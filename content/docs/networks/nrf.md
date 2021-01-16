@@ -1,19 +1,16 @@
 ---
-title: "nRF Mesh"
+title: "custom RF Mesh"
 description: "A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols. Open source SW is provided for off the shelf nRF SoC tags and dongles."
 lead: "A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols. Open source SW is provided for off the shelf nRF SoC tags and dongles."
 date: 2020-10-06T08:48:57+00:00
 lastmod: 2020-10-06T08:48:57+00:00
 draft: false
 images: []
-menu: 
-  docs:
-    parent: "networks"
 weight: 1
 toc: true
 ---
 
-{{< my_button href="https://github.com/nRFMesh/nRF52_Mesh" text="nRF Mesh Github Repo" >}}
+{{< new_button href="https://github.com/nRFMesh/nRF52_Mesh" text="nRF Mesh Github Repo" >}}
 
 ## Features
 {{< figure src="/images/nRF52-features.png" width="100%" >}}
@@ -522,7 +519,11 @@ Aknowledge
 
     cd ./raspi/
 
-### Raspberry pi scripts moved to [github raspi](https://github.com/HomeSmartMesh/raspi) Prject
+### Raspberry pi scripts moved to the 'raspi' Project
+
+{{< my_button href="/docs/frameworks/raspi_iot/" text="Frameworks/raspi" >}}
+
+{{< new_button href="https://github.com/HomeSmartMesh/raspi" text="github/raspi" >}}
 
 Below is a description of the `raspi` directory, but the content is no longer updated and represents a draft in compaision to the follow up project with raspberry pi services and IoT Software stack : https://github.com/HomeSmartMesh/raspi
 

@@ -1,6 +1,6 @@
 ---
-weight: 2
+title: "Microcontrollers"
 bookFlatSection: true
 bookCollapseSection: true
-title: "Controllers"
+weight: 2
 ---

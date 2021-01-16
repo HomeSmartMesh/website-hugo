@@ -1,6 +1,6 @@
 ---
-title : "Projects"
-description: "Projects documentation"
+title : "Frameworks"
+description: "Services, middleware and environments for applications eco-systems"
 lead: ""
 weight: 1
 date: 2020-10-06T08:48:23+00:00

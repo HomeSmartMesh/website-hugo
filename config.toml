@@ -1,6 +1,6 @@
-baseURL = "http://example.org/"
+baseURL = "http://homesmartmesh.github.com/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Home Smart Mesh"
 theme = 'book'
 
 [markup]
@@ -13,7 +13,7 @@ theme = 'book'
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
-  BookTheme = 'light'
+  BookTheme = 'dark'
 
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.

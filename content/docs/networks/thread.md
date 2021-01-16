@@ -17,6 +17,4 @@ toc: false
 
 {{< svg-pan-zoom "/images/openthread-environment-1.1.svg" >}}
 
-* Edges Visible in dark mode 🌙
-* Pan with the mouse, zoom with the image right bottom +/- signs
-* hover with the mouse on some elements that have external links to the relative websites
+* some elements have link to the corresponding websites
