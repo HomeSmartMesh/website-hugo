@@ -3,7 +3,7 @@ title: "M5 Stick Plus"
 description: "Small ESP32 with housing and lots of sensors"
 date: 2020-12-26T00:00:00+09:00
 draft: false
-weight: 2
+weight: 14
 ---
 
 ![img](/images/m5_stick_plus.png)

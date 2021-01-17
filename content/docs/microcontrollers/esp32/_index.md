@@ -1,7 +1,7 @@
 ---
 weight: 1
 bookFlatSection: true
-bookCollapseSection: false
+bookCollapseSection: true
 title: "esp32"
 ---
 ## ttgo t-display

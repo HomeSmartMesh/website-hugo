@@ -3,7 +3,7 @@ title: "TTGO T-Display"
 description: "Small dev kit with O-LED display"
 date: 2020-12-25T00:00:00+09:00
 draft: false
-weight: 1
+weight: 12
 ---
 
 ![img](/images/ttgo_t-display.png)
