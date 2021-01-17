@@ -57,6 +57,42 @@ toc: true
   * led panel : [github esp32_iot rgb_led](https://github.com/HomeSmartMesh/esp32_iot/tree/master/rgb_led)
   * bed heating [github esp32_iot bed_heater](https://github.com/HomeSmartMesh/esp32_iot/tree/master/bed_heater)
 
+
+## Meta website
+{{< figure src="/images/meta_website.png" width=100% >}}
+
+{{< my_button href="https://github.com/HomeSmartMesh/raspi/tree/master/web/overview" text="website source code" >}}
+
+### What is it ?
+* Hugo : a website as easy to customise as writing markdown
+* Menu : All webapps and websites can be organised in a hierarchical menu
+* Full screen : Each website is embedded on an iframe that can toggle to full screen mode or open in a new page
+
+### How does it work ?
+* create a new file : `homeassistant.md`
+
+{{< figure src="/images/hugo_md_file.png" width=200 >}}
+
+* call `hugo server` to test or `hugo` to generate the website (more details on [using hugo](https://gohugo.io/getting-started/))
+* this will already create a new menu entry
+
+{{< figure src="/images/hugo_menu.png" width=200 >}}
+
+* Fill it with the link to your webapp instance
+
+{{< figure src="/images/hugo_markdown.png" width=400 >}}
+
+* `weight` : defines the order in the menu entry
+* `title` : The text that will appear on the menu entry
+* `BookToC` : Table Of Content not required so that the iframe can be wider
+* `...{< iframe...` : call of the `iframe` html shortcode file that has been added in the `layouts\shortcodes` directory
+
+{{< figure src="/images/hugo_shortcodes.png" width=200 >}}
+
+### Demo video
+
+{{< youtube OUtunnrMKI4 >}}
+
 ## Smart home 3D webapp
 {{< figure src="/images/floor_temperature.png" width=600 >}}
 
