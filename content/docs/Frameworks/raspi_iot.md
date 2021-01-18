@@ -13,7 +13,7 @@ toc: true
 
 {{< my_button href="https://github.com/HomeSmartMesh/raspi" text="Raspi Github Repo" >}}
 ## Software
-{{< figure src="/images/software.png" width=600 >}}
+{{< image src="/images/software.png" width=600 >}}
 
 * Raspbian OS
 * Main services
@@ -40,7 +40,7 @@ toc: true
   * Roborock Chat : [js/telegraf/hover_poll.js](./js/telegraf/hover_poll.js)
 
 ## Hardware
-{{< figure src="/images/devices.png" width=600 >}}
+{{< image src="/images/devices.png" width=600 >}}
 
 * Zigbee
   * Hue Light with Hue gateway
@@ -59,7 +59,7 @@ toc: true
 
 
 ## Meta website
-{{< figure src="/images/meta_website.png" width=100% >}}
+{{< image src="/images/meta_website.png" width=100% >}}
 
 {{< my_button href="https://github.com/HomeSmartMesh/raspi/tree/master/web/overview" text="website source code" >}}
 
@@ -71,30 +71,30 @@ toc: true
 ### How does it work ?
 * create a new file : `homeassistant.md`
 
-{{< figure src="/images/hugo_md_file.png" width=200 >}}
+{{< image src="/images/hugo_md_file.png" width=200 >}}
 
 * call `hugo server` to test or `hugo` to generate the website (more details on [using hugo](https://gohugo.io/getting-started/))
 * this will already create a new menu entry
 
-{{< figure src="/images/hugo_menu.png" width=200 >}}
+{{< image src="/images/hugo_menu.png" width=200 >}}
 
 * Fill it with the link to your webapp instance
 
-{{< figure src="/images/hugo_markdown.png" width=400 >}}
+{{< image src="/images/hugo_markdown.png" width=400 >}}
 
 * `weight` : defines the order in the menu entry
 * `title` : The text that will appear on the menu entry
 * `BookToC` : Table Of Content not required so that the iframe can be wider
 * `...{< iframe...` : call of the `iframe` html shortcode file that has been added in the `layouts\shortcodes` directory
 
-{{< figure src="/images/hugo_shortcodes.png" width=200 >}}
+{{< image src="/images/hugo_shortcodes.png" width=200 >}}
 
 ### Demo video
 
 {{< youtube OUtunnrMKI4 >}}
 
 ## Smart home 3D webapp
-{{< figure src="/images/floor_temperature.png" width=600 >}}
+{{< image src="/images/floor_temperature.png" width=600 >}}
 
 Attempt to unify interfaces in one app. Result is quite a success though requires a beast GPU and quite some effort to arrange 3D details and camera positioning to get a nice user experiance out of it.
 * Has it's own github repo : https://github.com/HomeSmartMesh/smart_home_3d_webapp
@@ -102,8 +102,8 @@ Attempt to unify interfaces in one app. Result is quite a success though require
 * Even a Hackaday Blog entry : https://hackaday.com/2019/12/29/the-smart-home-gains-an-extra-dimension/
 
 ## Led Panel webapp
-{{< figure src="/images/led_panel_app.jpg" width=600 >}}
-{{< figure src="/images/ledpanel.jpg" width=600 >}}
+{{< image src="/images/led_panel_app.jpg" width=600 >}}
+{{< image src="/images/ledpanel.jpg" width=600 >}}
 
 * Hackaday project : https://hackaday.io/project/162825-neopixels-animations-on-esp32-mqtt-json-webapp
 
@@ -114,7 +114,7 @@ Attempt to unify interfaces in one app. Result is quite a success though require
 
 ### web heat control
 
-{{< figure src="/images/demo.gif" width=600 >}}
+{{< image src="/images/demo.gif" width=600 >}}
 
 The control of the heating has a feedback that ensures the execution of the command. The green displayed numbers represent the time since the last status of the zigbee device. Once a slider is modified and a command is sent, a feedback shall be received within few seconds and the time since last message should drop to `0 mn`
 
@@ -162,12 +162,12 @@ zig/living heat {
 - on release working : https://codepen.io/mhartington/pen/HKGno
 
 ## Bed Heating app
-{{< figure src="/images/bed_heating.png" width=400 >}}
+{{< image src="/images/bed_heating.png" width=400 >}}
 
 * web app : [js/bed_heater](./js/bed_heating/)
 
 ### Bed Heating hardware
-{{< figure src="/images/esp_32_bed_heater.png" width=200 >}}
+{{< image src="/images/esp_32_bed_heater.png" width=200 >}}
 
 * ESP32 firmware : [github esp32_iot bed_heater](https://github.com/HomeSmartMesh/esp32_iot/tree/master/bed_heater)
 * using a Shelly 1 pm : https://shelly.cloud/shelly-1pm-wifi-smart-relay-home-automation/
@@ -175,7 +175,7 @@ zig/living heat {
 * A Solid state relay
 
 ## Roborock chat
-{{< figure src="/images/hover_chat.png" width=600 >}}
+{{< image src="/images/hover_chat.png" width=600 >}}
 
 * using the amazing node.js telegraf framework : https://github.com/telegraf/telegraf
 * Roborock Chat : [js/telegraf/hover_poll.js](./js/telegraf/hover_poll.js)
@@ -202,7 +202,7 @@ zig/living heat {
 
 ## Heat cut
 
-{{< figure src="/images/heat_windows.png" width=600 >}}
+{{< image src="/images/heat_windows.png" width=600 >}}
 
 * Hackaday page : [Aquara and Eurotronics hand in hand to save energy](https://hackaday.io/project/124114-nrf5-custom-mesh-network/log/168774-aqara-and-eurotronics-hand-in-hand-to-save-energy)
 
@@ -212,7 +212,7 @@ zig/living heat {
 * Python service : [py/heating](./py/heating)
 
 ## Home status
-{{< figure src="/images/shelly_status.png" width=150 >}}
+{{< image src="/images/shelly_status.png" width=150 >}}
 
 * Leaving home, in a hurry, no time to walk through the house or to start smartphone apps to know if the heating is forgotten in one room or if a window is left open in another.
 * With this script [py/home_status](./py/home_status), you see the home status right next to the house door before leaving
@@ -243,7 +243,7 @@ As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt inte
 
 [zigbee/graph_view](./zigbee/graph_view/)
 
-{{< figure src="/images/zig_demo.gif" width=600 >}}
+{{< image src="/images/zig_demo.gif" width=600 >}}
 
 ### Features
 * configurable ip, port and mqtt base name

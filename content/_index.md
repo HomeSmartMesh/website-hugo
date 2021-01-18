@@ -22,6 +22,7 @@ BookToC: false
 
 <--->
 ## Wifi
+{{< figure src="/images/wifi.png" height=100 >}}
 ✅ Universal, Simple, secure
 
 ❌ Range issues and password hussle
@@ -41,13 +42,23 @@ BookToC: false
 
 {{< center-col >}}
 ## Thread
-✅ IPv6 generic gateway
+{{< figure src="/images/threadgrouplogo.ico" height=100 >}}
+
+✅ IPv6
+
+✅ generic bridging
+
+✅ multiple coordinators
 
 <--->
 ## Bluetooth
+{{< figure src="/images/bluetooth.ico" height=100 >}}
+✅ Direct Smartphones connection
+
 {{< /center-col >}}
 
 {{< image src="/images/networks_deployment.png" width=600 >}}
+
 When deploying multiple networks, it's important to select non interfering channels.
 Above is an example deployment of wifi and  zigbee along a custom RF.
 
@@ -63,12 +74,12 @@ Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Pyth
 <--->
 ## Home Assistant
 {{< figure src="/images/hassio.png" height=100 >}}
-{{< my_button href="https://www.home-assistant.io/" text="website" >}}
+{{< new_button href="https://www.home-assistant.io/" text="website" >}}
 
 <--->
 ## OpenHAB
 {{< figure src="/images/openhab.png" height=100 >}}
-{{< my_button href="https://www.openhab.org/" text="website" >}}
+{{< new_button href="https://www.openhab.org/" text="website" >}}
 
 {{< /center-col >}}
 
