@@ -62,3 +62,62 @@ void loop()
 
 ## Suppliers
 * [Aliexpress ~ 10€](https://de.aliexpress.com/item/4000829894292.html?spm=a2g0s.9042311.0.0.33794c4dbkKB4T)
+
+## Applications
+### Thermostat control
+
+{{< image src="/images/esp32/display-control-app-unpacked.png" width=500 >}}
+
+{{< image src="/images/esp32/display-control-app-all info.png"  width=500 >}}
+
+
+{{< new_button href="https://github.com/ESP32Home/t-display_controller" text="Project Github Repo" >}}
+
+**Features**
+* C++ Platformio project
+* Adjust temperature up/down with buttons
+* LCD display
+    * ongoing request
+    * target temperature
+    * current temperature
+    * metal temperature
+    * hot water flow
+* rechargeable battery
+* Deep Sleep, wake on button press
+* MQTT
+* Json payload
+* LCD Graphics splash screen
+
+{{< expand "Build info" "..." >}}
+```log
+PACKAGES:
+ - framework-arduinoespressif32 3.10004.201016 (1.0.4)
+ - tool-esptoolpy 1.30000.201119 (3.0.0)
+ - toolchain-xtensa32 2.50200.80 (5.2.0)
+Dependency Graph
+|-- <TFT_eSPI> 2.3.52+sha.49cdca6
+|   |-- <SPI> 1.0
+|   |-- <FS> 1.0
+|   |-- <SPIFFS> 1.0
+|   |   |-- <FS> 1.0
+|-- <GfxUi> 1.0.0+sha.64d5ced
+|   |-- <TFT_eSPI> 2.3.52+sha.49cdca6
+|   |   |-- <SPI> 1.0
+|   |   |-- <FS> 1.0
+|   |   |-- <SPIFFS> 1.0
+|   |   |   |-- <FS> 1.0
+|   |-- <SPI> 1.0
+|   |-- <FS> 1.0
+|   |-- <SPIFFS> 1.0
+|   |   |-- <FS> 1.0
+|-- <ArduinoJson> 6.16.1
+|-- <MQTT> 2.4.7
+|-- <SPI> 1.0
+|-- <FS> 1.0
+|-- <SPIFFS> 1.0
+|   |-- <FS> 1.0
+|-- <WiFi> 1.0
+|-- <Wire> 1.0.1
+|-- <Button2>
+```
+{{< /expand >}}
