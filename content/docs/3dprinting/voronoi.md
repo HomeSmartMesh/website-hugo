@@ -11,6 +11,8 @@ bookToC: false
 
 ## Cells Circle
 
+{{< image src="/images/3dprinting/Voronoi cells.jpg" width="600" >}}
+
 {{< model_viewer "/models/cells_circle.glb" "400" >}}
 {{< new_button text="Download STL" href="/models/cells_circle.stl" >}}
 

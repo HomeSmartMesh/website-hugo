@@ -1,0 +1,16 @@
+---
+title: "Handbag hanger"
+description: "Hang your handbag like you hang clothes"
+date: 2021-01-01T00:00:00+00:00
+weight: 4
+bookToC: false
+---
+
+# Handbag hanger
+
+{{< image src="/images/3dprinting/handbag carrier.jpg" >}}
+
+{{< model_viewer "/models/handbag_hanger.glb" "400" >}}
+{{< new_button text="Download STL" href="/models/Hang bag v2.stl">}}
+
+
