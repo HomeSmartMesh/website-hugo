@@ -1,6 +1,6 @@
 ---
-title: "Smart Switch Cover"
-description: "How to cover a dumb switch with a smart switch"
+title: "Switch Socket Cover"
+description: "How to cover a dumb switch and a Socket"
 date: 2021-01-01T00:00:00+00:00
 weight: 1
 bookToC: false
