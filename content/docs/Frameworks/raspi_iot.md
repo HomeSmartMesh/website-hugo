@@ -241,6 +241,11 @@ zig/living heat {
 ```
 {{< /expand>}}
 
+{{< image src="/images/3dprinting/dumb_to_smart.png" width="600" >}}
+{{< button relref="/docs/3dprinting/light">}} 3D print a Smart Switch Cover {{</button>}}
+
+
+
 ## Phantom Load cut
 * Some home devices especially device clusters such as TV sets and surroundings or PC and surroundings do have a significant cumulated power usage when in a standby mode.
 * Who likes to pay money for non used electricity ?

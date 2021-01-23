@@ -11,18 +11,16 @@ bookToC: false
 
 # Cover Dumb Switch with Smart Switch
 
-{{< image src="/images/aqara hue zigbee.png" >}}
+{{< image src="/images/3dprinting/dumb_to_smart.png" >}}
 
-{{< button href="/docs/frameworks/raspi_iot/#hue-light-control"  class=" text-center" >}} More details on the raspberry pi service {{</button>}}
-
-{{< model_viewer "/models/wall_switch.glb">}}
-
+{{< model_viewer "/models/wall_switch.glb" "400" >}}
 {{< new_button text="Download STL" href="/models/switch_cover_switch.stl">}}
-
 
 {{< load-photoswipe >}}
 {{< gallery dir="/images/3dprinting/wall switch" />}}
 
+# Application
 
-
+{{< image src="/images/aqara hue zigbee.png" >}}
+{{< button relref="/docs/frameworks/raspi_iot#hue-light-control" >}} More details on the raspberry pi service {{</button>}}
 
