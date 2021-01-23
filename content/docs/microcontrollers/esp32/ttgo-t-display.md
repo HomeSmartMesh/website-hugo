@@ -54,6 +54,8 @@ void loop()
 }
 ```
 
+## 3D printed case
+{{< image src="/images/esp32/display-control-app-unpacked.png" width=500 >}}
 
 ## Display
 * IPS ST7789V
@@ -65,8 +67,6 @@ void loop()
 
 ## Applications
 ### Thermostat control
-
-{{< image src="/images/esp32/display-control-app-unpacked.png" width=500 >}}
 
 {{< image src="/images/esp32/display-control-app-all info.png"  width=500 >}}
 

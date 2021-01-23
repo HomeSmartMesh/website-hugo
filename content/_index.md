@@ -14,7 +14,7 @@ BookToC: false
 {{< center-col >}}
 ## Custom Mesh
 {{< figure src="/images/nRF52832_sensortag.png" height=100 >}}
-{{< btn-local href="/docs/networks/nrf/" text="nRF Mesh Doc" >}}
+{{< button href="/docs/networks/nrf/" >}} nRF Mesh Doc {{</button>}}
 
 ✅ A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
@@ -30,7 +30,7 @@ BookToC: false
 <--->
 ## Zigbee
 {{< figure src="/images/zigbee.png" height=100 >}}
-{{< btn-local href="docs/networks/zigbee/" text="Zigbee Doc" >}}
+{{< button href="docs/networks/zigbee/" >}}Zigbee Doc{{</button>}}
 ✅ Mesh, wider range, reliable compared to wifi
 
 ✅ Low Power
@@ -90,7 +90,7 @@ Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Pyth
 ## Webapps
 {{< figure src="/images/floor_temperature.png" height=100 >}}
 
-{{< btn-local href="docs/webapps/home3d/" text="Webapps Doc" >}}
+{{< button relref="/docs/applications/home3d" >}}Webapps Doc{{</button>}}
 
 Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
 

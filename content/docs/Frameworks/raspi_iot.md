@@ -181,11 +181,65 @@ zig/living heat {
 * Roborock Chat : [js/telegraf/hover_poll.js](./js/telegraf/hover_poll.js)
 
 ## Hue Light control
+
+{{< image src="/images/aqara hue zigbee.png" >}}
+
 * Controls all the Hue light bulbs from Aquara sensor switches using the [HUE rest API](https://developers.meethue.com/develop/get-started-2/)
 * custom functions
   * Long press for minimal dimming
   * Toggle on of or Toggle dim states
-* [py/hue](./py/hue)
+
+{{< new_button href="https://github.com/HomeSmartMesh/raspi/tree/master/py/hue" text="hue ruler service (Github repo)" >}}
+
+{{< expand "Config example. Click to expand..." >}}
+```json
+{  
+    "bridges":{
+        "LivingRoom":"10.0.0.38",
+        "username_config":"/home/pi/.python_hue"
+    },
+    "mqtt":{
+        "host":"10.0.0.42",
+        "port":1883,
+        "keepalive":60,
+        "client_id":"hue_client",
+        "subscriptions":[
+                            "mzig/bed light button",
+                            "mzig/bed nic button",
+                            "mzig/living double switch",
+                            "lzig/bedroom switch",
+                            "lzig/volume white",
+                            "lzig/office switch",
+                            "lzig/hallway entrance switch",
+                            "lzig/hallway living switch",
+                            "lzig/hallway corridor switch"
+                        ],
+        "actions"   :[],
+        "publish" :true,
+        "subscribe" :true
+    },
+    "lightmap":{
+        "hallway":{
+            "action":"light_list_clicks",
+            "sensors":[
+                "hallway entrance switch",
+                "hallway living switch",
+                "hallway corridor switch"
+            ],
+            "lights":[
+                "Entrance White 1",
+                "Entrance White 2",
+                "Entrance White 3"
+            ]
+        }
+    },
+    "log":{
+        "logfile":"/home/pi/share/hue(date).log",
+        "level":"Info"
+    }
+}
+```
+{{< /expand>}}
 
 ## Phantom Load cut
 * Some home devices especially device clusters such as TV sets and surroundings or PC and surroundings do have a significant cumulated power usage when in a standby mode.
