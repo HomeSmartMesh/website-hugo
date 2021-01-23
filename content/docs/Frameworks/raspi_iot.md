@@ -272,16 +272,20 @@ zig/living heat {
 
 ## Home status
 {{< image src="/images/shelly_status.png" width=150 >}}
+{{< image src="/images/home_status.png" >}}
+
+{{< new_button href="https://github.com/HomeSmartMesh/raspi/tree/master/py/home_status" text="home status service (Github repo)" >}}
 
 * Leaving home, in a hurry, no time to walk through the house or to start smartphone apps to know if the heating is forgotten in one room or if a window is left open in another.
-* With this script [py/home_status](./py/home_status), you see the home status right next to the house door before leaving
+* With this script, you see the home status right next to the house door before leaving
 * Any window is open : The status light is blue
 * Any heater is active : The status is red
 * Both red and blue can be combined
 
 How does this work. In a controlled environemnt where the wifi is reliable, there is no need for wifi status as it is always on. Therefore the led status disable function can be re-used for another purpose. This provide the nicest integration of led status including power supply, mqtt connection without even blocking the socket for other usage.
 
-Below are the control URLs to turn led color on and off :
+Below are the control URLs to turn led color on and off
+{{< expand "json Config example. Click to expand..." >}}
 ```json
     "status":{
         "red":{
@@ -294,6 +298,12 @@ Below are the control URLs to turn led color on and off :
         }
     }
 ```
+{{< /expand>}}
+
+{{< image src="/images/3dprinting/cover_switch_socket.png" width="400" >}}
+{{< button relref="/docs/3dprinting/light_socket">}} 3D print a Switch and Socket Cover {{</button>}}
+
+
 
 ## Roborock button
 As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt interface, all it takes is this script [py/hover](./py/hover) to order cleaning of a room or a section with a click on an aquara zigbee button.

@@ -4,3 +4,6 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/HomeSmartMesh/homesmartmesh.github.io.git
+[submodule "static/models"]
+	path = static/models
+	url = https://github.com/HomeSmartMesh/models.git
