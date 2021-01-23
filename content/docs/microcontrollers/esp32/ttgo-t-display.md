@@ -6,7 +6,7 @@ draft: false
 weight: 12
 ---
 
-![img](/images/ttgo_t-display.png)
+{{< image src="/images/ttgo_t-display.png" >}}
 
 ## Simple Example
 * [t-display_controller](https://github.com/ESP32Home/t-display_controller)
@@ -21,7 +21,8 @@ lib_deps =
     https://github.com/ESP32Home/TFT_eSPI_ttgo_t-display.git#2.3.4_t-display
     https://github.com/ESP32Home/GfxUi.git#v1.0.1
 ```
-### Example
+### Example Code
+{{< expand "click to expand the example code..." >}}
 ```c++
 #include <Arduino.h>
 #include <TFT_eSPI.h>
@@ -53,10 +54,10 @@ void loop()
 
 }
 ```
-
+{{</expand>}}
 ## 3D printed case
-{{< image src="/images/esp32/display-control-app-unpacked.png" width=500 >}}
-
+{{< image src="/images/3dprinting/esp32_remote.png" >}}
+{{< button relref="/docs/3dprinting/esp32_remote">}} STL Model for 3D printing {{</button>}}
 ## Display
 * IPS ST7789V
 * 1,14 Zoll
@@ -69,6 +70,7 @@ void loop()
 ### Thermostat control
 
 {{< image src="/images/esp32/display-control-app-all info.png"  width=500 >}}
+{{< image src="/images/esp32/esp32_remote.png" >}}
 
 
 {{< new_button href="https://github.com/ESP32Home/t-display_controller" text="Project Github Repo" >}}

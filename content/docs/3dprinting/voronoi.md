@@ -9,6 +9,10 @@ bookToC: false
 
 {{< button relref="/docs/applications/voronoi" >}} Voronoi Generator Tool {{</button>}}
 
+## Cells Circle
+
+{{< model_viewer "/models/cells_circle.glb" "400" >}}
+{{< new_button text="Download STL" href="/models/cells_circle.stl" >}}
 
 ## Fantasy pen holder
 
