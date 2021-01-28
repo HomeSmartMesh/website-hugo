@@ -6,13 +6,13 @@ date: 2021-01-01T00:00:00+00:00
 lastmod: 2021-01-01T00:00:00+00:00
 draft: false
 images: []
-weight: 1
+weight: 2
 toc: true
 ---
 
-{{< my_button href="https://github.com/HomeSmartMesh/smart_home_3d_webapp" text="Webapp 3D Github Repo" >}}
+{{< new_button href="https://github.com/HomeSmartMesh/smart_home_3d_webapp" text="Webapp 3D Github Repo" >}}
 
-## First time usage
+## Getting Started
 1. host this project on your local raspberry pi or see ['Local host vs Remote host' section](#Local-host-vs-remote-host) on how to use the live demo
 2. create your own glTF model from blender (optional)
 
@@ -34,7 +34,8 @@ toc: true
 3. Click on the 3d model of the mosquitto gateway
 
 ### Live demo
-Link to [Github .io live demo](https://homesmartmesh.github.io/smart_home_3d_webapp/)
+
+{{< iframe src="https://homesmartmesh.github.io/smart_home_3d_webapp/" height="500" >}}
 
 ### Demo light control with power log
 
@@ -57,9 +58,11 @@ send_custom_event("three_param",{name:"Kitchen", pull:0.3});
 send_custom_event("three_param",{name:"Kitchen", push:0.3});
 ```
 
-<img src="https://github.com/HomeSmartMesh/web_three_interface/raw/master/12_multiple_parameters/media/demo.gif" width="400">
+{{< image src="https://github.com/HomeSmartMesh/web_three_interface/raw/master/12_multiple_parameters/media/demo.gif" >}}
 
-See `three_param` running in a [live demo](https://homesmartmesh.github.io/web_three_interface/12_multiple_parameters/)
+Step by step details with 12 example in the link below :
+
+{{< my_button href="/docs/applications/web_three_interface/" text="Web Three Interface" >}}
 
 ## Hue lights usage
 Note : This project is not related to the hue devices supplier and is a simple user of the provided API.
