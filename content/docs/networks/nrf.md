@@ -139,7 +139,7 @@ Contains the custom drivers for this project from which the [mesh.c](./drivers/m
 
 ### Protocol Overview
 
-The Home Smart Mesh project introduce an RF Mesh protocol which is a complete stack implementation to allow devices to communicate in a Mesh Network Topology. This protocol implementation is using the nRF SDK 15 it is using the Radio module through a modified Enhanced Shock-burst custom protocol. Implementations range from nRF24L01+ with an STM8L and STM32 to the nRF51 and nRF52 families that add features such as RSSI and bigger packets sizes.
+This project introduce an RF Mesh protocol which is a complete stack implementation to allow devices to communicate in a Mesh Network Topology. This protocol implementation is using the nRF SDK 15 it is using the Radio module through a modified Enhanced Shock-burst custom protocol. Implementations range from nRF24L01+ with an STM8L and STM32 to the nRF51 and nRF52 families that add features such as RSSI and bigger packets sizes.
 
 ### Protocol Description
 
@@ -541,7 +541,7 @@ The server's python scripts running also on a raspberry pi
 * ./raspi/milight : The milight RF gateway client (require the wifi to RF milight bridge HW)
 * Data collection into a time series database 
     
-## Home Smart Mesh detailed design
+## detailed design
 
 Functions call graph. Fifos dataflow between interrupts and main loop.
 
