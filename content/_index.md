@@ -4,14 +4,47 @@ description: "Overview of the website content"
 date: 2020-10-06T08:48:23+00:00
 lastmod: 2020-10-06T08:48:23+00:00
 BookToC: false
+grid:
+    filters:
+    - All
+    - Frameworks
+    - Network
+    - Applications
+    slot: 150
+    items:
+    - name: "Custom Mesh"
+      width: 300
+      tags: [Network]
+    - name: "Wifi"
+      width: 300
+      tags: [Network]
+    - name: "Zigbee"
+      width: 300
+      tags: [Network]
+    - name: "Thread"
+      width: 300
+      tags: [Network]
+    - name: "bluetooth"
+      width: 300
+      tags: [Network]
+    - name: "channels"
+      width: 600
+      tags: [Network]
+    - name: "raspi iot"
+      width: 300
+      tags: [Frameworks,Applications]
+    - name: "homeass"
+      width: 150
+      tags: [Frameworks]
+    - name: "openhab"
+      width: 150
+      tags: [Frameworks]
+    - name: "smarthome"
+      width: 600
+      tags: [Frameworks,Applications]
 ---
-## Home Automation Mind Map
 
-{{< svg-pan-zoom "/images/home automation.svg" >}}
-
-# Networks
-
-{{< center-col >}}
+{{< grid "my_grid" >}}
 ## Custom Mesh
 {{< figure src="/images/nRF52832_sensortag.png" height=100 >}}
 {{< button href="/docs/networks/nrf/" >}} nRF Mesh Doc {{</button>}}
@@ -19,14 +52,12 @@ BookToC: false
 ✅ A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
 ✅ Open source SW is provided for off the shelf nRF SoC tags and dongles.
-
 <--->
 ## Wifi
 {{< figure src="/images/wifi.png" height=100 >}}
 ✅ Universal, Simple, secure
 
 ❌ Range issues and password hussle
-
 <--->
 ## Zigbee
 {{< figure src="/images/zigbee.png" height=100 >}}
@@ -36,11 +67,7 @@ BookToC: false
 ✅ Low Power
 
 ❌ difficult pairing and attributes discovery unreliable
-
-
-{{< /center-col >}}
-
-{{< center-col >}}
+<--->
 ## Thread
 {{< figure src="/images/threadgrouplogo.ico" height=100 >}}
 
@@ -49,58 +76,44 @@ BookToC: false
 ✅ generic bridging
 
 ✅ multiple coordinators
-
 <--->
 ## Bluetooth
 {{< figure src="/images/bluetooth.ico" height=100 >}}
 ✅ Direct Smartphones connection
-
-{{< /center-col >}}
-
+<--->
 {{< image src="/images/networks_deployment.png" width=600 >}}
-
-When deploying multiple networks, it's important to select non interfering channels.
-Above is an example deployment of wifi and  zigbee along a custom RF.
-
-# Frameworks
-{{< center-col >}}
-
-## Custom DIY
+<--->
+## Raspi IoT
 {{< figure src="/images/pi_logo.png" height=100 >}}
 {{< my_button href="docs/raspi/readme/" text="Raspi Doc" >}}
 
 Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Python and Node.js scripts ruling the automation.
-
 <--->
 ## Home Assistant
 {{< figure src="/images/hassio.png" height=100 >}}
 {{< new_button href="https://www.home-assistant.io/" text="website" >}}
-
 <--->
 ## OpenHAB
 {{< figure src="/images/openhab.png" height=100 >}}
 {{< new_button href="https://www.openhab.org/" text="website" >}}
-
-{{< /center-col >}}
-
-
-# Applications
-
-{{< center-col >}}
-## Webapps
+<--->
+## Smart Home 3d
 {{< figure src="/images/floor_temperature.png" height=100 >}}
 
 {{< button relref="/docs/applications/home3d" >}}Webapps Doc{{</button>}}
 
 Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
 
+{{< /grid >}}
 
-<--->
 
-Voronoi Editor, Graphysics
 
-{{< /center-col >}}
 
+
+
+## Home Automation Mind Map
+
+{{< svg-pan-zoom "/images/home automation.svg" >}}
 
 ## Home Automation Devices
 
