@@ -25,14 +25,14 @@ grid:
       width: 300
       tags: [Network]
     - name: "bluetooth"
-      width: 300
-      tags: [Network]
-    - name: "channels"
-      width: 600
+      width: 150
       tags: [Network]
     - name: "raspi iot"
       width: 300
       tags: [Frameworks,Applications]
+    - name: "channels"
+      width: 600
+      tags: [Network]
     - name: "homeass"
       width: 150
       tags: [Frameworks]
@@ -76,18 +76,21 @@ grid:
 ✅ generic bridging
 
 ✅ multiple coordinators
+
+{{< my_button href="/docs/networks/thread/" text="Thread Mind Map" >}}
+
 <--->
 ## Bluetooth
 {{< figure src="/images/bluetooth.ico" height=100 >}}
 ✅ Direct Smartphones connection
 <--->
-{{< image src="/images/networks_deployment.png" width=600 >}}
-<--->
 ## Raspi IoT
 {{< figure src="/images/pi_logo.png" height=100 >}}
-{{< my_button href="docs/raspi/readme/" text="Raspi Doc" >}}
+{{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
 
-Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Python and Node.js scripts ruling the automation.
+Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Python and Node.js scripts for home automation.
+<--->
+{{< image src="/images/networks_deployment.png" width=600 >}}
 <--->
 ## Home Assistant
 {{< figure src="/images/hassio.png" height=100 >}}
@@ -100,7 +103,7 @@ Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Pyth
 ## Smart Home 3d
 {{< figure src="/images/floor_temperature.png" height=100 >}}
 
-{{< button relref="/docs/applications/home3d" >}}Webapps Doc{{</button>}}
+{{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
 
 Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
 
