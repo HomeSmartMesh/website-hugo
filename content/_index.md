@@ -1,5 +1,5 @@
 ---
-title : "Open Smart Mesh"
+title : "Home Smart Mesh"
 description: "Overview of the website content"
 date: 2020-10-06T08:48:23+00:00
 lastmod: 2020-10-06T08:48:23+00:00
@@ -8,28 +8,26 @@ grid:
     filters:
     - All
     - Frameworks
-    - Network
     - Applications
+    - Microcontrollers
+    - Network
     slot: 150
     items:
+    - name: "Raspi IoT"
+      width: 300
+      tags: [Frameworks,Applications,Network]
     - name: "Custom Mesh"
       width: 300
-      tags: [Network]
-    - name: "Wifi"
+      tags: [Network,Microcontrollers,nRF52]
+    - name: "ESP32 Programs"
       width: 300
-      tags: [Network]
+      tags: [Microcontrollers,ESP32]
     - name: "Zigbee"
       width: 300
       tags: [Network]
     - name: "Thread"
       width: 300
       tags: [Network]
-    - name: "bluetooth"
-      width: 150
-      tags: [Network]
-    - name: "raspi iot"
-      width: 300
-      tags: [Frameworks,Applications]
     - name: "channels"
       width: 600
       tags: [Network]
@@ -45,23 +43,36 @@ grid:
 ---
 
 {{< grid "my_grid" >}}
-## Custom Mesh
-{{< figure src="/images/nRF52832_sensortag.png" height=100 >}}
-{{< button href="/docs/networks/nrf/" >}} nRF Mesh Doc {{</button>}}
+## Raspi IoT
+{{< figure src="/images/raspi_iot.png" height=100 >}}
+{{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
+
+Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Python and Node.js scripts for home automation.
+
+<--->
+## Simple RF Mesh
+{{< figure src="/images/nRF52_mesh.png" height=100 >}}
+{{< my_button href="/docs/networks/nrf/" text="nRF Mesh Doc" >}}
 
 ✅ A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
 ✅ Open source SW is provided for off the shelf nRF SoC tags and dongles.
 <--->
-## Wifi
-{{< figure src="/images/wifi.png" height=100 >}}
-✅ Universal, Simple, secure
+## ESP32
 
-❌ Range issues and password hussle
+{{< figure src="/images/espressif.png" height=100 >}}
+{{< my_button href="/docs/microcontrollers/esp32/" text="ESP32 Boards" >}}
+
+✅ wifi MQTT with json payload
+
+✅ filesystem with json config
+
+✅ MQTT Timer camera, e-ink, remote control,...
+
 <--->
 ## Zigbee
 {{< figure src="/images/zigbee.png" height=100 >}}
-{{< button href="docs/networks/zigbee/" >}}Zigbee Doc{{</button>}}
+{{< my_button href="docs/networks/zigbee/" text="Zigbee Doc" >}}
 ✅ Mesh, wider range, reliable compared to wifi
 
 ✅ Low Power
@@ -71,24 +82,12 @@ grid:
 ## Thread
 {{< figure src="/images/threadgrouplogo.ico" height=100 >}}
 
-✅ IPv6
-
-✅ generic bridging
+✅ IPv6 generic bridging
 
 ✅ multiple coordinators
 
 {{< my_button href="/docs/networks/thread/" text="Thread Mind Map" >}}
 
-<--->
-## Bluetooth
-{{< figure src="/images/bluetooth.ico" height=100 >}}
-✅ Direct Smartphones connection
-<--->
-## Raspi IoT
-{{< figure src="/images/pi_logo.png" height=100 >}}
-{{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
-
-Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Python and Node.js scripts for home automation.
 <--->
 {{< image src="/images/networks_deployment.png" width=600 >}}
 <--->

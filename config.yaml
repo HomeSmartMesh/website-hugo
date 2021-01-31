@@ -1,6 +1,6 @@
-baseURL: "https://homesmartmesh.github.io/"
+baseURL: "https://www.homesmartmesh.com/"
 languageCode: "en-us"
-title: "Open Smart Mesh"
+title: "Home Smart Mesh"
 theme: 'book'
 
 markup:
