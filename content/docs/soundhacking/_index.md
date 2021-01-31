@@ -5,9 +5,10 @@ date: 2021-01-31T00:00:00+00:00
 weight: 20
 bookFlatSection: true
 bookCollapseSection: false
-bookToC: false
+bookToC: true
 ---
 
+# Overview
 The idea behind the [Sound Hacking github organisation](https://github.com/SoundHacking) is to take advantage of the latest advances of Machine learning and Audio processing to create innovative applications.
 
 ## Interactive sound input
@@ -20,13 +21,6 @@ The idea behind the [Sound Hacking github organisation](https://github.com/Sound
 * it's possible to debug an embedded sound processing system by injecting packets and retrieving  the results
 
 {{< image src="/images/sound/usb_cdc_test.png" width="500">}}
-
-# Discord channel
-
-{{< discord id="780126809671991328" >}}
-
-* invitation to the [Sound Hacking discord server](https://discord.gg/57cZapWHkC)
-* A place to ask questions, make suggestions and see posts about the progress
 
 # Topics
 ## Offline Preparation
@@ -101,4 +95,4 @@ Example integration of cubemx with pio :
 
 * Jupyter notebooks to showcase librosa functions
 
-{{< image src="/images/librosa.png" width=600 >}}
+{{< image src="/images/sound/librosa.png" width=600 >}}

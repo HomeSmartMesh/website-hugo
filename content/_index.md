@@ -22,6 +22,9 @@ grid:
     - name: "ESP32 Programs"
       width: 300
       tags: [Microcontrollers,ESP32]
+    - name: "Discord Server"
+      width: 400
+      tags: [Frameworks,Applications,Microcontrollers,Network]
     - name: "Zigbee"
       width: 300
       tags: [Network]
@@ -56,28 +59,36 @@ Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Pyth
 
 ✅ A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
-✅ Open source SW is provided for off the shelf nRF SoC tags and dongles.
+✅ Custom HW but also SW for nRF SoC tags and dongles on the market.
 <--->
 ## ESP32
 
 {{< figure src="/images/espressif.png" height=100 >}}
 {{< my_button href="/docs/microcontrollers/esp32/" text="ESP32 Boards" >}}
 
-✅ wifi MQTT with json payload
+✅ samples code with wifi MQTT json payload
 
 ✅ filesystem with json config
 
 ✅ MQTT Timer camera, e-ink, remote control,...
+<--->
+## Discord server
+An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
+
+{{< discord id="780126809671991328" >}}
+
 
 <--->
 ## Zigbee
 {{< figure src="/images/zigbee.png" height=100 >}}
 {{< my_button href="docs/networks/zigbee/" text="Zigbee Doc" >}}
-✅ Mesh, wider range, reliable compared to wifi
 
-✅ Low Power
+✅ Showcase of all used devices and their integration
 
-❌ difficult pairing and attributes discovery unreliable
+✅ References for deeper dive in the Zigbee standard
+
+✅ References for DIY coordinators and software
+
 <--->
 ## Thread
 {{< figure src="/images/threadgrouplogo.ico" height=100 >}}
