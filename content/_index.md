@@ -50,7 +50,11 @@ grid:
 {{< figure src="/images/raspi_iot.png" height=100 >}}
 {{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
 
-Best way to learn and dive deep. Sensors to MQTT to influx to Grafana. With Python and Node.js scripts for home automation.
+✅ learning examples using as few dependencies as possible
+
+✅ Sensors to MQTT to influx to Grafana.
+
+✅ Multiple Python and Node.js standalone services
 
 <--->
 ## Simple RF Mesh
