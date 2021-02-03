@@ -16,14 +16,14 @@ grid:
     - name: "Raspi IoT"
       width: 300
       tags: [Frameworks,Applications,Network]
-    - name: "Custom Mesh"
+    - name: "Simple RF Mesh"
       width: 300
       tags: [Network,Microcontrollers,nRF52]
     - name: "ESP32 Programs"
       width: 300
       tags: [Microcontrollers,ESP32]
     - name: "Discord Server"
-      width: 400
+      width: 600
       tags: [Frameworks,Applications,Microcontrollers,Network]
     - name: "Zigbee"
       width: 300
@@ -31,99 +31,86 @@ grid:
     - name: "Thread"
       width: 300
       tags: [Network]
-    - name: "channels"
+    - name: "Zigbee Wifi Channels"
       width: 600
       tags: [Network]
-    - name: "homeass"
+    - name: "Home Assistant"
       width: 150
       tags: [Frameworks]
-    - name: "openhab"
+    - name: "Open HAB"
       width: 150
       tags: [Frameworks]
-    - name: "smarthome"
+    - name: "Smart Home 3D"
       width: 600
       tags: [Frameworks,Applications]
 ---
 
 {{< grid "my_grid" >}}
-## Raspi IoT
-{{< figure src="/images/raspi_iot.png" height=100 >}}
+{{< image src="/images/raspi_iot.png" height=100 >}}
 {{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
 
-✅ learning examples using as few dependencies as possible
+Learning examples using as few dependencies as possible
 
-✅ Sensors to MQTT to influx to Grafana.
+Sensors to MQTT to influx to Grafana.
 
-✅ Multiple Python and Node.js standalone services
+Multiple Python and Node.js standalone services
 
 <--->
-## Simple RF Mesh
-{{< figure src="/images/nRF52_mesh.png" height=100 >}}
+{{< image src="/images/nRF52_mesh.png" height=100 >}}
 {{< my_button href="/docs/networks/nrf/" text="nRF Mesh Doc" >}}
 
-✅ A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
+A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
-✅ Custom HW but also SW for nRF SoC tags and dongles on the market.
+Custom HW but also SW for nRF SoC tags and dongles on the market.
 <--->
-## ESP32
-
-{{< figure src="/images/espressif.png" height=100 >}}
+{{< image src="/images/espressif.png" height=100 >}}
 {{< my_button href="/docs/microcontrollers/esp32/" text="ESP32 Boards" >}}
 
-✅ samples code with wifi MQTT json payload
+samples code with wifi MQTT json payload
 
-✅ filesystem with json config
+filesystem with json config
 
-✅ MQTT Timer camera, e-ink, remote control,...
+MQTT Timer camera, e-ink, remote control,...
 <--->
-## Discord server
-An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
-
 {{< discord id="780126809671991328" >}}
 
+An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 
 <--->
-## Zigbee
-{{< figure src="/images/zigbee.png" height=100 >}}
+{{< image src="/images/zigbee.png" height=100 >}}
 {{< my_button href="docs/networks/zigbee/" text="Zigbee Doc" >}}
 
-✅ Showcase of all used devices and their integration
+Showcase of all used devices and their integration
 
-✅ References for deeper dive in the Zigbee standard
+References for deeper dive in the Zigbee standard
 
-✅ References for DIY coordinators and software
+References for DIY coordinators and software
 
 <--->
-## Thread
-{{< figure src="/images/threadgrouplogo.ico" height=100 >}}
+{{< image src="/images/threadgrouplogo.ico" height=100 >}}
 
-✅ IPv6 generic bridging
+IPv6 generic bridging
 
-✅ multiple coordinators
+multiple coordinators
 
 {{< my_button href="/docs/networks/thread/" text="Thread Mind Map" >}}
 
 <--->
 {{< image src="/images/networks_deployment.png" width=600 >}}
 <--->
-## Home Assistant
-{{< figure src="/images/hassio.png" height=100 >}}
+{{< image src="/images/hassio.png" height=100 >}}
 {{< new_button href="https://www.home-assistant.io/" text="website" >}}
 <--->
-## OpenHAB
-{{< figure src="/images/openhab.png" height=100 >}}
+{{< image src="/images/openhab.png" height=100 >}}
 {{< new_button href="https://www.openhab.org/" text="website" >}}
 <--->
-## Smart Home 3d
-{{< figure src="/images/floor_temperature.png" height=100 >}}
+{{< image src="/images/floor_temperature.png" height=100 >}}
 
 {{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
 
 Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
 
 {{< /grid >}}
-
-
 
 
 
