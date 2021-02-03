@@ -25,6 +25,12 @@ grid:
     - name: "Discord Server"
       width: 600
       tags: [Frameworks,Applications,Microcontrollers,Network]
+    - name: "3D Printing"
+      width: 300
+      tags: []
+    - name: "Smart Home 3D"
+      width: 600
+      tags: [Frameworks,Applications]
     - name: "Zigbee"
       width: 300
       tags: [Network]
@@ -40,9 +46,6 @@ grid:
     - name: "Open HAB"
       width: 150
       tags: [Frameworks]
-    - name: "Smart Home 3D"
-      width: 600
-      tags: [Frameworks,Applications]
 ---
 
 {{< grid "my_grid" >}}
@@ -77,6 +80,18 @@ MQTT Timer camera, e-ink, remote control,...
 An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 
 <--->
+{{< image src="/images/3dprinting/cover_switch_socket_raw.png" href="/docs/3dprinting/" height=100 >}}
+
+3D Models for Smart Home, electronics and house utilities
+
+{{< my_button href="/docs/3dprinting/" text="3D Printing" >}}
+<--->
+{{< image src="/images/floor_temperature.png" height=100 >}}
+
+{{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
+
+Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
+<--->
 {{< image src="/images/zigbee.png" height=100 >}}
 {{< my_button href="docs/networks/zigbee/" text="Zigbee Doc" >}}
 
@@ -103,13 +118,6 @@ multiple coordinators
 <--->
 {{< image src="/images/openhab.png" height=100 >}}
 {{< new_button href="https://www.openhab.org/" text="website" >}}
-<--->
-{{< image src="/images/floor_temperature.png" height=100 >}}
-
-{{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
-
-Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
-
 {{< /grid >}}
 
 
