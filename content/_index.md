@@ -49,7 +49,7 @@ grid:
 ---
 
 {{< grid "my_grid" >}}
-{{< image src="/images/raspi_iot.png" height=100 >}}
+{{< image src="/images/raspi_iot.png" height="100px" href="docs/raspi/readme/" >}}
 {{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
 
 Learning examples using as few dependencies as possible
@@ -80,7 +80,7 @@ MQTT Timer camera, e-ink, remote control,...
 An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 
 <--->
-{{< image src="/images/3dprinting/cover_switch_socket_raw.png" href="/docs/3dprinting/" height=100 >}}
+{{< image src="/images/3dprinting/3dmodels.png" href="/docs/3dprinting/" height=100 >}}
 
 3D Models for Smart Home, electronics and house utilities
 

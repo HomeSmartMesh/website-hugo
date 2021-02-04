@@ -19,9 +19,6 @@ grid:
     - name: "Switch with Socket"
       width: 200
       tags: [Smart Light]
-    - name: "Voronoi"
-      width: 200
-      tags: []
     - name: "ESP32 remote"
       width: 400
       tags: [Electronics]
@@ -34,21 +31,24 @@ grid:
     - name: "House Model"
       width: 400
       tags: []
+    - name: "Voronoi"
+      width: 200
+      tags: []
 ---
 {{< grid "my_grid" >}}
 
-{{< image_ref src="/images/3dprinting/dumb_to_smart.png" href="/docs/3dprinting/light/" >}}
+{{< image src="/images/3dprinting/dumb_to_smart.png" href="/docs/3dprinting/light/" >}}
 <--->
 
-{{< image_ref src="/images/3dprinting/cover_switch_socket.png" href="/docs/3dprinting/light_socket/" >}}
+{{< image src="/images/3dprinting/cover_switch_socket.png" href="/docs/3dprinting/light_socket/" >}}
 <--->
-{{< image_ref src="/images/3dprinting/esp32_remote.png" href="/docs/3dprinting/esp32_remote/" >}}
+{{< image src="/images/3dprinting/esp32_remote.png" href="/docs/3dprinting/esp32_remote/" >}}
 <--->
-{{< image_ref src="/images/3dprinting/handbag carrier.jpg" href="/docs/3dprinting/handbag_hanger/" >}}
+{{< image src="/images/3dprinting/handbag carrier.jpg" href="/docs/3dprinting/handbag_hanger/" >}}
 <--->
-{{< image_ref src="/images/3dprinting/shelf/02 Shelf Top View.jpg" href="/docs/3dprinting/under_desk_shelf/" >}}
+{{< image src="/images/3dprinting/shelf/02 Shelf Top View.jpg" href="/docs/3dprinting/under_desk_shelf/" >}}
 <--->
-{{< image_ref src="/images/3dprinting/house/04 Side View 2.jpg" href="/docs/3dprinting/house" >}}
+{{< image src="/images/3dprinting/house/04 Side View 2.jpg" href="/docs/3dprinting/house" >}}
 <--->
-{{< image_ref src="/images/3dprinting/Voronoi cells.jpg" href="/docs/3dprinting/voronoi/" >}}
+{{< image src="/images/3dprinting/Voronoi cells.jpg" href="/docs/3dprinting/voronoi/" >}}
 {{< /grid >}}
