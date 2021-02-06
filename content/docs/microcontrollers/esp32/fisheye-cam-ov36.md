@@ -32,7 +32,7 @@ weight: 11
 * [m5stack/Arduino wakeup example](https://github.com/m5stack/TimerCam-arduino/tree/master/examples/wakeup)
 * [sep32home/Platformio wakeup example](https://github.com/ESP32Home/timercam_wakeup)
 
-{{< expand "Build info" "..." >}}
+{{< details "Build info" "..." >}}
 ```log
 PACKAGES:
  - framework-arduinoespressif32 0.0.0+sha.b05bdf6
@@ -41,7 +41,7 @@ PACKAGES:
 Dependency Graph
 |-- <Timer-CAM> 0.0.1
 ```
-{{< /expand >}}
+{{< /details >}}
 
 
 ### webcam
@@ -49,7 +49,7 @@ Dependency Graph
 * [esp32home/Platformio webcam example](https://github.com/ESP32Home/timercam_webcam)
 
 
-{{< expand "Build info" "..." >}}
+{{< details "Build info" "..." >}}
 Note `app_httpd` is part of the `Timer-CAM` lib
 ```log
 PACKAGES:
@@ -61,4 +61,4 @@ Dependency Graph
 |-- <Timer-CAM> 0.0.1   
 |-- <WiFi> 1.0
 ```
-{{< /expand >}}
+{{< /details >}}

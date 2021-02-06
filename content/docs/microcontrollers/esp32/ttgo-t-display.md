@@ -22,7 +22,7 @@ lib_deps =
     https://github.com/ESP32Home/GfxUi.git#v1.0.1
 ```
 ### Example Code
-{{< expand "click to expand the example code..." >}}
+{{< details "click to expand the example code..." >}}
 ```c++
 #include <Arduino.h>
 #include <TFT_eSPI.h>
@@ -54,7 +54,7 @@ void loop()
 
 }
 ```
-{{</expand>}}
+{{</details>}}
 ## 3D printed case
 {{< image src="/images/3dprinting/esp32_remote.png" >}}
 {{< button relref="/docs/3dprinting/esp32_remote">}} STL Model for 3D printing {{</button>}}
@@ -90,7 +90,7 @@ void loop()
 * Json payload
 * LCD Graphics splash screen
 
-{{< expand "Build info" "..." >}}
+{{< details "Build info" "..." >}}
 ```log
 PACKAGES:
  - framework-arduinoespressif32 3.10004.201016 (1.0.4)
@@ -122,4 +122,4 @@ Dependency Graph
 |-- <Wire> 1.0.1
 |-- <Button2>
 ```
-{{< /expand >}}
+{{< /details >}}

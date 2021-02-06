@@ -191,7 +191,7 @@ zig/living heat {
 
 {{< new_button href="https://github.com/HomeSmartMesh/raspi/tree/master/py/hue" text="hue ruler service (Github repo)" >}}
 
-{{< expand "Config example. Click to expand..." >}}
+{{< details "Config example. Click for details..." >}}
 ```json
 {  
     "bridges":{
@@ -239,7 +239,7 @@ zig/living heat {
     }
 }
 ```
-{{< /expand>}}
+{{< /details>}}
 
 {{< image src="/images/3dprinting/dumb_to_smart.png" width="600" >}}
 {{< button relref="/docs/3dprinting/light">}} 3D print a Smart Switch Cover {{</button>}}
@@ -285,7 +285,7 @@ zig/living heat {
 How does this work. In a controlled environemnt where the wifi is reliable, there is no need for wifi status as it is always on. Therefore the led status disable function can be re-used for another purpose. This provide the nicest integration of led status including power supply, mqtt connection without even blocking the socket for other usage.
 
 Below are the control URLs to turn led color on and off
-{{< expand "json Config example. Click to expand..." >}}
+{{< details "json Config example. Click for details..." >}}
 ```json
     "status":{
         "red":{
@@ -298,7 +298,7 @@ Below are the control URLs to turn led color on and off
         }
     }
 ```
-{{< /expand>}}
+{{< /details>}}
 
 {{< image src="/images/3dprinting/cover_switch_socket.png" width="400" >}}
 {{< button relref="/docs/3dprinting/light_socket">}} 3D print a Switch and Socket Cover {{</button>}}

@@ -3,23 +3,40 @@ weight: 1
 bookFlatSection: true
 bookCollapseSection: true
 title: "esp32"
+grid:
+    filters:
+    - All
+    - Board
+    - Display
+    - Camera
+    - Program
+    slot: 300
+    items:
+    - name: "ttgo t-display"
+      width: 200
+      tags: [Board,Display]
+    - name: "m5 stick C Plus"
+      width: 200
+      tags: [Board,Display]
+    - name: "fisheye cam OV3660"
+      width: 200
+      tags: [Board,Camera]
+    - name: "ttgo t5 e-paper"
+      width: 200
+      tags: [Board,Display]
+    - name: "Thermostat Control"
+      width: 200
+      tags: [Program,Display,Buttons]
 ---
-## ttgo t-display
-
-{{< columns >}} 
+{{<grid "esp32" >}}
+{{< image src="/images/ttgo_t-display.png" width=200 >}}
 * LCD ST7789V
 * 1,14 Zoll
 * 135x240
 * Charger : TP4054
 * [more details](/docs/microcontrollers/esp32/ttgo-t-display)
 <--->
-{{< figure src="/images/ttgo_t-display.png" width=200 >}}
-
-{{< /columns >}}
-
-## m5 stick C Plus
-
-{{< columns >}} 
+{{< image src="/images/m5_stick_plus.png" width=200 >}}
 * 6-Axis IMU
 * IR transmitter
 * Microphone
@@ -29,31 +46,31 @@ title: "esp32"
 * Passive Buzzer
 * [more details](/docs/microcontrollers/esp32/m5stick-plus)
 <--->
-{{< figure src="/images/m5_stick_plus.png" width=300 >}}
-{{< /columns >}}
-
-
-## fisheye cam OV3660
-
-{{< columns >}} 
+{{< figure src="/images/fisheye-cam-ov36.png" width=200 >}}
 * 3 Mega Pixels OV3660
 * Fisheye lens DFOV 120°
 * Ultra low power, sleep current 2μA
 * 270mAh battery
 * PSRAM 8MB
 * [more details](/docs/microcontrollers/esp32/fisheye-cam-ov36)
+
 <--->
-{{< figure src="/images/fisheye-cam-ov36.png" width=200 >}}
-{{< /columns >}}
-
-## ttgo t5 e-paper
-
-{{< columns >}} 
+{{< figure src="/images/ttgo_t5-epaper.png" width=300 >}}
 * GxGDEW029Z10
 * 2,9 Zoll
 * White / Black / Red
 * 296x128
 * [more details](/docs/microcontrollers/esp32/ttgo-t5-epaper)
+
 <--->
-{{< figure src="/images/ttgo_t5-epaper.png" width=300 >}}
-{{< /columns >}}
+{{< figure src="/images/esp32/display-control-app-all info.png" width=300 >}}
+* Boards : [ttgo-t-display](/docs/microcontrollers/esp32/ttgo-t-display)
+* Platformio
+* MQTT
+* Json
+* Buttons Temperature up/down
+* [more details](/docs/microcontrollers/esp32/ttgo-t-display/#thermostat-control)
+
+{{</grid>}}
+
+

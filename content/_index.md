@@ -11,7 +11,7 @@ grid:
     - Applications
     - Microcontrollers
     - Network
-    slot: 150
+    slot: 300
     items:
     - name: "Raspi IoT"
       width: 300
