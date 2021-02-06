@@ -22,12 +22,12 @@ grid:
     - name: "ESP32 Programs"
       width: 300
       tags: [Microcontrollers,ESP32]
-    - name: "Discord Server"
-      width: 600
-      tags: [Frameworks,Applications,Microcontrollers,Network]
     - name: "3D Printing"
       width: 300
       tags: []
+    - name: "Discord Server"
+      width: 600
+      tags: [Frameworks,Applications,Microcontrollers,Network]
     - name: "Smart Home 3D"
       width: 600
       tags: [Frameworks,Applications]
@@ -75,16 +75,16 @@ filesystem with json config
 
 MQTT Timer camera, e-ink, remote control,...
 <--->
-{{< discord id="780126809671991328" >}}
-
-An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
-
-<--->
 {{< image src="/images/3dprinting/3dmodels.png" href="/docs/3dprinting/" height=100 >}}
 
 3D Models for Smart Home, electronics and house utilities
 
 {{< my_button href="/docs/3dprinting/" text="3D Printing" >}}
+<--->
+{{< discord id="780126809671991328" >}}
+
+An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
+
 <--->
 {{< image src="/images/floor_temperature.png" height=100 >}}
 
