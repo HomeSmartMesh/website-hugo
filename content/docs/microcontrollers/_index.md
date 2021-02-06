@@ -15,7 +15,7 @@ grid:
     - RISC-V
     - NRF52
     - STM32
-    slot: 200
+    slot: 300
     items:
     - name: "ttgo t-display"
       width: 200
