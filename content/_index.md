@@ -16,10 +16,10 @@ grid:
     - name: "Raspi IoT"
       width: 300
       tags: [Frameworks,Applications,Network]
-    - name: "Simple RF Mesh"
+    - name: "Thread SensorTag"
       width: 300
-      tags: [Network,Microcontrollers,nRF52]
-    - name: "ESP32 Programs"
+      tags: [Frameworks,Microcontrollers,Network]
+    - name: "ESP32 Boards"
       width: 300
       tags: [Microcontrollers,ESP32]
     - name: "3D Printing"
@@ -28,6 +28,9 @@ grid:
     - name: "Discord Server"
       width: 600
       tags: [Frameworks,Applications,Microcontrollers,Network]
+    - name: "Simple RF Mesh"
+      width: 300
+      tags: [Network,Microcontrollers,nRF52]
     - name: "Smart Home 3D"
       width: 600
       tags: [Frameworks,Applications]
@@ -37,20 +40,20 @@ grid:
     - name: "Thread"
       width: 300
       tags: [Network]
-    - name: "Zigbee Wifi Channels"
-      width: 600
-      tags: [Network]
     - name: "Home Assistant"
       width: 150
       tags: [Frameworks]
+    - name: "Zigbee Wifi Channels"
+      width: 600
+      tags: [Network]
     - name: "Open HAB"
       width: 150
       tags: [Frameworks]
 ---
 
 {{< grid "my_grid" >}}
-{{< image src="/images/raspi_iot.png" height="100px" href="docs/raspi/readme/" >}}
-{{< my_button href="docs/raspi/readme/" text="Raspi IoT Doc" >}}
+{{< image src="/images/raspi_iot.png" height="150px" href="/docs/frameworks/raspi_iot/" >}}
+{{< my_button href="/docs/frameworks/raspi_iot/" text="Raspi IoT Doc" >}}
 
 Learning examples using as few dependencies as possible
 
@@ -59,12 +62,15 @@ Sensors to MQTT to influx to Grafana.
 Multiple Python and Node.js standalone services
 
 <--->
-{{< image src="/images/nRF52_mesh.png" height=100 >}}
-{{< my_button href="/docs/networks/nrf/" text="nRF Mesh Doc" >}}
+{{< image src="/images/thread_sensortag/concept.png" height="150px" href="/docs/frameworks/thread_sensortag/" >}}
+{{< my_button href="/docs/frameworks/thread_sensortag/" text="Raspi IoT Doc" >}}
 
-A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
+Thread mesh with nRF52840
 
-Custom HW but also SW for nRF SoC tags and dongles on the market.
+BME280 Temperature Humidity Pressure
+
+MAX44009 Ambient Light
+
 <--->
 {{< image src="/images/espressif.png" height=100 >}}
 {{< my_button href="/docs/microcontrollers/esp32/" text="ESP32 Boards" >}}
@@ -75,7 +81,7 @@ filesystem with json config
 
 MQTT Timer camera, e-ink, remote control,...
 <--->
-{{< image src="/images/3dprinting/3dmodels.png" href="/docs/3dprinting/" height=100 >}}
+{{< image src="/images/3dprinting/3dmodels.png" href="/docs/3dprinting/" height=150 >}}
 
 3D Models for Smart Home, electronics and house utilities
 
@@ -85,6 +91,13 @@ MQTT Timer camera, e-ink, remote control,...
 
 An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 
+<--->
+{{< image src="/images/nRF52_mesh.png" height=150 >}}
+{{< my_button href="/docs/networks/nrf/" text="nRF Mesh Doc" >}}
+
+A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
+
+Custom HW but also SW for nRF SoC tags and dongles on the market.
 <--->
 {{< image src="/images/floor_temperature.png" height=100 >}}
 
@@ -111,10 +124,10 @@ multiple coordinators
 {{< my_button href="/docs/networks/thread/" text="Thread Mind Map" >}}
 
 <--->
-{{< image src="/images/networks_deployment.png" width=600 >}}
-<--->
 {{< image src="/images/hassio.png" height=100 >}}
 {{< new_button href="https://www.home-assistant.io/" text="website" >}}
+<--->
+{{< image src="/images/networks_deployment.png" width=600 >}}
 <--->
 {{< image src="/images/openhab.png" height=100 >}}
 {{< new_button href="https://www.openhab.org/" text="website" >}}

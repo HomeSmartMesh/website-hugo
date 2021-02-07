@@ -8,6 +8,23 @@ weight: 2
 toc: true
 ---
 
+# Concept
+
+{{<image src="/images/thread_sensortag/concept.png" >}}
+
+
+The Thread sensorTag is based on an `nRF52840` which is integrated inside an `ISP1807`. On the tag, the used sensors are the `BME280` for Temperature, Humidity, Pressure and 
+
+{{< new_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840">}}
+
+{{< new_button href="https://www.insightsip.com/products/bluetooth-smart-modules/isp1807" text="ISP1807">}}
+
+{{< new_button href="https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/" text="BME280">}}
+
+{{< new_button href="https://www.maximintegrated.com/en/products/interface/sensor-interface/MAX44009.html" text="MAX44009">}}
+
+
+
 # Repo
 
 {{< new_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/fe999911c088dd4ad4b96288b7cdaeced648661c" text="schematics 07/02/2021 commit fe9999">}}
@@ -27,3 +44,8 @@ toc: true
 # 3D Board model
 
 {{< model_viewer "/models/sensortag.glb" "400" >}}
+
+# Firmware
+## Breadboard testing
+
+{{<image src="/images/thread_sensortag/breadboard_test.png" >}}
