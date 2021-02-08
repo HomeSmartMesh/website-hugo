@@ -54,23 +54,32 @@ toc: true
 
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
-# Boarder router
-
-## ncp for nRF service
-{{<new_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..." >}}
+# Boarder Router
+## Nordic Firmware
 
 build and flash the ncp example
 ```bash
 >cd "examples\thread\ncp\ftd\usb\pca10059\mbr\armgcc\Makefile"
 >make
+>make flash_mbr
 >make flash
 ```
-* connect the USB dongle with the ncp firmware on the raspberry pi
-* on the raspberry pi run
 
-## ncp for openthread service
+## Open Thread Firmware
 
 {{<new_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..." >}}
+
+  nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase
+
+  nrfjprog -f nrf52 --chiperase --program ot-ncp-ftd-gd81d769e-nrf52840.hex --reset
+
+## Nordic Raspi ready image
+
+* download a ready raspberry pi image
+
+{{<new_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..." >}}
+
+## OpenThread Raspi docker
 
 ```bash
 docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
@@ -82,21 +91,66 @@ docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
 
 {{<new_button href="https://openthread.io/guides/border-router/docker/run" text="More details on 'Run OTBR Docker'..." >}}
 
-Upon success you should be able to connect on the raspberry pi url `http://10.0.0.53:8080/`
+## Form a network
+
+Upon success you should be able to connect on the raspberry pi url `http://10.0.0.41/`
 
 {{<image src="/images/thread_sensortag/OTBR_server.png">}}
 
-After trying forming a network and on not success such error might appear
-
-  otbr-agent[196]: [CRIT]-PLAT----: Init() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:255: RadioSpinelIncompatible
-
+* on the left menu click on `Join` then select the required paramters (e.g. Channel,...) then click on `FORM` 
 ## wireshark sniffing
 
   git clone https://github.com/NordicSemiconductor/nRF-Sniffer-for-802.15.4
 
 * Flash the `nrf802154_sniffer_dongle.hex`
 
+When Forming a network, some Pakets can be sniffed including advertisment
 
+{{<image src="/images/thread_sensortag/wireshark_startup.png">}}
+
+## test with cli
+
+build and flash the cli example
+```bash
+>cd "examples\thread\cli\ftd\usb\pca10059\mbr\armgcc\Makefile"
+>make
+>make flash_mbr
+>make flash
+```
+on the cli
+
+```bash
+>panid 0x1234
+>panid
+>channel 13
+>channel
+>networkname OpenThreadDemo
+>networkname
+>extpanid 1111111122222222
+>masterkey
+>ifconfig up
+>thread start
+>state
+```
+Note `masterkey` command is for the `Network Key`
+
+at this stage the `state` command should log `child`
+
+wireshark should log the join as follows
+
+{{<image src="/images/thread_sensortag/child_join.png">}}
+
+* it's possible to ping with the router ip
+
+```bash
+>ping fe80::c85c:d0c4:1103:31d5
+Done
+> 16 bytes from fe80:0:0:0:c85c:d0c4:1103:31d5: icmp_seq=2 hlim=64 time=12ms
+```
+
+a good exercice is to commition a device through CLI
+
+{{<new_button href="https://openthread.io/guides/border-router/external-commissioning" text="External commitioning..." >}}
 
 # Useful commands
 
