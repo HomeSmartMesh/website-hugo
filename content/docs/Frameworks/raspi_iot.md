@@ -338,10 +338,7 @@ In order to use this script, it is required to host it locally on local raspberr
 * https://www.npmjs.com/package/winston-transport-browserconsole
 
 ## Support
-* I'm using the scripts from this repo, they are running 24/7 and have a stunning reliability. Total system failure rate is nearing that of the HW devices. No reboots ever required.
-* Each service has a log file to trace back unintended behavior and complex logic.
 * I'll provide support for any question or suggestion on https://github.com/HomeSmartMesh/raspi/issues
-
 ## Safety warning
 * Power Sockets have deadly voltage and should not be self altered
 * Usage of certified products such as Shelly or others is recommended for any high voltage product
@@ -349,3 +346,8 @@ In order to use this script, it is required to host it locally on local raspberr
   * reboot state
   * safety power too low
 * Any heat power control custom script must necessarily have another safe switch to fully cut the power when away or device is inattended.
+
+# Raspberry pi tooling
+
+{{<new_button href="https://www.raspberrypi.org/software/" text="Raspberry pi image flash tool..." >}}
+

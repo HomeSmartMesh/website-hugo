@@ -4,9 +4,6 @@ bookFlatSection: true
 bookCollapseSection: false
 title: "nRF52"
 grid:
-    filters:
-    - All
-    - Board
     slot: 300
     items:
     - name: "nRF52840 Dongle"
@@ -19,8 +16,9 @@ grid:
 
 {{<grid "mygrid">}}
 
-{{< image src="/images/nRF52840-Dongle.jpg" width=300 >}}
+{{< image src="/images/nrf_usb_dongle.png" width=300 >}}
 
+* board codename : PCA10056
 * [nRF52840](https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840)
 * ARM M4 64 MHz
 * 1024 KB ROM - 256 KB RAM

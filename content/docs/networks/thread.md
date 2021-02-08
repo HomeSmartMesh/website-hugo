@@ -27,6 +27,22 @@ toc: true
 
 {{< new_button href="https://openthread.io/guides/border-router/docker/test-connectivity" text="test connectivity" >}}
 
+# Documentation
+
+{{<new_button href="https://www.threadgroup.org/ThreadSpec" text="request the specification..." >}}
+
+{{<new_button href="https://infocenter.nordicsemi.com/topic/struct_sdk/struct/sdk_thread_zigbee_latest.html" text="nRF SDK for Thread and Zigbee v4.1.0..." >}}
+
+{{<new_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="download the SDK">}}
+
+# Tools
+
+{{<new_button href="https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-desktop/Download#infotabs" text="nRF Connect for desktop..." >}}
+
+{{<new_button href="https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download#infotabs" text="nRF Command Line Tools..." >}}
+
+{{<new_button href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads/7-2018-q2-update" text="GNU Arm Embedded Toolchain v7-2018-q2" >}}
+
 # devices
 * border router : dongle connected to the raspberry pi
 
@@ -38,7 +54,57 @@ toc: true
 
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
+# Boarder router
+
+## ncp for nRF service
+{{<new_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..." >}}
+
+build and flash the ncp example
+```bash
+>cd "examples\thread\ncp\ftd\usb\pca10059\mbr\armgcc\Makefile"
+>make
+>make flash
+```
+* connect the USB dongle with the ncp firmware on the raspberry pi
+* on the raspberry pi run
+
+## ncp for openthread service
+
+{{<new_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..." >}}
+
+```bash
+docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
+        net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
+        -p 8080:80 --dns=127.0.0.1 -it --volume \
+        /dev/ttyACM0:/dev/ttyACM0 --privileged openthread/otbr \
+        --radio-url spinel+hdlc+uart:///dev/ttyACM0
+```
+
+{{<new_button href="https://openthread.io/guides/border-router/docker/run" text="More details on 'Run OTBR Docker'..." >}}
+
+Upon success you should be able to connect on the raspberry pi url `http://10.0.0.53:8080/`
+
+{{<image src="/images/thread_sensortag/OTBR_server.png">}}
+
+After trying forming a network and on not success such error might appear
+
+  otbr-agent[196]: [CRIT]-PLAT----: Init() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:255: RadioSpinelIncompatible
+
+## wireshark sniffing
+
+  git clone https://github.com/NordicSemiconductor/nRF-Sniffer-for-802.15.4
+
+* Flash the `nrf802154_sniffer_dongle.hex`
+
+
+
 # Useful commands
+
+## flash
+
+```cmd
+nrfjprog -f NRF52 --chiperase --program <path to the hex file> --reset
+```
 
 {{< details "host wpantund wpanctl. Click to expand..." >}}
 ```shell
