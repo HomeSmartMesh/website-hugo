@@ -55,7 +55,7 @@ toc: true
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
 # Boarder Router
-## Nordic Firmware
+## Nordic - Firmware
 
 build and flash the ncp example
 ```bash
@@ -64,22 +64,29 @@ build and flash the ncp example
 >make flash_mbr
 >make flash
 ```
-
-## Open Thread Firmware
-
-{{<new_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..." >}}
-
-  nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase
-
-  nrfjprog -f nrf52 --chiperase --program ot-ncp-ftd-gd81d769e-nrf52840.hex --reset
-
-## Nordic Raspi ready image
+## Nordic - Raspi ready image
 
 * download a ready raspberry pi image
 
 {{<new_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..." >}}
 
-## OpenThread Raspi docker
+## Open Thread - Firmware
+
+Available pre-build firmware from [this page](https://openthread.io/platforms/co-processor/firmware) is the old version no longer compatible and results in this error :
+```bash
+a82cab962603 otbr-agent[196]: [CRIT]-PLAT----: Init() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:255: RadioSpinelIncompatible
+```
+
+{{<new_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..." >}}
+
+  nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
+
+therefore, as explained in [this ticket](https://github.com/openthread/ot-br-posix/issues/642), rcp not ncp has to be built and used 
+
+{{< hint warning >}}I could not find build instructions, e.g. missing tools 'aclocal',... the 'OpenThread' BR is at the moment not yet tested
+{{</ hint >}}
+
+## OpenThread - Raspi docker
 
 ```bash
 docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
@@ -90,6 +97,13 @@ docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
 ```
 
 {{<new_button href="https://openthread.io/guides/border-router/docker/run" text="More details on 'Run OTBR Docker'..." >}}
+
+## nRF Connect
+{{<new_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..." >}}
+
+* install `nRF Connect for deskop`
+* From within nRF connect, install `Toolchain Manager`
+* From the Toolchain manager, install the last `nRF Connect SDK`
 
 ## Form a network
 
@@ -151,6 +165,10 @@ Done
 a good exercice is to commition a device through CLI
 
 {{<new_button href="https://openthread.io/guides/border-router/external-commissioning" text="External commitioning..." >}}
+
+## MQTT-SN
+
+`examples\thread\mqttsn_sleepy_publisher`
 
 # Useful commands
 

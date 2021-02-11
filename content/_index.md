@@ -62,8 +62,8 @@ Sensors to MQTT to influx to Grafana.
 Multiple Python and Node.js standalone services
 
 <--->
-{{< image src="/images/thread_sensortag/concept.png" height="150px" href="/docs/frameworks/thread_sensortag/" >}}
-{{< my_button href="/docs/frameworks/thread_sensortag/" text="Raspi IoT Doc" >}}
+{{< image src="/images/thread_sensortag/concept.png" height="150px" href="/docs/microcontrollers/nrf52/thread_sensortag/" >}}
+{{< my_button href="/docs/microcontrollers/nrf52/thread_sensortag/" text="Thread SensorTag" >}}
 
 Thread mesh with nRF52840
 
