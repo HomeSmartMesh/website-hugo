@@ -14,6 +14,6 @@ bookToC: false
 The house model shown above was 3d printed with the model below, then decorated and painted by hand. The roof was made ready plastic material and painted.
 
 {{< model_viewer "/models/house.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/house.zip">}}
+{{< icon_button text="STL Model" href="/models/house.zip" icon="download" >}}
 
-{{< new_button text="Download Fusion 3D" href="/models/house model print.f3d">}}
+{{< icon_button text="Fusion 3D Model" href="/models/house model print.f3d" icon="download" >}}

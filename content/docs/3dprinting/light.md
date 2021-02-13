@@ -14,7 +14,7 @@ bookToC: false
 {{< image src="/images/3dprinting/dumb_to_smart.png" >}}
 
 {{< model_viewer "/models/wall_switch.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/switch_cover_switch.stl">}}
+{{< icon_button text="STL Model" href="/models/switch_cover_switch.stl" icon="download" >}}
 
 {{< load-photoswipe >}}
 {{< gallery dir="/images/3dprinting/wall switch" />}}

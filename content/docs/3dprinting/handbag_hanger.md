@@ -11,6 +11,6 @@ bookToC: false
 {{< image src="/images/3dprinting/handbag carrier.jpg" >}}
 
 {{< model_viewer "/models/handbag_hanger.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/Hang bag v2.stl">}}
+{{< icon_button text="STL Model" href="/models/Hang bag v2.stl" icon="download" >}}
 
 

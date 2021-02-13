@@ -12,7 +12,7 @@ runs with chrome as a web browser
 {{< iframe src="https://voronoi-editor.web.app/" height="600" >}}
 
 # Github repo
-{{< button href="https://github.com/WebSVG/voronoi" >}}Voronoi generator webapp Github Repo{{< /button>}}
+{{< icon_button href="https://github.com/WebSVG/voronoi" text="Voronoi generator webapp Github Repo"  icon="github" >}}
 
 # 3d printing
 {{< button relref="/docs/3dprinting/voronoi" >}} Voronoi STL Models {{</button>}}

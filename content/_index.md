@@ -53,6 +53,7 @@ grid:
 
 {{< grid "my_grid" >}}
 {{< image src="/images/raspi_iot.png" height="150px" href="/docs/frameworks/raspi_iot/" >}}
+
 {{< my_button href="/docs/frameworks/raspi_iot/" text="Raspi IoT Doc" >}}
 
 Learning examples using as few dependencies as possible
@@ -92,20 +93,20 @@ MQTT Timer camera, e-ink, remote control,...
 An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 
 <--->
-{{< image src="/images/nRF52_mesh.png" height=150 >}}
+{{< image src="/images/nRF52_mesh.png" height=150 href="/docs/networks/nrf/" >}}
 {{< my_button href="/docs/networks/nrf/" text="nRF Mesh Doc" >}}
 
 A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
 Custom HW but also SW for nRF SoC tags and dongles on the market.
 <--->
-{{< image src="/images/floor_temperature.png" height=100 >}}
+{{< image src="/images/floor_temperature.png" height=100 href="/docs/applications/home3d" >}}
 
 {{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
 
 Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
 <--->
-{{< image src="/images/zigbee.png" height=100 >}}
+{{< image src="/images/zigbee.png" height=100 href="docs/networks/zigbee/" >}}
 {{< my_button href="docs/networks/zigbee/" text="Zigbee Doc" >}}
 
 Showcase of all used devices and their integration
@@ -115,13 +116,16 @@ References for deeper dive in the Zigbee standard
 References for DIY coordinators and software
 
 <--->
-{{< image src="/images/threadgrouplogo.ico" height=100 >}}
+{{< image src="/images/threadgrouplogo.ico" height=100 href="/docs/networks/thread/" >}}
 
-IPv6 generic bridging
+{{< my_button href="/docs/networks/thread/" text="Thread Doc" >}}
 
-multiple coordinators
+Protocol Documentation
 
-{{< my_button href="/docs/networks/thread/" text="Thread Mind Map" >}}
+Tools
+
+Boarder Router
+
 
 <--->
 {{< image src="/images/hassio.png" height=100 >}}

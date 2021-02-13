@@ -11,7 +11,7 @@ bookToC: false
 {{< image src="/images/3dprinting/esp32_remote.png" >}}
 
 {{< model_viewer "/models/esp32_remote.glb" "400" >}}
-{{< new_button text="Download STL models zip" href="/models/esp32_remote.zip">}}
+{{< icon_button text="STL models zip" href="/models/esp32_remote.zip" icon="download" >}}
 
 # Application
 

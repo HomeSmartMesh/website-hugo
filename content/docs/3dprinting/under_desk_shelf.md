@@ -22,5 +22,5 @@ bookToC: false
 
 
 {{< model_viewer "/models/pc_platform.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/pc_platform.stl">}}
+{{< icon_button text="STL Model" href="/models/pc_platform.stl" icon="download" >}}
 

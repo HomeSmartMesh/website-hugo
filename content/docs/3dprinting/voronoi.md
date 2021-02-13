@@ -14,20 +14,20 @@ bookToC: false
 {{< image src="/images/3dprinting/Voronoi cells.jpg" width="600" >}}
 
 {{< model_viewer "/models/cells_circle.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/cells_circle.stl" >}}
+{{< icon_button text="STL Model" href="/models/cells_circle.stl"  icon="download" >}}
 
 ## Fantasy pen holder
 
 {{< model_viewer "/models/fantasy_pen_holder.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/fantasy_pen_holder.stl" >}}
+{{< icon_button text="STL Model" href="/models/fantasy_pen_holder.stl"  icon="download" >}}
 
 ## Fantasy Turtle Flower
 
 {{< model_viewer "/models/trtl_flower.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/trtl_flower.stl" >}}
+{{< icon_button text="STL Model" href="/models/trtl_flower.stl"  icon="download" >}}
 
 ## Girafe round
 
 {{< model_viewer "/models/girafe_round.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/girafe_round.stl" >}}
+{{< icon_button text="STL Model" href="/models/girafe_round.stl"  icon="download" >}}
 

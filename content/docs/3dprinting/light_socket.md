@@ -14,7 +14,7 @@ bookToC: false
 {{< image src="/images/3dprinting/cover_switch_socket.png" >}}
 
 {{< model_viewer "/models/wall_switch_double.glb" "400" >}}
-{{< new_button text="Download STL" href="/models/wall_switch_double.stl">}}
+{{< icon_button text="STL Model" href="/models/wall_switch_double.stl" icon="download" >}}
 
 # Application
 
