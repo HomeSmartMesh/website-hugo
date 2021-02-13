@@ -128,8 +128,8 @@ Boarder Router
 
 
 <--->
-{{< image src="/images/hassio.png" height=100 >}}
-{{< new_button href="https://www.home-assistant.io/" text="website" >}}
+{{< image src="/images/hassio.png" height=100 href="/docs/frameworks/home_assistant/">}}
+{{< button href="/docs/frameworks/home_assistant/" >}}Home Assistant{{</button>}}
 <--->
 {{< image src="/images/networks_deployment.png" width=600 >}}
 <--->
