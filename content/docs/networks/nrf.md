@@ -1,19 +1,21 @@
 ---
-title: "custom RF Mesh"
+title: "Simple Mesh"
 description: "A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols. Open source SW is provided for off the shelf nRF SoC tags and dongles."
 lead: "A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols. Open source SW is provided for off the shelf nRF SoC tags and dongles."
 date: 2020-10-06T08:48:57+00:00
-lastmod: 2020-10-06T08:48:57+00:00
+lastmod: 2021-02-14T08:00:00+00:00
 draft: false
-images: []
+images: ["/images/nRF52-features.png"]
 weight: 1
 toc: true
 ---
 
-{{< new_button href="https://github.com/nRFMesh/nRF52_Mesh" text="nRF Mesh Github Repo" >}}
+{{<icon_button relref="/docs/microcontrollers/nrf52/simplemesh_sensortag" text="Simple Mesh SensorTag" >}}
+
+{{<icon_button href="https://github.com/nRFMesh/nRF52_Mesh" text="Simple Mesh Repo" icon="github" >}}
 
 ## Features
-{{< figure src="/images/nRF52-features.png" width="100%" >}}
+{{< gfigure src="/images/nRF52-features.png" width="100%" >}}
 
 * 2.4 GHz 2 Mbps Mesh Network
   * tested with 300 packets / second

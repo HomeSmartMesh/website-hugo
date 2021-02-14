@@ -1,12 +1,15 @@
 ---
 title: "Thread SensorTag"
-description: ""
+description: "A Low power SensorTag with High quality measures of light, Temperature, Humidity and Pressure. Based on nRF52840 which supports multiple protocols including Thread"
 date: 2021-02-07T08:48:57+00:00
-lastmod: 2021-02-07T08:48:57+00:00
-images: []
+lastmod: 2021-02-14T08:00:00+00:00
+images: ["/images/thread_sensortag/concept.png"]
 weight: 2
 toc: true
 ---
+
+{{<icon_button relref="/docs/networks/thread/" text="Networks / Thread" >}}
+{{<icon_button relref="/docs/frameworks/chip/" text="Frameworks / CHIP" >}}
 
 # v1.0 MS8607 VEML6030
 

@@ -180,7 +180,11 @@ a good exercice is to commission a device through CLI
 ## MQTT-SN
 * MQTT-SN actually has nothing to do with `Thread`, it is rather a protcol for a bridge that allows clients to interact with an MQTT Broquer with minimal payload and packets transfers, therefore, it is well adapted to ip over low power mesh networks such as Thread.
 
-Firmware example from Nordic SDK `examples\thread\mqttsn_sleepy_publisher`
+Example firmware `mqttsn_sleepy_publisher` and `mqttsn_client_publisher` are a port of the nRFSDK example from PCA10056 which was the only supported board to the PCA10059, the nRF52840 USB dongle, therefore the search gateway, connect, publish sequence have been merged in on button and run cyclically on each new press.
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/mqttsn_sleepy_publisher" text="mqttsn_sleepy_publisher"  icon="github" >}}
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/mqttsn_client_publisher" text="mqttsn_client_publisher"  icon="github" >}}
 
 {{<icon_button href="https://www.oasis-open.org/committees/download.php/66091/MQTT-SN_spec_v1.2.pdf" text="MQTT-SN_spec_v1.2.pdf"  icon="new" >}}
 
@@ -190,13 +194,176 @@ sudo systemctl status paho-mqttsn-gateway.service
 sudo /usr/sbin/MQTT-SNGateway -f /etc/paho-mqtt-sn-gateway.conf
 sudo nano /etc/paho-mqtt-sn-gateway.conf
 ```
-Test vector
+{{<details "paho-mqtt-sn-gateway.conf" >}}
+```conf
+#**************************************************************************
+# Copyright (c) 2016-2019, Tomoaki Yamaguchi
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# and Eclipse Distribution License v1.0 which accompany this distribution.
+#
+# The Eclipse Public License is available at
+#    http://www.eclipse.org/legal/epl-v10.html
+# and the Eclipse Distribution License is available at
+#   http://www.eclipse.org/org/documents/edl-v10.php.
+#***************************************************************************
+#
+# config file of MQTT-SN Gateway
+#
+
+# IPv4 Address of iot.eclipse.org
+BrokerName=10.0.0.42
+BrokerPortNo=1883
+BrokerSecurePortNo=8883
+
+#
+# When AggregatingGateway=YES or ClientAuthentication=YES,
+# All clients must be specified by the ClientList File
+#
+
+ClientAuthentication=NO
+AggregatingGateway=NO
+QoS-1=NO
+Forwarder=NO
+
+#ClientsList=/path/to/your_clients.conf
+
+PredefinedTopic=NO
+#PredefinedTopicList=/path/to/your_predefinedTopic.conf
+
+#RootCAfile=/etc/ssl/certs/ca-certificates.crt
+#RootCApath=/etc/ssl/certs/
+#CertsFile=/path/to/certKey.pem
+#PrivateKey=/path/to/privateKey.pem
+
+GatewayID=1
+GatewayName=PahoGateway-01
+KeepAlive=900
+#LoginID=your_ID
+#Password=your_Password
+
+
+# UDP
+GatewayPortNo=10000
+MulticastIP=225.1.1.1
+MulticastPortNo=1883
+
+# GatewayUDP6Broadcast address is set to all Thread devices address
+# in order to enable Thread Sleepy Devices to receive multicast messages
+# sent from the gateway.
+# UDP6
+GatewayUDP6Port = 47193
+GatewayUDP6Broadcast = ff03::1
+GatewayUDP6If = wpan0
+
+# XBee
+Baudrate=38400
+SerialDevice=/dev/ttyUSB0
+ApiMode=2
+
+# LOG
+ShearedMemory=NO;
+```
+{{</details>}}
+
+Test vector for sending a `SEARCHGW` message to the MQTT-SQ gateway service
 ```bash
 #send (Length 3)(MsgType SEARCHGW=1)(Radius 1)
 echo -n -e "030101" | xxd -r -p | nc -u fd11:1111:1122:0:98bf:60c7:9431:ee90 47193
 ```
 
-### MQTT-SN Gateway data flow
+### Firmware flow diagram
+running the firmware example `mqtt_client_publisher` results in the following logs
+
+{{<details "MQTT-SN gateway log" >}}
+```shell
+pi@raspberrypi:~ $ sudo /usr/sbin/MQTT-SNGateway -f /etc/paho-mqtt-sn-gateway.conf
+ClientList can not open the Predefined Topic List.     /etc/predefinedTopic.conf
+
+ ***************************************************************************
+ * MQTT-SN Transparent Gateway
+ * Part of Project Paho in Eclipse
+ * (http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt-sn.embedded-c.git/)
+ *
+ * Author : Tomoaki YAMAGUCHI
+ * Version: 1.3.1
+ ***************************************************************************
+
+20210213 194529.539 PahoGateway-01 has been started.
+
+ ConfigFile: /etc/paho-mqtt-sn-gateway.conf
+ SensorN/W:   Gateway Port: 47193 Broadcast Address: ff03::1 Interface: wpan0
+ Broker:     10.0.0.42 : 1883, 8883
+ RootCApath: (null)
+ RootCAfile: (null)
+ CertKey:    (null)
+ PrivateKey: (null)
+
+
+
+20210213 194535.931   SEARCHGW          <---  Client                              03 01 01
+20210213 194535.932   GWINFO            --->  Clients                             03 02 01
+
+20210213 194541.989   CONNECT           <---  nRF52840_publisher                  18 04 04 01 00 3C 6E 52 46 35 32 38 34 30 5F 70 75 62 6C 69 73 68 65 72
+20210213 194541.997   CONNECT           ===>  nRF52840_publisher                  10 1E 00 04 4D 51 54 54 04 02 00 3C 00 12 6E 52 46 35 32 38 34 30 5F 70 75 62 6C 69 73 68 65 72
+20210213 194542.042   CONNACK           <===  nRF52840_publisher                  20 02 00 00
+20210213 194542.042   CONNACK           --->  nRF52840_publisher                  03 05 00
+
+20210213 194542.055   REGISTER    0001  <---  nRF52840_publisher                  1D 0A 00 00 00 01 6E 52 46 35 32 38 34 30 5F 72 65 73 6F 75 72 63 65 73 2F 6C 65 64 33
+20210213 194542.056   REGACK      0001  --->  nRF52840_publisher                  07 0B 00 01 00 01 00
+
+20210213 194550.331   PUBLISH     0002  <---  nRF52840_publisher                  08 0C 20 00 01 00 02 01
+20210213 194550.331   PUBLISH     0002  ===>  nRF52840_publisher                  32 1C 00 17 6E 52 46 35 32 38 34 30 5F 72 65 73 6F 75 72 63 65 73 2F 6C 65 64 33 00 02 01
+20210213 194550.338   PUBACK      0002  <===  nRF52840_publisher                  40 02 00 02
+20210213 194550.338   PUBACK      0002  --->  nRF52840_publisher                  07 0D 00 01 00 02 00
+
+20210213 194557.499   PUBLISH     0003  <---  nRF52840_publisher                  08 0C 20 00 01 00 03 00
+20210213 194557.500   PUBLISH     0003  ===>  nRF52840_publisher                  32 1C 00 17 6E 52 46 35 32 38 34 30 5F 72 65 73 6F 75 72 63 65 73 2F 6C 65 64 33 00 03 00
+20210213 194557.515   PUBACK      0003  <===  nRF52840_publisher                  40 02 00 03
+20210213 194557.516   PUBACK      0003  --->  nRF52840_publisher                  07 0D 00 01 00 03 00
+
+20210213 194602.541   PUBLISH     0004  <---  nRF52840_publisher                  08 0C 20 00 01 00 04 01
+20210213 194602.542   PUBLISH     0004  ===>  nRF52840_publisher                  32 1C 00 17 6E 52 46 35 32 38 34 30 5F 72 65 73 6F 75 72 63 65 73 2F 6C 65 64 33 00 04 01
+20210213 194602.547   PUBACK      0004  <===  nRF52840_publisher                  40 02 00 04
+20210213 194602.547   PUBACK      0004  --->  nRF52840_publisher                  07 0D 00 01 00 04 00
+```
+{{</details>}}
+
+{{<details "Firmware J-Link RTT log">}}
+```shell
+<info> app_timer: RTC: initialized.
+<info> app: Thread version   : OPENTHREAD/20191113-00534-gc6a258e3; NRF52840; Apr  5 2020 21:53:43
+<info> app: Network name     : OpenThreadDemo
+<info> app: Thread interface has been enabled.
+<info> app: 802.15.4 Channel : 13
+<info> app: 802.15.4 PAN ID  : 0x1234
+<info> app: Radio mode       : rx-on-when-idle
+<warning> app_timer: RTC instance already initialized.
+<info> app: State changed! Flags: 0x0117D33D Current role: 1
+<info> app: State changed! <info> app: (0)
+<info> app: MQTT-SN event: Client has found an active gateway.
+<info> app: MQTT-SN event: Client has found an active gateway.
+<info> app: MQTT-SN event: Gateway discovery procedure has finished.
+<info> app: MQTT-SN event: Gateway discovery result: 0x0.
+<info> app: (1)
+<info> app: Wake up first time
+<info> app: MQTT-SN event: Client connected.
+<info> app: MQTT-SN event: Client registered topic.
+<info> app: MQTT-SN event: Topic has been registered with ID: 1.
+<info> app: (2)
+<info> app: Wake up next times
+<info> app: MQTT-SN event: Client has successfully published content.
+<info> app: (2)
+<info> app: Wake up next times
+<info> app: MQTT-SN event: Client has successfully published content.
+<info> app: (2)
+<info> app: Wake up next times
+<info> app: MQTT-SN event: Client has successfully published content.
+```
+{{</details>}}
+
+### Firmware search gateway
 
 {{< svg-pan-zoom "/images/thread_sensortag/mqtt-sn gateway.svg" >}}
 
