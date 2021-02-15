@@ -10,7 +10,7 @@ toc: true
 
 {{<icon_button text="Product Page" href="https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF52840-Dongle/" icon="new">}}
 
-{{<image src="/images/nrf_usb_dongle.png" width="400px">}}
+{{<gfigure src="/images/nrf_usb_dongle.png" >}}
 
 * [nRF52840](https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840)
 * ARM M4 64 MHz
@@ -24,9 +24,18 @@ GetStarted)
 
 # nRF52840 Dongle
 
-## Serial wire debug pinout
+## Pinout
 
+### Serial Wire Debug
 {{< image src="/images/thread_sensortag/serial_wire_debug.png" >}}
+
+### LEDS
+
+* LED1 Green : `P0.06`
+* LED2 Green : `P0.08`
+* LED2 Green : `P1.09`
+* LED2 Blue  : `P0.12`
+
 
 ## pogo pin adapter
 

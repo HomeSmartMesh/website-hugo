@@ -97,6 +97,17 @@ therefore, as explained in [this ticket](https://github.com/openthread/ot-br-pos
 {{< hint warning >}}I could not find build instructions, e.g. missing tools 'aclocal',... the 'OpenThread' BR is at the moment not yet tested
 {{</ hint >}}
 
+### Manual Build
+{{<icon_button href="https://openthread.io/guides/build#how_to_build_openthread" text="How to build"  icon="new" >}}
+
+```bash
+  git clone https://github.com/openthread/openthread
+  sudo ./script/bootstrap
+  ./bootstrap
+  ./configure --enable-cli --enable-radio-only
+  make
+```
+
 ## OpenThread - Raspi docker
 
 ```bash
@@ -427,3 +438,25 @@ eui64
 
 {{</ details>}}
 
+# Thread over Zephyr
+{{<icon_button href="https://docs.zephyrproject.org/2.3.0/getting_started/index.html" text="Getting Started details..."  icon="new" >}}
+
+on windows steps are
+* Installing `choco`
+* Installing `west` dependencies with `choco`
+* installing `west` with `pip`
+* the retrieving the repo and building are performed through `west`
+* The compiler toolchain as multiple options
+  * Zephyr own SDK, not available on windows
+  * GNU ARM Embedded : to be installed on a path without spaces
+
+e.g. for a path `"D:\tools\gnu_arm_embedded\9_2020-q2-update\bin\arm-none-eabi-gcc.exe"` `GNUARMEMB_TOOLCHAIN_PATH` shall be set to `D:\tools\gnu_arm_embedded\9_2020-q2-update`
+
+building an nRF52840 Dongle sample
+```bash
+west build -p auto -b nrf52840dongle_nrf52840 samples\basic\blinky
+```
+the west flash seems to eraze the MBR (Master boot record) region of the dongle and not update it, so to get the program running, everytime I flash with `west` I have to reflash the mbr again with the nRF-SDK
+```bash
+nRF5_SDK_for_Thread_and_Zigbee_v4.1.0_32ce5f8\examples\thread\cli\ftd\usb\pca10059\mbr\armgcc>make flash_mbr
+```

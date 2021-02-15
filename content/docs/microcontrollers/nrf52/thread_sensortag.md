@@ -1,6 +1,6 @@
 ---
 title: "Thread SensorTag"
-description: "A Low power SensorTag with High quality measures of light, Temperature, Humidity and Pressure. Based on nRF52840 which supports multiple protocols including Thread"
+description: "A Low power SensorTag with High quality measures of light, Temperature, Humidity and Pressure. Based on nRF52840 which supports Thread and other protocols"
 date: 2021-02-07T08:48:57+00:00
 lastmod: 2021-02-14T08:00:00+00:00
 images: ["/images/thread_sensortag/concept.png"]
@@ -15,6 +15,10 @@ toc: true
 
 {{<image src="/images/thread_sensortag/concept.png" >}}
 {{<image src="/images/thread_sensortag/kicad_render.png" width="300vw" >}}
+
+
+The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used sensors are `VEMLS6030` for light and `MS8607` for Temperature, Humidity and Pressure.
+
 
 {{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/32a897a91b8c92f2495ef75408c987166ff7b465" text="commit" icon="github" >}}
 
@@ -46,7 +50,7 @@ toc: true
 {{<image src="/images/thread_sensortag/concept_0.png" >}}
 
 
-The Thread sensorTag is based on an `nRF52840` which is integrated inside an `ISP1807`. On the tag, the used sensors are the `BME280` for Temperature, Humidity, Pressure and 
+The preliminary version of the Thread sensorTag is based on an `nRF52840` which is integrated inside an `ISP1807`. On the tag, the used sensors are the `MAX44009` for light brightness and `BME280` for Temperature, Humidity and Pressure.
 
 {{< icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
 

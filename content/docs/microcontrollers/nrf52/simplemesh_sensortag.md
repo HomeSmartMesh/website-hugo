@@ -26,16 +26,14 @@ board render
 {{< icon_button href="https://www.maximintegrated.com/en/products/interface/sensor-interface/MAX44009.html" text="MAX44009" icon="new" >}}
 
 ## Schematics
-
-svg
+{{< svg-pan-zoom "/images/simplemesh_sensortag/schematics.svg" "white" >}}
 
 ## Board
+### Top
 
-svg
-
-## 3D Board model
-
-glb
+{{< svg-pan-zoom "/images/simplemesh_sensortag/top.svg" "white" >}}
+### Bottom
+{{< svg-pan-zoom "/images/simplemesh_sensortag/bottom.svg" "white" >}}
 
 # Firmware
 
