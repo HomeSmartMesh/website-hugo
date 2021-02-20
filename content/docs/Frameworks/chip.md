@@ -50,8 +50,53 @@ The MPSL is only required if needed to combine both bluetooth and Thread. Also t
 {{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/nrfconnect_platform_overview.md" text="Reference in github CHIP repo" icon="github" >}}
 
 
-# Building
-## default build
+# Linux
+## install
+* Step 1, install Zephyr
+{{<icon_button relref="/docs/frameworks/zephyr/" text="Install Zephyr"  >}}
+
+* Step 2, install the toolchain
+{{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_installing.html#installing-the-toolchain" text="install the toolchain" icon="new" >}}
+
+```bash
+nano ~/.zephyrrc
+export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
+export GNUARMEMB_TOOLCHAIN_PATH=~/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/
+```
+
+* Step 2, install nRF Connect SDK
+{{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_installing.html" text="install nRF Connect SDK" icon="new" >}}
+
+```bash
+mkdir ~/ncs && cd ~/ncs
+west init -m https://github.com/nrfconnect/sdk-nrf --mr v1.4.0
+west update
+west zephyr-export
+pip3 install --user -r zephyr/scripts/requirements.txt
+pip3 install --user -r nrf/scripts/requirements.txt
+pip3 install --user -r bootloader/mcuboot/scripts/requirements.txt
+```
+then on every new session
+```bash
+cd ncs
+source zephyr/zephyr-env.sh
+```
+* step 3, from the same link above install gn
+
+## build lighting app
+
+```bash
+cd connectedhomeip/examples/lighting-app/nrfconnect
+west build -b nrf52840dongle_nrf52840
+west flash
+nrfjprog --program build/zephyr/zephyr.hex -f NRF52
+```
+configure
+```bash
+west build -b nrf52840dongle_nrf52840 -t menuconfig
+```
+
+## build default
 {{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/BUILDING.md" text="How to" icon="github" >}}
 
 ```bash
@@ -68,11 +113,45 @@ important arguments :
 * target_cpu
 * target_os
 
-## building nRF Lighting app
+# Windows
 
 {{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/examples/lighting-app/nrfconnect/README.md" text="How to" icon="github" >}}
 
+* clone connectedhomeip repo
+* install nRF Connect SDK v1.4.0
+* configure the toolchain
+  * `ZEPHYR_TOOLCHAIN_VARIANT` to `gnuarmemb`
+  * `GNUARMEMB_TOOLCHAIN_PATH` to `D:\tools\gnu_arm_embedded\9_2020-q2-update`
+
+```cmd
+cd connectedhomeip\examples\lighting-app\nrfconnect
+"D:\tools\nrf\v1.4.0\zephyr\zephyr-env.cmd"
+west build -b nrf52840dongle_nrf52840
+
+```
+{{<details "build error on windows">}}
+```cmd
+D:\Projects\connectedhomeip\examples\lighting-app\nrfconnect>west build -b nrf52840dongle_nrf52840
+-- west build: generating a build system
+Including boilerplate (Zephyr base): D:/tools/nrf/v1.4.0/zephyr/cmake/app/boilerplate.cmake
+-- Application: D:/Projects/connectedhomeip/examples/lighting-app/nrfconnect
+-- Using NCS Toolchain 1.4.0 for building. (D:/tools/nrf/v1.4.99-dev1/toolchain/cmake)
+-- Zephyr version: 2.4.0 (D:/tools/nrf/v1.4.0/zephyr)
+-- Found Python3: D:/tools/nrf/v1.4.99-dev1/toolchain/opt/bin/python.exe (found suitable exact version "3.8.2") found components: Interpreter
+-- Found west (found suitable version "0.7.2", minimum required is "0.7.1")
+CMake Error at D:/tools/nrf/v1.4.0/zephyr/cmake/zephyr_module.cmake:48 (message):
+
+  D:/Projects/connectedhomeip/examples/lighting-app/nrfconnect/third_party/connectedhomeip/config/nrfconnect/chip-module,
+  given in ZEPHYR_EXTRA_MODULES, is not a valid zephyr module
+
+Call Stack (most recent call first):
+  D:/tools/nrf/v1.4.0/zephyr/cmake/app/boilerplate.cmake:150 (include)
+  D:/tools/nrf/v1.4.0/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:24 (include)
+  D:/tools/nrf/v1.4.0/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:35 (include_boilerplate)
+  CMakeLists.txt:26 (find_package)
 
 
-
-
+-- Configuring incomplete, errors occurred!
+FATAL ERROR: command exited with status 1: 'C:\Program Files\CMake\bin\cmake.EXE' '-DWEST_PYTHON=c:\users\user\appdata\local\programs\python\python39\python.exe' '-BD:\Projects\connectedhomeip\examples\lighting-app\nrfconnect\build' '-SD:\Projects\connectedhomeip\examples\lighting-app\nrfconnect' -GNinja -DBOARD=nrf52840dongle_nrf52840
+```
+{{</details>}}

@@ -448,64 +448,27 @@ eui64
 {{</ details>}}
 
 # Thread over Zephyr
-## Install
-{{<icon_button href="https://docs.zephyrproject.org/2.3.0/getting_started/index.html" text="Getting Started details..."  icon="new" >}}
 
-The details are in the link above, the summary of the step for installing on windows are
-* Installing `choco`
-* Installing `west` dependencies with `choco`
-* installing `west` with `pip`
-* the retrieving the repo and building are performed through `west`
-* The compiler toolchain as multiple options
-  * Zephyr own SDK, not available on windows
-  * GNU ARM Embedded : to be installed on a path without spaces
+for installing Zephyr see 
+{{<icon_button relref="/docs/frameworks/zephyr/" text="Installing Zephyr"  >}}
 
-e.g. for a path `"D:\tools\gnu_arm_embedded\9_2020-q2-update\bin\arm-none-eabi-gcc.exe"` `GNUARMEMB_TOOLCHAIN_PATH` shall be set to `D:\tools\gnu_arm_embedded\9_2020-q2-update`
-
-## Building and Flashing
+## building cli
+add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `overlay-minimal_singleprotocol.conf`
 ```bash
-west build -p auto -b nrf52840dongle_nrf52840 samples\basic\blinky
-west flash
-nrfjprog -f nrf52 --reset
+source ~/ncs/zephyr/zephyr-env.sh
+cd ~/ncs/nrf/samples/openthread/cli
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE=overlay-minimal_singleprotocol.conf
 ```
-{{<hint warning "hello ?">}}Flashing this USB Dongle board requires one of the following options{{</hint>}}
-
-{{<icon_button href="https://docs.zephyrproject.org/2.3.0/boards/arm/nrf52840dongle_nrf52840/doc/index.html#programming-and-debugging" text="How to Flash docs.zephyrproject"  icon="new" >}}
-
-* Option1 `Using the built-in bootloader only` : uses nrfutils and requires the default bootloader to be already flashed
-* Option2 `Using MCUboot in Serial Recovery Mode` : requires building the MCUboot and using nrfutils
-* Option3 `Using an External Debug Probe` :
-  * requires soldering SWD pins or using [this pogo pins adapter](/docs/microcontrollers/nrf52/usb_dongle/#pogo-pin-adapter)
-  * also `manual reset` or `nrfjprog -f nrf52 --reset`
-
-{{<details "modifying the DTS">}}
-The board device tree source located in `boards\arm\nrf52840dongle_nrf52840\nrf52840dongle_nrf52840.dts`
-the end of the file should look like below after the modification
-```
-/* Include flash partition table.
- * Two partition tables are available:
- * fstab-stock		-compatible with Nordic nRF5 bootloader, default
- * fstab-debugger	-to use an external debugger, w/o the nRF5 bootloader
- */
-#include "fstab-debugger.dts"
-
-&usbd {
-	compatible = "nordic,nrf-usbd";
-	status = "okay";
-};
-```
-we notice that after that change the generated dts file is different `build\zephyr\zephyr.dts`
-
-{{<image src="/images/thread_sensortag/west_dts.png" >}}
-{{</details>}}
-
-## Border Router Co-Processor
-{{<icon_button href="https://docs.zephyrproject.org/latest/samples/net/openthread/coprocessor/README.html" text="Zephyr OpenThread Co-Processor"  icon="new" >}}
+## building ncp
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
 
 ```bash
-west build -b nrf52840dk_nrf52840 samples/net/openthread/coprocessor -- -DCONF_FILE="prj.conf overlay-rcp.conf"
+cd v1.4.99-dev1/zephyr/samples/net/openthread/ncp
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-usb-nrf-br.conf"
 ```
-{{<hint "danger">}}
-D:/Projects/zephyrproject/zephyr/drivers/ieee802154/ieee802154_nrf5.h:11:10: fatal error: ieee802154_radio.h: No such file or directory
-{{</hint>}}
+
+```bash
+cd nrf/v1.4.99-dev1/nrf/samples/openthread/ncp
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.conf"
+```
 
