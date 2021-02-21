@@ -11,10 +11,15 @@ toc: true
 {{<icon_button relref="/docs/networks/nrf/" text="Networks / Simple Mesh" >}}
 {{<icon_button relref="/docs/frameworks/raspi_iot/" text="Frameworks / Raspi IoT" >}}
 
-# concept
+# Concept
 
 {{<image src="/images/simplemesh_sensortag.png" >}} 
 
+It is possible to mount either CR2032 or CR2477
+
+{{<image src="/images/mounted.png" >}}
+
+# Hardware
 board render
 
 {{< icon_button href="https://github.com/nRFMesh/nRF52_Mesh/tree/master/boards/nrf52_sensortag" text="repo directory" icon="github" >}}
@@ -34,7 +39,34 @@ board render
 {{< svg-pan-zoom "/images/simplemesh_sensortag/top.svg" "white" >}}
 ### Bottom
 {{< svg-pan-zoom "/images/simplemesh_sensortag/bottom.svg" "white" >}}
+### Module
+{{< figure src="/images/module_size.png" width="100%" >}}
 
-# Firmware
+# Application
+## Firmware
 
 {{< icon_button href="https://github.com/nRFMesh/nRF52_Mesh/tree/master/applications/01_sensortag" text="repo directory" icon="github" >}}
+
+### Low Power configuration
+|Flags to clear|
+--- |
+| NRFX_UARTE_ENABLED |
+| NRFX_UART_ENABLED | 
+| UART_ENABLED | 
+| UART0_ENABLED |
+| NRF_FPRINTF_ENABLED |
+| NRF_LOG_BACKEND_UART_ENABLED |
+| NRF_LOG_STR_FORMATTER_TIMESTAMP_FORMAT_ENABLED |
+| NRF_LOG_ENABLED |
+* removed nrf_drv_uart.c from Makefile
+* Required nRF52832 Errata [89] TWI: Static 400 uA current while using GPIOTE
+
+## Low Power measures
+| Mode | Current |
+--- | --- |
+| RTC + RAM | 9.6 uA |
+| // + Sensors | 22 uA |
+| // without TWI Woraround | 470 uA |
+| Uart Log | 500 uA |
+| Uart Log + HF | 700 uA |
+

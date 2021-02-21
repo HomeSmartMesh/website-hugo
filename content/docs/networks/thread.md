@@ -6,18 +6,18 @@ date: 2020-10-06T08:48:57+00:00
 lastmod: 2020-10-06T08:48:57+00:00
 draft: false
 images: []
-menu: 
-  docs:
-    parent: "networks"
-weight: 3
+weight: 2
 toc: true
 ---
+# Relates to
+{{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
+{{<icon_button relref="/docs/frameworks/chip/" text="Project CHIP" >}}
 
+# Overview
 {{< svg-pan-zoom "/images/openthread-environment-1.1.svg" >}}
 
 * some elements have link to the corresponding websites
 
-# Concepts
 
 {{< icon_button href="https://openthread.io/" text="Open Thread" icon="new" >}}
 
@@ -38,11 +38,11 @@ toc: true
 * IID : Interface Identifier (includes RLOC16)
 * RLOC = Mesh-Local Prefix + IID
 
-# Specification
+## Specification
 
 {{<icon_button href="https://www.threadgroup.org/ThreadSpec" text="request the specification..."  icon="new" >}}
 
-# Tools
+## Tools
 
 {{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-desktop/Download#infotabs" text="nRF Connect for desktop..."  icon="new" >}}
 
@@ -60,24 +60,57 @@ toc: true
 * From within nRF connect, install `Toolchain Manager`
 * From the Toolchain manager, install the last `nRF Connect SDK`
 
-# devices
-* border router : dongle connected to the raspberry pi
+## Thread Nodes
+A Thread network setup contains the following Nodes
 
-* test cli rfserv : command line dongle through serial monitor
-
-* mqtt-sn : test device with mqtt-sn
+* network co.processor : dongle connected to the raspberry pi
+* border router host : services running on a raspberry pi
+* cli tester : command line dongle through serial monitor for testing
+* mqtt-sn : end device with mqtt-sn such as sensors
 
 * [Topology Monitor](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Thread-topology-monitor) : GUI interface
 
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
-# Boarder Router
-* Border router solutions available from `Nordic` and from `Open Thread`.
-* A border router requires 
-  * a USB dongle as `Network Co-Processor`
-  * a `server` in our case on a raspberry pi
-## Network Co-Processor
-### Nordic - Firmware
+# Radio Co-Processor (RCP)
+This is the new version recommended by OpenThread for current and new versions aof border routers
+##  Zephyr v2.5.99
+* Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
+* For details on Zephyr install see
+{{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
+
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
+
+```bash
+cd zephyrproject/zephyr/samples/net/openthread/coprocessor
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-rcp.conf overlay-usb-nrf-br.conf"
+```
+* current status `Failed`
+
+{{<details "error details...">}}
+```bash
+FAILED: zephyr/CMakeFiles/zephyr.dir/drivers/ieee802154/ieee802154_nrf5.c.obj
+In file included from D:/Projects/zephyrproject/zephyr/drivers/ieee802154/ieee802154_nrf5.c:42:
+D:/Projects/zephyrproject/zephyr/drivers/ieee802154/ieee802154_nrf5.h:11:10: fatal error: ieee802154_radio.h: No such file or directory
+   11 | #include "ieee802154_radio.h"
+      |          ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[103/355] Building C object zephyr/subsys/net/CMakeFiles/subsys__net.dir/buf.c.obj
+ninja: build stopped: subcommand failed.
+FATAL ERROR: command exited with status 1: 'C:\Program Files\CMake\bin\cmake.EXE' --build 'D:\Projects\zephyrproject\zephyr\build'
+```
+{{</details>}}
+
+
+
+# Network Co-Processor (NCP)
+Note, see the RCP version above for recent border routers. Given the open source nature of OpenThread, it is quite challenging to find the right build instructions and version match to the right border router. Different NCP versions are listed here
+## Nordic - nRF 4.1.0
+* successfull match between the SDK and Rpi image, both available from the link below
+  * nRFSDK for Thread and Zigbee v4.1.0
+  * RaspPi OT Border Router Demo v4.1.0-1.alpha
+{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download" text="nRF SDK Download" icon="new" >}}
+
 
 build and flash the ncp example
 ```bash
@@ -87,21 +120,54 @@ build and flash the ncp example
 >make flash
 ```
 
-### Open Thread - Firmware
+## Zephyr v2.4.99
+* This section is about the `nRF Connect SDK` using the `zephyr` directory
+* successfully built and tested with `v1.4.99-dev1` which contains Zephyr version `2.4.99`
+* recognised as USB device
+{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
 
-Available pre-build firmware from [this page](https://openthread.io/platforms/co-processor/firmware) is the old version no longer compatible and results in this error :
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
+
+```bash
+cd nrf/v1.4.99-dev1/zephyr/samples/net/openthread/ncp
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-usb-nrf-br.conf"
+```
+
+## Nordic - nRF Connect
+* This section is about the `nRF Connect SDK` using the `nrf` directory
+* Not yet successfull with the nRF52 dongle, likely due to the missing usb overlay
+{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
+
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
+
+```bash
+cd nrf/v1.4.99-dev1/nrf/samples/openthread/ncp
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.conf"
+```
+
+## Open Thread
+
+Available pre-build firmware from [this page](https://openthread.io/platforms/co-processor/firmware) is `ncp` not `rcp`therefore results in thsi error
 ```bash
 a82cab962603 otbr-agent[196]: [CRIT]-PLAT----: Init() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:255: RadioSpinelIncompatible
 ```
 
 {{<icon_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..."  icon="new" >}}
 
-  nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
+```cmd
+nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
+```
 
-therefore, as explained in [this ticket](https://github.com/openthread/ot-br-posix/issues/642), rcp not ncp has to be built and used 
+As explained in [this ticket](https://github.com/openthread/ot-br-posix/issues/642), rcp not ncp has to be built and used 
 
 {{< hint warning >}}I could not find build instructions, e.g. missing tools 'aclocal',... the 'OpenThread' BR is at the moment not yet tested
 {{</ hint >}}
+
+# Border Router
+* Border router solutions available from `Nordic` and from `Open Thread`.
+* A border router requires 
+  * a USB dongle as `Network Co-Processor`
+  * a `server` in our case on a raspberry pi
 
 #### Manual Build
 {{<icon_button href="https://openthread.io/guides/build#how_to_build_openthread" text="How to build"  icon="new" >}}
@@ -118,10 +184,12 @@ therefore, as explained in [this ticket](https://github.com/openthread/ot-br-pos
 ### Nordic - sdcard image
 
 * download a ready raspberry pi image
+* successfully tested with the Nordif Firmware from the SDK v4.1.0
 
 {{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..."  icon="new" >}}
 
 ### OpenThread - docker
+* Not successfull yet, even with the pre-built binaries available on the OpenThread website
 
 ```bash
 docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
@@ -151,14 +219,10 @@ When Forming a network, some Pakets can be sniffed including advertisment
 {{<image src="/images/thread_sensortag/wireshark_startup.png">}}
 
 
+# MQTT Sensors Node
+* MQTT-SN is a protocol not requiring `Thread` necessarily, it is rather a protcol for a bridge that allows clients to interact with an MQTT Broquer with minimal payload and packets transfers, therefore, it is well adapted to ip over low power mesh networks such as `Thread`.
 
-
-
-# Devices
-## MQTT-SN
-* MQTT-SN actually has nothing to do with `Thread`, it is rather a protcol for a bridge that allows clients to interact with an MQTT Broquer with minimal payload and packets transfers, therefore, it is well adapted to ip over low power mesh networks such as Thread.
-
-Example firmware `mqttsn_sleepy_publisher` and `mqttsn_client_publisher` are a port of the nRFSDK example from PCA10056 which was the only supported board to the PCA10059, the nRF52840 USB dongle, therefore the search gateway, connect, publish sequence have been merged in on button and run cyclically on each new press.
+* Example firmware `mqttsn_sleepy_publisher` and `mqttsn_client_publisher` are a port of the nRFSDK example from PCA10056 which was the only supported board to the PCA10059, the nRF52840 USB dongle, therefore the search gateway, connect, publish sequence have been merged in on button and run cyclically on each new press.
 
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/mqttsn_sleepy_publisher" text="mqttsn_sleepy_publisher"  icon="github" >}}
 
@@ -251,7 +315,7 @@ Test vector for sending a `SEARCHGW` message to the MQTT-SQ gateway service
 echo -n -e "030101" | xxd -r -p | nc -u fd11:1111:1122:0:98bf:60c7:9431:ee90 47193
 ```
 
-### Firmware flow diagram
+## Firmware flow diagram
 running the firmware example `mqtt_client_publisher` results in the following logs
 
 {{<details "MQTT-SN gateway log" >}}
@@ -341,10 +405,16 @@ ClientList can not open the Predefined Topic List.     /etc/predefinedTopic.conf
 ```
 {{</details>}}
 
-### Firmware search gateway
+## Firmware search gateway
 
 {{< svg-pan-zoom "/images/thread_sensortag/mqtt-sn gateway.svg" >}}
 
+
+
+# CHIP Node
+As the `CHIP Protocol` can run over `Thread`, it is possible to connect CHIP applications.
+
+{{<icon_button relref="/docs/frameworks/chip/" text="More about Project CHIP" >}}
 
 # Test and Debug
 
@@ -453,22 +523,12 @@ for installing Zephyr see
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Installing Zephyr"  >}}
 
 ## building cli
-add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `overlay-minimal_singleprotocol.conf`
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `overlay-minimal_singleprotocol.conf`
+* Not yet successfull with the nRF52 dongle due to the missing usb overlay
+
 ```bash
 source ~/ncs/zephyr/zephyr-env.sh
 cd ~/ncs/nrf/samples/openthread/cli
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE=overlay-minimal_singleprotocol.conf
-```
-## building ncp
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
-```bash
-cd v1.4.99-dev1/zephyr/samples/net/openthread/ncp
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-usb-nrf-br.conf"
-```
-
-```bash
-cd nrf/v1.4.99-dev1/nrf/samples/openthread/ncp
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.conf"
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-minimal_singleprotocol.conf"
 ```
 

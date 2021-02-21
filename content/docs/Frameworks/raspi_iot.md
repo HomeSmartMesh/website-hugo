@@ -1,5 +1,5 @@
 ---
-title: "raspi IoT"
+title: "Raspi IoT"
 description: "raspberry pi server for home automation. 'No limits' to what you can do with python and node.js services interfaced with javascript web apps.
 This Fremwork is a lightweight mqtt interconnect between devices (HW), services (Automation) and webapps (UI)."
 date: 2020-10-06T08:48:57+00:00

@@ -6,6 +6,9 @@ lastmod: 2021-02-20T08:00:00+00:00
 weight: 4
 toc: true
 ---
+# Relates to
+{{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
+{{<icon_button relref="/docs/frameworks/chip/" text="Project CHIP" >}}
 
 # Windows
 ## Install
