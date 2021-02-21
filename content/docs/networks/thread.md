@@ -1,13 +1,15 @@
 ---
 title: "Thread"
-description: ""
+description: "Build and setup instruction for a Thread network. Compilation from different platforms comapatible with the nRF dongle"
 lead: ""
 date: 2020-10-06T08:48:57+00:00
-lastmod: 2020-10-06T08:48:57+00:00
+lastmod: 2021-02-21T08:48:57+00:00
 draft: false
 images: []
 weight: 2
 toc: true
+#BR : https://www.kirale.com/products/ktdg102/
+#Dongle : https://www.kirale.com/products/ktbrn1/
 ---
 # Relates to
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
@@ -63,7 +65,7 @@ toc: true
 ## Thread Nodes
 A Thread network setup contains the following Nodes
 
-* network co.processor : dongle connected to the raspberry pi
+* radio or network coprocessor : dongle connected to the raspberry pi
 * border router host : services running on a raspberry pi
 * cli tester : command line dongle through serial monitor for testing
 * mqtt-sn : end device with mqtt-sn such as sensors
@@ -73,8 +75,24 @@ A Thread network setup contains the following Nodes
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
 # Radio Co-Processor (RCP)
-This is the new version recommended by OpenThread for current and new versions aof border routers
+This is the new version recommended by OpenThread for current and new versions aof border routers, see [Vendor support RCP](https://openthread.io/platforms#radio-co-processor-rcp) for details.
+
+## OpenThread
+* successfully tested with the [OpenThread docker](#openthread---docker) raspberry pi image blow.
+
+{{<icon_button href="https://github.com/openthread/openthread/tree/master/examples/platforms/nrf528xx/nrf52840" text="nRF52840 Build instructions" icon="github" >}}
+
+```bash
+cd ~/opentrhead
+./script/bootstrap
+make distclean
+make -f examples/Makefile-nrf52840 USB=1
+arm-none-eabi-objcopy -O ihex output/nrf52840/bin/ot-rcp ~/share/ot-rcp.hex
+nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
+```
+
 ##  Zephyr v2.5.99
+* current status `Failing`
 * Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
 * For details on Zephyr install see
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
@@ -85,7 +103,6 @@ This is the new version recommended by OpenThread for current and new versions a
 cd zephyrproject/zephyr/samples/net/openthread/coprocessor
 west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-rcp.conf overlay-usb-nrf-br.conf"
 ```
-* current status `Failed`
 
 {{<details "error details...">}}
 ```bash
@@ -104,7 +121,7 @@ FATAL ERROR: command exited with status 1: 'C:\Program Files\CMake\bin\cmake.EXE
 
 
 # Network Co-Processor (NCP)
-Note, see the RCP version above for recent border routers. Given the open source nature of OpenThread, it is quite challenging to find the right build instructions and version match to the right border router. Different NCP versions are listed here
+Note, see the RCP version above for recent border routers. Given the open source nature of OpenThread, it is quite challenging to find the right build instructions and version match to the right border router. See [Vendor support NCP](https://openthread.io/platforms#network-co-processor-ncp) for mode details. Different NCP versions are listed here.
 ## Nordic - nRF 4.1.0
 * successfull match between the SDK and Rpi image, both available from the link below
   * nRFSDK for Thread and Zigbee v4.1.0
@@ -147,10 +164,7 @@ west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.c
 
 ## Open Thread
 
-Available pre-build firmware from [this page](https://openthread.io/platforms/co-processor/firmware) is `ncp` not `rcp`therefore results in thsi error
-```bash
-a82cab962603 otbr-agent[196]: [CRIT]-PLAT----: Init() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:255: RadioSpinelIncompatible
-```
+* Available pre-build ncp firmware
 
 {{<icon_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..."  icon="new" >}}
 
@@ -158,38 +172,12 @@ a82cab962603 otbr-agent[196]: [CRIT]-PLAT----: Init() at ../../third_party/opent
 nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
 ```
 
-As explained in [this ticket](https://github.com/openthread/ot-br-posix/issues/642), rcp not ncp has to be built and used 
+* for build instructions see the rcp building steps in the [rcp OpenThread](#openthread) section, the build commands generates both npc and rcp elf files.
 
-{{< hint warning >}}I could not find build instructions, e.g. missing tools 'aclocal',... the 'OpenThread' BR is at the moment not yet tested
-{{</ hint >}}
 
 # Border Router
-* Border router solutions available from `Nordic` and from `Open Thread`.
-* A border router requires 
-  * a USB dongle as `Network Co-Processor`
-  * a `server` in our case on a raspberry pi
-
-#### Manual Build
-{{<icon_button href="https://openthread.io/guides/build#how_to_build_openthread" text="How to build"  icon="new" >}}
-
-```bash
-  git clone https://github.com/openthread/openthread
-  sudo ./script/bootstrap
-  ./bootstrap
-  ./configure --enable-cli --enable-radio-only
-  make
-```
-
-## Server Setup
-### Nordic - sdcard image
-
-* download a ready raspberry pi image
-* successfully tested with the Nordif Firmware from the SDK v4.1.0
-
-{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..."  icon="new" >}}
-
-### OpenThread - docker
-* Not successfull yet, even with the pre-built binaries available on the OpenThread website
+## OpenThread - docker
+* successfully tested with the OpenThread dongle firmware [detailed above](#openthread)
 
 ```bash
 docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
@@ -200,6 +188,13 @@ docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
 ```
 
 {{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="More details on 'Run OTBR Docker'..."  icon="new" >}}
+## Nordic - sdcard image
+
+* download a ready raspberry pi image
+* successfully tested with the Nordif Firmware from the SDK v4.1.0
+
+{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..."  icon="new" >}}
+
 
 ## Form a network
 
