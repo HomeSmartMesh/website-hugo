@@ -10,6 +10,8 @@ toc: true
 
 {{<icon_button relref="/docs/networks/nrf/" text="Networks / Simple Mesh" >}}
 {{<icon_button relref="/docs/frameworks/raspi_iot/" text="Frameworks / Raspi IoT" >}}
+{{<icon_button href="https://www.tindie.com/products/wassfila/nrf52-mesh-sensor-node/" text="Tindie Product Page" icon="new" >}}
+
 
 # Concept
 

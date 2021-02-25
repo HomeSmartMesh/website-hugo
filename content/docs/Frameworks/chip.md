@@ -44,7 +44,10 @@ on linux the following commands succeed using node `v14.15.5` :
   npm run zap
 ```
 
-# nRF Connect integration
+
+
+# Building for nRF52
+## nRF Connect integration
 {{<image src="/images/thread_sensortag/chip_nrfconnect_overview_simplified.svg" >}}
 
 The above diagram taken from the CHIP repo link in the button below, shows the integration of a CHIP application on top of the nRF Connect SDK.
@@ -52,8 +55,24 @@ The above diagram taken from the CHIP repo link in the button below, shows the i
 The MPSL is only required if needed to combine both bluetooth and Thread. Also the softDevice is only needed for bluetooth but not for Thread.
 {{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/nrfconnect_platform_overview.md" text="Reference in github CHIP repo" icon="github" >}}
 
+## prerequisites
+{{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/BUILDING.md" text="How to" icon="github" >}}
 
-# Linux
+```bash
+git clone --recurse-submodules https://github.com/project-chip/connectedhomeip.git
+sudo apt-get install git gcc g++ python pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev unzip
+cd connectedhomeip
+source scripts/activate.sh
+gn gen out/custom
+gn args --list out/custom
+```
+important arguments :
+* chip_device_platform : esp32, freertos, linux, nrfconnect,...
+* chip_enable_openthread
+* chip_enable_wifi
+* target_cpu
+* target_os
+
 ## install
 * Step 1, install Zephyr
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Install Zephyr"  >}}
@@ -86,11 +105,12 @@ source zephyr/zephyr-env.sh
 ```
 * step 3, from the same link above install gn
 
-## build lighting app
+## build the lighting app
 
 ```bash
 cd connectedhomeip/examples/lighting-app/nrfconnect
-west build -b nrf52840dongle_nrf52840
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf"
+west build -b nrf52840dk_nrf52840 -- -DCONF_FILE="prj.conf"
 west flash
 nrfjprog --program build/zephyr/zephyr.hex -f NRF52
 ```
@@ -98,63 +118,46 @@ configure
 ```bash
 west build -b nrf52840dongle_nrf52840 -t menuconfig
 ```
-
-## build default
-{{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/BUILDING.md" text="How to" icon="github" >}}
-
+{{<details "Build Error">}}
 ```bash
-git clone --recurse-submodules https://github.com/project-chip/connectedhomeip.git
-sudo apt-get install git gcc g++ python pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev unzip
-source scripts/activate.sh
-gn gen out/custom
-gn args --list out/custom
-```
-important arguments :
-* chip_device_platform : esp32, freertos, linux, nrfconnect,...
-* chip_enable_openthread
-* chip_enable_wifi
-* target_cpu
-* target_os
-
-# Windows
-
-{{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/examples/lighting-app/nrfconnect/README.md" text="How to" icon="github" >}}
-
-* clone connectedhomeip repo
-* install nRF Connect SDK v1.4.0
-* configure the toolchain
-  * `ZEPHYR_TOOLCHAIN_VARIANT` to `gnuarmemb`
-  * `GNUARMEMB_TOOLCHAIN_PATH` to `D:\tools\gnu_arm_embedded\9_2020-q2-update`
-
-```cmd
-cd connectedhomeip\examples\lighting-app\nrfconnect
-"D:\tools\nrf\v1.4.0\zephyr\zephyr-env.cmd"
-west build -b nrf52840dongle_nrf52840
-
-```
-{{<details "build error on windows">}}
-```cmd
-D:\Projects\connectedhomeip\examples\lighting-app\nrfconnect>west build -b nrf52840dongle_nrf52840
--- west build: generating a build system
-Including boilerplate (Zephyr base): D:/tools/nrf/v1.4.0/zephyr/cmake/app/boilerplate.cmake
--- Application: D:/Projects/connectedhomeip/examples/lighting-app/nrfconnect
--- Using NCS Toolchain 1.4.0 for building. (D:/tools/nrf/v1.4.99-dev1/toolchain/cmake)
--- Zephyr version: 2.4.0 (D:/tools/nrf/v1.4.0/zephyr)
--- Found Python3: D:/tools/nrf/v1.4.99-dev1/toolchain/opt/bin/python.exe (found suitable exact version "3.8.2") found components: Interpreter
--- Found west (found suitable version "0.7.2", minimum required is "0.7.1")
-CMake Error at D:/tools/nrf/v1.4.0/zephyr/cmake/zephyr_module.cmake:48 (message):
-
-  D:/Projects/connectedhomeip/examples/lighting-app/nrfconnect/third_party/connectedhomeip/config/nrfconnect/chip-module,
-  given in ZEPHYR_EXTRA_MODULES, is not a valid zephyr module
-
+CMake Error at /usr/share/cmake-3.16/Modules/ExternalProject.cmake:3182 (add_custom_target):
+  add_custom_target cannot create target "chip-gn" because another target
+  with the same name already exists.  The existing target is a custom target
+  created in source directory
+  "/home/wass/connectedhomeip/config/nrfconnect/chip-module".  See
+  documentation for policy CMP0002 for more details.
 Call Stack (most recent call first):
-  D:/tools/nrf/v1.4.0/zephyr/cmake/app/boilerplate.cmake:150 (include)
-  D:/tools/nrf/v1.4.0/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:24 (include)
-  D:/tools/nrf/v1.4.0/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:35 (include_boilerplate)
-  CMakeLists.txt:26 (find_package)
+  /home/wass/ncs/modules/lib/connectedhomeip/config/nrfconnect/chip-module/CMakeLists.txt:244 (ExternalProject_Add)
+
+
+CMake Error at /home/wass/ncs/zephyr/cmake/extensions.cmake:570 (add_library):
+  add_library cannot create target "chip" because another target with the
+  same name already exists.  The existing target is an interface library
+  created in source directory
+  "/home/wass/connectedhomeip/config/nrfconnect/chip-module".  See
+  documentation for policy CMP0002 for more details.
+Call Stack (most recent call first):
+  /home/wass/ncs/modules/lib/connectedhomeip/config/nrfconnect/chip-module/CMakeLists.txt:268 (zephyr_interface_library_named)
+
+
+CMake Warning at /home/wass/ncs/zephyr/CMakeLists.txt:1349 (message):
+  __ASSERT() statements are globally ENABLED
+
+
+CMake Warning at /home/wass/ncs/zephyr/CMakeLists.txt:1377 (message):
+
+
+        The CMake build type was set to 'Debug', but the optimization flag was set to '-Os'.
+        This may be intentional and the warning can be turned off by setting the CMake variable 'NO_BUILD_TYPE_WARNING'
 
 
 -- Configuring incomplete, errors occurred!
-FATAL ERROR: command exited with status 1: 'C:\Program Files\CMake\bin\cmake.EXE' '-DWEST_PYTHON=c:\users\user\appdata\local\programs\python\python39\python.exe' '-BD:\Projects\connectedhomeip\examples\lighting-app\nrfconnect\build' '-SD:\Projects\connectedhomeip\examples\lighting-app\nrfconnect' -GNinja -DBOARD=nrf52840dongle_nrf52840
+See also "/home/wass/connectedhomeip/examples/lighting-app/nrfconnect/build/CMakeFiles/CMakeOutput.log".
+See also "/home/wass/connectedhomeip/examples/lighting-app/nrfconnect/build/CMakeFiles/CMakeError.log".
+FATAL ERROR: command exited with status 1: /usr/bin/cmake -DWEST_PYTHON=/usr/bin/python3 -B/home/wass/connectedhomeip/examples/lighting-app/nrfconnect/build -S/home/wass/connectedhomeip/examples/lighting-app/nrfconnect -GNinja -DBOARD=nrf52840dongle_nrf52840
 ```
 {{</details>}}
+
+# Building for ESP32
+
+[all clusters app](https://github.com/project-chip/connectedhomeip/tree/master/examples/all-clusters-app/esp32) example

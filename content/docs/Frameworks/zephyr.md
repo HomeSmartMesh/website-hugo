@@ -70,8 +70,7 @@ we notice that after that change the generated dts file is different `build\zeph
 * install [nRF Command Line tools](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download#infotabs)
 
 ```bash
-tar -xf nRF-Command-Line-Tools_10_12_1_Linux-amd64.tar.gz
-sudo dpkg -i JLink_Linux_V688a_x86_64.deb
+tar -xf nRFCommandLineTools10121Linuxamd64.tar.gz
 sudo dpkg -i nRF-Command-Line-Tools_10_12_1_Linux-amd64.deb
 ```
 ## Build and Flash
@@ -80,8 +79,9 @@ Testing blinky sample
 
 add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
 
+tested version 2.5.99
 ```bash
-cd ~/zephyrproject/zephyr/samples/blinky
+cd ~/zephyrproject/zephyr/samples/basic/blinky
 west build -p auto -b nrf52840dongle_nrf52840 -- -DCONF_FILE=prj.conf
 west flash
 nrfjprog -f nrf52 --reset

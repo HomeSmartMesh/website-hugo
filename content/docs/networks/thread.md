@@ -75,21 +75,31 @@ A Thread network setup contains the following Nodes
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
 # Radio Co-Processor (RCP)
-This is the new version recommended by OpenThread for current and new versions aof border routers, see [Vendor support RCP](https://openthread.io/platforms#radio-co-processor-rcp) for details.
-
+* This is the new version recommended by OpenThread for current and new versions aof border routers, see [Vendor support RCP](https://openthread.io/platforms#radio-co-processor-rcp) for details.
+* [How to build](https://openthread.io/guides/build#how_to_build_openthread)
 ## OpenThread
 * successfully tested with the [OpenThread docker](#openthread---docker) raspberry pi image blow.
 
 {{<icon_button href="https://github.com/openthread/openthread/tree/master/examples/platforms/nrf528xx/nrf52840" text="nRF52840 Build instructions" icon="github" >}}
 
+When using docker simply pull the environment
+```bash
+docker pull openthread/environment:latest
+docker run -it --rm openthread/environment bash
+```
+then continue the same way on linux or docker from windows
+
 ```bash
 cd ~/opentrhead
 ./script/bootstrap
+./bootstrap
 make distclean
 make -f examples/Makefile-nrf52840 USB=1
-arm-none-eabi-objcopy -O ihex output/nrf52840/bin/ot-rcp ~/share/ot-rcp.hex
+cd output/nrf52840/bin/
+arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
 nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 ```
+
 
 ##  Zephyr v2.5.99
 * current status `Failing`
@@ -405,6 +415,11 @@ ClientList can not open the Predefined Topic List.     /etc/predefinedTopic.conf
 {{< svg-pan-zoom "/images/thread_sensortag/mqtt-sn gateway.svg" >}}
 
 
+
+
+# Building with Platformio
+* although Zephyr is integrated in platformio, openthread is unfortunately not yet supported as of `PLATFORM: Nordic nRF52 (6.0.0+sha.d2e27c6)`
+* docs.platformio [limitations](https://docs.platformio.org/en/latest/frameworks/zephyr.html#limitations)
 
 # CHIP Node
 As the `CHIP Protocol` can run over `Thread`, it is possible to connect CHIP applications.
