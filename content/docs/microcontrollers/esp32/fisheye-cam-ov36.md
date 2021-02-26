@@ -1,8 +1,8 @@
 ---
 title: "Fisheye Cam OV3660"
-description: "ESP32 timer camera OV3660 with low power sleep"
+description: "ESP32 timer camera OV3660 with low power sleep. An Time lapse application sends images through MQTT to a raspberry pi image recorder"
 date: 2020-12-26T00:00:00+09:00
-draft: false
+images: ["/images/esp32/camera_lapse_app.png"]
 weight: 11
 ---
 
