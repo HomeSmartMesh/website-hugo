@@ -14,8 +14,13 @@ weight: 11
 * 270mAh battery
 * PSRAM 8MB
 
-## Product page
-* [Fisheye Timer camera $20](https://m5stack.com/collections/m5-unit/products/esp32-psram-timer-camera-fisheye-ov3660)
+## Links
+{{<icon_button text="Fisheye Timer camera $20" href="https://m5stack.com/collections/m5-unit/products/esp32-psram-timer-camera-fisheye-ov3660" icon="new">}}
+
+
+{{<icon_button text="Schematics - ESP32_SUBSYS" href="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/schematic/TimerCAM/TimerCAM_A1-ESP32_SUBSYS.pdf" icon="new">}}
+
+{{<icon_button text="Schematics - PMS_UART" href="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/schematic/TimerCAM/TimerCAM_A2-PMS_UART.pdf" icon="new">}}
 
 ## Platformio porting
 ### board definition

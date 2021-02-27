@@ -17,9 +17,12 @@ weight: 15
 * supported by platformio (`board=firebeetle32`)
 
 ## PINS
-* LED (IO2)
-* 50 % VBAT (A0 - SENSOR_VP)
+* LED : (IO2)
+* VBAT : (A0 - 38 - SENSOR_VP) measure ratio = 0.5
 
+{{<hint danger>}}
+The 0 Ohm resistors R10 and R11 needed to sense the battery voltage by A0-Pin38 are not populated (as of the boards I have). Therefore solder bridges are required to be added manually 😢
+{{</hint>}}
 ## Gallery
 
 {{<gallery dir="/images/esp32/firebeetle/" />}}
