@@ -88,3 +88,14 @@ Not successfully tested yet.
 
 {{<icon_button text="espnow_mqtt_gateway.ino" href="https://github.com/ESP32Home/ESPNowWrapper/blob/master/examples/espnow_mqtt_gateway.ino" icon="github">}}
 
+# Frequently Asked Questions
+Comments, Questions and suggestions are welcome on the [Home Smar Mesh - Discord server](https://discord.gg/57cZapWHkC)
+
+{{<details title="Is it possible for a device to identify its ESP-Now peers ?">}}
+* Given the ESP-Now [API Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html#api-reference), it looks like that it is a low level point to point messaging including broadcast, but not more. Therefore it's only based on mac addresses and does not have a higher level management. If it's needed to discover devices without entering their mac manually as a peer list, then it's probably better to look for [ESP-Mesh](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/mesh.html) which is intended to manage a fleet of devices. This [ESP-Mesh-Wrapper](/docs/microcontrollers/esp32/esp-mesh_wrapper/) is a wrapper for Arduino framework to make usage ESP-Mesh easier.
+* but I'm not really much satisfied with the custom protocols ideas, the ESP is at its best with wifi, when it comes to 2.4 GHz mesh solutions, why use a custom one while Standards exist like zigbee and Thread.
+{{</details>}}
+
+{{<details title="What are the alternatives to ESP-Mesh ?">}}
+* The ESP devices do implement wifi and Bluetooth standards, when it comes to the ESP-Mesh, it is a custom protocol and not used beyond Espressif devices, therefore when it comes to 2.4 GHz mesh solutions, Standards exist and are in quick expansion such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/).
+{{</details>}}

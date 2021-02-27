@@ -544,4 +544,3 @@ source ~/ncs/zephyr/zephyr-env.sh
 cd ~/ncs/nrf/samples/openthread/cli
 west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-minimal_singleprotocol.conf"
 ```
-

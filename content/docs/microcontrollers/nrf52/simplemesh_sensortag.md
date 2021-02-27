@@ -63,7 +63,7 @@ board render
 * removed nrf_drv_uart.c from Makefile
 * Required nRF52832 Errata [89] TWI: Static 400 uA current while using GPIOTE
 
-## Low Power measures
+## Low Power Measures
 | Mode | Current |
 --- | --- |
 | RTC + RAM | 9.6 uA |
@@ -72,3 +72,8 @@ board render
 | Uart Log | 500 uA |
 | Uart Log + HF | 700 uA |
 
+* 250 us @ 12 mA
+* 1.5 ms @ 3.5 mA
+* 50 uA @ infinite
+
+{{<image src="/images/simplemesh_sensortag/Power measures.png" >}}

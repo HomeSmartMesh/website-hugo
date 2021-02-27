@@ -88,3 +88,14 @@ The preliminary version of the Thread sensorTag is based on an `nRF52840` which 
 ## Breadboard testing
 
 {{<image src="/images/thread_sensortag/breadboard_test.png" >}}
+
+# Frequently Asked Questions
+{{<details title="Is it possible to save energy by collecting many samples over time and sending them together?">}}
+Yes, sure, the use cases could be slpit as follows :
+* For short term buffering, it's possible to use the RAM retention feature, you pay as you go fine granular (per 4 kB block: 30nA)
+* For long term buffering, we're no longer on the sensors network use case and rather on the logger tag use case, there you can use the Flash, 1 MB is huge.
+In my use case, I don't use buffering in order to allow live update of measures on the user's apps, but combining like a level trigger to immediately send values on big changes with buffering and sending all the values cyclically could be quite smart, you will need a QoS through to ensure your data is really sent after a while, which will also consume RF transactions, I opted for sending every single value on an RF packet which is also used as an alive signal to know when the sensor is dead or out of reach, so no problem if once a packet is lost in a while, but practically, as I use a flood mesh, most measures arrive more than once to the server.
+I think after all, such things should be configurable by the end users's app, and should not be hardcoded
+{{</details>}}
+
+
