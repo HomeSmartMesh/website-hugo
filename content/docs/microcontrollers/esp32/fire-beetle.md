@@ -26,7 +26,8 @@ The 0 Ohm resistors R10 and R11 needed to sense the battery voltage by A0-Pin38 
 * Another caveat is the usage of pin 36 A0 which conflicts with wifi. To avoid that, in the program below, the battery is measured before the wifi is activated.
 ## Gallery
 
-{{<gallery dir="/images/esp32/firebeetle/" />}}
+{{< load-photoswipe >}}
+{{< gallery dir="/images/esp32/firebeetle/" />}}
 
 ## Links
 {{<icon_button text="FireBeetle - DFRobot" href="https://www.dfrobot.com/product-1590.html" icon="new">}}
@@ -148,5 +149,3 @@ platform = espressif32
 monitor_speed = 115200
 ```
 {{< /details >}}
-
-{{<gallery dir="/images/esp32/firebeetle/" />}}
