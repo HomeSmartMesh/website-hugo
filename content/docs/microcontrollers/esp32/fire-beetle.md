@@ -18,11 +18,12 @@ weight: 15
 
 ## PINS
 * LED : (IO2)
-* VBAT : (A0 - 38 - SENSOR_VP) measure ratio = 0.5
+* VBAT : (A0 - 36 - SENSOR_VP) measure ratio = 0.5
 
 {{<hint danger>}}
 The 0 Ohm resistors R10 and R11 needed to sense the battery voltage by A0-Pin38 are not populated (as of the boards I have). Therefore solder bridges are required to be added manually 😢
 {{</hint>}}
+* Another caveat is the usage of pin 36 A0 which conflicts with wifi. To avoid that, in the program below, the battery is measured before the wifi is activated.
 ## Gallery
 
 {{<gallery dir="/images/esp32/firebeetle/" />}}
@@ -57,6 +58,63 @@ The 0 Ohm resistors R10 and R11 needed to sense the battery voltage by A0-Pin38 
     "deep_sleep_sec":10
 }
 ```
+## Main
+{{<details "main.cpp" >}}
+```c++
+#include "Arduino.h"
+#include <WiFi.h>
+
+#include <ArduinoJson.h>
+#include "freertos/FreeRTOS.h"
+#include <WiFi.h>
+#include <MQTT.h>
+#include <esp_wifi.h>
+
+#include "json_file.h"
+#include "battery.h"
+#include "wifi_secret.h"
+
+DynamicJsonDocument config(1*1024);//5 KB
+MQTTClient mqtt(1*1024);// 1KB for small messages
+WiFiClient wifi;//needed to stay on global scope
+
+void setup() {
+
+  Serial.begin(115200);
+  uint32_t vref = bat_init();
+  Serial.printf("eFuse Vref:%u mV\n", vref);
+  float battery_f = bat_get_voltage();
+  battery_f /=1000;
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  blink(100);
+  WiFi.begin(ssid, password);
+  load_config(config,true);
+  timelog("config loaded");
+
+  if(connect()){
+    mqtt_publish_status(battery_f);    timelog("=>status");
+    mqtt.loop();
+  }
+
+  Serial.println("ESP going to deep sleep");
+  Serial.flush();
+  blink(100);
+
+  esp_wifi_stop();
+  uint32_t deep_sleep_sec = config["deep_sleep_sec"];
+  esp_deep_sleep(deep_sleep_sec*1000000);
+  esp_deep_sleep_start();
+
+}
+
+void loop() {
+  //no loop
+}
+
+```
+{{</details>}}
+
 
 {{<details "Build info...">}}
 ```bash
