@@ -96,6 +96,22 @@ Comments, Questions and suggestions are welcome on the [Home Smar Mesh - Discord
 * but I'm not really much satisfied with the custom protocols ideas, the ESP is at its best with wifi, when it comes to 2.4 GHz mesh solutions, why use a custom one while Standards exist like zigbee and Thread.
 {{</details>}}
 
-{{<details title="What are the alternatives to ESP-Mesh ?">}}
-* The ESP devices do implement wifi and Bluetooth standards, when it comes to the ESP-Mesh, it is a custom protocol and not used beyond Espressif devices, therefore when it comes to 2.4 GHz mesh solutions, Standards exist and are in quick expansion such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/).
+{{<details title="Can ESP-Now solve the 'Provisioning' Problem or make it easier ?">}}
+* The provisioning dilemma is unfortunately common to all protocols and is a Home Automation Nightmare : "Provisioning / Pairing / Joining / Configuring".
+
+Let's first have a look on other protocols deal with provisioning :
+* Zigbee : Is the worst I've ever seen, as the state is not visible to the user shared between a device and a server, if a device goes offline it still thinks it's paired, to overcome temporary network shortage, and if you want it to join a new network you need to actively be playing around with it to figure out how each device has a different way to be reset and then enable pairing on the gateway...
+
+* Wifi : has a secred that each device has to know, but how can you give that secret, the own hotspot is not easy, as you need a webserver and manual entry, there are some protocols designed to make that easier :
+ * DDP Device Provisioning Protocol
+ * SmartConfig : this is [another example](https://github.com/geeksville/AutoWifi), you can read more about Unified [Provisioning on the Espressif website](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/provisioning/provisioning.html)
+
+Now, we might be disgusted from wifi for two reasons, provisioning and also range which is very limited compared to mesh networks that have repeaters.
+
+* Custom RF : e.g. the same here applies for ESP-NOW or any other custom mesh such as the [SimpleMesh](/docs/networks/nrf/) which is as it's names suggest simple, but also stable. Changing the battery is not more complex than changing the battery. The way I solved the configuration issue there, is by an automated script run after attaching a devices with the debugger, it reads the serial number, which has an associated short id coming from a config file. That short id will be used in radio packets as unique ID, I could also assign a master key for encryption, but I did not need security as it is only about light and temperature values, no control.
+
+So when it comes to ESP-Now, you also need to configure each of them to give them the security with "esp_now_set_pmk()" if you do not want everyone using your devices to spy on each other.
+The problem gets bigger if you want to give your devices to a user that has to use it securely on his network with a unique pmk and that user does not want to be flashing and messing with a configuration.
+
+To summarize, there's no way around a "provisioning" process whatever protocol you use unless you need no security, nor networks isolation, or can flash the secret uniquely for each device, which is also a sort of provisioning. And not mentioning the provisioning that needs an internet connection to synchronise with a backend and user account.
 {{</details>}}

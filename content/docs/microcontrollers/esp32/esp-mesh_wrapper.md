@@ -212,3 +212,9 @@ RX> from(3c:71:bf:83:bd:40) => (Hello dowlink neighbors : 31)
 RX> from(80:7d:3a:d5:2f:cc) => (Hello dowlink neighbors : 32)
 ```
 {{</details>}}
+
+
+# Frequently Asked Questions
+{{<details title="What are the alternatives to ESP-Mesh ?">}}
+* The ESP devices do implement wifi and Bluetooth standards, when it comes to the ESP-Mesh, it is a custom protocol and not used beyond Espressif devices, therefore when it comes to 2.4 GHz mesh solutions, Standards exist and are in quick expansion such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/).
+{{</details>}}
