@@ -77,6 +77,7 @@ A Thread network setup contains the following Nodes
 # Radio Co-Processor (RCP)
 * This is the new version recommended by OpenThread for current and new versions aof border routers, see [Vendor support RCP](https://openthread.io/platforms#radio-co-processor-rcp) for details.
 * [How to build](https://openthread.io/guides/build#how_to_build_openthread)
+* built using docker container
 ## OpenThread
 * successfully tested with the [OpenThread docker](#openthread---docker) raspberry pi image blow.
 
@@ -126,6 +127,7 @@ compilation terminated.
 ninja: build stopped: subcommand failed.
 FATAL ERROR: command exited with status 1: 'C:\Program Files\CMake\bin\cmake.EXE' --build 'D:\Projects\zephyrproject\zephyr\build'
 ```
+
 {{</details>}}
 
 
@@ -187,17 +189,178 @@ nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --ve
 
 # Border Router
 ## OpenThread - docker
-* successfully tested with the OpenThread dongle firmware [detailed above](#openthread)
-
+* use with the OpenThread dongle firmware [detailed above](#openthread)
+* The docker command below runs deamonized (in the background) and maps port 80.
 ```bash
-docker run --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
+docker run --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
         net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
-        -p 8080:80 --dns=127.0.0.1 -it --volume \
+        -p 80:80 --dns=127.0.0.1 --volume \
         /dev/ttyACM0:/dev/ttyACM0 --privileged openthread/otbr \
         --radio-url spinel+hdlc+uart:///dev/ttyACM0
 ```
+Below commands to run in separate windows
+* listen to the conainer logs
+* open a shell in the container
+* open a command line to the RCP
+```bash
+docker logs --follow otbr-metal
+docker exec -it otbr-metal /bin/bash
+ot-ctl
+```
+Error examples
+{{<details "Raspberry pi 3 errors">}}
+These errors happen with a raspberry pi 3 that does have a normal (not very big) cooling sink
+```bash
+Mar  1 17:01:41 fe48e43ea1cf kernel: [ 3083.875055] rpi_firmware_get_throttled: 15 callbacks suppressed
+Mar  1 17:01:41 fe48e43ea1cf kernel: [ 3083.875063] Voltage normalised (0x00000000)
+Mar  1 17:01:50 fe48e43ea1cf otbr-agent[203]: [INFO]-PLAT----: Session socket is ready
+Mar  1 17:02:00 fe48e43ea1cf otbr-agent[203]: [INFO]-CLI-----: execute command: state
+Mar  1 17:02:22 fe48e43ea1cf otbr-agent[203]: [INFO]-CLI-----: execute command: channel
+Mar  1 17:04:07 fe48e43ea1cf otbr-web[230]: wpan service error: 11
+```
+The error above is temporary and happens when the web server is used, but the error below is fatal and kills the usb access to the container, therefore non recoverable
+```bash
+Mar  1 17:10:36 fe48e43ea1cf otbr-agent[203]: [CRIT]-PLAT----: Unexpected RCP reset: RESET_POWER_ON
+Mar  1 17:10:36 fe48e43ea1cf otbr-agent[203]: [CRIT]-PLAT----: HandleRcpUnexpectedReset() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:2158: RadioSpinelReset
+Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fe80::a0ec:8d06:eb3f:3802%3#53
+Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fd11:1111:1122:0:db95:15a7:3c57:2817#53
+Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fd11:1111:1122::ff:fe00:3800#53
+Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fd11:1111:1122::ff:fe00:fc00#53
+Mar  1 17:13:45 fe48e43ea1cf otbr-web[230]: OpenThread daemon is not running.
+Mar  1 17:13:45 fe48e43ea1cf otbr-web[230]: wpan service error: 11
+```
+Therefore I recommend to use active cooling or a raspberry pi 4 with a sink consisting of the fully metal case.
+External Power supply to the RCP is also not a bad idea (recommended by OT)
+{{</details>}}
+
 
 {{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="More details on 'Run OTBR Docker'..."  icon="new" >}}
+## OpenThread - setup
+{{<icon_button href="https://openthread.io/guides/border-router/build#set-up-the-border-router" text="Setup - OpenThread..."  icon="new" >}}
+
+```bash
+git clone https://github.com/openthread/ot-br-posix
+cd ot-br-posix
+./script/bootstrap
+NETWORK_MANAGER=0 ./script/setup
+nano /etc/default/otbr-agent
+sudo reboot now
+sudo systemctl status
+sudo ot-ctl state
+```
+*issues*: in case a `dnsmasq` service already running, might have to be disabled first
+
+The status of the running services look as follows
+{{<details "sudo systemctl status">}}
+```bash
+pi@metal:~ $ sudo systemctl status
+● metal
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Thu 1970-01-01 01:00:01 CET; 51 years 1 months ago
+   CGroup: /
+           ├─user.slice
+           │ └─user-1000.slice
+           │   ├─session-3.scope
+           │   │ ├─1663 sshd: pi [priv]
+           │   │ ├─1669 sshd: pi@pts/0
+           │   │ ├─1670 -bash
+           │   │ ├─1687 sudo systemctl status
+           │   │ ├─1688 systemctl status
+           │   │ └─1689 pager
+           │   ├─user@1000.service
+           │   │ └─init.scope
+           │   │   ├─1637 /lib/systemd/systemd --user
+           │   │   └─1638 (sd-pam)
+           │   └─session-1.scope
+           │     ├─ 864 /bin/login -f
+           │     └─1648 -bash
+           ├─init.scope
+           │ └─1 /sbin/init splash
+           └─system.slice
+             ├─ncp_state_notifier.service
+             │ ├─427 /bin/sh /usr/sbin/ncp_state_notifier
+             │ ├─432 dbus-monitor --system type='signal', interface=org.freedesktop.DBus.Properties, path
+             │ └─433 /bin/sh /usr/sbin/ncp_state_notifier
+             ├─alsa-state.service
+             │ └─395 /usr/sbin/alsactl -E HOME=/run/alsa -s -n 19 -c rdaemon
+             ├─containerd.service
+             │ └─553 /usr/bin/containerd
+             ├─systemd-timesyncd.service
+             │ └─341 /lib/systemd/systemd-timesyncd
+             ├─NetworkManager.service
+             │ ├─420 /usr/sbin/NetworkManager --no-daemon
+             │ └─633 /sbin/dhclient -d -q -sf /usr/lib/NetworkManager/nm-dhcp-helper -pf /run/dhclient-et
+             ├─dbus.service
+             │ └─409 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-acti
+             ├─hciuart.service
+             │ └─826 /usr/bin/hciattach /dev/serial1 bcm43xx 3000000 flow -
+             ├─udisks2.service
+             │ └─394 /usr/lib/udisks2/udisksd
+             ├─docker.service
+             │ └─853 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+             ├─ssh.service
+             │ └─564 /usr/sbin/sshd -D
+             ├─ser2net.service
+             │ └─868 /usr/sbin/ser2net -c /etc/ser2net.conf -P /run/ser2net.pid
+             ├─avahi-daemon.service
+             │ ├─393 avahi-daemon: running [metal.local]
+             │ └─398 avahi-daemon: chroot helper
+             ├─otbr-web.service
+             │ └─428 /usr/sbin/otbr-web
+             ├─wpa_supplicant.service
+             │ └─419 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+             ├─triggerhappy.service
+             │ └─442 /usr/sbin/thd --triggers /etc/triggerhappy/triggers.d/ --socket /run/thd.socket --us
+             ├─systemd-logind.service
+             │ └─439 /lib/systemd/systemd-logind
+             ├─polkit.service
+             │ └─511 /usr/lib/policykit-1/polkitd --no-debug
+             ├─otbr-agent.service
+             │ └─423 /usr/sbin/otbr-agent -I wpan0 spinel+hdlc+uart:///dev/ttyACM0
+             ├─telegraf.service
+             │ └─542 /usr/bin/telegraf -config /etc/telegraf/telegraf.conf -config-directory /etc/telegra
+             ├─cron.service
+             │ └─437 /usr/sbin/cron -f
+             ├─systemd-udevd.service
+             │ └─181 /lib/systemd/systemd-udevd
+             ├─rsyslog.service
+             │ └─403 /usr/sbin/rsyslogd -n -iNONE
+             ├─bluetooth.service
+             │ └─831 /usr/lib/bluetooth/bluetoothd
+             ├─inetd.service
+             │ └─857 /usr/sbin/inetd
+             ├─bluealsa.service
+             │ └─834 /usr/bin/bluealsa
+             ├─systemd-journald.service
+             │ └─121 /lib/systemd/systemd-journald
+             ├─bind9.service
+             │ └─560 /usr/sbin/named -u bind
+             ├─rng-tools.service
+             │ └─415 /usr/sbin/rngd -r /dev/hwrng
+             └─dhcpcd.service
+               └─473 /sbin/dhcpcd -q -b
+```
+{{</details>}}
+
+After forming a network, the interface would look as follows
+{{<details "ifconfig wpan0">}}
+```bash
+wpan0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1280
+        inet6 fd85:454:6529:a0c5:9ebb:d761:b6d:df4e  prefixlen 64  scopeid 0x0<global>
+        inet6 fd11:22::7005:5eac:6482:e2ec  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::94bf:4de7:183c:f37d  prefixlen 64  scopeid 0x20<link>
+        inet6 fd85:454:6529:a0c5:0:ff:fe00:fc00  prefixlen 64  scopeid 0x0<global>
+        inet6 fd85:454:6529:a0c5:0:ff:fe00:d400  prefixlen 64  scopeid 0x0<global>
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 500  (UNSPEC)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 9  bytes 1524 (1.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+{{</details>}}
+
 ## Nordic - sdcard image
 
 * download a ready raspberry pi image
@@ -462,6 +625,11 @@ w join -n "MeasureFall" -c 15 -k 00112233445566778899aabbccddeeff -p 0x1234
 ```
 {{</ details>}}
 
+## cli on border router
+```shell
+sudo ot-ctl
+```
+
 ## cli firmware
 * A dongle flashed with `cli` firmware can be attached to the serial console and offer a command line interpreter that helps with testing
 
@@ -475,17 +643,17 @@ build and flash the cli example
 on the cli
 
 ```bash
->panid 0x1234
->panid
->channel 13
->channel
->networkname OpenThreadDemo
->networkname
->extpanid 1111111122222222
->masterkey
->ifconfig up
->thread start
->state
+panid 0x1234
+panid
+channel 13
+channel
+networkname OpenThreadDemo
+networkname
+extpanid 1111111122222222
+masterkey
+ifconfig up
+thread start
+state
 ```
 Note `masterkey` command is for the `Network Key`
 
@@ -526,6 +694,11 @@ adresses
 panid
 rloc16
 eui64
+extaddr
+extpanid
+ipaddr
+ipmaddr
+leaderdata
 ```
 
 {{</ details>}}

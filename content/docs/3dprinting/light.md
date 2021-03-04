@@ -3,6 +3,7 @@ title: "Switch Cover"
 description: "How to cover a dumb switch with a smart switch"
 date: 2021-01-01T00:00:00+00:00
 weight: 1
+images: ["/images/3dprinting/dumb_to_smart.png"]
 bookToC: false
 # https://www.viewstl.com/plugin/
 # {{< stl_viewer "/models/3DBenchy.stl" >}}

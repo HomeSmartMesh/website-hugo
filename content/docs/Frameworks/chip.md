@@ -46,7 +46,7 @@ on linux the following commands succeed using node `v14.15.5` :
 
 
 
-# Building for nRF52
+# Running on nRF52
 ## nRF Connect integration
 {{<image src="/images/thread_sensortag/chip_nrfconnect_overview_simplified.svg" >}}
 
@@ -55,38 +55,12 @@ The above diagram taken from the CHIP repo link in the button below, shows the i
 The MPSL is only required if needed to combine both bluetooth and Thread. Also the softDevice is only needed for bluetooth but not for Thread.
 {{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/nrfconnect_platform_overview.md" text="Reference in github CHIP repo" icon="github" >}}
 
-## prerequisites
-{{< icon_button href="https://github.com/project-chip/connectedhomeip/blob/master/docs/BUILDING.md" text="How to" icon="github" >}}
-
-```bash
-git clone --recurse-submodules https://github.com/project-chip/connectedhomeip.git
-sudo apt-get install git gcc g++ python pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev unzip
-cd connectedhomeip
-source scripts/activate.sh
-gn gen out/custom
-gn args --list out/custom
-```
-important arguments :
-* chip_device_platform : esp32, freertos, linux, nrfconnect,...
-* chip_enable_openthread
-* chip_enable_wifi
-* target_cpu
-* target_os
+{{<hint info>}}
+Note that `zephyr` and `connectedhomeip` will be managed as ncs dependencies with west from `nrf/west.yml`
+{{</hint>}}
 
 ## install
-* Step 1, install Zephyr
-{{<icon_button relref="/docs/frameworks/zephyr/" text="Install Zephyr"  >}}
-
-* Step 2, install the toolchain
-{{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_installing.html#installing-the-toolchain" text="install the toolchain" icon="new" >}}
-
-```bash
-nano ~/.zephyrrc
-export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-export GNUARMEMB_TOOLCHAIN_PATH=~/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/
-```
-
-* Step 2, install nRF Connect SDK
+* install nRF Connect SDK
 {{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_installing.html" text="install nRF Connect SDK" icon="new" >}}
 
 ```bash
@@ -107,57 +81,107 @@ source zephyr/zephyr-env.sh
 
 ## build the lighting app
 
+* Update `prj.conf` params to match the thread border router parametrs (e.g. channel,...)
+* add CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n
+
 ```bash
-cd connectedhomeip/examples/lighting-app/nrfconnect
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf"
-west build -b nrf52840dk_nrf52840 -- -DCONF_FILE="prj.conf"
-west flash
-nrfjprog --program build/zephyr/zephyr.hex -f NRF52
-```
-configure
-```bash
+cd ncs/modules/lib/connectedhomeip/examples/lighting-app/nrfconnect/
 west build -b nrf52840dongle_nrf52840 -t menuconfig
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf"
+west flash
+nrfjprog -f nrf52 --program zephyr.hex --sectorerase --verify
 ```
-{{<details "Build Error">}}
-```bash
-CMake Error at /usr/share/cmake-3.16/Modules/ExternalProject.cmake:3182 (add_custom_target):
-  add_custom_target cannot create target "chip-gn" because another target
-  with the same name already exists.  The existing target is a custom target
-  created in source directory
-  "/home/wass/connectedhomeip/config/nrfconnect/chip-module".  See
-  documentation for policy CMP0002 for more details.
-Call Stack (most recent call first):
-  /home/wass/ncs/modules/lib/connectedhomeip/config/nrfconnect/chip-module/CMakeLists.txt:244 (ExternalProject_Add)
+* in the config below, the RTT logging is enabled to get the log through the SWD Segger J-Link interface, see `# Logging` section
+* please note that the show `CONFIG_OPENTHREAD_MASTERKEY` is a dummy key and has to be kept secret in a production environment
+{{<details "prj.conf">}}
+```conf
+#
+#    Copyright (c) 2020 Project CHIP Authors
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+#
 
+# This sample uses sample-defaults.conf to set options common for all
+# samples. This file should contain only options specific for this sample
+# or overrides of default values.
 
-CMake Error at /home/wass/ncs/zephyr/cmake/extensions.cmake:570 (add_library):
-  add_library cannot create target "chip" because another target with the
-  same name already exists.  The existing target is an interface library
-  created in source directory
-  "/home/wass/connectedhomeip/config/nrfconnect/chip-module".  See
-  documentation for policy CMP0002 for more details.
-Call Stack (most recent call first):
-  /home/wass/ncs/modules/lib/connectedhomeip/config/nrfconnect/chip-module/CMakeLists.txt:268 (zephyr_interface_library_named)
+# Add support for LEDs and buttons on Nordic development kits
+CONFIG_DK_LIBRARY=y
+CONFIG_PWM=y
 
+# Default OpenThread network settings
+CONFIG_OPENTHREAD_PANID=4660
+CONFIG_OPENTHREAD_CHANNEL=13
+CONFIG_OPENTHREAD_NETWORK_NAME="OpenThreadDemo"
+CONFIG_OPENTHREAD_XPANID="11:11:11:11:22:22:22:22"
+CONFIG_OPENTHREAD_MASTERKEY="00112233445566778899aabbccddeeff"
 
-CMake Warning at /home/wass/ncs/zephyr/CMakeLists.txt:1349 (message):
-  __ASSERT() statements are globally ENABLED
+# Bluetooth overrides
+CONFIG_BT_DEVICE_NAME="ChipLight"
 
+# Additional configs for debbugging experience.
+CONFIG_THREAD_NAME=y
+CONFIG_MPU_STACK_GUARD=y
 
-CMake Warning at /home/wass/ncs/zephyr/CMakeLists.txt:1377 (message):
+# CHIP configuration
+CONFIG_CHIP_PROJECT_CONFIG="main/include/CHIPProjectConfig.h"
+CONFIG_CHIP_OPENTHREAD_CONFIG="../../platform/nrfconnect/project_include/OpenThreadConfig.h"
 
+CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n
 
-        The CMake build type was set to 'Debug', but the optimization flag was set to '-Os'.
-        This may be intentional and the warning can be turned off by setting the CMake variable 'NO_BUILD_TYPE_WARNING'
-
-
--- Configuring incomplete, errors occurred!
-See also "/home/wass/connectedhomeip/examples/lighting-app/nrfconnect/build/CMakeFiles/CMakeOutput.log".
-See also "/home/wass/connectedhomeip/examples/lighting-app/nrfconnect/build/CMakeFiles/CMakeError.log".
-FATAL ERROR: command exited with status 1: /usr/bin/cmake -DWEST_PYTHON=/usr/bin/python3 -B/home/wass/connectedhomeip/examples/lighting-app/nrfconnect/build -S/home/wass/connectedhomeip/examples/lighting-app/nrfconnect -GNinja -DBOARD=nrf52840dongle_nrf52840
+# Logging
+CONFIG_SERIAL=n
+CONFIG_LOG=y
+CONFIG_LOG_BACKEND_RTT=y
+CONFIG_LOG_BACKEND_UART=n
+CONFIG_BOOT_BANNER=y
+CONFIG_USE_SEGGER_RTT=y
+CONFIG_CONSOLE=y
+CONFIG_UART_CONSOLE=n
+CONFIG_RTT_CONSOLE=y
+```
+{{</details>}}
+The log output is then as follows
+{{<details "RTT Log output" >}}
+```log
+I: nRF5 802154 radio initialized
+I: 4 Sectors of 4096 bytes
+I: alloc wra: 0, ec0
+I: data wra: 0, 227
+*** Booting Zephyr OS build v2.4.99-ncs1-rc1  ***
+I: Init CHIP stack
+I: SoftDevice Controller build revision: 
+I: e5 c7 9c d9 91 00 1d 66 |.......f
+I: ea fb 6e 7b 98 2f 42 0d |..n{./B.
+I: f1 60 93 c8             |.`..    
+I: Starting CHIP task
+I: Init Thread stack
+D: 593[DL] CHIP task running
+D: 594[DL] In DriveBLEState
+I: 614[DL] CHIPoBLE advertising disabled because device is fully provisioned
+D: 615[DL] OpenThread State Changed (Flags: 0x0100103d)
+D: 616[DL]    Device Role: DETACHED
+D: 617[DL]    Thread Unicast Addresses:
+D: 618[DL]         fdb0:f51f:154a:11be:0:ff:fe00:f002/64 valid preferred rloc
+D: 620[DL]         fdb0:f51f:154a:11be:2294:a147:3648:185d/64 valid preferred
+D: 621[DL]         fe80::4b5:84fc:320f:d2/64 valid preferred
+I: 830[DL] OpenThread ifconfig up and thread start
+I: 832[DL] OpenThread started: OK
+I: 832[DL] Setting OpenThread device type to MINIMAL END DEVICE
+I: 834[ZCL] Using ZAP con
 ```
 {{</details>}}
 
-# Building for ESP32
+# Running on ESP32
 
 [all clusters app](https://github.com/project-chip/connectedhomeip/tree/master/examples/all-clusters-app/esp32) example

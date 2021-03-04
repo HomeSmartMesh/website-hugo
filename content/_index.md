@@ -16,38 +16,32 @@ grid:
     items:
     - name: "Raspi IoT"
       width: 300
-      tags: [Frameworks,Applications,Network]
+      tags: [Frameworks]
     - name: "Thread SensorTag"
       width: 300
-      tags: [Frameworks,Microcontrollers,Network]
+      tags: [Microcontrollers]
     - name: "ESP32 Boards"
       width: 300
       tags: [Microcontrollers,ESP32]
     - name: "3D Printing"
       width: 300
       tags: []
-    - name: "Discord Server"
-      width: 600
-      tags: [Frameworks,Applications,Microcontrollers,Network]
     - name: "Simple Mesh"
       width: 300
-      tags: [Network,Microcontrollers,nRF52]
-    - name: "Smart Home 3D"
-      width: 600
-      tags: [Frameworks,Applications]
-    - name: "Zigbee"
-      width: 300
-      tags: [Network]
+      tags: [Network,nRF52]
     - name: "Thread"
       width: 300
       tags: [Network]
-    - name: "Home Assistant"
-      width: 150
-      tags: [Frameworks]
-    - name: "Zigbee Wifi Channels"
+    - name: "Smart Home 3D"
       width: 600
+      tags: [Applications]
+    - name: "Zigbee"
+      width: 300
       tags: [Network]
-    - name: "Open HAB"
+    - name: "Discord Server"
+      width: 600
+      tags: []
+    - name: "Home Assistant"
       width: 150
       tags: [Frameworks]
 ---
@@ -74,7 +68,7 @@ BME280 Temperature Humidity Pressure
 MAX44009 Ambient Light
 
 <--->
-{{< image src="/images/espressif.png" height=100 >}}
+{{< image src="/images/espressif.png" href="/docs/microcontrollers/esp32/"  height=100 >}}
 {{< my_button href="/docs/microcontrollers/esp32/" text="ESP32 Boards" >}}
 
 samples code with wifi MQTT json payload
@@ -88,10 +82,6 @@ MQTT Timer camera, e-ink, remote control,...
 3D Models for Smart Home, electronics and house utilities
 
 {{< my_button href="/docs/3dprinting/" text="3D Printing" >}}
-<--->
-{{< discord id="780126809671991328" >}}
-
-An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 
 <--->
 {{< image src="/images/nRF52_mesh.png" height=150 href="/docs/networks/nrf/" >}}
@@ -100,6 +90,16 @@ An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live sugges
 A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols.
 
 Custom HW but also SW for nRF SoC tags and dongles on the market.
+<--->
+{{< image src="/images/threadgrouplogo.ico" height=100 href="/docs/networks/thread/" >}}
+
+{{< my_button href="/docs/networks/thread/" text="Thread Doc" >}}
+
+Protocol Documentation
+
+Tools
+
+Boarder Router
 <--->
 {{< image src="/images/floor_temperature.png" height=100 href="/docs/applications/home3d" >}}
 
@@ -116,26 +116,15 @@ References for deeper dive in the Zigbee standard
 
 References for DIY coordinators and software
 
+
+
 <--->
-{{< image src="/images/threadgrouplogo.ico" height=100 href="/docs/networks/thread/" >}}
+{{< discord id="780126809671991328" >}}
 
-{{< my_button href="/docs/networks/thread/" text="Thread Doc" >}}
-
-Protocol Documentation
-
-Tools
-
-Boarder Router
-
-
+An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 <--->
 {{< image src="/images/hassio.png" height=100 href="/docs/frameworks/home_assistant/">}}
 {{< button href="/docs/frameworks/home_assistant/" >}}Home Assistant{{</button>}}
-<--->
-{{< image src="/images/networks_deployment.png" width=600 >}}
-<--->
-{{< image src="/images/openhab.png" height=100 >}}
-{{< new_button href="https://www.openhab.org/" text="website" >}}
 {{< /grid >}}
 
 

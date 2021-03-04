@@ -10,8 +10,7 @@ toc: true
 {{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Project CHIP" >}}
 
-# Windows
-## Install
+# Windows Install
 {{<icon_button href="https://docs.zephyrproject.org/2.3.0/getting_started/index.html" text="Getting Started details..."  icon="new" >}}
 
 The details are in the link above, the summary of the step for installing on windows are
@@ -24,46 +23,7 @@ The details are in the link above, the summary of the step for installing on win
   * GNU ARM Embedded : to be installed on a path without spaces
 
 e.g. for a path `"D:\tools\gnu_arm_embedded\9_2020-q2-update\bin\arm-none-eabi-gcc.exe"` `GNUARMEMB_TOOLCHAIN_PATH` shall be set to `D:\tools\gnu_arm_embedded\9_2020-q2-update`
-
-## Build and Flash
-```bash
-west build -p auto -b nrf52840dongle_nrf52840 samples\basic\blinky
-west flash
-nrfjprog -f nrf52 --reset
-```
-{{<hint warning "hello ?">}}Flashing this USB Dongle board requires one of the following options{{</hint>}}
-
-{{<icon_button href="https://docs.zephyrproject.org/2.3.0/boards/arm/nrf52840dongle_nrf52840/doc/index.html#programming-and-debugging" text="How to Flash docs.zephyrproject"  icon="new" >}}
-
-* Option1 `Using the built-in bootloader only` : uses nrfutils and requires the default bootloader to be already flashed
-* Option2 `Using MCUboot in Serial Recovery Mode` : requires building the MCUboot and using nrfutils
-* Option3 `Using an External Debug Probe` :
-  * requires soldering SWD pins or using [this pogo pins adapter](/docs/microcontrollers/nrf52/usb_dongle/#pogo-pin-adapter)
-  * also `manual reset` or `nrfjprog -f nrf52 --reset`
-
-{{<details "modifying the DTS">}}
-The board device tree source located in `boards\arm\nrf52840dongle_nrf52840\nrf52840dongle_nrf52840.dts`
-the end of the file should look like below after the modification
-```
-/* Include flash partition table.
- * Two partition tables are available:
- * fstab-stock		-compatible with Nordic nRF5 bootloader, default
- * fstab-debugger	-to use an external debugger, w/o the nRF5 bootloader
- */
-#include "fstab-debugger.dts"
-
-&usbd {
-	compatible = "nordic,nrf-usbd";
-	status = "okay";
-};
-```
-we notice that after that change the generated dts file is different `build\zephyr\zephyr.dts`
-
-{{<image src="/images/thread_sensortag/west_dts.png" >}}
-{{</details>}}
-
-# Linux
-## Install
+# Linux Install
 * installing Zephyr with its own compiler toolchain `Zephyr SDK`
 
 * [install Zephyr dependencies - Ubuntu](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/getting_started/index.html#install-required-tools)
@@ -73,7 +33,7 @@ we notice that after that change the generated dts file is different `build\zeph
 tar -xf nRFCommandLineTools10121Linuxamd64.tar.gz
 sudo dpkg -i nRF-Command-Line-Tools_10_12_1_Linux-amd64.deb
 ```
-## Build and Flash
+# Build and Flash
 
 Testing blinky sample
 
@@ -86,3 +46,41 @@ west build -p auto -b nrf52840dongle_nrf52840 -- -DCONF_FILE=prj.conf
 west flash
 nrfjprog -f nrf52 --reset
 ```
+## RTT config
+required configuration to have logs running over the segger j-link RTT (log through the same SWD interface used for programming)
+{{<details "prj.conf">}}
+```conf
+CONFIG_GPIO=y
+CONFIG_SERIAL=n
+CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n
+
+# Logging
+CONFIG_LOG=y
+CONFIG_LOG_BACKEND_RTT=y
+CONFIG_LOG_BACKEND_UART=n
+CONFIG_BOOT_BANNER=y
+CONFIG_USE_SEGGER_RTT=y
+CONFIG_CONSOLE=y
+CONFIG_UART_CONSOLE=n
+CONFIG_RTT_CONSOLE=y
+```
+{{</details>}}
+
+{{<details "main.c">}}
+```C
+#include <zephyr.h>
+#include <logging/log.h>
+LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
+void main(void)
+{
+	LOG_INF("Starting");
+	int count = 0;
+	while (1) {
+		LOG_INF("loop: %d",count++);
+	}
+}
+
+```
+{{</details>}}
+
+{{<icon_button text="pio zephyr log example" href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_blink" icon="github">}}
