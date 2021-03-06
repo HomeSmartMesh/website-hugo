@@ -3,6 +3,7 @@ title: "Project CHIP"
 description: "Connected Home Over IP"
 date: 2021-02-12T08:00:00+00:00
 lastmod: 2021-02-12T08:00:00+00:00
+images: ["/design/Protocols.svg"]
 weight: 2
 toc: true
 ---
@@ -10,6 +11,8 @@ toc: true
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
 {{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
 # Overview
+{{<image src="/design/Protocols.svg">}}
+The image above does only focus on the relation between `CHIP`, `Thread` and `Zigbee`. Both CHIP and Zigbee run on `802.15.4` (optional for CHIP), and both are directly or indirectly based on `ZCL` which is in case of CHIP named `ZAP` Zigbee Cluster Library Advanced Platform.
 ## Definition
 
 We can consider the project CHIP `Connected Home Over IP` definition as in two folds :
@@ -79,10 +82,12 @@ source zephyr/zephyr-env.sh
 ```
 * step 3, from the same link above install gn
 
-## build the lighting app
+## lighting app
 
 * Update `prj.conf` params to match the thread border router parametrs (e.g. channel,...)
 * add CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n
+
+{{<icon_button href="https://github.com/project-chip/connectedhomeip/tree/master/examples/lighting-app/nrfconnect" text="github readme guide" icon="github" >}}
 
 ```bash
 cd ncs/modules/lib/connectedhomeip/examples/lighting-app/nrfconnect/
@@ -91,8 +96,11 @@ west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf"
 west flash
 nrfjprog -f nrf52 --program zephyr.hex --sectorerase --verify
 ```
-* in the config below, the RTT logging is enabled to get the log through the SWD Segger J-Link interface, see `# Logging` section
-* please note that the show `CONFIG_OPENTHREAD_MASTERKEY` is a dummy key and has to be kept secret in a production environment
+note on config :
+* the RTT logging is enabled to get the log through the SWD Segger J-Link interface, see `# Logging` section
+* as CHIP is running over zephyr, a zephyr shell is provided alo through the RTT with config on the `# shell` section
+* the shown `CONFIG_OPENTHREAD_MASTERKEY` is a dummy key and has to be kept secret in a production environment
+
 {{<details "prj.conf">}}
 ```conf
 #
@@ -142,15 +150,22 @@ CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n
 # Logging
 CONFIG_SERIAL=n
 CONFIG_LOG=y
-CONFIG_LOG_BACKEND_RTT=y
+#CONFIG_LOG_BACKEND_RTT=y
 CONFIG_LOG_BACKEND_UART=n
 CONFIG_BOOT_BANNER=y
 CONFIG_USE_SEGGER_RTT=y
 CONFIG_CONSOLE=y
 CONFIG_UART_CONSOLE=n
 CONFIG_RTT_CONSOLE=y
+
+# shell
+CONFIG_LOG_BACKEND_RTT=n
+CONFIG_SHELL=y
+CONFIG_SHELL_BACKEND_RTT=y
+CONFIG_SHELL_BACKEND_SERIAL=n
 ```
 {{</details>}}
+
 The log output is then as follows
 {{<details "RTT Log output" >}}
 ```log
@@ -182,6 +197,112 @@ I: 834[ZCL] Using ZAP con
 ```
 {{</details>}}
 
+Upon reset, more details in the log with regard to SetupQRCode
+{{<details "RTT Log output after reset" >}}
+```log
+I: nRF5 802154 radio initialized
+I: 4 Sectors of 4096 bytes
+I: alloc wra: 0, 9c0
+I: data wra: 0, 885
+*** Booting Zephyr OS build v2.4.99-ncs1-rc1  ***
+I: Init CHIP stack
+I: SoftDevice Controller build revision: 
+I: e5 c7 9c d9 91 00 1d 66 |.......f
+I: ea fb 6e 7b 98 2f 42 0d |..n{./B.
+I: f1 60 93 c8             |.`..    
+I: Starting CHIP task
+I: Init Thread stack
+I: 647[DL] OpenThread ifconfig up and thread start
+I: 648[DL] OpenThread started: OK
+I: 648[DL] Setting OpenThread device type to MINIMAL END DEVICE
+I: 650[ZCL] Using ZAP configuration...
+I: 651[ZCL] deactivate report event
+I: 651[ZCL] Cluster callback: 6
+I: 652[ZCL] Cluster callback: 8
+I: 653[ZCL] Value: 255, length 1
+D: 654[IN] TransportMgr initialized
+I: 654[IN] local node id is lu
+
+D: 655[IN] New pairing for device lu, key 112233!!
+I: 657[SVR] Received a new connection.
+I: 670[SVR] Network already provisioned. Disabling BLE advertisement
+I: 672[SVR] Server Listening...
+I: 672[DL] Device Configuration:
+I: 682[DL]   Serial Number: (not set)
+I: 682[DL]   Vendor Id: 9050 (0x235A)
+I: 683[DL]   Product Id: 65279 (0xFEFF)
+I: 693[DL]   Product Revision: 1
+I: 702[DL]   Setup Pin Code: 12345678
+I: 711[DL]   Setup Discriminator: 3840 (0xF00)
+I: 721[DL]   Manufacturing Date: (not set)
+I: 739[SVR] SetupQRCode:  [CH:I34DV*-00 0C9SS0]
+I: 740[SVR] Copy/paste the below URL in a browser to see the QR Code:
+I: 741[SVR] https://dhrishi.github.io/connectedhomeip/qrcode.html?data=CH%3AI34DV%2A-00%200C9SS0
+D: 743[DL] CHIP task running
+D: 744[DL] In DriveBLEState
+I: 757[DL] CHIPoBLE advertising disabled because device is fully provisioned
+D: 759[DL] OpenThread State Changed (Flags: 0x1100107d)
+D: 760[DL]    Device Role: DETACHED
+D: 761[DL]    Thread Unicast Addresses:
+D: 762[DL]         fdde:ad00:beef:0:1e65:2162:2d83:6133/64 valid preferred
+D: 763[DL]         fe80::2c53:1780:f20f:23ad/64 valid preferred
+```
+{{</details>}}
+
+Example shell commands execution on the RTT
+{{<details "RTT shell commands and output" >}}
+```bash
+rtt:~$ ot masterkey
+00112233445566778899aabbccddeeff
+
+Done
+
+rtt:~$ kernel threads
+Scheduler: 104 since last call
+Threads:
+ 0x200048e0 CHIP      
+  options: 0x0, priority: -1 timeout: 536889700
+  state: pending
+  stack size 8192, unused 7104, usage 1088 / 8192 (13 %)
+
+ 0x20002e40 SDC RX    
+  options: 0x0, priority: -10 timeout: 536882884
+  state: pending
+  stack size 1024, unused 832, usage 192 / 1024 (18 %)
+
+ 0x20002588 BT RX     
+  options: 0x0, priority: -8 timeout: 536880652
+  state: pending
+  stack size 1024, unused 832, usage 192 / 1024 (18 %)
+...
+rtt:~$ ot panid 0x1234
+Done
+
+D: 2488290[DL] OpenThread State Changed (Flags: 0x30008000)
+D: 2488291[DL]    Network Name: ot_zephyr
+D: 2488292[DL]    PAN Id: 0x1234
+D: 2488293[DL]    Extended PAN Id: 0xDEAD00BEEF00CAFE
+D: 2488294[DL]    Channel: 11
+D: 2488295[DL]    Mesh Prefix: fdde:ad00:beef::/64
+```
+{{</details>}}
+
+
+
 # Running on ESP32
 
-[all clusters app](https://github.com/project-chip/connectedhomeip/tree/master/examples/all-clusters-app/esp32) example
+{{<icon_button relref="https://github.com/project-chip/connectedhomeip/tree/master/examples/all-clusters-app/esp32" text="all clusters app" icon="github" >}}
+
+# Comissioning
+Each device will generate a setup QR Code, in this case `CH:I34DV*-00 0C9SS0` which is a sectret not to be shared for production devices.
+{{<image src="/images/chip/qrcode-example.png" width="200" >}}
+
+QR code generators services are abundant, but for production devices, better not to use an online generator and rely on an offline one to minimize risks.
+In order to facilitate the creation, an url is provided where the string to be converted is passed as argument in the `data=` param to an app that cretates the QR code on the page :
+
+https://dhrishi.github.io/connectedhomeip/qrcode.html?data=CH%3AI34DV%2A-00%200C9SS0
+## using an Android App
+
+{{<icon_button relref="https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/nrfconnect_android_commissioning.md" text="github readme" icon="github" >}}
+
+

@@ -103,7 +103,6 @@ nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 
 
 ##  Zephyr v2.5.99
-* current status `Failing`
 * Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
 * For details on Zephyr install see
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
@@ -111,23 +110,20 @@ nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 * add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
 
 ```bash
-cd zephyrproject/zephyr/samples/net/openthread/coprocessor
+cd zephyrproject
+source zephyr/zephyr-env.sh
+cd zephyr/samples/net/openthread/coprocessor
 west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-rcp.conf overlay-usb-nrf-br.conf"
+cd build/zephyr
+nrfjprog -f nrf52 --program zephyr.hex --sectorerase --verify
 ```
 
-{{<details "error details...">}}
+{{<details "border router error details...">}}
+tested version in zephyr 2.5.99 and border router openthread docker
 ```bash
-FAILED: zephyr/CMakeFiles/zephyr.dir/drivers/ieee802154/ieee802154_nrf5.c.obj
-In file included from D:/Projects/zephyrproject/zephyr/drivers/ieee802154/ieee802154_nrf5.c:42:
-D:/Projects/zephyrproject/zephyr/drivers/ieee802154/ieee802154_nrf5.h:11:10: fatal error: ieee802154_radio.h: No such file or directory
-   11 | #include "ieee802154_radio.h"
-      |          ^~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-[103/355] Building C object zephyr/subsys/net/CMakeFiles/subsys__net.dir/buf.c.obj
-ninja: build stopped: subcommand failed.
-FATAL ERROR: command exited with status 1: 'C:\Program Files\CMake\bin\cmake.EXE' --build 'D:\Projects\zephyrproject\zephyr\build'
+Mar  6 13:00:06 3d926b9c2cee avahi-daemon[129]: Server startup complete. Host name is 3d926b9c2cee.local. Local service cookie is 2646371747.
+Mar  6 13:00:07 3d926b9c2cee otbr-agent[145]: [CRIT]-PLAT----: HandleRcpTimeout() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:2168: RadioSpinelNoResponse
 ```
-
 {{</details>}}
 
 

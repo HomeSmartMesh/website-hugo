@@ -17,6 +17,9 @@ grid:
     - name: "Raspi IoT"
       width: 300
       tags: [Frameworks]
+    - name: "Connected Home IP"
+      width: 300
+      tags: [Frameworks]
     - name: "Thread SensorTag"
       width: 300
       tags: [Microcontrollers]
@@ -56,6 +59,15 @@ Learning examples using as few dependencies as possible
 Sensors to MQTT to influx to Grafana.
 
 Multiple Python and Node.js standalone services
+
+<--->
+{{< image src="/images/chip.png" height="150px" href="/docs/frameworks/chip/" >}}
+
+{{< my_button href="/docs/frameworks/chip/" text="ConnectedHomeIP" >}}
+
+Multiple networks supported (Thread, BT, Wifi)
+
+Application "Advanced ZCL" over IP
 
 <--->
 {{< image src="/images/thread_sensortag/concept.png" height="150px" href="/docs/microcontrollers/nrf52/thread_sensortag/" >}}
