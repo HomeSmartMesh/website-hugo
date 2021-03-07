@@ -5,9 +5,10 @@ lead: "Control your home like a Video Game served from your local pi. See your 3
 date: 2021-01-01T00:00:00+00:00
 lastmod: 2021-01-01T00:00:00+00:00
 draft: false
-images: []
+images: ["/images/floor_temperature.png"]
 weight: 2
 toc: true
+#https://schema.org/SoftwareSourceCode
 ---
 
 {{< new_button href="https://github.com/HomeSmartMesh/smart_home_3d_webapp" text="Webapp 3D Github Repo" >}}

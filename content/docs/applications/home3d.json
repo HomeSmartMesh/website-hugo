@@ -1,0 +1,12 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Smart Home 3D Webapp",
+  "operatingSystem": "Windows, OSX, ANDROID",
+  "applicationCategory": "HomeAutomation",
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD"
+  }
+}

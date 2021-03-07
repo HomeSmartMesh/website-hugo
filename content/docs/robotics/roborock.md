@@ -106,11 +106,8 @@ bot.launch()
 * see also
 {{<icon_button text="Valetudo FAQ Page" href="https://valetudo.cloud/pages/faq.html" icon="new" >}}
 
-{{<details title="Can I install valetudo on a new robot ?">}}
-* No, .
-{{</details>}}
-
-{{<details title="Why not use existing BLDC drivers such as Flipsky ?">}}
-* Flipsky is overdimensioned in size and in power for driving a small robot.
-{{</details>}}
-
+{{<faq>}}
+Can I install Valetudo on a new robot ?
+<--->
+No, only Gen1 and Gen2 of Roborock are supported.
+{{</faq>}}

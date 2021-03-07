@@ -3,9 +3,9 @@ title: "Thread"
 description: "Build and setup instruction for a Thread network. Compilation from different platforms comapatible with the nRF dongle"
 lead: ""
 date: 2020-10-06T08:48:57+00:00
-lastmod: 2021-02-21T08:48:57+00:00
+lastmod: 2021-03-07T08:00:00+00:00
 draft: false
-images: []
+images: ["/images/openthread-environment-1.1.svg"]
 weight: 2
 toc: true
 #BR : https://www.kirale.com/products/ktdg102/
@@ -720,11 +720,12 @@ west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-minimal_s
 * see also
 {{<icon_button text="threadgroup FAQ" href="https://www.threadgroup.org/support#faq" icon="new" >}}
 
-{{<details title="can I run openthread with Arduino ?">}}
-* No, at least not at the moment and not within a native integration similar to the wifi and network in arduino. Despite being known to be an IDE, under the hoods, Arduino is also a framework. The current preferred and supported framework for openthread is Zephyr-OS.
-{{</details>}}
-
-{{<details title="can I run openthread with platformio ?">}}
-* This is under investigation and should be available soon. The current platformio integration of Zephyr-OS does not include openthread, but this is likely to change any time soon.
-{{</details>}}
-
+{{<faq>}}
+can I run openthread with Arduino ?
+<--->
+No, at least not at the moment and not within a native integration similar to the wifi and network in arduino. Despite being known to be an IDE, under the hoods, Arduino is also a framework. The current preferred and supported framework for openthread is Zephyr-OS.
+<===>
+can I run openthread with platformio ?
+<--->
+This is under investigation and should be available soon. The current platformio integration of Zephyr-OS does not include openthread, but this is likely to change any time soon.
+{{</faq>}}

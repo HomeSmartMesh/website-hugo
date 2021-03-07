@@ -310,10 +310,10 @@ If you need support, want to ask a question or suggest a different answer, you c
 {{<icon_button text="Home Smart Mesh - connectedhomeip channel" href="https://discord.gg/f9MTAnBYM9" icon="discord" >}}
 
 {{<faq>}}
-Is CHIP yet another protocol to push consumers replace their existing devices ?
+Is CHIP yet another invention to push consumers into buing new products ?
 <--->
-* I do not think so. If existing devices need their own gateway and consumers already have them, there's no need to change anything. 
-* If a user now buys a new product with the new technology (CHIP, Thread), its integration should not require a vendor specific gateway which is a clear advantage to the user. This dissolves the lockin to a particular devices supplier which is a great win for the users.
+* I do not think so. If existing devices have their own gateway and consumers already have them, there's no need to update.
+* If a user now buys a new product with the new technology (CHIP, Thread), its integration should not require a vendor specific gateway, this is an advantage for the user. This dissolves the lockin to a particular device supplier which is also for the users benefit.
 <===>
 Will CHIP replace zigbee ?
 <--->
