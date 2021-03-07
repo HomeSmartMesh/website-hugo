@@ -1,10 +1,8 @@
 ---
-title : "Sound Hacking"
+title : "Sound Processing"
 description: "Mastering real time sound capture processing and generation on embedded processors"
 date: 2021-01-31T00:00:00+00:00
-weight: 20
-bookFlatSection: true
-bookCollapseSection: false
+weight: 8
 bookToC: true
 ---
 
