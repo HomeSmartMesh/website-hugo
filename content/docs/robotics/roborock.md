@@ -98,3 +98,19 @@ bot_init()
 bot.launch()
 ```
 {{</details>}}
+
+# FAQ - Discussion
+* If you want to add a question or an answer suggestion, you can join the discussion on the discord server
+{{<icon_button text="Roborock Valetudo discord channel" href="https://discord.gg/5PR47RMMsT" icon="discord" >}}
+
+* see also
+{{<icon_button text="Valetudo FAQ Page" href="https://valetudo.cloud/pages/faq.html" icon="new" >}}
+
+{{<details title="Can I install valetudo on a new robot ?">}}
+* No, .
+{{</details>}}
+
+{{<details title="Why not use existing BLDC drivers such as Flipsky ?">}}
+* Flipsky is overdimensioned in size and in power for driving a small robot.
+{{</details>}}
+

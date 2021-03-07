@@ -51,3 +51,16 @@ Gray boxes are git repositories / submodules with html links
 
 
 {{<svg-pan-zoom "/design/rover_repo_structure.svg" >}}
+
+# FAQ - Discussion
+If you want to add a question or an answer suggestion, you can join the discussion on the discord server
+{{<icon_button text="Home Rover discord channel" href="https://discord.gg/USjPBGVfxR" icon="discord" >}}
+
+{{<details title="Is this robot ready ?">}}
+* No, this project started in 2019 is currently in slow progress mode and only have concept and simulation. The electronic design is still in progress.
+{{</details>}}
+
+{{<details title="Why not use existing BLDC drivers such as Flipsky ?">}}
+* Flipsky is overdimensioned in size and in power for driving a small robot.
+{{</details>}}
+

@@ -305,4 +305,20 @@ https://dhrishi.github.io/connectedhomeip/qrcode.html?data=CH%3AI34DV%2A-00%200C
 
 {{<icon_button relref="https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/nrfconnect_android_commissioning.md" text="github readme" icon="github" >}}
 
+# FAQ - Discussion
+If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
+{{<icon_button text="Home Smart Mesh - connectedhomeip channel" href="https://discord.gg/f9MTAnBYM9" icon="discord" >}}
 
+{{<faq>}}
+Is CHIP yet another protocol to push consumers replace their existing devices ?
+<--->
+* I do not think so. If existing devices need their own gateway and consumers already have them, there's no need to change anything. 
+* If a user now buys a new product with the new technology (CHIP, Thread), its integration should not require a vendor specific gateway which is a clear advantage to the user. This dissolves the lockin to a particular devices supplier which is a great win for the users.
+<===>
+Will CHIP replace zigbee ?
+<--->
+* For new products, I would expect more CHIP devices in the future than zigbee, although this is a bet that depends on how hard the transition is. Given that the underlying RF physical layer is the same `802.15.4`, hardware suppliers have no excuses about hardware incompatibilities.
+* Software is not an easy task, for already deployed devices, this will depend on the reliability of the firmware update, and if old devices do have enough capacity for a bigger sw stack. For new devices, all of the software stack is available as opensouce and any startup or maker can use it as described in this page.
+* Even if new products would have CHIP exclusively, the provided solutions will have to allow cohabitation of CHIP/Thread and zigbee for a long time. This is possible through usage of different channels or even the same with different network ids.
+* Combining a multi protocol gateway for both Thread and Zigbee is an interesting idea that I have not see, but it could reduce the gateways that have to stay deployed. It would require multiple Radio Co Processors though to allow operation in different channels.
+{{</faq>}}
