@@ -1,5 +1,5 @@
 ---
-title: "ESP-Mesh Wrapper"
+title: "ESP-Mesh"
 description: "An ESP-MESH wrapper library for an Arduino like API and using json for runtime configuration"
 date: 2021-02-26T00:00:00+09:00
 images: []
@@ -214,7 +214,12 @@ RX> from(80:7d:3a:d5:2f:cc) => (Hello dowlink neighbors : 32)
 {{</details>}}
 
 
-# Frequently Asked Questions
-{{<details title="What are the alternatives to ESP-Mesh ?">}}
-* The ESP devices do implement wifi and Bluetooth standards, when it comes to the ESP-Mesh, it is a custom protocol and not used beyond Espressif devices, therefore when it comes to 2.4 GHz mesh solutions, Standards exist and are in quick expansion such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/).
-{{</details>}}
+# FAQ - Discussion
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
+{{<icon_button text="ESP-Now channel" href="https://discord.gg/caHerwBdz8" icon="discord" >}}
+
+{{<faq>}}
+What are the alternatives to ESP-Mesh ?
+<--->
+The ESP devices do implement wifi and Bluetooth standards, when it comes to the ESP-Mesh, it is a custom protocol and not used beyond Espressif devices, therefore when it comes to 2.4 GHz mesh solutions, Standards exist and are in quick expansion such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/).
+{{</faq>}}
