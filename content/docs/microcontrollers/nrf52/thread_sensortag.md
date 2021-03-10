@@ -36,30 +36,13 @@ The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used s
 
 ## Board
 
-{{< svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag-brd.svg" "white" >}}
+{{<image src="/images/thread_sensortag/board_top.png" >}}
+
+{{<image src="/images/thread_sensortag/board_bottom.png" >}}
 
 ## 3D Board model
 
 {{< model_viewer "/models/nrf/sensortag_1.glb" "400" >}}
-
-
-# v0.0 BME280 MAX44009
-
-{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/cb1083393b6b34cd9d02931da196c2d072bd03fc" text="commit" icon="github" >}}
-
-{{<image src="/images/thread_sensortag/concept_0.png" >}}
-
-
-The preliminary version of the Thread sensorTag is based on an `nRF52840` which is integrated inside an `ISP1807`. On the tag, the used sensors are the `MAX44009` for light brightness and `BME280` for Temperature, Humidity and Pressure.
-
-{{< icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
-
-{{< icon_button href="https://www.insightsip.com/products/bluetooth-smart-modules/isp1807" text="ISP1807" icon="new" >}}
-
-{{< icon_button href="https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/" text="BME280" icon="new" >}}
-
-{{< icon_button href="https://www.maximintegrated.com/en/products/interface/sensor-interface/MAX44009.html" text="MAX44009" icon="new" >}}
-
 
 
 ## Repo
@@ -89,13 +72,18 @@ The preliminary version of the Thread sensorTag is based on an `nRF52840` which 
 
 {{<image src="/images/thread_sensortag/breadboard_test.png" >}}
 
-# Frequently Asked Questions
-{{<details title="Is it possible to save energy by collecting many samples over time and sending them together?">}}
+# FAQ - Discussion
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
+{{<icon_button text="Discord - #thread-sensortag " href="https://discord.gg/SdKHaAfKN4" icon="discord" >}}
+
+{{<faq>}}
+Is it possible to save energy by collecting many sensor samples over time and sending them together?
+<--->
 Yes, sure, the use cases could be slpit as follows :
 * For short term buffering, it's possible to use the RAM retention feature, you pay as you go fine granular (per 4 kB block: 30nA)
 * For long term buffering, we're no longer on the sensors network use case and rather on the logger tag use case, there you can use the Flash, 1 MB is huge.
 In my use case, I don't use buffering in order to allow live update of measures on the user's apps, but combining like a level trigger to immediately send values on big changes with buffering and sending all the values cyclically could be quite smart, you will need a QoS through to ensure your data is really sent after a while, which will also consume RF transactions, I opted for sending every single value on an RF packet which is also used as an alive signal to know when the sensor is dead or out of reach, so no problem if once a packet is lost in a while, but practically, as I use a flood mesh, most measures arrive more than once to the server.
 I think after all, such things should be configurable by the end users's app, and should not be hardcoded
-{{</details>}}
+{{</faq>}}
 
 

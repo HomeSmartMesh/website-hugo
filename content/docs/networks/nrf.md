@@ -352,9 +352,12 @@ Aknowledge
 * Status : preparation
 * previous application "03 bldc 52832" ported to the nRF52840-dongle
 
-# Frequently Asked Questions
-Comments, Questions and suggestions are welcome on the [Home Smar Mesh - Discord server](https://discord.gg/57cZapWHkC)
+# FAQ - Discussion
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
+{{<icon_button text="Discord - #simple-mesh " href="https://discord.gg/qSMv6KkCdJ" icon="discord" >}}
 
-{{<details title="What are the alternatives to Simple-Mesh ?">}}
-* Simple Mesh is a playground for Mesh experimentation but does not intend to cover production grade features, therefore when it comes to 2.4 GHz mesh solutions, Standards such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/) exist, provide all needed features and are more affordable as the documentation is open and the development is also open source.
-{{</details>}}
+{{<faq>}}
+What are the alternatives to Simple-Mesh ?
+<--->
+Simple Mesh is a playground for Mesh experimentation but does not intend to cover production grade features, therefore when it comes to 2.4 GHz mesh solutions, Standards such as [Zigbee](/docs/networks/zigbee/) and [Thread](/docs/networks/thread/) exist, provide all needed features and are more affordable as the documentation is open and the development is also open source.
+{{</faq>}}
