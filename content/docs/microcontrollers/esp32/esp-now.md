@@ -1,7 +1,8 @@
 ---
 title: "ESP-Now"
-description: ""
+description: "An ESP-Now wrapper library is created and used in a Broadcast and Gateway examples. The ESP-Now Broadcast had 100% RX success with another ESP-Now only device, but the ESP-Now to wifi gateway had only 25% RX success rate"
 date: 2021-02-26T00:00:00+09:00
+lastmod: 2021-03-08T08:00:00+00:00
 images: []
 weight: 20
 ---
@@ -86,6 +87,49 @@ void loop() {
 {{<hint info>}}
 In this example, we notice in the log below a broadcast from an ESP-Now only device is received by another  ESP-Now only device with 100% success. This success is due to the receiving device listening most of the time except when transmitting. A higher frequency can reveal misses on collision times.
 {{</hint>}}
+
+{{<details "Broadcast startup 'main.cpp'">}}
+```log
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0018,len:4
+load:0x3fff001c,len:1044
+load:0x40078000,len:8896
+load:0x40080400,len:5828
+entry 0x400806ac
+36 : Boot ready
+150 : config loaded
+
+Brownout detector was triggered
+
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0018,len:4
+load:0x3fff001c,len:1044
+load:0x40078000,len:8896
+load:0x40080400,len:5828
+entry 0x400806ac
+37 : Boot ready
+150 : config loaded
+234 : wifi mode set
+236 : setup() done
+send => (ff:ff:ff:ff:ff:ff) 'Good Morning Everyone (0)'
+237 : initial broadcast() done
+
+
+237 : loop start cycle (1)
+ Version=1;  channel=1;  peers=1 encrypted=0;   send_cb> Sent data to ff:ff:ff:ff:ff:ff, status: 0
+
+send => (ff:ff:ff:ff:ff:ff) 'Hello Everyone (1)'
+  send_cb> Sent data to ff:ff:ff:ff:ff:ff, status: 0
+```
+{{</details>}}
 
 {{<details "Log of Two boradcasters receivers">}}
 first instance

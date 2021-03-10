@@ -10,6 +10,8 @@ weight: 2
 toc: true
 #https://schema.org/SoftwareSourceCode
 ---
+{{<linked_data "/static/data/home3d.json">}}
+
 
 {{< new_button href="https://github.com/HomeSmartMesh/smart_home_3d_webapp" text="Webapp 3D Github Repo" >}}
 
