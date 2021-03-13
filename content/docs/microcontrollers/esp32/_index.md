@@ -2,6 +2,7 @@
 weight: 1
 bookFlatSection: true
 bookCollapseSection: true
+BookToC: false
 title: "esp32"
 grid:
     filters:
@@ -11,7 +12,7 @@ grid:
     - Camera
     - LowPower
     - Program
-    slot: 300
+    slot: 250
     items:
     - name: "ttgo t-display"
       width: 200
@@ -25,6 +26,9 @@ grid:
     - name: "FireBeetle"
       width: 200
       tags: [Board,LowPower]
+    - name: "m5 atom lite"
+      width: 200
+      tags: [Board]
     - name: "ttgo t5 e-paper"
       width: 200
       tags: [Board,Display]
@@ -50,7 +54,7 @@ grid:
 * Passive Buzzer
 * [more details](/docs/microcontrollers/esp32/m5stick-plus)
 <--->
-{{< image src="/images/fisheye-cam-ov36.png" width=200 >}}
+{{<image src="/images/esp32/timer-cam-3mp.png" href="/docs/microcontrollers/esp32/fisheye-cam-ov36" width=200 >}}
 * 3 Mega Pixels OV3660
 * Fisheye lens DFOV 120°
 * Ultra low power, sleep current 2μA
@@ -63,6 +67,14 @@ grid:
 * USB and external DC
 * TP4056 Li-Ion battery charger
 * [more details](/docs/microcontrollers/esp32/fire-beetle)
+
+<--->
+{{< image src="/images/esp32/M5-Atom-Lite.webp" href="/docs/microcontrollers/esp32/m5stack-atom" width=150 >}}
+* Tiny 24 x 24 x 10 mm
+* User Button + Reset
+* RGB Led SK6812
+* IR Led
+* [more details](/docs/microcontrollers/esp32/m5stack-atom)
 
 <--->
 {{< figure src="/images/ttgo_t5-epaper.png" width=300 >}}
