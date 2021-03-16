@@ -100,6 +100,7 @@ cd output/nrf52840/bin/
 arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
 nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 ```
+{{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
 
 
 ##  Zephyr v2.5.99
@@ -626,7 +627,10 @@ w join -n "MeasureFall" -c 15 -k 00112233445566778899aabbccddeeff -p 0x1234
 sudo ot-ctl
 ```
 
-## cli firmware
+## cli openthread firmware
+{{<icon_button href="ot-cli-ftd_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-cli-ftd thread-reference-20191113" icon="download" >}}
+
+## cli Nordic firmware
 * A dongle flashed with `cli` firmware can be attached to the serial console and offer a command line interpreter that helps with testing
 
 build and flash the cli example
