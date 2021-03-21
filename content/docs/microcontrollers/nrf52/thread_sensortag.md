@@ -7,6 +7,8 @@ images: ["/images/thread_sensortag/concept.png"]
 weight: 2
 toc: true
 ---
+{{<load-svg-pan-zoom>}}
+{{<load-model_viewer>}}
 {{<load-photoswipe >}}
 
 {{<icon_button relref="/docs/networks/thread/" text="Networks / Thread" >}}

@@ -5,10 +5,8 @@ date: 2021-01-01T00:00:00+00:00
 weight: 1
 images: ["/images/3dprinting/dumb_to_smart.png"]
 bookToC: false
-# https://www.viewstl.com/plugin/
-# {{< stl_viewer "/models/3DBenchy.stl" >}}
-# https://www.liwen.id.au/heg/
 ---
+{{<load-model_viewer>}}
 
 # Cover Dumb Switch with Smart Switch
 

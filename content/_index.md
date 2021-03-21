@@ -48,7 +48,7 @@ grid:
       width: 150
       tags: [Frameworks]
 ---
-
+{{<load-svg-pan-zoom>}}
 {{< grid "my_grid" >}}
 {{< image src="/images/raspi_iot.png" height="150px" href="/docs/frameworks/raspi_iot/" >}}
 

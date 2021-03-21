@@ -7,6 +7,7 @@ lastmod: 2021-02-14T08:00:00+00:00
 weight: 2
 toc: true
 ---
+{{<load-svg-pan-zoom>}}
 
 {{<icon_button relref="/docs/networks/nrf/" text="Networks / Simple Mesh" >}}
 {{<icon_button relref="/docs/frameworks/raspi_iot/" text="Frameworks / Raspi IoT" >}}

@@ -8,6 +8,7 @@ images: ["/images/robotics/rover_concept.png" ]
 weight: 1
 toc: true
 ---
+{{<load-svg-pan-zoom>}}
 
 # Overview
 {{<icon_button text="RobLibs Github Organization" href="https://github.com/Roblibs" icon="github" >}}

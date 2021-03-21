@@ -9,6 +9,7 @@ images: ["/images/nRF52-features.png"]
 weight: 1
 toc: true
 ---
+{{<load-svg-pan-zoom>}}
 {{<load-photoswipe >}}
 # Simple Mesh Overview
 A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocols. Open source SW is provided for custom and off the shelf nRF SoC tags and dongles.

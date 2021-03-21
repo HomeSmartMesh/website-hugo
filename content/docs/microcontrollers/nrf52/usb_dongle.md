@@ -7,6 +7,7 @@ lastmod: 2021-02-14T08:00:00+00:00
 weight: 3
 toc: true
 ---
+{{<load-model_viewer>}}
 {{<load-photoswipe >}}
 
 {{<icon_button text="Product Page" href="https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF52840-Dongle/" icon="new">}}

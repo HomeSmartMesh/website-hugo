@@ -11,6 +11,7 @@ toc: true
 #BR : https://www.kirale.com/products/ktdg102/
 #Dongle : https://www.kirale.com/products/ktbrn1/
 ---
+{{<load-svg-pan-zoom>}}
 # Relates to
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Project CHIP" >}}
