@@ -95,7 +95,7 @@ then continue the same way on linux or docker from windows
 cd ~/opentrhead
 ./script/bootstrap
 ./bootstrap
-make distclean
+sudo rm -rf output/
 make -f examples/Makefile-nrf52840 USB=1
 cd output/nrf52840/bin/
 arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
@@ -103,6 +103,9 @@ nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 ```
 {{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
 
+{{<icon_button href="ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
+
+{{<icon_button href="ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
 
 ##  Zephyr v2.5.99
 * Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
