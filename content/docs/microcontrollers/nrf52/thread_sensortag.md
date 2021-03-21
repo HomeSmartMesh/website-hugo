@@ -7,9 +7,11 @@ images: ["/images/thread_sensortag/concept.png"]
 weight: 2
 toc: true
 ---
+{{<load-photoswipe >}}
 
 {{<icon_button relref="/docs/networks/thread/" text="Networks / Thread" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Frameworks / CHIP" >}}
+
 
 # v1.0 MS8607 VEML6030
 
@@ -19,8 +21,6 @@ toc: true
 
 The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used sensors are `VEMLS6030` for light and `MS8607` for Temperature, Humidity and Pressure.
 
-
-{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/32a897a91b8c92f2495ef75408c987166ff7b465" text="commit" icon="github" >}}
 
 {{< icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
 
@@ -32,51 +32,47 @@ The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used s
 
 ## Schematics
 
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/32a897a91b8c92f2495ef75408c987166ff7b465" text="commit" icon="github" >}}
+
 {{< svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
 
 ## Board
 
-{{<image src="/images/thread_sensortag/board_top.png" >}}
+{{<image src="/images/thread_sensortag/board_top.png" width="300" >}}
+{{<gfigure src="/images/thread_sensortag/prototype_top.webp" >}}
 
-{{<image src="/images/thread_sensortag/board_bottom.png" >}}
+{{<image src="/images/thread_sensortag/board_bottom.png" width="300" >}}
+{{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" >}}
 
 ## 3D Board model
 
 {{< model_viewer "/models/nrf/sensortag_1.glb" "400" >}}
 
 
-## Repo
+## Power Consumption
 
-{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/fe999911c088dd4ad4b96288b7cdaeced648661c" text="schematics 07/02/2021 commit fe9999"  icon="github" >}}
-
-## Components
-
-### Consumption
-
-{{< iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
-
-## Schematics
-
-{{< svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag_v0.svg" "white" >}}
-
-## Board
-
-{{< svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag-brd_v0.svg" "white" >}}
-
-## 3D Board model
-
-{{< model_viewer "/models/nrf/sensortag_0.glb" "400" >}}
+{{<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
 
 # Firmware
-## Breadboard testing
+{{<hint warning>}} The firmware for this SensorTag is in preparation
+{{</hint>}}
 
-{{<image src="/images/thread_sensortag/breadboard_test.png" >}}
+* example based on `nRFSDK for Thread and Zigbee v4.1.0`
+{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/mqttsn_publish_sensor" text="MQTT-SN directory" icon="github" >}}
+
+* example based on `Zephyr` and `nRF Connect SDK`
+
+{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_sensor" text="MQTT-SN directory" icon="github" >}}
 
 # FAQ - Discussion
 * If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
 {{<icon_button text="Discord - #thread-sensortag " href="https://discord.gg/SdKHaAfKN4" icon="discord" >}}
 
 {{<faq>}}
+Does this Thread SensorTag support MQTT ?
+<--->
+At the moment, a firmware is in preparation that support MQTT-SN which needs an MQTT-SN gateway to connect it to an MQTT broquer. Mode details in the [MQTT Sensors Node](/docs/networks/thread/#mqtt-sensors-node)
+<===>
 Is it possible to save energy by collecting many sensor samples over time and sending them together?
 <--->
 Yes, sure, the use cases could be slpit as follows :

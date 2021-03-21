@@ -19,5 +19,5 @@ bookToC: false
 {{< button relref="/docs/microcontrollers/esp32/ttgo-t-display#thermostat-control" >}} More details on the ESP32 Arduino code {{</button>}}
 
 3D printing creation requires sometimes quite a number of iterations
-
-{{< gfigure src="/images/3dprinting/esp32_remote_iterations.jpg" >}}
+{{<load-photoswipe >}}
+{{<gfigure src="/images/3dprinting/esp32_remote_iterations.jpg" >}}

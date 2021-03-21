@@ -725,6 +725,18 @@ west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-minimal_s
 {{<icon_button text="threadgroup FAQ" href="https://www.threadgroup.org/support#faq" icon="new" >}}
 
 {{<faq>}}
+What is the difference between RCP/NCP Thread Stack ?
+<--->
+RCP stands for Radio Co-Processor and only includes the MAC Layer not the full Thread Core stack. More details : https://openthread.io/platforms#network-co-processor-ncp
+<===>
+What is the link between FTD/ETD Thread Devices ?
+<--->
+FTD = `Full Thread device` can be a Thread router or more, an ETD `End Thread Device` can be M:minial or S:Sleepy and in both cases does not route packets. More details https://openthread.io/guides/thread-primer/node-roles-and-types
+<===>
+What is the difference between using an RCP/NCP and running Thread as a stand alone device ?
+<--->
+The difference only lays on the partitioning of the application, in the RCP/NCP the application runs on the Host be it a raspberry pi or another uC, in the stand alone the whole thread stack and app run on the same device. We can think of the NCP as example like the CLI=`command line interface` Thread utility, but the protocol is not text mode rather binary. If the host is an uC itself, the question would be, why using two uC and if it is possible rather to merge them in just one, a corner case might need that like for example a double uC with WiFi and thread capabiltiy.
+<===>
 can I run openthread with Arduino ?
 <--->
 No, at least not at the moment and not within a native integration similar to the wifi and network in arduino. Despite being known to be an IDE, under the hoods, Arduino is also a framework. The current preferred and supported framework for openthread is Zephyr-OS.
