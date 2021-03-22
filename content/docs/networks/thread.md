@@ -741,6 +741,18 @@ What is the difference between using an RCP/NCP and running Thread as a stand al
 <--->
 The difference only lays on the partitioning of the application, in the RCP/NCP the application runs on the Host be it a raspberry pi or another uC, in the stand alone the whole thread stack and app run on the same device. We can think of the NCP as example like the CLI=`command line interface` Thread utility, but the protocol is not text mode rather binary. If the host is an uC itself, the question would be, why using two uC and if it is possible rather to merge them in just one, a corner case might need that like for example a double uC with WiFi and thread capabiltiy.
 <===>
+Does the Thread Topolog Monitor use the same CLI firmware as the openthread CLI ?
+<--->
+No, the Thread Topology monitor TTM comes with it own firmware that needs to be flashed
+<===>
+How does the Thread Topolog Monitor work ? What can it see ?
+<--->
+The Thread Topolog Monitor TTM is an active node on the network, it needs the credentials to be able to join it and only then it can retrieve info from the network it will also display itself in the network.
+<===>
+What is the difference between the Thread Topology Monitor and the 802.15.4 sniffer ?
+<--->
+The 802.15.4 sniffer does not join the network and is totally passive. It can listen to all the traffic of the channel it is in, including all pan ids. If it has the master key, it can then decript data from the corresponding network.
+<===>
 can I run openthread with Arduino ?
 <--->
 No, at least not at the moment and not within a native integration similar to the wifi and network in arduino. Despite being known to be an IDE, under the hoods, Arduino is also a framework. The current preferred and supported framework for openthread is Zephyr-OS.
