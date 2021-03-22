@@ -71,7 +71,7 @@ A Thread network setup contains the following Nodes
 * cli tester : command line dongle through serial monitor for testing
 * mqtt-sn : end device with mqtt-sn such as sensors
 
-* [Topology Monitor](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Thread-topology-monitor) : GUI interface
+* [Topology Monitor](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Thread-topology-monitor) : GUI interface. Note the hex file to flash on the nRF52840 USB dongle are provided as part of the download pack in `nRF_TTM-win32-x64_0.13.0.zip\nRF_TTM-win32-x64\hex`. A different CLI or NCP fimware would not work.
 
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
