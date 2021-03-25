@@ -56,15 +56,19 @@ The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used s
 {{<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
 
 # Firmware
-{{<hint warning>}} The firmware for this SensorTag is in preparation
+{{<hint info>}} Tested firmware with MQTT-SN gateway and Mosquitto broquer
 {{</hint>}}
 
-* example based on `nRFSDK for Thread and Zigbee v4.1.0`
+* example based on `nRFSDK for Thread and Zigbee v4.1.0` which path should be declared in an environment variable `THREAD_SDK_ROOT`
+* Note that, as specified in the SDK file `components\toolchain\gcc\Makefile.windows` the used toolchain is `GNU Tools ARM Embedded/7 2018-q2-update`
 {{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/mqttsn_publish_sensor" text="MQTT-SN directory" icon="github" >}}
 
-* example based on `Zephyr` and `nRF Connect SDK`
+{{<hint warning>}} The following example is still in development
+{{</hint>}}
 
-{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_sensor" text="MQTT-SN directory" icon="github" >}}
+* example based on `Zephyr` and `nRF Connect SDK`, still in development
+
+{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_sensor" text="pio Zephyr sensor" icon="github" >}}
 
 # FAQ - Discussion
 * If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
