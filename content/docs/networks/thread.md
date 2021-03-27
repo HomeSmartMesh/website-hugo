@@ -195,12 +195,21 @@ nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --ve
 {{<hint warning>}}This method only deploys the lates available docker container, see [version](#version) for a specific version.{{</hint>}}
 * use with the OpenThread dongle firmware [detailed above](#openthread)
 * The docker command below runs deamonized (in the background) and maps port 80.
+* Note that restarting the same container does not work there fore `-rm` would help restart a new container each time
+* Two issues happen when mapping port 80 only, the `Topology` menu does not show anything and the Android comissioning App can't reach the border router so a falback on `host` networking with the second docker command solves these issues.
 ```bash
-docker run --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
+docker run --rm --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
         net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
         -p 80:80 --dns=127.0.0.1 --volume \
         /dev/ttyACM0:/dev/ttyACM0 --privileged openthread/otbr \
         --radio-url spinel+hdlc+uart:///dev/ttyACM0
+
+docker run --rm --name otbr-metal -d \
+  --sysctl "net.ipv6.conf.all.disable_ipv6=0 net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
+  --network host --dns=127.0.0.1 \
+  --volume /dev/ttyACM0:/dev/ttyACM0 \
+  --privileged openthread/otbr \
+  --radio-url spinel+hdlc+uart:///dev/ttyACM0
 ```
 Below commands to run in separate windows
 * listen to the conainer logs
@@ -217,7 +226,7 @@ These commands allow creating a docker image based on a specific commit, e.g. fo
 git clone https://github.com/openthread/ot-br-posix
 cd ot-br-posix
 git checkout 4b6d3b863f
-#git checkout 615de5
+#git checkout 615de5  #2021-03-22
 #git checkout thread-br-certified-20180819
 git submodule update --init --recursive
 docker build --no-cache -t openthread/otbr -f etc/docker/Dockerfile .
