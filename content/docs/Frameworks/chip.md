@@ -89,6 +89,10 @@ source zephyr/zephyr-env.sh
 
 {{<icon_button href="https://github.com/project-chip/connectedhomeip/tree/master/examples/lighting-app/nrfconnect" text="github readme guide" icon="github" >}}
 
+{{<icon_button href="/data/nRF52840_chip-v1.5.0-rc1.zip" text="zephyr.hex v1.5.0-rc1" icon="download" >}}
+
+
+
 ```bash
 cd ncs/modules/lib/connectedhomeip/examples/lighting-app/nrfconnect/
 west build -b nrf52840dongle_nrf52840 -t menuconfig
