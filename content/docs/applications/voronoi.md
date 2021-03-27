@@ -5,6 +5,7 @@ date: 2021-01-01T00:00:00+00:00
 lastmod: 2021-01-01T00:00:00+00:00
 weight: 2
 toc: true
+images: ["/images/voronoi/screenshot.png"]
 ---
 
 # Webapp

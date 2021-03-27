@@ -190,6 +190,9 @@ nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --ve
 
 # Border Router
 ## OpenThread - docker
+{{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="Reference on 'Run OTBR Docker'..."  icon="new" >}}
+### latest
+{{<hint warning>}}This method only deploys the lates available docker container, see [version](#version) for a specific version.{{</hint>}}
 * use with the OpenThread dongle firmware [detailed above](#openthread)
 * The docker command below runs deamonized (in the background) and maps port 80.
 ```bash
@@ -208,34 +211,18 @@ docker logs --follow otbr-metal
 docker exec -it otbr-metal /bin/bash
 ot-ctl
 ```
-Error examples
-{{<details "Raspberry pi 3 errors">}}
-These errors happen with a raspberry pi 3 that does have a normal (not very big) cooling sink
+### version
+These commands allow creating a docker image based on a specific commit, e.g. for testing with Thread version 1.1 instead of 1.2. The image is built with this [Dockerfile](https://github.com/openthread/ot-br-posix/blob/main/etc/docker/Dockerfile).
 ```bash
-Mar  1 17:01:41 fe48e43ea1cf kernel: [ 3083.875055] rpi_firmware_get_throttled: 15 callbacks suppressed
-Mar  1 17:01:41 fe48e43ea1cf kernel: [ 3083.875063] Voltage normalised (0x00000000)
-Mar  1 17:01:50 fe48e43ea1cf otbr-agent[203]: [INFO]-PLAT----: Session socket is ready
-Mar  1 17:02:00 fe48e43ea1cf otbr-agent[203]: [INFO]-CLI-----: execute command: state
-Mar  1 17:02:22 fe48e43ea1cf otbr-agent[203]: [INFO]-CLI-----: execute command: channel
-Mar  1 17:04:07 fe48e43ea1cf otbr-web[230]: wpan service error: 11
+git clone https://github.com/openthread/ot-br-posix
+cd ot-br-posix
+git checkout 4b6d3b863f
+#git checkout 615de5
+#git checkout thread-br-certified-20180819
+git submodule update --init --recursive
+docker build --no-cache -t openthread/otbr -f etc/docker/Dockerfile .
 ```
-The error above is temporary and happens when the web server is used, but the error below is fatal and kills the usb access to the container, therefore non recoverable
-```bash
-Mar  1 17:10:36 fe48e43ea1cf otbr-agent[203]: [CRIT]-PLAT----: Unexpected RCP reset: RESET_POWER_ON
-Mar  1 17:10:36 fe48e43ea1cf otbr-agent[203]: [CRIT]-PLAT----: HandleRcpUnexpectedReset() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:2158: RadioSpinelReset
-Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fe80::a0ec:8d06:eb3f:3802%3#53
-Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fd11:1111:1122:0:db95:15a7:3c57:2817#53
-Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fd11:1111:1122::ff:fe00:3800#53
-Mar  1 17:10:36 fe48e43ea1cf named[77]: no longer listening on fd11:1111:1122::ff:fe00:fc00#53
-Mar  1 17:13:45 fe48e43ea1cf otbr-web[230]: OpenThread daemon is not running.
-Mar  1 17:13:45 fe48e43ea1cf otbr-web[230]: wpan service error: 11
-```
-Therefore I recommend to use active cooling or a raspberry pi 4 with a sink consisting of the fully metal case.
-External Power supply to the RCP is also not a bad idea (recommended by OT)
-{{</details>}}
-
-
-{{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="More details on 'Run OTBR Docker'..."  icon="new" >}}
+Now running the same command above from the section [latest](#latest) with the same image `openthread/otbr` will run the newly built image.
 ## OpenThread - setup
 {{<icon_button href="https://openthread.io/guides/border-router/build#set-up-the-border-router" text="Setup - OpenThread..."  icon="new" >}}
 
