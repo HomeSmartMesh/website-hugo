@@ -70,6 +70,11 @@ The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used s
 
 {{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_sensor" text="pio Zephyr sensor" icon="github" >}}
 
+# bootloader options
+* nRF SDK v16.0.0 [bootloader](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.sdk5.v15.0.0%2Flib_bootloader.html)
+* MCU boot - zephyr bootloader
+* UF2 bootloader
+
 # FAQ - Discussion
 * If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
 {{<icon_button text="Discord - #thread-sensortag " href="https://discord.gg/SdKHaAfKN4" icon="discord" >}}

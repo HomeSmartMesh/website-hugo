@@ -29,6 +29,10 @@ GetStarted)
 ## Pinout
 
 ### Serial Wire Debug
+* the usb dongle is referred to as `PCA10059` which in projects usually shifts the app to offset `0x1000` as openbootloader usage is expected
+* With serial wire debug, it's possible to flash applications at same address as the `PCA10056` which is at address 0x0000
+* recovering the openbootloader mode would then require to reflash the MBR with any nRF SDK project `make flash_mbr`
+
 {{< image src="/images/thread_sensortag/serial_wire_debug.png" >}}
 
 ### LEDS
@@ -45,5 +49,9 @@ GetStarted)
 
 {{<icon_button text="STL models zip" href="/models/nrf/nRF52840_usb_pogo_top.zip" icon="download">}}
 
+## micro python
+{{<icon_button text="build micro python" relref="/docs/frameworks/upython/#config" >}}
+
+## gallery
 {{< image src="/images/thread_sensortag/pogo_pin_adapter.png" >}}
 
