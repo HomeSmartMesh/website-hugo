@@ -4,9 +4,64 @@ description: "Mastering real time sound capture processing and generation on emb
 date: 2021-01-31T00:00:00+00:00
 weight: 8
 bookToC: true
+images: ["/images/sound/web_py_loop.png"]
 ---
 
-# Overview
+# Repositories
+
+## web py loop
+
+{{<icon_button text="repo" href="https://github.com/SoundHacking/web_py_loop" icon="github" >}}
+
+{{<image src="/images/sound/web_py_loop.png" >}}
+
+* using `createScriptProcessor` which is to be deprecated
+* Note `MediaStreamTrackProcessor` is not supported yet as of 02 Apr 2021. [Sample demo](https://github.com/webrtc/samples/blob/gh-pages/src/content/insertable-streams/audio-processing/js/main.js) available
+
+## webRTC
+Official example 
+{{<icon_button text="peerconnection audio" href="https://github.com/webrtc/samples/tree/gh-pages/src/content/peerconnection/audio" icon="github" >}}
+
+
+## pystream
+{{<icon_button text="repo" href="https://github.com/SoundHacking/pystream" icon="github" >}}
+
+{{<image src="/images/sound/python_process.png" >}}
+
+* List audio devices
+* Test Audio input and output
+* connect inputs to outputs
+* process the live stream between input and output
+* generate tone
+
+### dependencies
+
+* matplotlib
+* numpy
+* [sounddevice](https://python-sounddevice.readthedocs.io/)
+
+## see sound
+
+{{<icon_button text="repo" href="https://github.com/SoundHacking/see_sound/" icon="github" >}}
+
+{{<image src="/images/sound/analyser.png" >}}
+
+* a web app framework to see the sound in different forms
+* real-time analysis of played audio
+* Playing sound with html5 [web Audio API](https://www.w3.org/TR/webaudio/)
+### Live demo
+
+{{< iframe src="https://soundhacking.github.io/see_sound/" height="300" >}}
+
+## librosa_demo
+
+{{< new_button href="https://github.com/SoundHacking/librosa_demo/" text="github project" >}}
+
+* Jupyter notebooks to showcase librosa functions
+
+{{< image src="/images/sound/librosa.png" width=600 >}}
+
+# Features Plan
 The idea behind the [Sound Hacking github organisation](https://github.com/SoundHacking) is to take advantage of the latest advances of Machine learning and Audio processing to create innovative applications.
 
 ## Interactive sound input
@@ -61,36 +116,3 @@ Microcontrollers in scope :
 
 Example integration of cubemx with pio :
 * [f411_piocube_lib_blink](https://github.com/STM32Libs/f411_piocube_lib_blink)
-# Repositories
-
-## [pystream](https://github.com/SoundHacking/pystream)
-* List audio devices
-* Test Audio input and output
-* connect inputs to outputs
-* process the live stream between input and output
-* generate tone
-
-### dependencies
-
-* matplotlib
-* numpy
-* [sounddevice](https://python-sounddevice.readthedocs.io/)
-
-## see sound
-
-{{< new_button href="https://github.com/SoundHacking/see_sound/" text="github project" >}}
-
-* a web app framework to see the sound in different forms
-* real-time analysis of played audio
-* Playing sound with html5 [web Audio API](https://www.w3.org/TR/webaudio/)
-### Live demo
-
-{{< iframe src="https://soundhacking.github.io/see_sound/" height="300" >}}
-
-## librosa_demo
-
-{{< new_button href="https://github.com/SoundHacking/librosa_demo/" text="github project" >}}
-
-* Jupyter notebooks to showcase librosa functions
-
-{{< image src="/images/sound/librosa.png" width=600 >}}
