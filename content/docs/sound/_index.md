@@ -8,9 +8,7 @@ images: ["/images/sound/web_py_loop.png"]
 ---
 {{<load-photoswipe >}}
 
-# Repositories
-
-## web py loop
+# web py loopback
 
 {{<icon_button text="repo" href="https://github.com/SoundHacking/web_py_loop" icon="github" >}}
 
@@ -19,20 +17,23 @@ images: ["/images/sound/web_py_loop.png"]
 * using `createScriptProcessor` which is to be deprecated
 * Note `MediaStreamTrackProcessor` is not supported yet as of 02 Apr 2021. [Sample demo](https://github.com/webrtc/samples/blob/gh-pages/src/content/insertable-streams/audio-processing/js/main.js) available
 
-### script processor loopback
+## web audio script processor
 * using the deprecated `ScriptProcessorNode` to divert the input and send it through websocket as `Float32Array` to the server
 * on the same processing loop, the audio is replacing with the incoming `Float32Array` stream from the server
 * During the first iteration of the processing loop, as the queue is empty, the output is filled with zeros
 
-{{<gfigure src="/design/02_script_processor_loopback.svg" width="70%">}}
+{{<gfigure src="/design/02_script_processor_loopback.svg" width="500px">}}
 
-### media recorder source loopback
+## media source extension API
 * using `MediaRecorder` and `MediaSource` for encoded stream loopback through websocket
-{{<gfigure src="/design/06_media_recorder_source_loopback.svg" width="50%">}}
+{{<gfigure src="/design/06_media_recorder_source_loopback.svg" width="400px">}}
 
 ## webRTC
 Official example 
 {{<icon_button text="peerconnection audio" href="https://github.com/webrtc/samples/tree/gh-pages/src/content/peerconnection/audio" icon="github" >}}
+
+{{<gfigure src="/design/web_rtc.svg" width="300px">}}
+
 
 
 ## pystream
@@ -52,7 +53,7 @@ Official example
 * numpy
 * [sounddevice](https://python-sounddevice.readthedocs.io/)
 
-## see sound
+# see sound
 
 {{<icon_button text="repo" href="https://github.com/SoundHacking/see_sound/" icon="github" >}}
 
@@ -61,11 +62,11 @@ Official example
 * a web app framework to see the sound in different forms
 * real-time analysis of played audio
 * Playing sound with html5 [web Audio API](https://www.w3.org/TR/webaudio/)
-### Live demo
+## Live demo
 
 {{< iframe src="https://soundhacking.github.io/see_sound/" height="300" >}}
 
-## librosa_demo
+# librosa test
 
 {{< new_button href="https://github.com/SoundHacking/librosa_demo/" text="github project" >}}
 
@@ -128,3 +129,14 @@ Microcontrollers in scope :
 
 Example integration of cubemx with pio :
 * [f411_piocube_lib_blink](https://github.com/STM32Libs/f411_piocube_lib_blink)
+
+# FAQ - Discussion
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
+{{<icon_button text="Home Smart Mesh - Audio Processing" href="https://discord.gg/83pGqB67Qa" icon="discord" >}}
+{{<faq>}}
+What is the difference between a MediaStream and a MediaSource when used in a real time network ?
+<--->
+It is possible to append Buffers to a MediaSource which opens its input to a custom websocket while MediaStream, can only be bound to a webRTC RTCPeerConnection.
+
+Note that `audio.src` is to be used with a `MediaSrouce` URL while `audio.srcObject` is for `MediaStream`.
+{{</faq>}}

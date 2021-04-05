@@ -168,7 +168,7 @@
               <data key="d6">
                 <y:GenericNode configuration="ShinyPlateNode3">
                   <y:Geometry height="30.0" width="153.94700984102957" x="30.000304603294737" y="141.1035156249999"/>
-                  <y:Fill color="#FFFF99" transparent="false"/>
+                  <y:Fill color="#CCFFCC" transparent="false"/>
                   <y:BorderStyle hasColor="false" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="82.69140625" x="35.627801795514785" xml:space="preserve" y="5.6494140625">getUserMedia<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
                 </y:GenericNode>
@@ -188,9 +188,9 @@
               <data key="d6">
                 <y:GenericNode configuration="ShinyPlateNode3">
                   <y:Geometry height="29.999999999999886" width="139.947619047619" x="50.43492063492066" y="352.1035156249998"/>
-                  <y:Fill color="#C0C0C0" transparent="false"/>
+                  <y:Fill color="#000000" color2="#999999" transparent="false"/>
                   <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="90.6953125" x="24.626153273809507" xml:space="preserve" y="5.649414062499943">MediaRecorder<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="90.6953125" x="24.626153273809507" xml:space="preserve" y="5.649414062499943">MediaRecorder<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
                 </y:GenericNode>
               </data>
             </node>
@@ -333,9 +333,9 @@
               <data key="d6">
                 <y:GenericNode configuration="ShinyPlateNode3">
                   <y:Geometry height="29.999999999999886" width="139.947619047619" x="253.48353174603176" y="458.1035156249998"/>
-                  <y:Fill color="#C0C0C0" transparent="false"/>
+                  <y:Fill color="#000000" color2="#999999" transparent="false"/>
                   <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="78.689453125" x="30.629082961309507" xml:space="preserve" y="5.649414062499943">MediaSource<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="78.689453125" x="30.629082961309507" xml:space="preserve" y="5.649414062499943">MediaSource<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
                 </y:GenericNode>
               </data>
             </node>
@@ -345,7 +345,7 @@
                   <y:Geometry height="29.999999999999886" width="101.0" x="272.95734126984127" y="546.8046874999995"/>
                   <y:Fill color="#CC99FF" transparent="false"/>
                   <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="35.998046875" x="32.5009765625" xml:space="preserve" y="5.6494140625">audio<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="64.662109375" x="18.1689453125" xml:space="preserve" y="5.6494140625">html audio<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
                 </y:GenericNode>
               </data>
             </node>
@@ -365,7 +365,7 @@
               <data key="d6">
                 <y:GenericNode configuration="ShinyPlateNode3">
                   <y:Geometry height="30.0" width="65.7527777777778" x="328.3244047619047" y="397.1035156249998"/>
-                  <y:Fill color="#CCFFCC" transparent="false"/>
+                  <y:Fill color="#FFFFFF" transparent="false"/>
                   <y:BorderStyle hasColor="false" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="32.6640625" x="16.54435763888887" xml:space="preserve" y="5.6494140625">opus<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
                 </y:GenericNode>
@@ -376,7 +376,7 @@
               <data key="d6">
                 <y:GenericNode configuration="ShinyPlateNode3">
                   <y:Geometry height="30.0" width="65.7527777777778" x="122.51924603174604" y="302.10351562499983"/>
-                  <y:Fill color="#CCFFCC" transparent="false"/>
+                  <y:Fill color="#FFFFFF" transparent="false"/>
                   <y:BorderStyle hasColor="false" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="32.6640625" x="16.544357638888897" xml:space="preserve" y="5.6494140625">opus<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
                 </y:GenericNode>
@@ -397,7 +397,6 @@
       </graph>
     </node>
     <edge id="n1::e0" source="n1::n0" target="n1::n1::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="14.999999999999943" tx="0.0" ty="-15.0"/>
@@ -407,7 +406,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e0" source="n1::n1::n0" target="n1::n1::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="15.0" tx="0.0" ty="-14.999999999999943">
@@ -420,7 +418,6 @@
       </data>
     </edge>
     <edge id="n0::n0::e0" source="n0::n0::n0" target="n0::n0::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="-50.5" sy="0.0" tx="54.973504920514785" ty="0.0">
@@ -433,7 +430,6 @@
       </data>
     </edge>
     <edge id="n0::e0" source="n0::n1" target="n0::n0::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="-30.269269087271553" sy="14.999999999999943" tx="-27.486752460257392" ty="-14.999999999999943">
@@ -446,7 +442,6 @@
       </data>
     </edge>
     <edge id="n0::e1" source="n0::n0::n1" target="n0::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="27.486752460257392" sy="-14.999999999999943" tx="30.26926908727156" ty="14.999999999999943">
@@ -459,7 +454,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e1" source="n1::n1::n3::n0" target="n1::n1::n6::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="14.999999999999943" tx="0.0" ty="-14.999999999999943"/>
@@ -469,7 +463,6 @@
       </data>
     </edge>
     <edge id="e0" source="n1::n1::n6::n0" target="n0::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="15.0" tx="-30.269269087271567" ty="-15.0"/>
@@ -479,7 +472,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e2" source="n1::n1::n2" target="n1::n1::n3::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.edge.framed">
           <y:Path sx="0.0" sy="14.999999999999943" tx="0.0" ty="-14.999999999999943">
@@ -492,7 +484,6 @@
       </data>
     </edge>
     <edge id="n1::n1::n4::e0" source="n1::n1::n4::n0" target="n1::n1::n4::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="31.68819444444445" sy="14.999999999999943" tx="0.0" ty="-15.0">
@@ -505,7 +496,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e3" source="n1::n1::n4::n1" target="n1::n1::n5">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="15.0" tx="0.0" ty="-14.999999999999943"/>
@@ -515,7 +505,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e4" source="n1::n1::n7" target="n1::n1::n8">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.edge.framed">
           <y:Path sx="0.0" sy="14.999999999999943" tx="0.0" ty="-14.999999999999943"/>
@@ -525,7 +514,6 @@
       </data>
     </edge>
     <edge id="n1::e1" source="n1::n1::n8" target="n1::n2">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.edge.framed">
           <y:Path sx="0.0" sy="14.999999999999943" tx="0.0" ty="-14.999999999999943"/>
@@ -535,7 +523,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e5" source="n1::n1::n5" target="n1::n1::n9">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="14.999999999999943" tx="0.0" ty="-15.0"/>
@@ -545,7 +532,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e6" source="n1::n1::n9" target="n1::n1::n7">
-      <data key="d9"/>
       <data key="d10">
         <y:QuadCurveEdge straightness="0.1">
           <y:Path sx="0.0" sy="15.0" tx="-34.98690476190475" ty="-14.999999999999943">
@@ -558,7 +544,6 @@
       </data>
     </edge>
     <edge id="e1" source="n0::n1" target="n1::n1::n4::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="30.26926908727154" sy="-15.0" tx="-31.688194444444434" ty="14.999999999999943">
@@ -574,7 +559,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e7" source="n1::n1::n11" target="n1::n1::n2">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="15.0" tx="34.98690476190475" ty="-14.999999999999943"/>
@@ -585,7 +569,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e8" source="n1::n1::n1" target="n1::n1::n2">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="14.999999999999943" tx="-34.98690476190475" ty="-14.999999999999943">
@@ -598,7 +581,6 @@
       </data>
     </edge>
     <edge id="n1::n1::e9" source="n1::n1::n10" target="n1::n1::n7">
-      <data key="d9"/>
       <data key="d10">
         <y:BezierEdge>
           <y:Path sx="0.0" sy="15.0" tx="34.98690476190475" ty="-14.999999999999943">
