@@ -6,6 +6,7 @@ weight: 8
 bookToC: true
 images: ["/images/sound/web_py_loop.png"]
 ---
+{{<load-photoswipe >}}
 
 # Repositories
 
@@ -17,6 +18,17 @@ images: ["/images/sound/web_py_loop.png"]
 
 * using `createScriptProcessor` which is to be deprecated
 * Note `MediaStreamTrackProcessor` is not supported yet as of 02 Apr 2021. [Sample demo](https://github.com/webrtc/samples/blob/gh-pages/src/content/insertable-streams/audio-processing/js/main.js) available
+
+### script processor loopback
+* using the deprecated `ScriptProcessorNode` to divert the input and send it through websocket as `Float32Array` to the server
+* on the same processing loop, the audio is replacing with the incoming `Float32Array` stream from the server
+* During the first iteration of the processing loop, as the queue is empty, the output is filled with zeros
+
+{{<gfigure src="/design/02_script_processor_loopback.svg" width="70%">}}
+
+### media recorder source loopback
+* using `MediaRecorder` and `MediaSource` for encoded stream loopback through websocket
+{{<gfigure src="/design/06_media_recorder_source_loopback.svg" width="50%">}}
 
 ## webRTC
 Official example 

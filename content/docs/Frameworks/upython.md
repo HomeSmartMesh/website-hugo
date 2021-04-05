@@ -60,6 +60,11 @@ int mp_hal_stdin_rx_chr(void) {
 
 * use board `PCA10056` note that this board has `MICROPY_HW_USB_CDC` not defined, disabled, set to `(0)`
 * edit the config file `ports/nrf/boards/pca10056/mpconfigboard.h`
+
+{{<hint warning>}}
+In case the Hardware flow control is not used, which means the UART CTS and RTS pins are not attached, it is important to disable the `MICROPY_HW_UART1_HWFC` by setting it to `(0)`
+{{</hint>}}
+
 ```c++
 // UART config
 #define MICROPY_HW_UART1_RX         (9)
