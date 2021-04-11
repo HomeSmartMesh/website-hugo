@@ -21,10 +21,6 @@ toc: true
 * version 1.1
 * update from v1.0 added RGB LED
 
-{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/8bbcb726f8227c933b18bea9f7477ed7f553a38d" text="commit" icon="github" >}}
-
-
-
 
 * `nRF52840` on a `MS88SF2` module.
 * Light sensor `VEMLS6030`
@@ -39,6 +35,12 @@ toc: true
 {{< icon_button href="https://www.mouser.com/datasheet/2/418/5/NG_DS_MS8607-02BA01_B3-1134999.pdf" text="MS86072" icon="new" >}}
 
 {{< icon_button href="https://www.mouser.com/datasheet/2/427/veml6030-1767367.pdf" text="VEML6030" icon="new" >}}
+
+## Manufacturing
+* design files
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/8bbcb726f8227c933b18bea9f7477ed7f553a38d" text="v1.1 commit 8bbcb7" icon="github" >}}
+* gerber files
+{{<icon_button text="Gerber files v1.1" href="/data/manufacturing_v1.1.zip" icon="download" >}}
 
 ## Schematics
 
@@ -77,6 +79,7 @@ toc: true
 {{<icon_button text="STL Model" href="/models/thread4_lower.stl" icon="download" >}}
 {{< model_viewer "/models/thread4_lower.glb" "400" >}}
 {{< gallery dir="/images/thread_sensortag/swd-pogo" />}}
+
 
 # Produced versions
 * v 1.0 10.02.2021
