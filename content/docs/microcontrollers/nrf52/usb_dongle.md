@@ -55,3 +55,8 @@ GetStarted)
 ## gallery
 {{< image src="/images/thread_sensortag/pogo_pin_adapter.png" >}}
 
+# bootloader options
+* nRF SDK v16.0.0 [bootloader](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.sdk5.v15.0.0%2Flib_bootloader.html)
+* MCU boot - zephyr bootloader
+* UF2 bootloader
+

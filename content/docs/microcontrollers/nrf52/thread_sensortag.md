@@ -14,19 +14,27 @@ toc: true
 {{<icon_button relref="/docs/networks/thread/" text="Networks / Thread" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Frameworks / CHIP" >}}
 
-
-# v1.0 MS8607 VEML6030
-
 {{<image src="/images/thread_sensortag/concept.png" >}}
-{{<image src="/images/thread_sensortag/kicad_render.png" width="300vw" >}}
+{{<image src="/images/thread_sensortag/kicad_render.webp" width="300vw" >}}
+
+# Current Version
+* version 1.1
+* update from v1.0 added RGB LED
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/8bbcb726f8227c933b18bea9f7477ed7f553a38d" text="commit" icon="github" >}}
 
 
-The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used sensors are `VEMLS6030` for light and `MS8607` for Temperature, Humidity and Pressure.
 
 
-{{< icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
+* `nRF52840` on a `MS88SF2` module.
+* Light sensor `VEMLS6030`
+* Temperature, Humidity and pressure`MS8607`
+* Reset button `P0.18` and user button SW0 `P1.09`
+* RGB LED `P0. 04 06 08`
 
-{{< icon_button href="https://www.minew.com/products/nrf52840-module-ms88sf2.html" text="MS88SF2" icon="new" >}}
+{{<icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
+
+{{<icon_button href="https://www.minew.com/products/nrf52840-module-ms88sf2.html" text="MS88SF2" icon="new" >}}
 
 {{< icon_button href="https://www.mouser.com/datasheet/2/418/5/NG_DS_MS8607-02BA01_B3-1134999.pdf" text="MS86072" icon="new" >}}
 
@@ -34,28 +42,20 @@ The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used s
 
 ## Schematics
 
-{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/32a897a91b8c92f2495ef75408c987166ff7b465" text="commit" icon="github" >}}
-
 {{< svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
 
 ## Board
 
-{{<image src="/images/thread_sensortag/board_top.png" width="300" >}}
-{{<gfigure src="/images/thread_sensortag/prototype_top.webp" >}}
+{{<image src="/images/thread_sensortag/board_top.webp" width="500px" >}}
 
-{{<image src="/images/thread_sensortag/board_bottom.png" width="300" >}}
-{{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" >}}
-
-## 3D Board model
-
-{{< model_viewer "/models/nrf/sensortag_1.glb" "400" >}}
-
+{{<image src="/images/thread_sensortag/board_bottom.png" width="500px" >}}
 
 ## Power Consumption
 
 {{<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
 
-# Firmware
+# development
+## Firmware
 {{<hint info>}} Tested firmware with MQTT-SN gateway and Mosquitto broquer
 {{</hint>}}
 
@@ -70,10 +70,21 @@ The Thread sensorTag is based on an `nRF52840` on a `MS88SF2` module. The used s
 
 {{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_sensor" text="pio Zephyr sensor" icon="github" >}}
 
-# bootloader options
-* nRF SDK v16.0.0 [bootloader](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.sdk5.v15.0.0%2Flib_bootloader.html)
-* MCU boot - zephyr bootloader
-* UF2 bootloader
+## flashing
+* SWD pogo pins adapter
+* Pogo Pin P75-E2 Dia 1.3mm Length 16.5mm
+
+{{<icon_button text="STL Model" href="/models/thread4_lower.stl" icon="download" >}}
+{{< model_viewer "/models/thread4_lower.glb" "400" >}}
+{{< gallery dir="/images/thread_sensortag/swd-pogo" />}}
+
+# Produced versions
+* v 1.0 10.02.2021
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/32a897a91b8c92f2495ef75408c987166ff7b465" text="commit" icon="github" >}}
+{{<gfigure src="/images/thread_sensortag/prototype_top.webp" width="200px" >}}
+{{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" width="200px" >}}
+
 
 # FAQ - Discussion
 * If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
