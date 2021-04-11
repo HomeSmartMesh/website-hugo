@@ -5,7 +5,7 @@ lead: ""
 date: 2020-10-06T08:48:57+00:00
 lastmod: 2020-10-06T08:48:57+00:00
 draft: false
-images: []
+images: ["/images/zigbee_devices.png"]
 weight: 3
 toc: true
 ---
@@ -14,7 +14,7 @@ toc: true
 
 Below are examples of used devices in this project 
 
-{{< figure src="/images/zigbee_devices.png" width=600 >}}
+{{<figure src="/images/zigbee_devices.png" width=600 >}}
 
 As in the above figure, I kept all the light with the hue gateway for a reliable function, and opted for zigbee2mqtt for all other non lighting devices.
 
