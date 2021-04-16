@@ -21,7 +21,7 @@ toc: true
 * version 1.1
 * update from v1.0 added RGB LED
 
-
+Features
 * `nRF52840` on a `MS88SF2` module.
 * Light sensor `VEMLS6030`
 * Temperature, Humidity and pressure`MS8607`
@@ -37,8 +37,10 @@ toc: true
 {{< icon_button href="https://www.mouser.com/datasheet/2/427/veml6030-1767367.pdf" text="VEML6030" icon="new" >}}
 
 ## Manufacturing
+* v 1.1 15.04.2021
 * design files
-{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/8bbcb726f8227c933b18bea9f7477ed7f553a38d" text="v1.1 commit 8bbcb7" icon="github" >}}
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.1" text="tag v1.1" icon="github" >}}
+
 * gerber files
 {{<icon_button text="Gerber files v1.1" href="/data/manufacturing_v1.1.zip" icon="download" >}}
 
@@ -50,27 +52,40 @@ toc: true
 
 {{<image src="/images/thread_sensortag/board_top.webp" width="500px" >}}
 
-{{<image src="/images/thread_sensortag/board_bottom.png" width="500px" >}}
-
 ## Power Consumption
 
 {{<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
 
 # development
 ## Firmware
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware" text="repo directory" icon="github" >}}
+
+### 01 dongle nrfsdk mqttsn client
+
 {{<hint info>}} Tested firmware with MQTT-SN gateway and Mosquitto broquer
 {{</hint>}}
 
 * example based on `nRFSDK for Thread and Zigbee v4.1.0` which path should be declared in an environment variable `THREAD_SDK_ROOT`
 * Note that, as specified in the SDK file `components\toolchain\gcc\Makefile.windows` the used toolchain is `GNU Tools ARM Embedded/7 2018-q2-update`
-{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/mqttsn_publish_sensor" text="MQTT-SN directory" icon="github" >}}
 
-{{<hint warning>}} The following example is still in development
-{{</hint>}}
+### 04 dongle pio zephyr blink
+* zephyr with platformio environment for easy install
+* dongle led blink
 
-* example based on `Zephyr` and `nRF Connect SDK`, still in development
+### 06 tag zephyr hello
+* hello world example using the `nrf52840_sensortag` custom board
 
-{{< icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware/pio_zephyr_sensor" text="pio Zephyr sensor" icon="github" >}}
+zephyr examples usage
+```bash
+west build -b nrf52840_sensortag
+west flash
+```
+### 07 tag zephyr button
+* introducing user button interrupt
+### 08 tag zephyr thread
+* simplest example with thread stack running
+* thread stack added through config only
 
 ## flashing
 * SWD pogo pins adapter
@@ -82,9 +97,13 @@ toc: true
 
 
 # Produced versions
+* v 1.1 15.04.2021
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.1" text="tag v1.1" icon="github" >}}
+
 * v 1.0 10.02.2021
 
-{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/commit/32a897a91b8c92f2495ef75408c987166ff7b465" text="commit" icon="github" >}}
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.0" text="tag v1.0" icon="github" >}}
 {{<gfigure src="/images/thread_sensortag/prototype_top.webp" width="200px" >}}
 {{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" width="200px" >}}
 
