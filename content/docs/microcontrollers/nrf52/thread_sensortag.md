@@ -34,7 +34,7 @@ Features
 
 {{< icon_button href="https://www.mouser.com/datasheet/2/418/5/NG_DS_MS8607-02BA01_B3-1134999.pdf" text="MS86072" icon="new" >}}
 
-{{< icon_button href="https://www.mouser.com/datasheet/2/427/veml6030-1767367.pdf" text="VEML6030" icon="new" >}}
+{{< icon_button href="https://www.vishay.com/docs/84366/veml6030.pdf" text="VEML6030" icon="new" >}}
 
 ## Manufacturing
 * v 1.1 15.04.2021
@@ -57,7 +57,25 @@ Features
 {{<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
 
 # development
-## Firmware
+## install
+* install [zephyr and west](http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/getting_started/index.html#getting-started)
+
+{{<hint warning>}}
+make sure there is no environment variable `ZEPHYR_BASE` in order to use the local zephyr version
+{{</hint>}}
+
+* create directory structure and fetch the sdk :
+```bash
+mkdir hsm_workspace
+cd hsm_workspace
+west init -m https://github.com/HomeSmartMesh/sdk-hsm-sensortag -mr main
+```
+* fetch all dependencies from referenced repos in `hsm.west.yml`
+```bash
+west update
+```
+
+## descripton
 
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware" text="repo directory" icon="github" >}}
 
