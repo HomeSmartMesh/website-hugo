@@ -75,7 +75,88 @@ west init -m https://github.com/HomeSmartMesh/sdk-hsm-sensortag -mr main
 west update
 ```
 
-## descripton
+## sdk samples
+
+### tag_sensor_veml6030
+```bash
+west build -t guiconfig
+west build -b nrf52840_sensortag -- -DCONF_FILE=prj-shell.conf
+west build -b nrf52840_sensortag -- -DCONF_FILE=prj-log.conf
+west flash
+```
+
+
+{{<details "default config">}}
+```conf
+CONFIG_GPIO=y
+CONFIG_SERIAL=n
+
+CONFIG_I2C=y
+CONFIG_SENSOR=y
+CONFIG_VEML6030=y
+```
+{{</details>}}
+
+{{<details "build log">}}
+```bash
+-- west build: generating a build system
+Including boilerplate (Zephyr base (cached)): D:/Dev/nrf52/hsm/zephyr/cmake/app/boilerplate.cmake
+-- Application: D:/Dev/nrf52/hsm/hsm/samples/tag_sensor_veml6030
+-- Zephyr version: 2.5.99 (D:/Dev/nrf52/hsm/zephyr)
+-- Found west (found suitable version "0.10.1", minimum required is "0.7.1")
+-- Board: nrf52840_sensortag
+-- Cache files will be written to: D:/Dev/nrf52/hsm/zephyr/.cache
+-- Found toolchain: gnuarmemb (D:/tools/gnu_arm_embedded/10 2020-q4-major)
+-- Found BOARD.dts: D:/Dev/nrf52/hsm/hsm/boards/arm/nrf52840_sensortag/nrf52840_sensortag.dts
+```
+{{</details>}}
+
+running the sample on ambiant light, hand cover then flash light
+
+{{<details "run log">}}
+```log
+[00:00:00.325,683] <inf> VEML6030: veml6030_init() power on
+[00:00:00.326,202] <inf> VEML6030: i2c_burst_write(0x0000) success
+*** Booting Zephyr OS build zephyr-v2.5.0-2187-g757cd12e6602  ***
+
+[00:00:00.326,324] <inf> main: VEML6030 light sensor application
+
+Found device "VEML6030", getting sensor data
+
+[00:00:00.427,062] <inf> main: sensor: lum reading: 1255
+
+[00:00:05.527,740] <inf> main: sensor: lum reading: 1253
+
+[00:00:10.628,448] <inf> main: sensor: lum reading: 1242
+
+[00:00:15.729,156] <inf> main: sensor: lum reading: 107
+
+[00:00:20.829,864] <inf> main: sensor: lum reading: 111
+
+[00:00:25.930,572] <inf> main: sensor: lum reading: 1304
+
+[00:00:31.031,280] <inf> main: sensor: lum reading: 1482
+
+[00:00:36.131,988] <inf> main: sensor: lum reading: 23082
+
+[00:00:41.232,696] <inf> main: sensor: lum reading: 23791
+
+[00:00:46.333,404] <inf> main: sensor: lum reading: 1257
+
+[00:00:51.434,112] <inf> main: sensor: lum reading: 1365
+
+[00:00:56.534,820] <inf> main: sensor: lum reading: 1354
+
+[00:01:01.635,528] <inf> main: sensor: lum reading: 1351
+
+[00:01:06.736,236] <inf> main: sensor: lum reading: 1349
+
+[00:01:11.836,944] <inf> main: sensor: lum reading: 1274
+```
+{{</details>}}
+
+
+## preliminary test samples
 
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware" text="repo directory" icon="github" >}}
 
