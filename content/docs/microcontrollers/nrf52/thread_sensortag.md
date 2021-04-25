@@ -23,8 +23,9 @@ toc: true
 
 Features
 * `nRF52840` on a `MS88SF2` module.
-* Light sensor `VEMLS6030`
-* Temperature, Humidity and pressure`MS8607`
+* i²C bus scl `P1.13` and sda `P1.15`
+* Light sensor `VEMLS6030` @`0x48`
+* `MS8607` with relative humidity @`0x40`, pressure and temperature @`0x76`
 * Reset button `P0.18` and user button SW0 `P1.09`
 * RGB LED `P0. 04 06 08`
 
@@ -34,7 +35,8 @@ Features
 
 {{< icon_button href="https://www.mouser.com/datasheet/2/418/5/NG_DS_MS8607-02BA01_B3-1134999.pdf" text="MS86072" icon="new" >}}
 
-{{< icon_button href="https://www.vishay.com/docs/84366/veml6030.pdf" text="VEML6030" icon="new" >}}
+{{< icon_button href="https://www.vishay.com/docs/84366/veml6030.pdf" text="VEML6030 DS" icon="new" >}}
+{{< icon_button href="https://www.vishay.com/docs/84367/designingveml6030.pdf" text="VEML6030 AN" icon="new" >}}
 
 ## Manufacturing
 * v 1.1 15.04.2021
@@ -84,6 +86,7 @@ west build -b nrf52840_sensortag -- -DCONF_FILE=prj-shell.conf
 west build -b nrf52840_sensortag -- -DCONF_FILE=prj-log.conf
 west flash
 ```
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/tag_sensor_veml6030" text="tag sensor veml6030" icon="github" >}}
 
 
 {{<details "default config">}}
