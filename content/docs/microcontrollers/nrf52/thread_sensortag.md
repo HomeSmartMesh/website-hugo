@@ -97,6 +97,9 @@ CONFIG_SERIAL=n
 CONFIG_I2C=y
 CONFIG_SENSOR=y
 CONFIG_VEML6030=y
+
+CONFIG_NEWLIB_LIBC=y
+CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y
 ```
 {{</details>}}
 
@@ -114,9 +117,9 @@ Including boilerplate (Zephyr base (cached)): D:/Dev/nrf52/hsm/zephyr/cmake/app/
 ```
 {{</details>}}
 
-running the sample on ambiant light, hand cover then flash light
+running the initial versions on ambiant light, hand cover then flash light
 
-{{<details "run log">}}
+{{<details "run log preliminary">}}
 ```log
 [00:00:00.325,683] <inf> VEML6030: veml6030_init() power on
 [00:00:00.326,202] <inf> VEML6030: i2c_burst_write(0x0000) success
@@ -158,6 +161,41 @@ Found device "VEML6030", getting sensor data
 ```
 {{</details>}}
 
+running with auto mode
+
+{{<details "run log auto">}}
+```log
+[00:00:00.324,188] <inf> VEML6030: veml6030_init()
+*** Booting Zephyr OS build zephyr-v2.5.0-2187-g757cd12e6602  ***
+
+[00:00:00.324,310] <inf> main: VEML6030 light sensor application
+=====> light 3.614 lux
+=====> light 3.582 lux
+=====> light 7.142 lux
+auto_measure>sample 65535 not optimal ; gain = 2.000 ; it = 800 ms
+auto_measure>new params => gain = 1.000000 ; it = 800
+=====> light 449.741 lux
+=====> light 453.672 lux
+auto_measure>sample 65535 not optimal ; gain = 1.000 ; it = 800 ms
+auto_measure>new params => gain = 0.250000 ; it = 800
+=====> light 1502.496 lux
+=====> light 1645.315 lux
+auto_measure>sample 65535 not optimal ; gain = 0.250 ; it = 800 ms
+auto_measure>new params => gain = 0.125000 ; it = 800
+=====> light 3081.197 lux
+auto_measure>sample 65535 not optimal ; gain = 0.125 ; it = 800 ms
+auto_measure>new params => gain = 0.125000 ; it = 400
+=====> light 5908.954 lux
+auto_measure>sample 24 not optimal ; gain = 0.125 ; it = 400 ms
+auto_measure>new params => gain = 2.000000 ; it = 800
+=====> light 3.031 lux
+=====> light 3.010 lux
+=====> light 3.136 lux
+=====> light 3.794 lux
+=====> light 4.478 lux
+=====> light 3.139 lux
+```
+{{</details>}}
 
 ## preliminary test samples
 

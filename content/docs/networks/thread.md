@@ -103,9 +103,9 @@ nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 ```
 {{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
 
-{{<icon_button href="ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
+{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
 
-{{<icon_button href="ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
+{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
 
 ##  Zephyr v2.5.99
 * Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
