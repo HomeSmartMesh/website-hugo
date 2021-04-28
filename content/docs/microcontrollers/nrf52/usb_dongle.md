@@ -44,6 +44,7 @@ GetStarted)
 
 
 ## pogo pin adapter
+* Pogo Pin P75-E2 Dia 1.3mm Length 16.5mm
 
 {{< model_viewer "/models/nrf/pogo_adapter_swd.glb" "400" >}}
 
@@ -53,7 +54,8 @@ GetStarted)
 {{<icon_button text="build micro python" relref="/docs/frameworks/upython/#config" >}}
 
 ## gallery
-{{< image src="/images/thread_sensortag/pogo_pin_adapter.png" >}}
+{{< load-photoswipe >}}
+{{< gallery dir="/images/nrf52_dongle" />}}
 
 # bootloader options
 * nRF SDK v16.0.0 [bootloader](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.sdk5.v15.0.0%2Flib_bootloader.html)

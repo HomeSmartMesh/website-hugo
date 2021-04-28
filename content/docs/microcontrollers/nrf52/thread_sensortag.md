@@ -197,6 +197,29 @@ auto_measure>new params => gain = 2.000000 ; it = 800
 ```
 {{</details>}}
 
+* The previous auto mode has a disadvantage, when saturating, the best guess is still biased as it used a wrong saturated measure.
+* The following example makes a special case of a saturated measure and directly jumps to the highest mode which has the lowes integration time anyway so only 25 ms are spent, after which the sample is sure not to be saturated and either has a chance to already be in optimal mode (if it is the highest) or guqrantees that the next selected mode will be the optimal.
+
+{{<details "run log auto sat">}}
+```log
+[00:00:00.325,836] <inf> main: VEML6030 light sensor application
+=====> light 70.247 lux
+=====> light 67.090 lux
+auto_measure>sample 65535 not optimal ; gain = 2.000 ; it = 800 ms
+auto_measure>new params => gain = 0.125000 ; it = 25
+auto_measure>sample 487 not optimal ; gain = 0.125 ; it = 25 ms
+auto_measure>new params => gain = 0.250000 ; it = 800
+=====> light 897.811 lux
+=====> light 793.872 lux
+auto_measure>sample 2668 not optimal ; gain = 0.250 ; it = 800 ms
+auto_measure>new params => gain = 2.000000 ; it = 800
+=====> light 69.358 lux
+=====> light 69.289 lux
+=====> light 68.566 lux
+=====> light 68.465 lux
+```
+{{</details>}}
+
 ## preliminary test samples
 
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware" text="repo directory" icon="github" >}}
