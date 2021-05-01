@@ -72,10 +72,48 @@ Official example
 
 * Jupyter notebooks to showcase librosa functions
 
-{{< image src="/images/sound/librosa.png" width=600 >}}
+{{<image src="/images/sound/librosa.png" width=600 >}}
 
-# Features Plan
-The idea behind the [Sound Hacking github organisation](https://github.com/SoundHacking) is to take advantage of the latest advances of Machine learning and Audio processing to create innovative applications.
+
+
+# Microcontroller loopback
+{{<image src="/images/sound/nRF52_usb_loopback.png" width=600 >}}
+* usb audio loopback zephyr example on `nrf52840dk_nrf52840`
+* tested on the nRF52 dongle with debugger attached
+
+build
+```bash
+cd zephyr/samples/subsys/usb/audio/headphones_microphone
+west build -b nrf52840dk_nrf52840 -- -DCONF_FILE=prj.conf
+west flash
+```
+
+{{<details "build log">}}
+```bash
+-- west build: generating a build system
+-- Application: D:/Projects/zp/zephyrproject/zephyr/samples/subsys/usb/audio/headphones_microphone
+-- Zephyr version: 2.5.99 (D:/Projects/zp/zephyrproject/zephyr)
+-- Found Python3: C:/Users/User/AppData/Local/Programs/Python/Python39/python.exe (found suitable exact version "3.9.0") found components: Interpreter 
+-- Found west (found suitable version "0.10.1", minimum required is "0.7.1")
+-- Board: nrf52840dk_nrf52840
+-- Cache files will be written to: D:/Projects/zp/zephyrproject/zephyr/.cache
+-- Found toolchain: gnuarmemb (D:/tools/gnu_arm_embedded/10 2020-q4-major)
+-- Found BOARD.dts: D:/Projects/zp/zephyrproject/zephyr/boards/arm/nrf52840dk_nrf52840/nrf52840dk_nrf52840.dts
+-- Found devicetree overlay: D:/Projects/zp/zephyrproject/zephyr/samples/subsys/usb/audio/headphones_microphone/boards/nrf52840dk_nrf52840.overlay
+-- Generated zephyr.dts: D:/Projects/zp/zephyrproject/zephyr/samples/subsys/usb/audio/headphones_microphone/build/zephyr/zephyr.dts
+...
+-- west build: building application
+[152/159] Linking C executable zephyr\zephyr_prebuilt.elf
+
+[159/159] Linking C executable zephyr\zephyr.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:       45912 B         1 MB      4.38%
+            SRAM:       16004 B       256 KB      6.11%
+        IDT_LIST:          0 GB         2 KB      0.00%
+```
+{{</details>}}
+
+# Future Plan
 
 ## Interactive sound input
 * inputs in microcontrollers for preprocessing interface to PC for further processing.
