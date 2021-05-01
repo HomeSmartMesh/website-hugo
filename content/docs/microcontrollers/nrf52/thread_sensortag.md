@@ -33,10 +33,10 @@ Features
 
 {{<icon_button href="https://www.minew.com/products/nrf52840-module-ms88sf2.html" text="MS88SF2" icon="new" >}}
 
-{{< icon_button href="https://www.mouser.com/datasheet/2/418/5/NG_DS_MS8607-02BA01_B3-1134999.pdf" text="MS86072" icon="new" >}}
+{{<icon_button href="https://www.mouser.com/datasheet/2/418/5/NG_DS_MS8607-02BA01_B3-1134999.pdf" text="MS86072" icon="new" >}}
 
-{{< icon_button href="https://www.vishay.com/docs/84366/veml6030.pdf" text="VEML6030 DS" icon="new" >}}
-{{< icon_button href="https://www.vishay.com/docs/84367/designingveml6030.pdf" text="VEML6030 AN" icon="new" >}}
+{{<icon_button href="https://www.vishay.com/docs/84366/veml6030.pdf" text="VEML6030 DS" icon="new" >}}
+{{<icon_button href="https://www.vishay.com/docs/84367/designingveml6030.pdf" text="VEML6030 AN" icon="new" >}}
 
 ## Manufacturing
 * v 1.1 15.04.2021
@@ -48,15 +48,11 @@ Features
 
 ## Schematics
 
-{{< svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
+{{<svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
 
 ## Board
 
 {{<image src="/images/thread_sensortag/board_top.webp" width="500px" >}}
-
-## Power Consumption
-
-{{<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyTmBeA3KFeX2gRebiZoTsREhtoXCE8qZstHx1fQO6X83I-5LDIG0I0BbR6QdomUmvdfttt59Nt4Q/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height="200" >}}
 
 # development
 ## install
