@@ -26,7 +26,7 @@ Features
 * i²C bus scl `P1.13` and sda `P1.15`
 * Light sensor `VEMLS6030` @`0x48`
 * `MS8607` with relative humidity @`0x40`, pressure and temperature @`0x76`
-* Reset button `P0.18` and user button SW0 `P1.09`
+* Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&x=280&y=115&z=3.4#schematics) SW0 `P1.09`
 * RGB LED `P0. 04 06 08`
 
 {{<icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
