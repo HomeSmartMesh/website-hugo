@@ -41,8 +41,8 @@ toc: true
 Features
 * `nRF52840` on a [MS88SF2](?svg=nrf52-sensor-tag&text=MS88SF2) module.
 * i²C bus scl `P1.13` and sda `P1.15`
-* Light sensor `VEMLS6030` @`0x48`
-* `MS8607` with relative humidity @`0x40`, pressure and temperature @`0x76`
+* Light sensor [VEMLS6030](?svg=nrf52-sensor-tag&text=VEML6030) @`0x48`
+* [MS8607](?svg=nrf52-sensor-tag&text=MS860702BA01-50) with relative humidity @`0x40`, pressure and temperature @`0x76`
 * Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&text=EVQ-PUA02K) SW0 `P1.09`
 * [RGB LED](?svg=nrf52-sensor-tag&text=LED1) `P0. 04 06 08`
 
