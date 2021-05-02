@@ -21,14 +21,6 @@ toc: true
 * version 1.1
 * update from v1.0 added RGB LED
 
-Features
-* `nRF52840` on a `MS88SF2` module.
-* i²C bus scl `P1.13` and sda `P1.15`
-* Light sensor `VEMLS6030` @`0x48`
-* `MS8607` with relative humidity @`0x40`, pressure and temperature @`0x76`
-* Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&x=280&y=115&z=3.4#schematics) SW0 `P1.09`
-* RGB LED `P0. 04 06 08`
-
 {{<icon_button href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840" text="nRF52840" icon="new" >}}
 
 {{<icon_button href="https://www.minew.com/products/nrf52840-module-ms88sf2.html" text="MS88SF2" icon="new" >}}
@@ -45,6 +37,14 @@ Features
 
 * gerber files
 {{<icon_button text="Gerber files v1.1" href="/data/manufacturing_v1.1.zip" icon="download" >}}
+
+Features
+* `nRF52840` on a [MS88SF2](?svg=nrf52-sensor-tag&text=MS88SF2) module.
+* i²C bus scl `P1.13` and sda `P1.15`
+* Light sensor `VEMLS6030` @`0x48`
+* `MS8607` with relative humidity @`0x40`, pressure and temperature @`0x76`
+* Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&text=EVQ-PUA02K) SW0 `P1.09`
+* [RGB LED](?svg=nrf52-sensor-tag&text=LED1) `P0. 04 06 08`
 
 ## Schematics
 
