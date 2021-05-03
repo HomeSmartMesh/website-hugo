@@ -14,10 +14,19 @@ toc: true
 {{<icon_button relref="/docs/networks/thread/" text="Networks / Thread" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Frameworks / CHIP" >}}
 
-{{<image src="/images/thread_sensortag/concept.png" >}}
-{{<image src="/images/thread_sensortag/kicad_render.webp" width="300vw" >}}
+{{<image src="/images/thread_sensortag/sensortag_v1.1.webp" width="600px" >}}
 
-# Current Version
+* `nRF52840` on a [MS88SF2](?svg=nrf52-sensor-tag&text=MS88SF2) module.
+* i²C bus scl `P1.13` and sda `P1.15`
+* Light sensor [VEMLS6030](?svg=nrf52-sensor-tag&text=VEML6030) @`0x48`
+* [MS8607](?svg=nrf52-sensor-tag&text=MS860702BA01-50) with relative humidity @`0x40`, pressure and temperature @`0x76`
+* Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&text=S2) SW0 `P1.09`
+* [RGB LED](?svg=nrf52-sensor-tag&text=LED1) `P0. 04 06 08`
+
+## Schematics
+
+{{<svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
+
 * version 1.1
 * update from v1.0 added RGB LED
 
@@ -37,18 +46,6 @@ toc: true
 
 * gerber files
 {{<icon_button text="Gerber files v1.1" href="/data/manufacturing_v1.1.zip" icon="download" >}}
-
-Features
-* `nRF52840` on a [MS88SF2](?svg=nrf52-sensor-tag&text=MS88SF2) module.
-* i²C bus scl `P1.13` and sda `P1.15`
-* Light sensor [VEMLS6030](?svg=nrf52-sensor-tag&text=VEML6030) @`0x48`
-* [MS8607](?svg=nrf52-sensor-tag&text=MS860702BA01-50) with relative humidity @`0x40`, pressure and temperature @`0x76`
-* Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&text=EVQ-PUA02K) SW0 `P1.09`
-* [RGB LED](?svg=nrf52-sensor-tag&text=LED1) `P0. 04 06 08`
-
-## Schematics
-
-{{<svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
 
 ## Board
 
