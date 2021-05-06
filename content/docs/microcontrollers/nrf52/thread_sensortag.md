@@ -3,7 +3,7 @@ title: "Thread SensorTag"
 description: "A Low power SensorTag with High quality measures of light, Temperature, Humidity and Pressure. Based on nRF52840 which supports Thread and other protocols"
 date: 2021-02-07T08:48:57+00:00
 lastmod: 2021-02-14T08:00:00+00:00
-images: ["/images/thread_sensortag/concept.png"]
+images: ["/images/thread_sensortag/sensortag_v1.1.webp"]
 weight: 2
 toc: true
 ---
