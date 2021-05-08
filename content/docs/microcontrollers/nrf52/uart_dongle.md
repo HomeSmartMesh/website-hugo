@@ -4,7 +4,7 @@ description: "nRF52832 with SIL2104 UART to USB converter"
 images: ["/images/nrf_usb_dongle.png"]
 date: 2021-02-21T08:00:00+00:00
 lastmod: 2021-02-21T08:00:00+00:00
-weight: 4
+weight: 5
 toc: true
 ---
 

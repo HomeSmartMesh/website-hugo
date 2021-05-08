@@ -4,7 +4,7 @@ description: "A Low power SensorTag with High quality measures of light, Tempera
 date: 2021-02-07T08:48:57+00:00
 lastmod: 2021-02-14T08:00:00+00:00
 images: ["/images/thread_sensortag/sensortag_v1.1.webp"]
-weight: 2
+weight: 1
 toc: true
 ---
 {{<load-svg-pan-zoom>}}
@@ -71,8 +71,32 @@ west update
 ```
 
 ## sdk samples
+### device treee drivers
+the driver sensors are declared in the custom board device treee source `nrf52840_sensortag.dts`.
+```conf
+&i2c0 {
+	compatible = "nordic,nrf-twi";
+	status = "okay";
+	sda-gpios = <&gpio1 15 0>;
+	scl-gpios = <&gpio1 13 0>;
+
+	ms8607@40 /*hum@40,press@76*/{
+		compatible = "teconnectivity,ms8607";
+		reg = <0x40>;
+		label = "MS8607";
+	};
+	veml6030@48 {
+		compatible = "vishay,veml6030";
+		reg = <0x48>;
+		int-gpios = <&gpio0 31 0>;
+		label = "VEML6030";
+	};
+};
+```
+{{<hint warning>}}The MS8607 uses x2 i2c adresses `0x40` and `0x76`, which makes it require two separate drivers to fit in the Zephyr dts declaration. For simplicity purpose, the vendor driver has been reused with minimal adaptations for Zephyr. Only the adress `0x40` is declared in the dts. That loses the multi instance feature as the adress `0x76` is hardcoded in the driver, the sensor anyway does not have any i2c multi instance configuration option.{{</hint>}}
 
 ### tag_sensor_veml6030
+
 ```bash
 west build -t guiconfig
 west build -b nrf52840_sensortag -- -DCONF_FILE=prj-shell.conf
@@ -212,6 +236,75 @@ auto_measure>new params => gain = 2.000000 ; it = 800
 =====> light 68.465 lux
 ```
 {{</details>}}
+
+
+### tag_sensor_ms8607
+
+```bash
+west build -t guiconfig
+west build -b nrf52840_sensortag -- -DCONF_FILE=prj.conf
+west flash
+```
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/tag_sensor_ms8607" text="tag sensor ms8607" icon="github" >}}
+
+
+{{<details "default config">}}
+```conf
+CONFIG_GPIO=y
+CONFIG_SERIAL=n
+
+CONFIG_I2C=y
+CONFIG_SENSOR=y
+CONFIG_MS8607=y
+
+...
+
+CONFIG_NEWLIB_LIBC=y
+CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y
+
+```
+{{</details>}}
+
+{{<details "build log">}}
+```bash
+Including boilerplate (Zephyr base): D:/Dev/nrf52/hsm/zephyr/cmake/app/boilerplate.cmake
+-- Application: D:/Dev/nrf52/hsm/hsm/samples/tag_sensor_ms8607
+-- Zephyr version: 2.5.99 (D:/Dev/nrf52/hsm/zephyr)
+-- Found Python3: C:/Users/User/AppData/Local/Programs/Python/Python39/python.exe (found suitable exact version "3.9.0") found components: Interpreter
+-- Found west (found suitable version "0.10.1", minimum required is "0.7.1")
+-- Board: nrf52840_sensortag
+-- Cache files will be written to: D:/Dev/nrf52/hsm/zephyr/.cache
+-- Found toolchain: gnuarmemb (D:/tools/gnu_arm_embedded/10 2020-q4-major)
+-- Found BOARD.dts: D:/Dev/nrf52/hsm/hsm/boards/arm/nrf52840_sensortag/nrf52840_sensortag.dts
+-- Generated zephyr.dts: D:/Dev/nrf52/hsm/hsm/samples/tag_sensor_ms8607/build/zephyr/zephyr.dts
+...
+[135/135] Linking C executable zephyr\zephyr.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:       44688 B         1 MB      4.26%
+            SRAM:        8544 B       256 KB      3.26%
+        IDT_LIST:          0 GB         2 KB      0.00%
+```
+{{</details>}}
+
+{{<details "run log">}}
+```log
+*** Booting Zephyr OS build zephyr-v2.5.0-2187-g757cd12e6602  ***
+
+[00:00:00.325,714] <inf> main: MS8607 Temperature Humidity pressure sensor application
+[00:00:00.326,049] <inf> main: ms8607> connected
+ms8607> t=22.59 °  p=963.62 mbar  h=38.59 %RH
+ms8607> t=22.59 °  p=963.63 mbar  h=38.90 %RH
+ms8607> t=22.59 °  p=963.63 mbar  h=38.88 %RH
+ms8607> t=22.60 °  p=963.64 mbar  h=39.74 %RH
+ms8607> t=22.17 °  p=963.62 mbar  h=51.82 %RH
+ms8607> t=22.10 °  p=963.62 mbar  h=58.70 %RH
+ms8607> t=22.09 °  p=963.62 mbar  h=60.83 %RH
+ms8607> t=23.16 °  p=963.69 mbar  h=72.36 %RH
+ms8607> t=22.67 °  p=963.63 mbar  h=77.52 %RH
+ms8607> t=22.65 °  p=963.55 mbar  h=53.33 %RH
+```
+{{</details>}}
+
 
 ## preliminary test samples
 

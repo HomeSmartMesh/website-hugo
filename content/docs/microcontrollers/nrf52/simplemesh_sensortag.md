@@ -4,7 +4,7 @@ description: "A Sensor tag to monitor Light brightness with MAX44009, Temperatur
 images: ["/images/simplemesh_sensortag.png"]
 date: 2021-02-14T08:00:00+00:00
 lastmod: 2021-02-14T08:00:00+00:00
-weight: 2
+weight: 3
 toc: true
 ---
 {{<load-svg-pan-zoom>}}
