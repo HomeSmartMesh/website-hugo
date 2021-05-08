@@ -305,6 +305,64 @@ ms8607> t=22.65 °  p=963.55 mbar  h=53.33 %RH
 ```
 {{</details>}}
 
+### tag_battery
+
+```bash
+west build -t guiconfig
+west build -b nrf52840_sensortag -- -DCONF_FILE=prj.conf
+west flash
+```
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/tag_battery" text="tag battery" icon="github" >}}
+
+
+{{<details "default config">}}
+```conf
+CONFIG_GPIO=y
+CONFIG_SERIAL=n
+
+CONFIG_ADC=y
+...
+CONFIG_NEWLIB_LIBC=y
+CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y
+
+```
+{{</details>}}
+
+{{<details "build log">}}
+```bash
+Including boilerplate (Zephyr base (cached)): D:/Dev/nrf52/hsm/zephyr/cmake/app/boilerplate.cmake
+-- Application: D:/Dev/nrf52/hsm/hsm/samples/tag_battery
+-- Zephyr version: 2.5.99 (D:/Dev/nrf52/hsm/zephyr)     
+-- Found west (found suitable version "0.10.1", minimum required is "0.7.1")
+-- Board: nrf52840_sensortag
+-- Cache files will be written to: D:/Dev/nrf52/hsm/zephyr/.cache
+-- Found toolchain: gnuarmemb (D:/tools/gnu_arm_embedded/10 2020-q4-major)
+-- Found BOARD.dts: D:/Dev/nrf52/hsm/hsm/boards/arm/nrf52840_sensortag/nrf52840_sensortag.dts
+-- Generated zephyr.dts: D:/Dev/nrf52/hsm/hsm/samples/tag_battery/build/zephyr/zephyr.dts
+...
+[107/107] Linking C executable zephyr\zephyr.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:       41528 B         1 MB      3.96%
+            SRAM:        8544 B       256 KB      3.26%
+        IDT_LIST:          0 GB         2 KB      0.00%
+```
+{{</details>}}
+
+{{<details "run log">}}
+```log
+*** Booting Zephyr OS build zephyr-v2.5.0-2187-g757cd12e6602  ***
+
+[00:00:00.325,714] <inf> main: Test App for Battery Voltage Measure through ADC
+[00:00:00.325,744] <inf> battery: battery_init() vref = 600
+[00:00:00.325,805] <inf> battery: battery_start> adc_read()
+[00:00:00.425,872] <inf> battery: battery_get_mv() raw = 3764
+[00:00:00.425,872] <inf> main: battery> Voltage = 3308 mV
+[00:00:05.326,049] <inf> battery: battery_start> adc_read()
+[00:00:05.426,086] <inf> battery: battery_get_mv() raw = 3768
+[00:00:05.426,116] <inf> main: battery> Voltage = 3311 mV
+```
+{{</details>}}
+
 
 ## preliminary test samples
 
