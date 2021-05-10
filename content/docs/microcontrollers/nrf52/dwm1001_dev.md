@@ -9,6 +9,7 @@ toc: true
 #{{<load-svg-pan-zoom>}}
 #{{<svg-pan-zoom "/images/uwb/dwm1001-dev-schematic.svg" "white" >}}
 ---
+{{<load-photoswipe >}}
 
 {{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band" >}}
 
@@ -57,3 +58,25 @@ The product page includes datasheets, schematics, firmware,...
 {{<icon_button text="Decaware" href="https://github.com/Decawave" icon="github" >}}
 
 {{<icon_button href="https://docs.zephyrproject.org/latest/boards/arm/decawave_dwm1001_dev/doc/index.html" text="Zephyr support" >}}
+
+# Gallery
+
+{{< gallery dir="/images/uwb/devkit" />}}
+
+* `01 Unboxing` : A cable and x4 usb angles provided that can keep x4 Anchors up right.
+* `06 Additional Passive Tag as serial listener` : Make sure that the listener is configured with the app to join the Network intended to be listened to
+
+# FAQ - Discussion
+* Support should be available from the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel
+{{<icon_button text="Discord - #ultra-wide-band " href="https://discord.gg/tyZZfTETYS" icon="discord" >}}
+
+
+{{<faq>}}
+How difficult is it to setup a demo ?
+<--->
+It's actually surprisingly easy. The hardest step is to install the App which I could not find on the appstore and Android prevents installing .apk by default, a trick was to long press "save link as" as simple click does not work, then in the settings the ip of the server has to be set as trusted. The rest is very well documented in the Quick Start guide.
+<===>
+What to do if the localization in the is terribly wrong ?
+<--->
+By default the refresh rate of stationary tags is set to 10 sec, and the algorithm has an additional filter that prevents the tag position from moving to a new absolute measure and rather only improving by a given percentage. By incrinsing the "Stationary update rate" within the range of ~ 2 sec, it's possible to get an expected user experience with a tag visibly converging to the correct location.
+{{</faq>}}
