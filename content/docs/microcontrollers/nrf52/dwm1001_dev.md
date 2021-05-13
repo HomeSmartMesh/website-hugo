@@ -3,7 +3,7 @@ title: "UWB DWM1001 dev"
 description: "An Ultra Wide Band development kit including the DWM1001C Module"
 date: 2021-05-08T08:00:00+00:00
 lastmod: 2021-05-08T08:00:00+00:00
-images: ["/images/thread_sensortag/sensortag_v1.1.webp"]
+images: ["/images/uwb/DWM1001 DevKit.png"]
 weight: 2
 toc: true
 #{{<load-svg-pan-zoom>}}
@@ -76,7 +76,7 @@ How difficult is it to setup a demo ?
 <--->
 It's actually surprisingly easy. The hardest step is to install the App which I could not find on the appstore and Android prevents installing .apk by default, a trick was to long press "save link as" as simple click does not work, then in the settings the ip of the server has to be set as trusted. The rest is very well documented in the Quick Start guide.
 <===>
-What to do if the localization in the is terribly wrong ?
+What to do if the localization in the app is terribly wrong ?
 <--->
 By default the refresh rate of stationary tags is set to 10 sec, and the algorithm has an additional filter that prevents the tag position from moving to a new absolute measure and rather only improving by a given percentage. By incrinsing the "Stationary update rate" within the range of ~ 2 sec, it's possible to get an expected user experience with a tag visibly converging to the correct location.
 {{</faq>}}
