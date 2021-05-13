@@ -18,6 +18,9 @@ grid:
     - STM32
     slot: 300
     items:
+    - name: "Ultra Wide Band DWM1001 dev"
+      width: 300
+      tags: [Board,NRF52]
     - name: "Thread SensorTag"
       width: 200
       tags: [Board,NRF52,Thread]
@@ -59,6 +62,11 @@ grid:
       tags: [Board,NRF52]
 ---
 {{<grid "esp32" >}}
+{{< image src="/images/uwb/DWM1001 DevKit.png" href="/docs/microcontrollers/nrf52/dwm1001_dev" width="150px" >}}
+* nRF52832
+* UWB DWM1001C Module
+{{< button relref="/docs/microcontrollers/nrf52/dwm1001_dev" >}}details...{{</button>}}
+<--->
 {{< image src="/images/thread_sensortag/concept.png" href="/docs/microcontrollers/nrf52/thread_sensortag" width="300px" >}}
 {{< button relref="/docs/microcontrollers/nrf52/thread_sensortag" >}}details...{{</button>}}
 <--->

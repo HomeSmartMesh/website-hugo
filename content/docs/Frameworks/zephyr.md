@@ -3,7 +3,7 @@ title: "Zephyr RTOS"
 description: "The linux style RTOS for microcontrollers"
 date: 2021-02-20T08:00:00+00:00
 lastmod: 2021-02-20T08:00:00+00:00
-weight: 4
+weight: 5
 toc: true
 ---
 # Relates to

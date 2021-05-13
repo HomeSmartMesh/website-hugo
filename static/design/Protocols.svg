@@ -142,6 +142,9 @@
         <path d="M-513.875 -3.2 L28.125 -3.2 L28.125 476.8 L-513.875 476.8 L-513.875 -3.2 Z"/>
       </clipPath>
     </defs>
+    <g fill="rgb(52,58,64)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="translate(15,15)" stroke="rgb(52,58,64)">
+      <rect x="-15" width="542" height="450" y="-15" clip-path="url(#clipPath2)" stroke="none"/>
+    </g>
     <g text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,0.9375,267.5,332)" image-rendering="optimizeQuality">
       <image x="0" y="0" clip-path="url(#clipPath3)" width="32" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABACAYAAAB7jnWuAAABkUlEQVR4Xu2YyUoE&#13;&#10;QRBEc9x1UHEHPdiuKIqK20XREXH///8xHmld+mBXVw+DYAa8a2VkZhV0tFkoFAqF&#13;&#10;QsNXryVDUTpsTIyLiRZ0FoUpOimmxayYE/1MOomO6YLCHLYolsWaWP9ho4Fi0TnF&#13;&#10;Z8SCedEtUYl9cSAOMygWY6dzitPJjjgWF+JK3IjbDIpE9+ycsdM5xU/ND7wXj+Ip&#13;&#10;kyKxe7pn54ydzilO4RfxJt4zKRIG2D0XrjIfO51T/FN8taBI7J+ntmp+4a7Nu6fz&#13;&#10;eoEmipQM8My4yYyffTLSeoEmihQGwkAYCANhIAyEgTAQBv6MATIBCYgQMrARGyCE&#13;&#10;8lW8Z56EHmyEX8X1XHAu7sSz+RQ+zPNBDkXCwJR5LtwUR+bZgClggoDyaj6RJorU&#13;&#10;M0/GffM1VOLE3ASTwAhBZZBBsVI+nDd/DdvmkzgTl+ZmcigWU+AyJhMr5uvAyK55&#13;&#10;ZEv/CX6jk5IJ7gPPkjuxZG6G1fBMm+gsTLAO7gRGmAhPNP0ramJowkgyA0wmh1Ao&#13;&#10;FAr9c30DN3OOZeVFP2oAAAAASUVORK5CYII=" height="64" preserveAspectRatio="none"/>
       <image x="0" y="0" transform="matrix(6.5,0,0,1,32,0)" clip-path="url(#clipPath4)" width="32" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABACAYAAAB7jnWuAAAAg0lEQVR4Xu3IsQ3C&#13;&#10;ABTE0IugCjXKBDABooaKKOy/DwO49xV8S69xMk3TNE3JUpZzWS5l2cpyL8uzLO+y&#13;&#10;7GX5lmHYMGwYNgwbhg3DhmHDsGHYMGwYNgwbhg3DhmHDsGHYMGwYNgwbhg3DhmHL&#13;&#10;UZZPWV5leZTlVpZrWdaynMqmaZqmP+8HddwsEDGKXvcAAAAASUVORK5CYII=" height="64" preserveAspectRatio="none"/>
@@ -215,7 +218,7 @@
       <path fill="url(#linearGradient7)" d="M102.5 121 Q102.5 113.5 110 113.5 L194 113.5 Q201.5 113.5 201.5 121 Q201.5 128.5 159.5 135.3 Q117.5 142.1 110 142.1 Q102.5 142.1 102.5 134.6 Z" clip-path="url(#clipPath2)" transform="matrix(1,0,0,1,-87,-98)" stroke="none" image-rendering="auto"/>
     </g>
     <g stroke-linecap="butt" transform="matrix(1,0,0,1,15,15)" fill="white" text-rendering="geometricPrecision" font-family="sans-serif" shape-rendering="geometricPrecision" stroke="white" font-weight="bold" stroke-miterlimit="1.45">
-      <text x="165.665" xml:space="preserve" y="136.7139" clip-path="url(#clipPath2)" stroke="none">CHIP</text>
+      <text x="161.9971" xml:space="preserve" y="136.7139" clip-path="url(#clipPath2)" stroke="none">Matter</text>
     </g>
     <g text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,0.9375,62,64)" image-rendering="optimizeQuality">
       <image x="0" y="0" clip-path="url(#clipPath29)" width="32" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABACAYAAAB7jnWuAAABkUlEQVR4Xu2YyUoE&#13;&#10;QRBEc9x1UHEHPdiuKIqK20XREXH///8xHmld+mBXVw+DYAa8a2VkZhV0tFkoFAqF&#13;&#10;QsNXryVDUTpsTIyLiRZ0FoUpOimmxayYE/1MOomO6YLCHLYolsWaWP9ho4Fi0TnF&#13;&#10;Z8SCedEtUYl9cSAOMygWY6dzitPJjjgWF+JK3IjbDIpE9+ycsdM5xU/ND7wXj+Ip&#13;&#10;kyKxe7pn54ydzilO4RfxJt4zKRIG2D0XrjIfO51T/FN8taBI7J+ntmp+4a7Nu6fz&#13;&#10;eoEmipQM8My4yYyffTLSeoEmihQGwkAYCANhIAyEgTAQBv6MATIBCYgQMrARGyCE&#13;&#10;8lW8Z56EHmyEX8X1XHAu7sSz+RQ+zPNBDkXCwJR5LtwUR+bZgClggoDyaj6RJorU&#13;&#10;M0/GffM1VOLE3ASTwAhBZZBBsVI+nDd/DdvmkzgTl+ZmcigWU+AyJhMr5uvAyK55&#13;&#10;ZEv/CX6jk5IJ7gPPkjuxZG6G1fBMm+gsTLAO7gRGmAhPNP0ramJowkgyA0wmh1Ao&#13;&#10;FAr9c30DN3OOZeVFP2oAAAAASUVORK5CYII=" height="64" preserveAspectRatio="none"/>

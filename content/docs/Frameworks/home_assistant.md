@@ -3,7 +3,7 @@ title: "Home Assistant"
 description: "Integration of different Protocols, Networks and Frameworks in Home assistant"
 date: 2021-02-13T08:48:57+00:00
 lastmod: 2021-02-13T08:48:57+00:00
-weight: 3
+weight: 4
 toc: true
 ---
 

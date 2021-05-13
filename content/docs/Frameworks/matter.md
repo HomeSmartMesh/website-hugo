@@ -1,29 +1,30 @@
 ---
-title: "Project CHIP"
-description: "Connected Home Over IP"
-date: 2021-02-12T08:00:00+00:00
-lastmod: 2021-02-12T08:00:00+00:00
+title: "Matter"
+description: "Matter is the new name of project Connected Home Over IP"
+date: 2021-05-13T08:00:00+00:00
+lastmod: 2021-05-13T08:00:00+00:00
 images: ["/design/Protocols.svg"]
-weight: 3
+weight: 2
 toc: true
 ---
-# Moved to
-{{<icon_button relref="/docs/frameworks/matter/" text="Matter" >}}
-
-This page will be kept as a transitional link
 # Relates to
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
 {{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
+previously known as `CHIP`
+{{<image src="/images/chip.png" width="400px" href="/docs/frameworks/chip/" >}}
 # Overview
+
 {{<image src="/design/Protocols.svg">}}
-The image above does only focus on the relation between `CHIP`, `Thread` and `Zigbee`. Both CHIP and Zigbee run on `802.15.4` (optional for CHIP), and both are directly or indirectly based on `ZCL` which is in case of CHIP named `ZAP` Zigbee Cluster Library Advanced Platform.
+The image above does only focus on the relation between `Matter`, `Thread` and `Zigbee`. Both Matter and Zigbee run on `802.15.4` (optional for Matter), and both are directly or indirectly based on `ZCL` which is in case of Matter named `ZAP` Zigbee Cluster Library Advanced Platform.
 ## Definition
 
-We can consider the project CHIP `Connected Home Over IP` definition as in two folds :
+We can consider the project Matter previously known as `Connected Home Over IP` definition as in two folds :
 * a takeover of the Zigbee Cluster Library to be fit over the IP layer.
 * The abstraction of all different transport protocols with IP
 
 This will avoid that each transport (e.g. BT, Zigbee) have a custom app layer. It is interesting to notice that the `Zigbee Alliance` is driving this project whereas Zigbee itself does not map to an IP layer, and therefore `Thread` is the natural transition from Zigbee as both are 802.15.4 compliant at the bottom and both will keep the same logic of the ZCL that devices are familiar with.
+
+The statement above dates back to 12 Feb 2021 shows the discomfort of the Zigbee alliance carrying a displaced protocol as a name, which could predict the recent renaming of the alliance to `Connectivity Standard Alliance` or [csa](https://csa-iot.org/).
 
 ## Links
 

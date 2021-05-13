@@ -9,7 +9,11 @@ grid:
     - All
     - nRF52840
     - nRF52832
+    - uwb
     items:
+    - name: "Ultra Wide Band DWM1001 dev"
+      width: 200
+      tags: [Board,nRF52832,uwb]
     - name: "Thread SensorTag"
       width: 200
       tags: [Board,nRF52840,Thread]
@@ -25,7 +29,17 @@ grid:
 ---
 
 {{<grid "mygrid">}}
+{{< image src="/images/uwb/DWM1001 DevKit.png" href="/docs/microcontrollers/nrf52/dwm1001_dev" width="300px" >}}
+* nRF52832
+* UWB DWM1001C Module
+{{< button relref="/docs/microcontrollers/nrf52/dwm1001_dev" >}}details...{{</button>}}
+<--->
 {{< image src="/images/thread_sensortag/concept.png" href="/docs/microcontrollers/nrf52/thread_sensortag" width="300px" >}}
+* nRF52840
+* openthread
+* Zephyr
+* Light, Temperature, Humidity, Pressure
+
 {{< button relref="/docs/microcontrollers/nrf52/thread_sensortag" >}}details...{{</button>}}
 
 <--->
