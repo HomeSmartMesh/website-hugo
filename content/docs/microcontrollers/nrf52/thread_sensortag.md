@@ -71,6 +71,191 @@ west update
 ```
 
 ## sdk samples
+The SDK samples are presented in two folds, first the overall application including all the measures, then a list of basic applications with minimal code for each driver and measure separately
+
+### tag_sensors_broadcast
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/tag_sensors_broadcast" text="tag sensors broadcast" icon="github" >}}
+
+{{<gfigure src="/images/thread_sensortag/application.png" >}}
+
+```bash
+west build -t guiconfig
+west build -b nrf52840_sensortag -- -DCONF_FILE="prj.conf overlay-shell.conf"
+west flash
+```
+
+
+{{<details "default config">}}
+```conf
+CONFIG_ADC=y
+CONFIG_BATTERY=y
+
+CONFIG_I2C=y
+CONFIG_SENSOR=y
+CONFIG_VEML6030=y
+CONFIG_MS8607=y
+
+CONFIG_GPIO=y
+CONFIG_SERIAL=n
+
+CONFIG_NEWLIB_LIBC=y
+CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y
+
+# Network
+CONFIG_NETWORKING=y
+CONFIG_NET_L2_OPENTHREAD=y
+
+CONFIG_OPENTHREAD_CHANNEL=13
+CONFIG_OPENTHREAD_PANID=4660
+CONFIG_OPENTHREAD_NETWORK_NAME="OpenThreadDemo"
+CONFIG_OPENTHREAD_XPANID="11:11:11:11:22:22:22:22"
+CONFIG_OPENTHREAD_MASTERKEY="00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff"
+CONFIG_OPENTHREAD_FTD=y
+
+#CONFIG_NET_CONFIG_MY_IPV6_ADDR="fdde:ad00:beef::1"
+#CONFIG_NET_CONFIG_PEER_IPV6_ADDR="ff02::1"
+#CONFIG_PEER_PORT=4242
+
+# Disable certain parts of Zephyr IPv6 stack
+CONFIG_NET_IPV6_NBR_CACHE=n
+CONFIG_NET_IPV6_MLD=n
+
+# Kernel options
+CONFIG_MAIN_STACK_SIZE=2048
+CONFIG_INIT_STACKS=y
+
+# Generic networking options
+CONFIG_NET_UDP=y
+CONFIG_NET_TCP=n
+CONFIG_NET_SOCKETS=y
+CONFIG_NET_SOCKETS_POSIX_NAMES=y
+CONFIG_NET_SOCKETS_POLL_MAX=4
+CONFIG_NET_CONNECTION_MANAGER=y
+
+# Logging
+CONFIG_NET_LOG=y
+CONFIG_LOG=y
+CONFIG_NET_STATISTICS=y
+CONFIG_PRINTK=y
+
+# Network buffers
+CONFIG_NET_PKT_RX_COUNT=16
+CONFIG_NET_PKT_TX_COUNT=16
+CONFIG_NET_BUF_RX_COUNT=80
+CONFIG_NET_BUF_TX_COUNT=80
+CONFIG_NET_CONTEXT_NET_PKT_POOL=y
+
+# IP address options
+CONFIG_NET_IF_UNICAST_IPV6_ADDR_COUNT=3
+CONFIG_NET_IF_MCAST_IPV6_ADDR_COUNT=4
+CONFIG_NET_MAX_CONTEXTS=10
+
+# Network shell
+CONFIG_NET_SHELL=y
+
+```
+{{</details>}}
+
+{{<details "build log">}}
+```bash
+-- west build: generating a build system
+Including boilerplate (Zephyr base): D:/Dev/nrf52/hsm/zephyr/cmake/app/boilerplate.cmake
+-- Application: D:/Dev/nrf52/hsm/hsm/samples/tag_sensors_broadcast
+-- Zephyr version: 2.5.99 (D:/Dev/nrf52/hsm/zephyr)
+-- Found Python3: C:/Users/User/AppData/Local/Programs/Python/Python39/python.exe (found suitable exact version "3.9.0") found components: Interpreter
+-- Found west (found suitable version "0.10.1", minimum required is "0.7.1")
+-- Board: nrf52840_sensortag
+-- Cache files will be written to: D:/Dev/nrf52/hsm/zephyr/.cache
+-- Found toolchain: gnuarmemb (D:/tools/gnu_arm_embedded/10 2020-q4-major)
+-- Found BOARD.dts: D:/Dev/nrf52/hsm/hsm/boards/arm/nrf52840_sensortag/nrf52840_sensortag.dts
+-- Generated zephyr.dts: D:/Dev/nrf52/hsm/hsm/samples/tag_sensors_broadcast/build/zephyr/zephyr.dts
+...
+[558/558] Linking CXX executable zephyr\zephyr.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:      319096 B         1 MB     30.43%
+            SRAM:       94016 B       256 KB     35.86%
+        IDT_LIST:          0 GB         2 KB      0.00%
+```
+{{</details>}}
+
+{{<details "run log">}}
+```log
+*** Booting Zephyr OS build zephyr-v2.5.0-2187-g757cd12e6602  ***
+rtt:~$ rtt:~$ [00:00:00.264,617] <inf> fs_nvs: 8 Sectors of 4096 bytes
+rtt:~$ [00:00:00.264,617] <inf> fs_nvs: alloc wra: 2, d60
+rtt:~$ [00:00:00.264,617] <inf> fs_nvs: data wra: 2, 448
+rtt:~$ [00:00:00.275,970] <inf> net_l2_openthread: State changed! Flags: 0x101fc300 Current role: 0
+rtt:~$ [00:00:00.276,275] <inf> net_l2_openthread: OpenThread version: OPENTHREAD/gfd27fc3a7; Zephyr; May 13 2021 18:19:06
+rtt:~$ [00:00:00.280,517] <inf> net_l2_openthread: Network name: ot_zephyr
+rtt:~$ [00:00:00.289,459] <inf> net_l2_openthread: State changed! Flags: 0x0100103d Current role: 1
+rtt:~$ [00:00:00.290,344] <inf> VEML6030: veml6030_init()
+rtt:~$ [00:00:00.290,344] <inf> MS8607: ms8607_init> i2c_master_init()
+rtt:~$ [00:00:00.292,602] <inf> main: Hello Sensors Broadcast
+rtt:~$ [00:00:00.292,633] <inf> battery: battery_init() vref = 600
+rtt:~$ rtt:~$ [00:00:00.292,968] <inf> main: ms8607> connected
+rtt:~$ [00:00:00.292,999] <inf> main: starting loop (0)
+rtt:~$ [00:00:00.293,060] <inf> battery: battery_start> adc_read()
+rtt:~$ [00:00:00.293,487] <inf> battery: battery_get_mv() raw = 3447
+rtt:~$ rtt:~$ [00:00:00.314,117] <inf> net_l2_openthread: State changed! Flags: 0x000010e4 Current role: 2
+rtt:~$ [00:00:00.374,145] <inf> net_l2_openthread: State changed! Flags: 0x00000200 Current role: 2
+rtt:~$ rtt:~$ thread_tags/7009D837C7BB557A{"alive":0,"voltage":3.029,"light":9.909,"temperature":25.15,"humidity":42.79,"pressure":951.03}
+[00:00:01.961,029] <inf> udp_client: CONFIG_NET_IPV6
+rtt:~$ [00:00:01.964,843] <inf> main: sleeping 10 sec
+rtt:~$ rtt:~$ [00:00:11.964,904] <inf> main: starting loop (1)
+rtt:~$ [00:00:11.964,996] <inf> battery: battery_start> adc_read()
+rtt:~$ [00:00:11.965,148] <inf> battery: battery_get_mv() raw = 3460
+rtt:~$ rtt:~$ thread_tags/7009D837C7BB557A{"alive":1,"voltage":3.041,"light":11.095,"temperature":25.16,"humidity":42.01,"pressure":950.98}
+[00:00:13.631,591] <inf> main: sleeping 10 sec
+rtt:~$ rtt:~$ [00:00:23.631,652] <inf> main: starting loop (2)
+rtt:~$ [00:00:23.631,744] <inf> battery: battery_start> adc_read()
+rtt:~$ [00:00:23.631,896] <inf> battery: battery_get_mv() raw = 3460
+rtt:~$ rtt:~$ thread_tags/7009D837C7BB557A{"alive":2,"voltage":3.041,"light":10.097,"temperature":25.16,"humidity":41.95,"pressure":951.01}
+[00:00:25.298,156] <inf> main: sleeping 10 sec
+```
+{{</details>}}
+
+* On the raspberry pi, it's possible to listen to the thread udp packets using `socat`
+```bash
+socat UDP6-LISTEN:4242,fork STDOUT
+```
+{{<gfigure src="/images/thread_sensortag/socat.png" >}}
+
+* This python script captures Ipv6 UDP packets and forwards their json payload to a configured MQTT broker
+
+{{<icon_button href="https://github.com/HomeSmartMesh/raspi/blob/master/py/thread_tags/thread_tags.py" text="python json string to MQTT" icon="github" >}}
+
+* the config file of the script allows to provide the MQTT broquer and to replace the device id with a friendly name, which is important not to hardcode the id in any source and to avoid firmware updates when moving the sensors from one room to another.
+
+{{<details "python script config">}}
+```json
+{  
+    "mqtt":{
+        "host":"10.0.0.42",
+        "port":1883,
+        "keepalive":60,
+        "client_id":"thread_tags",
+        "subscriptions":[ ],
+        "actions"   :[],
+        "publish" :true,
+        "subscribe" :false
+    },
+    "friendlyNames":{
+        "7005D83727DD525A":"01"
+    },
+    "log":{
+        "logfile":"/home/pi/share/thread_tags_(date).log",
+        "level":"Info"
+    }
+}
+```
+{{</details>}}
+
+
+and [another raspi python scripts](https://github.com/HomeSmartMesh/raspi/tree/master/py/influx) forwards them to influxDB to end up in Grafana, which can also [run as a service](https://github.com/HomeSmartMesh/raspi/blob/92f549866482c3a65e2b738ad909ef740f6919e5/run_services.sh#L72).
+
+{{<gfigure src="/images/thread_sensortag/grafana.png" width="200px">}}
+
+{{<hint warning>}}This firmware is not yet optimised for low power{{</hint>}}
 ### device treee drivers
 the driver sensors are declared in the custom board device treee source `nrf52840_sensortag.dts`.
 ```conf
