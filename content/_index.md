@@ -14,15 +14,15 @@ grid:
     - Network
     slot: 300
     items:
-    - name: "Raspi IoT"
-      width: 300
-      tags: [Frameworks]
-    - name: "Connected Home IP"
-      width: 300
-      tags: [Frameworks]
     - name: "Thread SensorTag"
       width: 300
       tags: [Microcontrollers]
+    - name: "Raspi IoT"
+      width: 300
+      tags: [Frameworks]
+    - name: "Matter"
+      width: 300
+      tags: [Frameworks]
     - name: "ESP32 Boards"
       width: 300
       tags: [Microcontrollers,ESP32]
@@ -50,6 +50,16 @@ grid:
 ---
 {{<load-svg-pan-zoom>}}
 {{< grid "my_grid" >}}
+{{< image src="/images/thread_sensortag/sensortag_v1.1.webp" height="150px" href="/docs/microcontrollers/nrf52/thread_sensortag/" >}}
+{{< my_button href="/docs/microcontrollers/nrf52/thread_sensortag/" text="Thread SensorTag" >}}
+
+Thread mesh with nRF52840
+
+BME280 Temperature Humidity Pressure
+
+MAX44009 Ambient Light
+
+<--->
 {{< image src="/images/raspi_iot.png" height="150px" href="/docs/frameworks/raspi_iot/" >}}
 
 {{< my_button href="/docs/frameworks/raspi_iot/" text="Raspi IoT Doc" >}}
@@ -61,23 +71,13 @@ Sensors to MQTT to influx to Grafana.
 Multiple Python and Node.js standalone services
 
 <--->
-{{< image src="/images/chip.png" height="150px" href="/docs/frameworks/chip/" >}}
+{{< image src="/images/chip.png" height="150px" href="/docs/frameworks/matter/" >}}
 
-{{< my_button href="/docs/frameworks/chip/" text="ConnectedHomeIP" >}}
+{{< my_button href="/docs/frameworks/chip/" text="ConnectedHomeIP ➡ Matter" >}}
 
 Multiple networks supported (Thread, BT, Wifi)
 
 Application "Advanced ZCL" over IP
-
-<--->
-{{< image src="/images/thread_sensortag/concept.png" height="150px" href="/docs/microcontrollers/nrf52/thread_sensortag/" >}}
-{{< my_button href="/docs/microcontrollers/nrf52/thread_sensortag/" text="Thread SensorTag" >}}
-
-Thread mesh with nRF52840
-
-BME280 Temperature Humidity Pressure
-
-MAX44009 Ambient Light
 
 <--->
 {{< image src="/images/espressif.png" href="/docs/microcontrollers/esp32/"  height=100 >}}

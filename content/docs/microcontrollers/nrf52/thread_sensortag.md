@@ -2,7 +2,7 @@
 title: "Thread SensorTag"
 description: "A Low power SensorTag with High quality measures of light, Temperature, Humidity and Pressure. Based on nRF52840 which supports Thread and other protocols"
 date: 2021-02-07T08:48:57+00:00
-lastmod: 2021-02-14T08:00:00+00:00
+lastmod: 2021-05-14T08:00:00+00:00
 images: ["/images/thread_sensortag/sensortag_v1.1.webp"]
 weight: 1
 toc: true
@@ -14,6 +14,7 @@ toc: true
 {{<icon_button relref="/docs/networks/thread/" text="Networks / Thread" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Frameworks / CHIP" >}}
 
+# Overview
 {{<image src="/images/thread_sensortag/sensortag_v1.1.webp" width="600px" >}}
 
 * `nRF52840` on a [MS88SF2](?svg=nrf52-sensor-tag&text=MS88SF2) module.
@@ -51,7 +52,7 @@ toc: true
 
 {{<image src="/images/thread_sensortag/board_top.webp" width="500px" >}}
 
-# development
+# Development
 ## install
 * install [zephyr and west](http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/getting_started/index.html#getting-started)
 
@@ -255,7 +256,9 @@ and [another raspi python scripts](https://github.com/HomeSmartMesh/raspi/tree/m
 
 {{<gfigure src="/images/thread_sensortag/grafana.png" width="200px">}}
 
-{{<hint warning>}}This firmware is not yet optimised for low power{{</hint>}}
+{{<hint danger>}}As of 14 May 2021, the port of Zephyr to nrf52 only supports `PM_STATE_OFF`{{</hint>}}
+* the [power.c](https://github.com/zephyrproject-rtos/zephyr/blob/21d1ad3762302b3e461953df59430c77e0709274/soc/arm/nordic_nrf/nrf52/power.c) shows the current implementation of `pm_power_state_set()`
+* As of the nRF52840 datasheet section 5.3.3 System OFF mode. This mode cannot be woken up from RTC, but can be woken up by GPIO through DETECT signal.
 ### device treee drivers
 the driver sensors are declared in the custom board device treee source `nrf52840_sensortag.dts`.
 ```conf
