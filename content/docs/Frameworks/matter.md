@@ -9,7 +9,7 @@ toc: true
 ---
 # Relates to
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
-{{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
+{{<icon_button relref="/docs/networks/thread/" text="OpenThread Guide" >}}
 previously known as `CHIP`
 {{<image src="/images/chip.png" width="400px" href="/docs/frameworks/chip/" >}}
 # Overview

@@ -67,6 +67,23 @@ Community contribution of Zephyr based examples with decadriver
 
 {{<icon_button href="https://github.com/foldedtoad/dwm1001" text="Zephyr with decadriver" icon="github">}}
 
+## Raspberry pi software
+* DWM Daemon
+* DWM Proxy
+* webapp provided on the raspberry pi on the path `/var/www/html/`.
+
+### Decawave Webapp
+* The webapp is based on [three.js](https://threejs.org/) which is a viable choice for 3d gemoetry calculations of anchors and tag coordinates.
+* The view is limited to an orthogonal projection which makes the app 2d only. Although the created tags and anchros are actual 3d meshes, only 2d shapes appear on the screen.
+* The down side of 3d is the need for ray casting to create click events on objects. But on the upside it's a frameowrk that can easily extend to 3D models. Maybe for the future, Decawave will get inspired by the [smart home 3d webapp](/docs/applications/home3d/) project.
+* The menus are handled with injected jquery html with classes.
+* All in all, this webapp is an amazing user experience and a reference for open design, that's how all mdoern apps should be
+
+An easy upload function allows to customize the view with an own floor map. The offset and scale is not easy but manageable
+
+{{<image src="/images/uwb/floormap.webp" width="600px" >}}
+
+
 # Standard
 
 {{<image src="/images/uwb/uwb_standard.webp" width="600px" >}}

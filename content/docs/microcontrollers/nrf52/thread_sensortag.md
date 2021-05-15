@@ -80,7 +80,8 @@ The SDK samples are presented in two folds, first the overall application includ
 {{<gfigure src="/images/thread_sensortag/application.png" >}}
 
 ```bash
-west build -t guiconfig
+cd hsm/samples/tag_sensors_broadcast
+west build -b nrf52840_sensortag -t guiconfig
 west build -b nrf52840_sensortag -- -DCONF_FILE="prj.conf overlay-shell.conf"
 west flash
 ```
@@ -215,7 +216,10 @@ rtt:~$ rtt:~$ thread_tags/7009D837C7BB557A{"alive":2,"voltage":3.041,"light":10.
 ```
 {{</details>}}
 
-* On the raspberry pi, it's possible to listen to the thread udp packets using `socat`
+* for info on the raspberry pi border router setup and networking see :
+{{<button relref="/docs/networks/thread#openthread---setup" >}}border router setup{{</button>}}
+
+* it's possible to listen to the ipv6 thread udp packets using `socat`
 ```bash
 socat UDP6-LISTEN:4242,fork STDOUT
 ```
@@ -241,7 +245,7 @@ socat UDP6-LISTEN:4242,fork STDOUT
         "subscribe" :false
     },
     "friendlyNames":{
-        "7005D83727DD525A":"01"
+        "7005D83727DD525A":"livingroom tag"
     },
     "log":{
         "logfile":"/home/pi/share/thread_tags_(date).log",
@@ -286,7 +290,8 @@ the driver sensors are declared in the custom board device treee source `nrf5284
 ### tag_sensor_veml6030
 
 ```bash
-west build -t guiconfig
+cd hsm/samples/tag_sensor_veml6030
+west build -b nrf52840_sensortag -t guiconfig
 west build -b nrf52840_sensortag -- -DCONF_FILE=prj-shell.conf
 west build -b nrf52840_sensortag -- -DCONF_FILE=prj-log.conf
 west flash
@@ -429,7 +434,8 @@ auto_measure>new params => gain = 2.000000 ; it = 800
 ### tag_sensor_ms8607
 
 ```bash
-west build -t guiconfig
+cd hsm/samples/tag_sensor_ms8607
+west build -b nrf52840_sensortag -t guiconfig
 west build -b nrf52840_sensortag -- -DCONF_FILE=prj.conf
 west flash
 ```
@@ -496,7 +502,8 @@ ms8607> t=22.65 °  p=963.55 mbar  h=53.33 %RH
 ### tag_battery
 
 ```bash
-west build -t guiconfig
+cd hsm/samples/tag_battery
+west build -b nrf52840_sensortag -t guiconfig
 west build -b nrf52840_sensortag -- -DCONF_FILE=prj.conf
 west flash
 ```

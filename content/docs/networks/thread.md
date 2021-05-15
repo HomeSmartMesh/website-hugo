@@ -12,9 +12,10 @@ toc: true
 #Dongle : https://www.kirale.com/products/ktbrn1/
 ---
 {{<load-svg-pan-zoom>}}
-# Relates to
+
+{{<icon_button relref="/docs/microcontrollers/nrf52/thread_sensortag/" text="Thread SensorTag" >}}
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
-{{<icon_button relref="/docs/frameworks/chip/" text="Project CHIP" >}}
+{{<icon_button relref="/docs/frameworks/matter/" text="Project Matter" >}}
 
 # Overview
 {{< svg-pan-zoom "/images/openthread-environment-1.1.svg" >}}
@@ -269,6 +270,10 @@ wpan0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1280
 {{</details>}}
 
 ## udp test
+{{<hint warning>}}
+Note that for networking tests, a border router installation is recommended or network between docker and the host has to be configured.
+{{</hint>}}
+
 The [openthread-setup](#openthread---setup) should be performed to be able to install and use `socat`.
 Listening from `ot-ctl` :
 ```shell
