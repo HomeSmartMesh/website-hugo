@@ -64,7 +64,7 @@ make sure there is no environment variable `ZEPHYR_BASE` in order to use the loc
 ```bash
 mkdir hsm_workspace
 cd hsm_workspace
-west init -m https://github.com/HomeSmartMesh/sdk-hsm-sensortag -mr main
+west init -m https://github.com/HomeSmartMesh/sdk-hsm-sensortag --mr main
 ```
 * fetch all dependencies from referenced repos in `hsm.west.yml`
 ```bash

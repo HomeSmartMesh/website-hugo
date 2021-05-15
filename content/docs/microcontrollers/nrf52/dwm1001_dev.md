@@ -11,7 +11,7 @@ toc: true
 ---
 {{<load-photoswipe >}}
 
-{{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band" >}}
+{{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band RTLS" >}}
 
 # Development Board
 {{<image src="/images/uwb/DWM1001 DevKit.png" width="250px" >}}

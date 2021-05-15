@@ -6,7 +6,7 @@ date: 2020-10-06T08:48:57+00:00
 lastmod: 2021-03-07T08:00:00+00:00
 draft: false
 images: ["/images/openthread-environment-1.1.svg"]
-weight: 2
+weight: 1
 toc: true
 #BR : https://www.kirale.com/products/ktdg102/
 #Dongle : https://www.kirale.com/products/ktbrn1/

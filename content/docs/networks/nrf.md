@@ -6,7 +6,7 @@ date: 2020-10-06T08:48:57+00:00
 lastmod: 2021-02-14T08:00:00+00:00
 draft: false
 images: ["/images/nRF52-features.png"]
-weight: 1
+weight: 3
 toc: true
 ---
 {{<load-svg-pan-zoom>}}

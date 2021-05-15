@@ -6,7 +6,7 @@ date: 2020-10-06T08:48:57+00:00
 lastmod: 2020-10-06T08:48:57+00:00
 draft: false
 images: ["/images/zigbee_devices.png"]
-weight: 3
+weight: 4
 toc: true
 ---
 
