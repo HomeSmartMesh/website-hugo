@@ -6,9 +6,23 @@ lastmod: 2021-02-20T08:00:00+00:00
 weight: 5
 toc: true
 ---
-# Relates to
+{{<load-photoswipe >}}
 {{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
-{{<icon_button relref="/docs/frameworks/chip/" text="Project CHIP" >}}
+{{<icon_button relref="/docs/frameworks/chip/" text="Project Matter" >}}
+
+# Debug with OZone
+* [Ozone](https://www.segger.com/products/development-tools/ozone-j-link-debugger/) : performance analyzer
+* [RTOS Awareness](https://www.segger.com/products/development-tools/ozone-j-link-debugger/technology/rtos-awareness/) : debug an RTOS
+
+Steps :
+* in the new project wizard, make sure a peripheral svd file is selected e.g. `nRF5_SDK_for_Thread_and_Zigbee_v4.1.0_32ce5f8/modules/nrfx/mdk/nrf52840.svd`
+* For a Segger j-link edu, select the Target interface SWD
+* select the elf file of the Zephyr build `D:/Dev/nrf52/hsm/hsm/samples/tag_power/build/zephyr/zephyr.elf`
+* make sure to use Ozone version 3.22d or higher
+* in the bottom left console type `Project.SetOSPlugin("ZephyrPlugin_CM4")`. That will load the Zephyr RTOS awareness plugin
+* you should now be able to access the Zephyr debug window from the menu `View` then in the `Advanced` section `Zephyr`
+
+{{<gfigure src="/images/zephyr/ozone_zephyr.png" width="500px">}}
 
 # Windows Install
 {{<icon_button href="https://docs.zephyrproject.org/2.3.0/getting_started/index.html" text="Getting Started details..."  icon="new" >}}

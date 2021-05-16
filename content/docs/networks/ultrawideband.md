@@ -90,6 +90,12 @@ An easy upload function allows to customize the view with an own floor map. The 
 
 {{<icon_button text="802.15.4z" href="https://www.ieee802.org/15/pub/TG4z.html" icon="new" >}}
 
+# References
+
+{{<icon_button text="ACCURATE POSITIONING IN ULTRA-WIDEBAND SYSTEMS" href="http://repository.bilkent.edu.tr/bitstream/handle/11693/13380/10.1109-MWC.2011.5751292.pdf?sequence=1" icon="pdf" >}}
+
+{{<icon_button text="AN ACCURATE UWB RANGING FOR PRECISION ASSET LOCATION" href="http://vlsicad.eecs.umich.edu/BK/Slots/cache/www.ee.vt.edu/~ha/research/publications/uwbst03b.pdf" icon="pdf" >}}
+
 
 # FAQ
 
