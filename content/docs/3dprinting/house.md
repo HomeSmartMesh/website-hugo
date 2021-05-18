@@ -10,7 +10,7 @@ bookToC: false
 # House Model
 
 {{< load-photoswipe >}}
-{{< gallery dir="/images/3dprinting/house" />}}
+{{<gallery dir="/images/3dprinting/house" />}}
 
 The house model shown above was 3d printed with the model below, then decorated and painted by hand. The roof was made ready plastic material and painted.
 

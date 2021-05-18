@@ -15,10 +15,11 @@ toc: true
 * [RTOS Awareness](https://www.segger.com/products/development-tools/ozone-j-link-debugger/technology/rtos-awareness/) : debug an RTOS
 
 Steps :
+* make sure to use Ozone version 3.22d or higher
 * in the new project wizard, make sure a peripheral svd file is selected e.g. `nRF5_SDK_for_Thread_and_Zigbee_v4.1.0_32ce5f8/modules/nrfx/mdk/nrf52840.svd`
 * For a Segger j-link edu, select the Target interface SWD
-* select the elf file of the Zephyr build `D:/Dev/nrf52/hsm/hsm/samples/tag_power/build/zephyr/zephyr.elf`
-* make sure to use Ozone version 3.22d or higher
+* compile with `CONFIG_DEBUG_THREAD_INFO=y`
+* select the elf file of the Zephyr build `hsm/hsm/samples/tag_power/build/zephyr/zephyr.elf`
 * in the bottom left console type `Project.SetOSPlugin("ZephyrPlugin_CM4")`. That will load the Zephyr RTOS awareness plugin
 * you should now be able to access the Zephyr debug window from the menu `View` then in the `Advanced` section `Zephyr`
 

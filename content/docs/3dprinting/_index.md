@@ -14,7 +14,7 @@ grid:
     slot: 200
     items:
     - name: "Smart Light Switch"
-      width: 400
+      width: 200
       tags: [Smart Light]
     - name: "Switch with Socket"
       width: 200
@@ -29,12 +29,15 @@ grid:
       width: 200
       tags: []
     - name: "House Model"
-      width: 400
+      width: 200
       tags: []
     - name: "Voronoi"
       width: 200
       tags: []
 ---
+
+# 3D Models
+
 {{< grid "my_grid" >}}
 
 {{< image src="/images/3dprinting/dumb_to_smart.png" href="/docs/3dprinting/light/" >}}
@@ -48,7 +51,19 @@ grid:
 <--->
 {{< image src="/images/3dprinting/shelf/02 Shelf Top View.jpg" href="/docs/3dprinting/under_desk_shelf/" >}}
 <--->
-{{< image src="/images/3dprinting/house/04 Side View 2.jpg" href="/docs/3dprinting/house" >}}
+{{< image src="/images/3dprinting/house/03 Model Side.JPG" href="/docs/3dprinting/house" >}}
 <--->
 {{< image src="/images/3dprinting/Voronoi cells.jpg" href="/docs/3dprinting/voronoi/" >}}
 {{< /grid >}}
+
+# Discord
+* Not all models have their own dedicated page and uploaded model, but if you like one of the below gallery models, feel free to ask on the discord channel and I would upload it.
+
+{{<icon_button text="Home Smart Mesh - 3D Printing" href="https://discord.gg/eqxztEdchX" icon="discord" >}}
+
+# Gallery
+
+{{< load-photoswipe >}}
+{{<gallery dir="/images/3dprinting/all models" />}}
+
+
