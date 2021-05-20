@@ -32,6 +32,7 @@ The statement above dates back to 12 Feb 2021 shows the discomfort of the Zigbee
 
 {{< icon_button href="https://github.com/project-chip/connectedhomeip" text="Github Repo" icon="github" >}}
 
+{{< icon_button href="https://codelabs.developers.google.com/codelabs/chip-get-started?utm_source=google-io&utm_medium=organic&utm_campaign=io21-learninglab#0" text="CHIP Getting Started codelab" icon="new" >}}
 ## Tools
 
 **ZAP** : ZCL Advaned Platform

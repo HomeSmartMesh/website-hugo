@@ -21,6 +21,8 @@ An Ultra-Wide-Band networks can form a mesh network, in addition, the main featu
 * PANS : Positioning and Netowrking Stack
 * [eCos](https://ecos.sourceware.org/) : Free Open source Real-Time Operating-System
 
+Decawave provides a ready to use localisation system based on a preflashed `DWM1001_PANS_R2.0.hex` firmware. The functional concept is described in `DWM1001 System Overview and Performance.pdf` including the time division protocol and the format of all the 802.15.4 Frames.
+
 ## Hardware
 UWM Chips available from Decawave, now Qorvo. Qorvo is also the supplier of Apple UWB chips.
 
@@ -30,11 +32,13 @@ More details about the UWB DWM1001 development kit :
 
 ## nRF52832 Firmware
 * Production Firmware : available as precompiled binary `DWM1001_PANS_R2.0.hex` in order to recover the Module for production grade certified applications
+* PANS library : All the main functions performed by the module (TWR, RTLS, Bluetooth, 802.15.4) are provided as a library on top of which a user nRF52832 application can be built.
 * Open Source Firmware : multiple examples are provided to kick start development
 
 ### From the Product Page
 {{<icon_button href="https://www.decawave.com/product/dwm1001-development-board/" text="Product Page software development kit" icon="new">}}
 
+* simple example on how to use the `PANS` library. Overview in `DWM1001-Firmware-User-Guide.pdf` and details in `DWM1001-API-Guide.pdf`
 * available `.emProject` project files for [Segger Studio](https://www.segger.com/products/development-tools/embedded-studio/)
 * based on `Nordik SDK` version `12.1.0`
 * Used `GNU Tools ARM Embedded` version `5.4 2016q3`
@@ -65,6 +69,7 @@ More details about the UWB DWM1001 development kit :
 
 Community contribution of Zephyr based examples with decadriver
 
+{{<hint warning>}}GNU GLP v3{{</hint>}}
 {{<icon_button href="https://github.com/foldedtoad/dwm1001" text="Zephyr with decadriver" icon="github">}}
 
 ## Raspberry pi software
