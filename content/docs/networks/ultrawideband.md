@@ -36,6 +36,7 @@ More details about the UWB DWM1001 development kit :
 * Open Source Firmware : multiple examples are provided to kick start development
 
 ### From the Product Page
+
 {{<icon_button href="https://www.decawave.com/product/dwm1001-development-board/" text="Product Page software development kit" icon="new">}}
 
 * simple example on how to use the `PANS` library. Overview in `DWM1001-Firmware-User-Guide.pdf` and details in `DWM1001-API-Guide.pdf`
