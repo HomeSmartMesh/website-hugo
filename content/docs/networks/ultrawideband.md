@@ -33,13 +33,14 @@ More details about the UWB DWM1001 development kit :
 ## nRF52832 Firmware
 * Production Firmware : available as precompiled binary `DWM1001_PANS_R2.0.hex` in order to recover the Module for production grade certified applications
 * PANS library : All the main functions performed by the module (TWR, RTLS, Bluetooth, 802.15.4) are provided as a library on top of which a user nRF52832 application can be built.
+* PANS library API : described in `DWM1001-Firmware-User-Guide.pdf` and `DWM1001-API-Guide.pdf` 
 * Open Source Firmware : multiple examples are provided to kick start development
 
 ### From the Product Page
 
 {{<icon_button href="https://www.decawave.com/product/dwm1001-development-board/" text="Product Page software development kit" icon="new">}}
 
-* simple example on how to use the `PANS` library. Overview in `DWM1001-Firmware-User-Guide.pdf` and details in `DWM1001-API-Guide.pdf`
+* simple example on how to use the `PANS` library.
 * available `.emProject` project files for [Segger Studio](https://www.segger.com/products/development-tools/embedded-studio/)
 * based on `Nordik SDK` version `12.1.0`
 * Used `GNU Tools ARM Embedded` version `5.4 2016q3`
@@ -60,6 +61,7 @@ More details about the UWB DWM1001 development kit :
 * based on `Nordik SDK` version `14.2.0`
 * source code of the dw1000 spi driver
 
+{{<hint warning>}}with Embedded studio V5.40, it is required to enable the updated #ifdef for `__putchar` in `retarget.c` line 100{{</hint>}}
 
 ### Zephyr
 {{<icon_button href="https://docs.zephyrproject.org/2.4.0/boards/arm/decawave_dwm1001_dev/doc/index.html" text="Zephyr Port" icon="new">}}
@@ -73,12 +75,30 @@ Community contribution of Zephyr based examples with decadriver
 {{<hint warning>}}GNU GLP v3{{</hint>}}
 {{<icon_button href="https://github.com/foldedtoad/dwm1001" text="Zephyr with decadriver" icon="github">}}
 
+
+## DW Tranceiver API
+available from Decawave uploads zip in path `dw1000_api_rev2p14\dw1000_api_rev2p14_stsw\DW1000_Software_API_Guide_rev2p7.pdf`
+
+{{<icon_button href="https://www.decawave.com/wp-content/uploads/2019/01/dw1000_api_rev2p14.zip" text="dw1000_api_rev2p14.zip" icon="download" >}}
+
 ## Raspberry pi software
 * DWM Daemon
 * DWM Proxy
-* webapp provided on the raspberry pi on the path `/var/www/html/`.
+* webapp http server
+* dwm device on `/dev/dwm0`
+
+check that your raspberry pi is a model 3b not b+ with 100 Mbit only with `sudo ethtool eth0 | grep Speed`, which is important for the real time operation of the services.
+
+### DWM Daemon
+* service : `dwm1001.service`
+* log : `/var/log/dwm-daemon.log`
+* config : `/etc/dwm1001/dwm1001.config`
+### DWM Proxy
+* service : `dwm1001-proxy.service`
+* config : `/etc/dwm1001/dwm1001-proxy.config`
 
 ### Decawave Webapp
+* the webapp is provided on the raspberry pi on the path `/var/www/html/`.
 * The webapp is based on [three.js](https://threejs.org/) which is a viable choice for 3d gemoetry calculations of anchors and tag coordinates.
 * The view is limited to an orthogonal projection which makes the app 2d only. Although the created tags and anchros are actual 3d meshes, only 2d shapes appear on the screen.
 * The down side of 3d is the need for ray casting to create click events on objects. But on the upside it's a frameowrk that can easily extend to 3D models. Maybe for the future, Decawave will get inspired by the [smart home 3d webapp](/docs/applications/home3d/) project.
@@ -88,6 +108,65 @@ Community contribution of Zephyr based examples with decadriver
 An easy upload function allows to customize the view with an own floor map. The offset and scale is not easy but manageable
 
 {{<image src="/images/uwb/floormap.webp" width="600px" >}}
+
+### MQTT Config
+The decawave webapp communicates with all devices through the 802.15.4-uwb mesh network to send and receive configuration. For that purpose, the IOT Data message is used as config request and response packets.
+
+* Details of the IoT Data message are provided in `DWM1001_System_Overview.pdf` section `9.1.12 IOT Data message`
+* config can be update by sending a request
+    * topic `dwm/node/<nodeid>/downlink/config`
+    * 802.15.4-uwb downlink message id `UWBMAC_FRM_TYPE_DL_IOT_DATA`
+* config is received by a response
+    * topic `dwm/node/<nodeid>/uplink/config`
+    * 802.15.4-uwb uplink message id `UWBMAC_FRM_TYPE_UL_IOT_DATA`
+
+given that the response is a confirmation it will have a payload similar as the request
+
+{{<details "example Anchor config downlink">}}
+```json
+{
+  "configuration": {
+    "label": "RearRight",
+    "nodeType": "ANCHOR",
+    "uwbFirmwareUpdate": false,
+    "leds": false,
+    "ble": false,
+    "anchor": {
+      "routingConfig": "ROUTING_CFG_OFF",
+      "initiator": false,
+      "position": {
+        "x": 3.5500002,
+        "y": 1.1,
+        "z": 0,
+        "quality": 100
+      }
+    }
+  }
+}
+```
+{{</details>}}
+
+{{<details "example Tag config downling">}}
+```json
+{
+  "configuration": {
+    "label": "BatteryTag",
+    "nodeType": "TAG",
+    "uwbFirmwareUpdate": false,
+    "leds": false,
+    "ble": false,
+    "tag": {
+      "locationEngine": true,
+      "responsive": true,
+      "stationaryDetection": true,
+      "nomUpdateRate": 100,
+      "statUpdateRate": 2000
+    }
+  }
+}
+```
+{{</details>}}
+
 
 
 # Standard

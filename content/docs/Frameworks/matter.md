@@ -32,7 +32,6 @@ The statement above dates back to 12 Feb 2021 shows the discomfort of the Zigbee
 
 {{< icon_button href="https://github.com/project-chip/connectedhomeip" text="Github Repo" icon="github" >}}
 
-{{< icon_button href="https://codelabs.developers.google.com/codelabs/chip-get-started?utm_source=google-io&utm_medium=organic&utm_campaign=io21-learninglab#0" text="CHIP Getting Started codelab" icon="new" >}}
 ## Tools
 
 **ZAP** : ZCL Advaned Platform
@@ -54,6 +53,10 @@ on linux the following commands succeed using node `v14.15.5` :
 ```
 
 
+# Chip Tool
+Command line helper tool :
+
+{{<icon_button href="https://github.com/project-chip/connectedhomeip/tree/master/examples/chip-tool" text="examples / chip-tool" icon="github" >}}
 
 # Running on nRF52
 ## nRF Connect integration
@@ -301,7 +304,148 @@ D: 2488295[DL]    Mesh Prefix: fdde:ad00:beef::/64
 
 # Running on ESP32
 
-{{<icon_button relref="https://github.com/project-chip/connectedhomeip/tree/master/examples/all-clusters-app/esp32" text="all clusters app" icon="github" >}}
+{{<icon_button href="https://codelabs.developers.google.com/codelabs/chip-get-started?utm_source=google-io&utm_medium=organic&utm_campaign=io21-learninglab#0" text="CHIP Getting Started codelab" icon="new" >}}
+
+* tested on board `ESP32 wemos mini`
+* selected `ESP32-DevKitC` from menu config
+* Blue led controlled by `statusLED1.Set(*value);`
+* Clusetr `ZCL_ON_OFF_CLUSTER_ID`, attribute `ZCL_ON_OFF_ATTRIBUTE_ID`
+
+## runlog
+pc chip-tool
+{{<details "chip-tool client - pairing">}}
+```bash
+wass@ryzen:~/connectedhomeip/examples/chip-tool/out/debug$ ./chip-tool pairing bypass 10.0.0.27 11097
+CHIP:IN: TransportMgr initialized
+CHIP:DIS: Init admin pairing table with server storage
+CHIP:IN: Loading certs from KVS
+CHIP:IN: local node id is 0x000000000001B669
+CHIP:ZCL: Using ZAP configuration...
+CHIP:ZCL: deactivate report event
+CHIP:CTL: Getting operational keys
+CHIP:CTL: Generating credentials
+CHIP:CTL: Loaded credentials successfully
+CHIP:IN: New pairing for device 0x0000000000bc5c01, key 0!!CHIP:DL: 
+CHIP task running
+CHIP:TOO: Secure Pairing Success
+CHIP:TOO: Pairing Success
+CHIP:CTL: Shutting down the commissioner
+CHIP:CTL: Shutting down the controller
+CHIP:DL: System Layer shutdown
+CHIP:DL: Inet Layer shutdown
+CHIP:DL: BLE layer shutdown
+```
+{{</details>}}
+
+{{<details "chip-tool client - command">}}
+```bash
+wass@ryzen:~/connectedhomeip/examples/chip-tool/out/debug$ ./chip-tool onoff toggle 1
+CHIP:IN: TransportMgr initialized
+CHIP:DIS: Init admin pairing table with server storage
+CHIP:IN: Loading certs from KVS
+CHIP:IN: local node id is 0x000000000001B669
+CHIP:ZCL: Using ZAP configuration...
+CHIP:ZCL: deactivate report event
+CHIP:CTL: Getting operational keys
+CHIP:CTL: Generating credentials
+CHIP:CTL: Loaded credentials successfully
+CHIP:DL: CHIP task running
+CHIP:TOO: Sending cluster (0x0006) command (0x02) on endpoint 1
+CHIP:DMG: ICR moving to [Initialize]
+CHIP:DMG: ICR moving to [AddCommand]
+CHIP:IN: New pairing for device 0x0000000000bc5c01, key 0!!
+CHIP:IN: Secure message was encrypted: Msg ID 1
+CHIP:IN: Sending msg from 0x000000000001B669 to 0x0000000000BC5C01 at utc time: 3688372 msec
+CHIP:IN: Sending secure msg on generic transport
+CHIP:IN: Secure msg send status No Error
+CHIP:DMG: ICR moving to [   Sending]
+CHIP:IN: Secure transport received message destined to node ID (0x000000000001B669)
+CHIP:EM: Received message of type 9 and protocolId 327680
+CHIP:DMG: InvokeCommand =
+CHIP:DMG: {
+CHIP:DMG: 	CommandList =
+CHIP:DMG: 	[
+CHIP:DMG: 		CommandDataElement =
+CHIP:DMG: 		{
+CHIP:DMG: 			CommandPath =
+CHIP:DMG: 			{
+CHIP:DMG: 				EndpointId = 0x1,
+CHIP:DMG: 				ClusterId = 0x6,
+CHIP:DMG: 				CommandId = 0x2,
+CHIP:DMG: 			},
+CHIP:DMG: 			
+CHIP:DMG: 			StatusElement =
+CHIP:DMG: 			{
+CHIP:DMG: 				GeneralCode = 0x0,
+CHIP:DMG: 				ProtocolId = 0x5,
+CHIP:DMG: 				protocolCode = 0x0,
+CHIP:DMG: 			},
+CHIP:DMG: 			
+CHIP:DMG: 		},
+CHIP:DMG: 		
+CHIP:DMG: 	],
+CHIP:DMG: 	
+CHIP:DMG: }
+CHIP:EM: Sending Standalone Ack for MsgId:00000001
+CHIP:IN: Secure message was encrypted: Msg ID 2
+CHIP:IN: Sending msg from 0x000000000001B669 to 0x0000000000BC5C01 at utc time: 3689394 msec
+CHIP:IN: Sending secure msg on generic transport
+CHIP:IN: Secure msg send status No Error
+CHIP:EM: Flushed pending ack for MsgId:00000001
+CHIP:ZCL: DefaultResponse:
+CHIP:ZCL:   Transaction: 0x558001796dd0
+CHIP:ZCL:   status: EMBER_ZCL_STATUS_SUCCESS (0x00)
+CHIP:TOO: Default Success Response
+CHIP:DMG: ICR moving to [Uninitiali]
+CHIP:CTL: Shutting down the controller
+CHIP:DL: System Layer shutdown
+CHIP:DL: Inet Layer shutdown
+CHIP:DL: BLE layer shutdown
+```
+{{</details>}}
+ 
+esp32 monitor
+{{<details "esp32 Matter server">}}
+```bash
+E (20563) chip[IN]: Secure transport received message destined to node ID (0x0000000000BC5C01)
+I (20563) chip[IN]: Setting fabricID 1B669 on admin.
+I (20563) chip[IN]: Since admin was modified, persisting changes to KVS
+I (21273) chip[SVR]: Stored value in server storage
+I (21293) chip[DIS]: Admin (0) persisted to storage. Calling OnAdminPersistedToStorage
+I (21293) chip[ZCL]: OpCreds: Admin 0 was persisted to storage. FabricId 00001B66900000000, NodeId bc5c01000000000000306E, VendorId 0x0632
+I (21303) chip[ZCL]: OpCreds: Call to writeAdminsIntoFabricsListAttribute
+I (21313) chip[ZCL]: OpCreds: Skipping over unitialized admin with fabricId 0x000000000001B669, nodeId 0x0000000000BC5C01 vendorId 0x0000
+I (21323) chip[ZCL]: OpCreds: Stored 0 admins in fabrics list attribute.
+I (21333) chip[EM]: Received message of type 8 and protocolId 327680
+V (21343) chip[EM]: ec id: 39017, Delegate: 0x3ffcca68
+V (21343) chip[DMG]: ICR moving to [Initialize]
+V (21353) chip[ZCL]: Received Cluster Command: Cluster=6 Command=2 Endpoint=1
+I (21353) chip[ZCL]: On/Off set value: 1 2
+I (21363) chip[ZCL]: Toggle on/off from 0 to 1
+I (21363) app-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x0006', EndPoint ID: '0x01', Attribute ID: '0x0000'
+I (21383) app-devicecallbacks: set ZCL_ON_OFF_ATTRIBUTE_ID to value: 1
+I (21383) app-devicecallbacks: Current free heap: 115004
+
+I (21393) app-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x0008', EndPoint ID: '0x01', Attribute ID: '0x0000'
+I (21403) app-devicecallbacks: Unhandled cluster ID: 8
+I (21413) app-devicecallbacks: Current free heap: 115004
+
+I (21413) app-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x0005', EndPoint ID: '0x01', Attribute ID: '0x0003'
+I (21433) app-devicecallbacks: Unhandled cluster ID: 5
+I (21433) app-devicecallbacks: Current free heap: 115004
+
+V (21443) chip[DMG]: ICR moving to [AddCommand]
+V (21443) chip[IN]: Secure message was encrypted: Msg ID 1
+I (21453) chip[IN]: Sending msg from 0x0000000000BC5C01 to 0x000000000001B669 at utc time: 20779 msec
+I (21463) chip[IN]: Sending secure msg on generic transport
+I (21473) chip[IN]: Secure msg send status No Error
+V (21473) chip[DMG]: ICR moving to [   Sending]
+V (21473) chip[DMG]: ICR moving to [Uninitiali]
+E (21483) chip[DL]: Long dispatch time: 920 ms
+E (21483) chip[IN]: Secure transport received message destined to node ID (0x0000000000BC5C01)
+I (21493) chip[EM]: Received message of type 16 and protocolId 0
+```
+{{</details>}}
 
 # Comissioning
 Each device will generate a setup QR Code, in this case `CH:I34DV*-00 0C9SS0` which is a sectret not to be shared for production devices.
