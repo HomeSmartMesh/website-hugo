@@ -14,6 +14,9 @@ grid:
     - Network
     slot: 300
     items:
+    - name: "Ultra Wide Band"
+      width: 300
+      tags: [Network]
     - name: "Thread SensorTag"
       width: 300
       tags: [Microcontrollers]
@@ -50,6 +53,14 @@ grid:
 ---
 {{<load-svg-pan-zoom>}}
 {{< grid "my_grid" >}}
+{{<image src="/images/uwb/DRTLS.webp" height="150px" href="/docs/networks/ultrawideband/" >}}
+{{<my_button href="/docs/networks/ultrawideband/" text="Ultra Wide Band Evaluation" >}}
+
+Mesh network 802.15.4-uwb with positioning
+
+Qorvo/Decawave Modules evaluation
+
+<--->
 {{< image src="/images/thread_sensortag/sensortag_v1.1.webp" height="150px" href="/docs/microcontrollers/nrf52/thread_sensortag/" >}}
 {{< my_button href="/docs/microcontrollers/nrf52/thread_sensortag/" text="Thread SensorTag" >}}
 

@@ -15,6 +15,14 @@ toc: true
 
 {{< new_button href="https://github.com/HomeSmartMesh/smart_home_3d_webapp" text="Webapp 3D Github Repo" >}}
 
+## UWB Indoors positioning
+
+{{< figure src="/images/home3d/uwb-tag-3d.gif" width=600 >}}
+
+UWB development environment
+{{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band RTLS" >}}
+
+
 ## Getting Started
 1. host this project on your local raspberry pi or see ['Local host vs Remote host' section](#Local-host-vs-remote-host) on how to use the live demo
 2. create your own glTF model from blender (optional)
