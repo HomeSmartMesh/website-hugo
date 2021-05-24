@@ -22,6 +22,9 @@ toc: true
 UWB development environment
 {{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band RTLS" >}}
 
+Support, reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel
+{{<icon_button text="Discord - #smart-home-3d " href="https://discord.gg/4mEpx9jyF7" icon="discord" >}}
+
 
 ## Getting Started
 1. host this project on your local raspberry pi or see ['Local host vs Remote host' section](#Local-host-vs-remote-host) on how to use the live demo
@@ -278,3 +281,4 @@ test model : 8000 triangls
 * Samsung galaxy S10 : 60 FPS
 * Samsung galaxy S5 : 14 FPS
 * Samsung galaxy Tab pro (SM-P900) :  N.A (does not fully load, simplified scene with 3000 tri at 2 FPS)
+
