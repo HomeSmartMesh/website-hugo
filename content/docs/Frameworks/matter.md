@@ -11,7 +11,7 @@ toc: true
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
 {{<icon_button relref="/docs/networks/thread/" text="OpenThread Guide" >}}
 previously known as `CHIP`
-{{<image src="/images/chip.png" width="400px" href="/docs/frameworks/chip/" >}}
+{{<image src="/images/matter/overview.png" width="400px" href="/docs/frameworks/chip/" >}}
 # Overview
 
 {{<image src="/design/Protocols.svg">}}
@@ -28,9 +28,11 @@ The statement above dates back to 12 Feb 2021 shows the discomfort of the Zigbee
 
 ## Links
 
-{{< icon_button href="https://www.connectedhomeip.com/" text="CHIP website" icon="new" >}}
+{{< icon_button href="https://buildwithmatter.com/" text="build with Matter website" icon="new" >}}
 
 {{< icon_button href="https://github.com/project-chip/connectedhomeip" text="Github Repo" icon="github" >}}
+
+{{< icon_button href="https://zigbeealliance.org/wp-content/uploads/2020/08/Zigbee-Alliance-Associate-Member-Agreement-V2.pdf" text="Associate Member Agreement" icon="pdf" >}}
 
 ## Tools
 

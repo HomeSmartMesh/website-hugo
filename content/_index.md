@@ -82,7 +82,7 @@ Sensors to MQTT to influx to Grafana.
 Multiple Python and Node.js standalone services
 
 <--->
-{{< image src="/images/chip.png" height="150px" href="/docs/frameworks/matter/" >}}
+{{< image src="/images/matter/overview.png" height="150px" href="/docs/frameworks/matter/" >}}
 
 {{< my_button href="/docs/frameworks/chip/" text="ConnectedHomeIP ➡ Matter" >}}
 

@@ -114,6 +114,8 @@ using the core functions and adding TDMA, Clock calib,...
 
 Community contribution of Zephyr based examples with decadriver
 {{<icon_button href="https://github.com/foldedtoad/dwm1001" text="dwm1001" icon="github">}}
+
+* using custom board `nrf52_dwm1001`
 * Path `dwm1001/examples`
 * ex_01 ... ex_14 (simple, sleep, sniff, twr, low power, accell,...)
 * decadriver `DW1000 Device Driver Version 05.01.00`

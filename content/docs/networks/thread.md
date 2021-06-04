@@ -561,10 +561,10 @@ ClientList can not open the Predefined Topic List.     /etc/predefinedTopic.conf
 ## Arduino
 * in discussion in this [openthread issue#1803](https://github.com/openthread/openthread/issues/1803), the issue is that Arduino lacks the netwroking layers required to provide a descent interface to the app.
 
-# CHIP Node
-As the `CHIP Protocol` can run over `Thread`, it is possible to connect CHIP applications.
+# Build with Matter Node
+As the `Matter Protocol` can run over `Thread`, it is possible to connect Matter applications.
 
-{{<icon_button relref="/docs/frameworks/chip/" text="More about Project CHIP" >}}
+{{<icon_button relref="/docs/frameworks/matter/" text="More about Project Matter" >}}
 
 # Test and Debug
 

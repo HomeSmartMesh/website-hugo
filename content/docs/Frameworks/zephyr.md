@@ -10,13 +10,50 @@ toc: true
 {{<icon_button relref="/docs/networks/thread/" text="Thread Protocol" >}}
 {{<icon_button relref="/docs/frameworks/chip/" text="Project Matter" >}}
 
+# Trace with with SystemView
+* [Segger SystemView](https://www.segger.com/products/development-tools/systemview/) : Real time OS Tracing
+* [SystemView user manual](https://www.segger.com/downloads/free-utilities/UM08027) : Getting started, API reference,...
+
+{{<hint warning>}}It's highly recommended to read the SystemView user manual to understand how the RT OS concepts are displayed{{</hint>}}
+
+Steps :
+* Install SystemView
+* compile the target with the overlay `overlay-tracing.conf` and flash, reset
+* SystemView Recorder configuration `J-Link`, `NRF52840_XXAA`, `SWD`, `4000 KHz`
+* SystemView `Start Recording` the `Stop Recording`
+* if SystemViewer keeps crashing try closing the window `CPU load`
+
+{{<gfigure src="/images/zephyr/systemview.webp" width="500px">}}
+
+content of `overlay-tracing.conf`
+```conf
+#Tracing
+CONFIG_TRACING=y
+CONFIG_SEGGER_SYSTEMVIEW=y
+CONFIG_THREAD_NAME=y
+CONFIG_SEGGER_SYSTEMVIEW_BOOT_ENABLE=y
+# careful adjustment as long as there is enough SRAM use it for tracing 128 KB
+CONFIG_SEGGER_SYSVIEW_RTT_BUFFER_SIZE=131072
+```
+## Hints
+* power on tracing : In case a power-on startup has to be traced, it is necessary to increase the target local RTT buffer size, because it keeps bauffering the tracing until the user has the time to start SystemView recording. For that, it is important to check how much free memory the system has, and then adjust the RTT buffer
+* ISR ID Identification : the function `sysview_get_interrupt()` is using `SCB->ICSR VECTACTIVE`
+
+
+{{<table "table table-striped table-bordered">}}
+VECTACTIVE | IRQ
+-----------|-----
+19 | nrfx_twi_0_irq_handler
+{{</table>}}
+
+
 # Debug with OZone
 * [Ozone](https://www.segger.com/products/development-tools/ozone-j-link-debugger/) : performance analyzer
 * [RTOS Awareness](https://www.segger.com/products/development-tools/ozone-j-link-debugger/technology/rtos-awareness/) : debug an RTOS
 
 Steps :
 * make sure to use Ozone version 3.22d or higher
-* in the new project wizard, make sure a peripheral svd file is selected e.g. `nRF5_SDK_for_Thread_and_Zigbee_v4.1.0_32ce5f8/modules/nrfx/mdk/nrf52840.svd`
+* in the new project wizard, make sure an svd file is selected e.g. from the Zephyr projecz `modules\hal\nordic\nrfx\mdk\nrf52840.svd`
 * For a Segger j-link edu, select the Target interface SWD
 * compile with `CONFIG_DEBUG_THREAD_INFO=y`
 * select the elf file of the Zephyr build `hsm/hsm/samples/tag_power/build/zephyr/zephyr.elf`
