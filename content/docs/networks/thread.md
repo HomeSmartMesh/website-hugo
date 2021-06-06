@@ -22,14 +22,12 @@ toc: true
 
 * some elements have link to the corresponding websites
 
+{{<icon_button href="https://openthread.io/" text="Open Thread" icon="new" >}}
+{{<icon_button href="https://openthread.io/guides/thread-primer/ipv6-addressing" text="IPV6 adressing"  icon="new" >}}
+{{<icon_button href="https://openthread.io/guides/thread-primer/network-discovery" text="Network discovery"  icon="new" >}}
+{{<icon_button href="https://openthread.io/guides/border-router/docker/test-connectivity" text="test connectivity"  icon="new" >}}
+{{<icon_button href="https://openthread.io/reference" text="openthread API reference"  icon="new" >}}
 
-{{< icon_button href="https://openthread.io/" text="Open Thread" icon="new" >}}
-
-{{< icon_button href="https://openthread.io/guides/thread-primer/ipv6-addressing" text="IPV6 adressing"  icon="new" >}}
-
-{{< icon_button href="https://openthread.io/guides/thread-primer/network-discovery" text="Network discovery"  icon="new" >}}
-
-{{< icon_button href="https://openthread.io/guides/border-router/docker/test-connectivity" text="test connectivity"  icon="new" >}}
 
 ## Cheat sheet
 * IPv6 bit length : 128 bit = 8x 16 ibts => `00b1:00b2:00b3:00b4:00b5:00b6:00b7:00b8`
@@ -605,7 +603,7 @@ sudo ot-ctl
 ```
 
 ## cli openthread firmware
-{{<icon_button href="ot-cli-ftd_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-cli-ftd thread-reference-20191113" icon="download" >}}
+{{<icon_button href="/data/ot-cli-ftd_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-cli-ftd thread-reference-20191113" icon="download" >}}
 
 ## cli Nordic firmware
 * A dongle flashed with `cli` firmware can be attached to the serial console and offer a command line interpreter that helps with testing
@@ -620,9 +618,9 @@ build and flash the cli example
 on the cli
 
 ```bash
-panid 0x1234
+panid 0x1212
 panid
-channel 13
+channel 18
 channel
 networkname OpenThreadDemo
 networkname
@@ -740,6 +738,8 @@ nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --ve
 {{<icon_button text="Home Smart Mesh - Thread channel" href="https://discord.gg/A5X64fkM8m" icon="discord" >}}
 
 * see also
+{{<icon_button text="google groups openthread users" href="https://groups.google.com/g/openthread-users" icon="new" >}}
+
 {{<icon_button text="threadgroup FAQ" href="https://www.threadgroup.org/support#faq" icon="new" >}}
 
 {{<faq>}}

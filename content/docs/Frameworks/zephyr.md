@@ -38,12 +38,15 @@ CONFIG_SEGGER_SYSVIEW_RTT_BUFFER_SIZE=131072
 ## Hints
 * power on tracing : In case a power-on startup has to be traced, it is necessary to increase the target local RTT buffer size, because it keeps bauffering the tracing until the user has the time to start SystemView recording. For that, it is important to check how much free memory the system has, and then adjust the RTT buffer
 * ISR ID Identification : the function `sysview_get_interrupt()` is using `SCB->ICSR VECTACTIVE`
-
+* not the same as `IRQn_Type` defined in `modules\hal\nordic\nrfx\mdk\nrf52840.h`
 
 {{<table "table table-striped table-bordered">}}
 VECTACTIVE | IRQ
 -----------|-----
+16 | nrf_clock_event_check
+17 | nrf5_radio_irq
 19 | nrfx_twi_0_irq_handler
+
 {{</table>}}
 
 

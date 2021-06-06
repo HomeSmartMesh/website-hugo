@@ -81,14 +81,13 @@ The SDK samples are presented in two folds, first the overall application includ
 
 ```bash
 cd hsm/samples/tag_sensors_broadcast
-west build -b nrf52840_sensortag -t guiconfig
-west build -b nrf52840_sensortag -- -DCONF_FILE="prj.conf overlay-shell.conf"
+west build -b nrf52840_sensortag
 west flash
 ```
 
-
 {{<details "default config">}}
 ```conf
+# Peripherals
 CONFIG_ADC=y
 CONFIG_BATTERY=y
 
@@ -98,8 +97,19 @@ CONFIG_VEML6030=y
 CONFIG_MS8607=y
 
 CONFIG_GPIO=y
-CONFIG_SERIAL=n
 
+# Power optimization
+CONFIG_PM=y
+CONFIG_PM_DEVICE=y
+CONFIG_SERIAL=n
+CONFIG_LOG=n
+CONFIG_CONSOLE=n
+CONFIG_UART_CONSOLE=n
+CONFIG_RTT_CONSOLE=n
+CONFIG_USE_SEGGER_RTT=n
+CONFIG_PRINTK=n
+
+# message generation
 CONFIG_NEWLIB_LIBC=y
 CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y
 
@@ -107,12 +117,20 @@ CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y
 CONFIG_NETWORKING=y
 CONFIG_NET_L2_OPENTHREAD=y
 
+# Minimal Thread Device & Sleepy End Device
+CONFIG_OPENTHREAD_MTD=y 
+CONFIG_OPENTHREAD_MTD_SED=y
+CONFIG_OPENTHREAD_SHELL=n
+#CONFIG_OPENTHREAD_FTD=y
+CONFIG_OPENTHREAD_POLL_PERIOD=600000
+#CONFIG_OPENTHREAD_MANUAL_START=y
+
 CONFIG_OPENTHREAD_CHANNEL=13
 CONFIG_OPENTHREAD_PANID=4660
 CONFIG_OPENTHREAD_NETWORK_NAME="OpenThreadDemo"
 CONFIG_OPENTHREAD_XPANID="11:11:11:11:22:22:22:22"
 CONFIG_OPENTHREAD_MASTERKEY="00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff"
-CONFIG_OPENTHREAD_FTD=y
+
 
 #CONFIG_NET_CONFIG_MY_IPV6_ADDR="fdde:ad00:beef::1"
 #CONFIG_NET_CONFIG_PEER_IPV6_ADDR="ff02::1"
@@ -134,12 +152,6 @@ CONFIG_NET_SOCKETS_POSIX_NAMES=y
 CONFIG_NET_SOCKETS_POLL_MAX=4
 CONFIG_NET_CONNECTION_MANAGER=y
 
-# Logging
-CONFIG_NET_LOG=y
-CONFIG_LOG=y
-CONFIG_NET_STATISTICS=y
-CONFIG_PRINTK=y
-
 # Network buffers
 CONFIG_NET_PKT_RX_COUNT=16
 CONFIG_NET_PKT_TX_COUNT=16
@@ -151,20 +163,17 @@ CONFIG_NET_CONTEXT_NET_PKT_POOL=y
 CONFIG_NET_IF_UNICAST_IPV6_ADDR_COUNT=3
 CONFIG_NET_IF_MCAST_IPV6_ADDR_COUNT=4
 CONFIG_NET_MAX_CONTEXTS=10
-
-# Network shell
-CONFIG_NET_SHELL=y
-
 ```
 {{</details>}}
 
 {{<details "build log">}}
 ```bash
+D:\Dev\nrf52\hsm\hsm\samples\tag_sensors_broadcast>west build -b nrf52840_sensortag -- -DCONF_FILE=prj.conf
 -- west build: generating a build system
 Including boilerplate (Zephyr base): D:/Dev/nrf52/hsm/zephyr/cmake/app/boilerplate.cmake
 -- Application: D:/Dev/nrf52/hsm/hsm/samples/tag_sensors_broadcast
--- Zephyr version: 2.5.99 (D:/Dev/nrf52/hsm/zephyr)
--- Found Python3: C:/Users/User/AppData/Local/Programs/Python/Python39/python.exe (found suitable exact version "3.9.0") found components: Interpreter
+-- Zephyr version: 2.6.0-rc1 (D:/Dev/nrf52/hsm/zephyr), build: v2.6.0-rc1-120-g41e885947e4f
+-- Found Python3: C:/Users/User/AppData/Local/Programs/Python/Python39/python.exe (found suitable exact version "3.9.0") found components: Interpreter 
 -- Found west (found suitable version "0.10.1", minimum required is "0.7.1")
 -- Board: nrf52840_sensortag
 -- Cache files will be written to: D:/Dev/nrf52/hsm/zephyr/.cache
@@ -172,10 +181,10 @@ Including boilerplate (Zephyr base): D:/Dev/nrf52/hsm/zephyr/cmake/app/boilerpla
 -- Found BOARD.dts: D:/Dev/nrf52/hsm/hsm/boards/arm/nrf52840_sensortag/nrf52840_sensortag.dts
 -- Generated zephyr.dts: D:/Dev/nrf52/hsm/hsm/samples/tag_sensors_broadcast/build/zephyr/zephyr.dts
 ...
-[558/558] Linking CXX executable zephyr\zephyr.elf
+[536/536] Linking CXX executable zephyr\zephyr.elf
 Memory region         Used Size  Region Size  %age Used
-           FLASH:      319096 B         1 MB     30.43%
-            SRAM:       94016 B       256 KB     35.86%
+           FLASH:      177224 B         1 MB     16.90%
+            SRAM:       71200 B       256 KB     27.16%
         IDT_LIST:          0 GB         2 KB      0.00%
 ```
 {{</details>}}
@@ -215,6 +224,19 @@ rtt:~$ rtt:~$ thread_tags/7009D837C7BB557A{"alive":2,"voltage":3.041,"light":10.
 [00:00:25.298,156] <inf> main: sleeping 10 sec
 ```
 {{</details>}}
+
+Low power performance :
+
+{{<gfigure src="/images/thread_sensortag/deep_sleep_current.png" >}}
+
+{{<table "table table-striped table-bordered">}}
+Period | Average Current
+-----------|-----
+deep sleep | 3.19 uA
+sensors acquisition | 54 uA
+wakeup cycle 1.7 sec including RF | 125 uA
+{{</table>}}
+
 
 * for info on the raspberry pi border router setup and networking see :
 {{<button relref="/docs/networks/thread#openthread---setup" >}}border router setup{{</button>}}
@@ -260,9 +282,6 @@ and [another raspi python scripts](https://github.com/HomeSmartMesh/raspi/tree/m
 
 {{<gfigure src="/images/thread_sensortag/grafana.png" width="200px">}}
 
-{{<hint danger>}}As of 14 May 2021, the port of Zephyr to nrf52 only supports `PM_STATE_OFF`{{</hint>}}
-* the [power.c](https://github.com/zephyrproject-rtos/zephyr/blob/21d1ad3762302b3e461953df59430c77e0709274/soc/arm/nordic_nrf/nrf52/power.c) shows the current implementation of `pm_power_state_set()`
-* As of the nRF52840 datasheet section 5.3.3 System OFF mode. This mode cannot be woken up from RTC, but can be woken up by GPIO through DETECT signal.
 ### device treee drivers
 the driver sensors are declared in the custom board device treee source `nrf52840_sensortag.dts`.
 ```conf
