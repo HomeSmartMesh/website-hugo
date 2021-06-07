@@ -12,6 +12,7 @@ toc: true
 #Dongle : https://www.kirale.com/products/ktbrn1/
 ---
 {{<load-svg-pan-zoom>}}
+{{<load-photoswipe >}}
 
 {{<icon_button relref="/docs/microcontrollers/nrf52/thread_sensortag/" text="Thread SensorTag" >}}
 {{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
@@ -731,6 +732,16 @@ nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --ve
 
 * for build instructions see the rcp building steps in the [rcp OpenThread](#openthread) section, the build commands generates both npc and rcp elf files.
 
+
+
+# Thread UDP packets
+* Thread UDP packets are encapsulated using 6LoWPAN which has a payload of 88 Bytes, that's why such a json UDP text message 
+```text
+thread_tags/7009D837C7BB557A{"alive":18673,"voltage":3.106,"light":184.948,"temperature":24.56,"humidity":46.49,"pressure":961.90}
+```
+is split in two packets where each has an ACK. From one side that's a lot x4 times of what the RF power consumption could be for a simple broadcast, but at the same time it avoids taking care of manually adapting the program behaviour to accomodate the protocol. Also keeping a json text format instead of binary avoids a middle layer converting binary to text readable by apps, that would cost a bottleneck dependency between each device and the gateway.
+
+{{<gfigure src="/images/thread/udp over 6LoWPAN.png">}}
 
 
 # FAQ - Discussion

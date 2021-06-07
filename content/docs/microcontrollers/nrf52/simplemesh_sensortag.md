@@ -8,6 +8,7 @@ weight: 3
 toc: true
 ---
 {{<load-svg-pan-zoom>}}
+{{<load-photoswipe >}}
 
 {{<icon_button relref="/docs/networks/nrf/" text="Networks / Simple Mesh" >}}
 {{<icon_button relref="/docs/frameworks/raspi_iot/" text="Frameworks / Raspi IoT" >}}
@@ -77,4 +78,19 @@ board render
 * 1.5 ms @ 3.5 mA
 * 50 uA @ infinite
 
-{{<image src="/images/simplemesh_sensortag/Power measures.png" >}}
+{{<gfigure src="/images/simplemesh_sensortag/Power measures.png" >}}
+
+## PPK-II Measures
+### First wakeup
+{{<gfigure src="/images/simplemesh_sensortag/first wakeup.png" >}}
+
+### wakeup cycle type 1
+{{<gfigure src="/images/simplemesh_sensortag/wakeup cycle.png" >}}
+
+### wakeup cycle type 2
+{{<gfigure src="/images/simplemesh_sensortag/wakeup_cycle_t2.png" >}}
+
+### sleep period
+{{<gfigure src="/images/simplemesh_sensortag/sleep_period.png" >}}
+
+
