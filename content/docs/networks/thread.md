@@ -85,13 +85,6 @@ A Thread network setup contains the following Nodes
 
 {{<icon_button href="https://github.com/openthread/openthread/tree/master/examples/platforms/nrf528xx/nrf52840" text="nRF52840 Build instructions" icon="github" >}}
 
-When using docker simply pull the environment
-```bash
-docker pull openthread/environment:latest
-docker run -it --rm openthread/environment bash
-```
-then continue the same way on linux or docker from windows
-
 ```bash
 cd ~/opentrhead
 ./script/bootstrap
@@ -100,8 +93,23 @@ sudo rm -rf output/
 make -f examples/Makefile-nrf52840 USB=1
 cd output/nrf52840/bin/
 arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
+nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
 ```
+{{<icon_button href="https://github.com/openthread/ot-nrf528xx/blob/main/src/nrf52840/README.md" text="new nRF52840 Build instructions" icon="github" >}}
+```bash
+cd ~/ot-nrf528xx
+./script/bootstrap
+./bootstrap
+sudo rm -rf build/
+./script/build nrf52840 USB_trans -DOT_THREAD_VERSION=1.2
+cd build/bin/
+arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
+nrfjprog -f nrf52 --eraseall
+nrfjprog -f nrf52 --chiperase --program ot-rcp.hex --reset
+```
+
+
 {{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
 
 {{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
@@ -143,20 +151,28 @@ Mar  6 13:00:07 3d926b9c2cee otbr-agent[145]: [CRIT]-PLAT----: HandleRcpTimeout(
 git clone https://github.com/openthread/ot-br-posix
 cd ot-br-posix
 ./script/bootstrap
-NETWORK_MANAGER=0 ./script/setup
-nano /etc/default/otbr-agent
+INFRA_IF_NAME=eth0 ./script/setup
+sudo nano /etc/default/otbr-agent
 sudo reboot now
 sudo systemctl status
 sudo ot-ctl state
 ```
-*issues*: in case a `dnsmasq` service already running, might have to be disabled first
+
+* *issue*: in case a `dnsmasq` service already running, might have to be disabled first
+* *issue*: in case of not being able to create a network (not advertising on wireshark) a new raspi install might be required as network adapters conflicts might prevent the otber-agent from running properly
+
+the `/etc/default/otbr-agent` service config file should be configured with the right adapter
+```bash
+# Default settings for otbr-agent. This file is sourced by systemd
+# Options to pass to otbr-agent
+OTBR_AGENT_OPTS="-I wpan0 -B eth0 spinel+hdlc+uart:///dev/ttyACM0"
+```
 
 The status of the running services look as follows.
 These services should now be available :
 * `avahi-daemon`
-* `otbr-agent`
-* `otbr-web`
-* `ncp_state_notifier`
+* `otbr-agent` : access the usb device and creates wpan0
+* `otbr-web`   : creates the OTBorderRouter web server
 * `wpa_supplicant`
 {{<details "sudo systemctl status">}}
 ```bash
@@ -566,62 +582,27 @@ As the `Matter Protocol` can run over `Thread`, it is possible to connect Matter
 {{<icon_button relref="/docs/frameworks/matter/" text="More about Project Matter" >}}
 
 # Test and Debug
-
-## with server command line
-* using `wpanctl`
-
-{{< details "host wpantund wpanctl. Click to expand..." >}}
-```shell
-sudo nano /etc/wpantund.conf
-
-sudo wpanctl status
-
-sudo wpanctl scan
-
-sudo wpanctl leave
-
-sudo wpanctl setprop w
-
-sudo wpanctl setprop Channel: 15
-
-sudo wpanctl setprop Network:PANID 0x1234
-
-sudo wpanctl setprop Network:Key 00112233445566778899aabbccddeeff
-
-sudo wpanctl config-gateway -d "fd11:22::"
-
-sudo wpanctl form "nRF52840thread"
-
-sudo wpanctl permit-join 300
-
-w join -n "MeasureFall" -c 15 -k 00112233445566778899aabbccddeeff -p 0x1234
-```
-{{</ details>}}
-
 ## cli on border router
+in this case the dongle is flashed with ot-rcp.hex not with ot-cli.hex
 ```shell
+sudo ot-ctl state
 sudo ot-ctl
+>
 ```
 
 ## cli openthread firmware
 {{<icon_button href="/data/ot-cli-ftd_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-cli-ftd thread-reference-20191113" icon="download" >}}
 
-## cli Nordic firmware
-* A dongle flashed with `cli` firmware can be attached to the serial console and offer a command line interpreter that helps with testing
-
-build and flash the cli example
 ```bash
->cd "examples\thread\cli\ftd\usb\pca10059\mbr\armgcc\Makefile"
->make
->make flash_mbr
->make flash
+nrfjprog -f nrf52 --eraseall
+nrfjprog -f nrf52 --program ot-cli-ftd.hex --sectorerase --verify
 ```
 on the cli
 
 ```bash
-panid 0x1212
+panid 0x1234
 panid
-channel 18
+channel 13
 channel
 networkname OpenThreadDemo
 networkname
