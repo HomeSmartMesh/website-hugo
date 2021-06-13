@@ -98,11 +98,6 @@ board render
 * `Thread sensortag` is using MS8607 and `nRF52832 sensortag` is using BME280
 * `Thread sensortag` is sampling every 3 sec while `nRF52832 sensortag` every 40 sec
 * `Thread sensortag` has no case while `nRF52832 sensortag` is inside a PLA case
-### light
-{{<gfigure src="/images/nrf52832_sensortag/light.png" >}}
-{{<gfigure src="/images/nrf52832_sensortag/light_day.png" >}}
-{{<gfigure src="/images/nrf52832_sensortag/light_hour.png" >}}
-
 ### temperature
 {{<gfigure src="/images/nrf52832_sensortag/compare_temperature.png" >}}
 {{<gfigure src="/images/nrf52832_sensortag/temperature_hour.png" >}}
@@ -111,3 +106,10 @@ board render
 {{<gfigure src="/images/nrf52832_sensortag/humidity_hour.png" >}}
 ### pressure
 {{<gfigure src="/images/nrf52832_sensortag/pressure.png" >}}
+
+## MAX44009 vs VEML6030
+* `Thread sensortag` is using VEML6030 and `nRF52832 sensortag` is using MAX44009
+### light
+{{<gfigure src="/images/nrf52832_sensortag/light.png" >}}
+{{<gfigure src="/images/nrf52832_sensortag/light_day.png" >}}
+{{<gfigure src="/images/nrf52832_sensortag/light_hour.png" >}}

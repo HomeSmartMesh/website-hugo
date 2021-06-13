@@ -9,10 +9,19 @@ images: ["/images/uwb/DRTLS.webp"]
 weight: 2
 toc: true
 ---
+
+{{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm1001_dev/" text="Microcontrollers / nRF52 / UWB DWM1001 dev" >}}
 
-An Ultra-Wide-Band networks can form a mesh network, in addition, the main feature is the Real-Time-Locating-System capability.
-# Real Time Locating System
+An Ultra-Wide-Band networks can form a mesh network, in addition, the main feature is the RTLS: Real-Time-Locating-System capability.
+# RTLS Gen 2
+{{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
+{{<image src="/images/uwb/dwm3001-cdk.webp" width="150px">}}
+
+* DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
+* using nRF52833 as host capable of Thread and Bluetooth Mesh and Direction finding
+
+# RTLS Gen 1
 
 {{<image src="/images/uwb/DRTLS.webp">}}
 
@@ -22,7 +31,6 @@ An Ultra-Wide-Band networks can form a mesh network, in addition, the main featu
 * [eCos](https://ecos.sourceware.org/) : Free Open source Real-Time Operating-System
 
 Decawave provides a ready to use localisation system based on a preflashed `DWM1001_PANS_R2.0.hex` firmware. The functional concept is described in `DWM1001 System Overview and Performance.pdf` including the time division protocol and the format of all the 802.15.4 Frames.
-
 ## Hardware
 UWM Chips available from Decawave, now Qorvo. Qorvo is also the supplier of Apple UWB chips.
 

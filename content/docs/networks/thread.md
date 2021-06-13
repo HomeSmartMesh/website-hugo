@@ -75,76 +75,8 @@ A Thread network setup contains the following Nodes
 
 * [Wireshark sniffer](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Sniffer-for-Bluetooth-LE) : dongle that captures all frames and shows them on wireshark
 
-
-# Radio Co-Processor (RCP)
-* This is the new version recommended by OpenThread for current and new versions aof border routers, see [Vendor support RCP](https://openthread.io/platforms#radio-co-processor-rcp) for details.
-* [How to build](https://openthread.io/guides/build#how_to_build_openthread)
-* built using docker container
-## OpenThread
-* successfully tested with the [OpenThread docker](#openthread---docker) raspberry pi image blow.
-
-{{<icon_button href="https://github.com/openthread/openthread/tree/master/examples/platforms/nrf528xx/nrf52840" text="nRF52840 Build instructions" icon="github" >}}
-
-```bash
-cd ~/opentrhead
-./script/bootstrap
-./bootstrap
-sudo rm -rf output/
-make -f examples/Makefile-nrf52840 USB=1
-cd output/nrf52840/bin/
-arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
-nrfjprog -f nrf52 --eraseall
-nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
-```
-{{<icon_button href="https://github.com/openthread/ot-nrf528xx/blob/main/src/nrf52840/README.md" text="new nRF52840 Build instructions" icon="github" >}}
-```bash
-cd ~/ot-nrf528xx
-./script/bootstrap
-./bootstrap
-sudo rm -rf build/
-./script/build nrf52840 USB_trans -DOT_THREAD_VERSION=1.2
-cd build/bin/
-arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
-nrfjprog -f nrf52 --eraseall
-nrfjprog -f nrf52 --chiperase --program ot-rcp.hex --reset
-```
-
-
-{{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
-
-{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
-
-{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
-
-##  Zephyr v2.5.99
-* Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
-* For details on Zephyr install see
-{{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
-
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
-```bash
-cd zephyrproject
-source zephyr/zephyr-env.sh
-cd zephyr/samples/net/openthread/coprocessor
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-rcp.conf overlay-usb-nrf-br.conf"
-cd build/zephyr
-nrfjprog -f nrf52 --program zephyr.hex --sectorerase --verify
-```
-
-{{<details "border router error details...">}}
-tested version in zephyr 2.5.99 and border router openthread docker
-```bash
-Mar  6 13:00:06 3d926b9c2cee avahi-daemon[129]: Server startup complete. Host name is 3d926b9c2cee.local. Local service cookie is 2646371747.
-Mar  6 13:00:07 3d926b9c2cee otbr-agent[145]: [CRIT]-PLAT----: HandleRcpTimeout() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:2168: RadioSpinelNoResponse
-```
-{{</details>}}
-
-
-
-
 # Border Router
-## OpenThread - setup
+## raspberry pi setup
 {{<icon_button href="https://openthread.io/guides/border-router/build#set-up-the-border-router" text="Setup - OpenThread..."  icon="new" >}}
 
 ```bash
@@ -284,6 +216,28 @@ wpan0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1280
 ```
 {{</details>}}
 
+## Radio Co-Processor (RCP)
+{{<icon_button href="https://github.com/openthread/ot-nrf528xx/blob/main/src/nrf52840/README.md" text="new nRF52840 Build instructions" icon="github" >}}
+```bash
+cd ~/ot-nrf528xx
+./script/bootstrap
+./bootstrap
+sudo rm -rf build/
+./script/build nrf52840 USB_trans  -DOT_THREAD_VERSION=1.2
+cd build/bin/
+arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
+nrfjprog -f nrf52 --eraseall
+nrfjprog -f nrf52 --chiperase --program ot-rcp.hex --reset
+```
+
+
+{{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
+
+
 ## udp test
 {{<hint warning>}}
 Note that for networking tests, a border router installation is recommended or network between docker and the host has to be configured.
@@ -306,58 +260,6 @@ on the nRF52 node Zephyr shell :
 >ot udp open
 >ot udp send ff02::1 4242 hi_there_now
 ```
-## OpenThread - docker
-{{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="Reference on 'Run OTBR Docker'..."  icon="new" >}}
-### latest
-{{<hint warning>}}This method only deploys the lates available docker container, see [version](#version) for a specific version.{{</hint>}}
-* use with the OpenThread dongle firmware [detailed above](#openthread)
-* The docker command below runs deamonized (in the background) and maps port 80.
-* Note that restarting the same container does not work there fore `-rm` would help restart a new container each time
-* Two issues happen when mapping port 80 only, the `Topology` menu does not show anything and the Android comissioning App can't reach the border router so a falback on `host` networking with the second docker command solves these issues.
-```bash
-docker run --rm --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
-        net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
-        -p 80:80 --dns=127.0.0.1 --volume \
-        /dev/ttyACM0:/dev/ttyACM0 --privileged openthread/otbr \
-        --radio-url spinel+hdlc+uart:///dev/ttyACM0
-
-docker run --rm --name otbr-metal -d \
-  --sysctl "net.ipv6.conf.all.disable_ipv6=0 net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
-  --network host --dns=127.0.0.1 \
-  --volume /dev/ttyACM0:/dev/ttyACM0 \
-  --privileged openthread/otbr \
-  --radio-url spinel+hdlc+uart:///dev/ttyACM0
-```
-Below commands to run in separate windows
-* listen to the conainer logs
-* open a shell in the container
-* open a command line to the RCP
-```bash
-docker logs --follow otbr-metal
-docker exec -it otbr-metal /bin/bash
-ot-ctl
-```
-### version
-These commands allow creating a docker image based on a specific commit, e.g. for testing with Thread version 1.1 instead of 1.2. The image is built with this [Dockerfile](https://github.com/openthread/ot-br-posix/blob/main/etc/docker/Dockerfile).
-```bash
-git clone https://github.com/openthread/ot-br-posix
-cd ot-br-posix
-git checkout 4b6d3b863f
-#git checkout 615de5  #2021-03-22
-#git checkout thread-br-certified-20180819
-git submodule update --init --recursive
-docker build --no-cache -t openthread/otbr -f etc/docker/Dockerfile .
-```
-Now running the same command above from the section [latest](#latest) with the same image `openthread/otbr` will run the newly built image.
-
-## Nordic - sdcard image
-
-* download a ready raspberry pi image
-* successfully tested with the Nordif Firmware from the SDK v4.1.0
-
-{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..."  icon="new" >}}
-
-
 ## Form a network
 
 Upon success you should be able to connect on the raspberry pi url `http://10.0.0.41/`
@@ -581,7 +483,7 @@ As the `Matter Protocol` can run over `Thread`, it is possible to connect Matter
 
 {{<icon_button relref="/docs/frameworks/matter/" text="More about Project Matter" >}}
 
-# Test and Debug
+# Command Line Interface
 ## cli on border router
 in this case the dongle is flashed with ot-rcp.hex not with ot-cli.hex
 ```shell
@@ -590,19 +492,32 @@ sudo ot-ctl
 >
 ```
 
-## cli openthread firmware
+## cli dongle
+{{<icon_button href="https://github.com/openthread/ot-nrf528xx/blob/main/src/nrf52840/README.md" text="new nRF52840 Build instructions" icon="github" >}}
+```bash
+cd ~/ot-nrf528xx
+./script/bootstrap
+./bootstrap
+sudo rm -rf build/
+./script/build nrf52840 USB_trans -DOT_COMMISSIONER=ON -DOT_JOINER=ON -DOT_THREAD_VERSION=1.2
+cd build/bin/
+arm-none-eabi-objcopy -O ihex ot-cli-ftd ot-cli-ftd-com-join.hex
+```
+
 {{<icon_button href="/data/ot-cli-ftd_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-cli-ftd thread-reference-20191113" icon="download" >}}
+{{<icon_button href="/data/ot-cli-ftd-com-join-11.06.2021.hex" text="ot-cli-ftd thread-reference-20191113" icon="download" >}}
 
 ```bash
 nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --program ot-cli-ftd.hex --sectorerase --verify
 ```
-on the cli
+
+* node with credentials
 
 ```bash
 panid 0x1234
 panid
-channel 13
+channel 24
 channel
 networkname OpenThreadDemo
 networkname
@@ -612,6 +527,22 @@ ifconfig up
 thread start
 state
 ```
+* commissioner, see [openthread - commissioning](https://openthread.io/guides/build/commissioning)
+
+```bash
+commissioner start
+commissioner joiner add f4ce36ea62a65434 ABCDE2
+```
+* joiner
+
+```bash
+eui64
+>f4ce36ea62a65434
+ifconfig up
+joiner start ABCDE2
+```
+
+
 Note `masterkey` command is for the `Network Key`
 
 at this stage the `state` command should log `child`
@@ -767,3 +698,97 @@ can I run openthread with platformio ?
 <--->
 This is under investigation and should be available soon. The current platformio integration of Zephyr-OS does not include openthread, but this is likely to change any time soon.
 {{</faq>}}
+
+# History
+In the history are moved sections that are deprecated or no longer relevant kept for historical info only
+## Nordic - sdcard image
+
+* download a ready raspberry pi image
+* successfully tested with the Nordif Firmware from the SDK v4.1.0
+
+{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..."  icon="new" >}}
+
+## OpenThread - docker
+{{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="Reference on 'Run OTBR Docker'..."  icon="new" >}}
+### latest
+{{<hint warning>}}This method only deploys the lates available docker container, see [version](#version) for a specific version.{{</hint>}}
+* use with the OpenThread dongle firmware [detailed above](#openthread)
+* The docker command below runs deamonized (in the background) and maps port 80.
+* Note that restarting the same container does not work there fore `-rm` would help restart a new container each time
+* Two issues happen when mapping port 80 only, the `Topology` menu does not show anything and the Android comissioning App can't reach the border router so a falback on `host` networking with the second docker command solves these issues.
+```bash
+docker run --rm --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
+        net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
+        -p 80:80 --dns=127.0.0.1 --volume \
+        /dev/ttyACM0:/dev/ttyACM0 --privileged openthread/otbr \
+        --radio-url spinel+hdlc+uart:///dev/ttyACM0
+
+docker run --rm --name otbr-metal -d \
+  --sysctl "net.ipv6.conf.all.disable_ipv6=0 net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
+  --network host --dns=127.0.0.1 \
+  --volume /dev/ttyACM0:/dev/ttyACM0 \
+  --privileged openthread/otbr \
+  --radio-url spinel+hdlc+uart:///dev/ttyACM0
+```
+Below commands to run in separate windows
+* listen to the conainer logs
+* open a shell in the container
+* open a command line to the RCP
+```bash
+docker logs --follow otbr-metal
+docker exec -it otbr-metal /bin/bash
+ot-ctl
+```
+### version
+These commands allow creating a docker image based on a specific commit, e.g. for testing with Thread version 1.1 instead of 1.2. The image is built with this [Dockerfile](https://github.com/openthread/ot-br-posix/blob/main/etc/docker/Dockerfile).
+```bash
+git clone https://github.com/openthread/ot-br-posix
+cd ot-br-posix
+git checkout 4b6d3b863f
+#git checkout 615de5  #2021-03-22
+#git checkout thread-br-certified-20180819
+git submodule update --init --recursive
+docker build --no-cache -t openthread/otbr -f etc/docker/Dockerfile .
+```
+Now running the same command above from the section [latest](#latest) with the same image `openthread/otbr` will run the newly built image.
+
+
+##  RCP - Zephyr v2.5.99
+* Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
+* For details on Zephyr install see
+{{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
+
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
+
+```bash
+cd zephyrproject
+source zephyr/zephyr-env.sh
+cd zephyr/samples/net/openthread/coprocessor
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-rcp.conf overlay-usb-nrf-br.conf"
+cd build/zephyr
+nrfjprog -f nrf52 --program zephyr.hex --sectorerase --verify
+```
+
+{{<details "border router error details...">}}
+tested version in zephyr 2.5.99 and border router openthread docker
+```bash
+Mar  6 13:00:06 3d926b9c2cee avahi-daemon[129]: Server startup complete. Host name is 3d926b9c2cee.local. Local service cookie is 2646371747.
+Mar  6 13:00:07 3d926b9c2cee otbr-agent[145]: [CRIT]-PLAT----: HandleRcpTimeout() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:2168: RadioSpinelNoResponse
+```
+{{</details>}}
+
+
+## Radio Co-Processor (RCP) from main repo
+{{<icon_button href="https://github.com/openthread/openthread/tree/master/examples/platforms/nrf528xx/nrf52840" text="nRF52840 Build instructions" icon="github" >}}
+
+```bash
+cd ~/opentrhead
+./script/bootstrap
+./bootstrap
+sudo rm -rf output/
+make -f examples/Makefile-nrf52840 USB=1
+cd output/nrf52840/bin/
+arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
+nrfjprog -f nrf52 --eraseall
+nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
+```
