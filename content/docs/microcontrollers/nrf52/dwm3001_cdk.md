@@ -1,9 +1,9 @@
 ---
 title: "UWB DWM3001 cdk"
-description: "2nd Generation Ultra Wide Band development kit including"
+description: "2nd Generation Ultra Wide Band development kit including the DW3110 transciever"
 date: 2021-05-08T08:00:00+00:00
 lastmod: 2021-05-08T08:00:00+00:00
-images: ["/images/uwb/DWM1001 DevKit.png"]
+images: ["/images/uwb/dwm3001-cdk.webp"]
 weight: 2
 toc: true
 #{{<load-svg-pan-zoom>}}
@@ -49,7 +49,11 @@ toc: true
 * Location precision : 10 cm
     * Angle precision (for dual antenna) : +/- 10° accuracy, 5° std dev
 
+{{<icon_button text="DW3000 datasheet" href="https://www.decawave.com/wp-content/uploads/2021/03/DW3000_Datasheet.pdf" icon="pdf" >}}
+{{<icon_button text="DW3000 user manual" href="https://www.decawave.com/wp-content/uploads/2021/05/DW3000-User-Manual.pdf" icon="pdf" >}}
+
 {{<icon_button text="FiRa" href="https://www.firaconsortium.org/news/press-releases/2020/05/fira-consortium-publishes-uwb-mac-technical-requirements-to-build-ultrawideband-interoperable-ecosystem" icon="new" >}}
+
 
 # FAQ - Discussion
 * Reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel

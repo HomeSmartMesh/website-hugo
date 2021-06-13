@@ -269,9 +269,10 @@ Upon success you should be able to connect on the raspberry pi url `http://10.0.
 * on the left menu click on `Join` then select the required paramters (e.g. Channel,...) then click on `FORM` 
 ## wireshark sniffing
 
-  git clone https://github.com/NordicSemiconductor/nRF-Sniffer-for-802.15.4
-
-* Flash the `nrf802154_sniffer_dongle.hex`
+* git clone https://github.com/NordicSemiconductor/nRF-Sniffer-for-802.15.4
+* Folow the user guide especially section `Installing the nRF Sniffer capture plugin in Wireshark`
+  * Flash the `nrf802154_sniffer_dongle.hex`
+  * configure the used masterkeys in wireshark menu `Edit/Preferences` then `Protocols/IEEE 802.15.4` in Decryption Keys `Edit...`
 
 When Forming a network, some Pakets can be sniffed including advertisment
 
@@ -512,7 +513,7 @@ nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --program ot-cli-ftd.hex --sectorerase --verify
 ```
 
-* node with credentials
+* connecting a node with credentials
 
 ```bash
 panid 0x1234
@@ -526,20 +527,6 @@ masterkey
 ifconfig up
 thread start
 state
-```
-* commissioner, see [openthread - commissioning](https://openthread.io/guides/build/commissioning)
-
-```bash
-commissioner start
-commissioner joiner add f4ce36ea62a65434 ABCDE2
-```
-* joiner
-
-```bash
-eui64
->f4ce36ea62a65434
-ifconfig up
-joiner start ABCDE2
 ```
 
 
@@ -590,61 +577,71 @@ leaderdata
 ```
 
 {{</ details>}}
-# Network Co-Processor (NCP)
-Note, see the RCP version above for recent border routers. Given the open source nature of OpenThread, it is quite challenging to find the right build instructions and version match to the right border router. See [Vendor support NCP](https://openthread.io/platforms#network-co-processor-ncp) for mode details. Different NCP versions are listed here.
-## Nordic - nRF 4.1.0
-* successfull match between the SDK and Rpi image, both available from the link below
-  * nRFSDK for Thread and Zigbee v4.1.0
-  * RaspPi OT Border Router Demo v4.1.0-1.alpha
-{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download" text="nRF SDK Download" icon="new" >}}
 
+# Commissioning
+{{<hint warning>}}note that the security concept is based on the confidentiality of the masterkey, the one used here is a dummy key used for demo purpose only. Setting a predefined masterkey is optional, the stack will generate a random one that can be retrieved with the `masterkey` command if it's needed for analysis purpose.
+{{</hint>}}
 
-build and flash the ncp example
+* make sure you use cli dongles with Commissioner and joiner compile options, see [cli dongle](#cli-dongle)
+* [openthread commissioning](https://openthread.io/guides/build/commissioning)
+* [commissioning commands](https://github.com/openthread/openthread/blob/main/src/cli/README_COMMISSIONER.md)
+* [dataset commands](https://github.com/openthread/openthread/blob/main/src/cli/README_DATASET.md)
+* make sure the used masterky is configured in the [wireshark sniffer](#wireshark-sniffing) to analyse the exchange
+
+on the commissioner cli run
 ```bash
->cd "examples\thread\ncp\ftd\usb\pca10059\mbr\armgcc\Makefile"
->make
->make flash_mbr
->make flash
+thread stop
+ifconfig down
+
+dataset init new
+dataset
+dataset channel 24
+dataset channel
+dataset masterkey 00112233445566778899aabbccddeeff
+dataset commit active
+ifconfig up
+thread start
+commissioner start
+commissioner joiner add * ABCDE2
 ```
-
-## Zephyr v2.4.99
-* This section is about the `nRF Connect SDK` using the `zephyr` directory
-* successfully built and tested with `v1.4.99-dev1` which contains Zephyr version `2.4.99`
-* recognised as USB device
-{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
-
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
+on the joiner cli run
 ```bash
-cd nrf/v1.4.99-dev1/zephyr/samples/net/openthread/ncp
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-usb-nrf-br.conf"
+factoryreset
+ifconfig up
+joiner start ABCDE2
 ```
 
-## Nordic - nRF Connect
-* This section is about the `nRF Connect SDK` using the `nrf` directory
-* Not yet successfull with the nRF52 dongle, likely due to the missing usb overlay
-{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
-
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
+{{<details "commissioner and joiner logs" >}}
+* commissioner log
 ```bash
-cd nrf/v1.4.99-dev1/nrf/samples/openthread/ncp
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.conf"
+> commissioner start
+Commissioner: petitioning
+Done
+> Commissioner: active
+
+> commissioner joiner add * ABCDE2
+Done
+> ~ Discovery Request from 76380f6b58cf89f6: version=3,joiner=1
+Commissioner: Joiner start a320c9053f0862ce
+Commissioner: Joiner connect a320c9053f0862ce
+Commissioner: Joiner finalize a320c9053f0862ce
+Commissioner: Joiner end a320c9053f0862ce
 ```
-
-## Open Thread
-
-* Available pre-build ncp firmware
-
-{{<icon_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..."  icon="new" >}}
-
-```cmd
-nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
+* joiner log
+```bash
+> joiner start ABCDE2
+Done
+> Join success
 ```
-
-* for build instructions see the rcp building steps in the [rcp OpenThread](#openthread) section, the build commands generates both npc and rcp elf files.
-
-
+* wireshark sniffing should display among others the following transactions
+  * MLE : Discovery Request
+  * MLE : Discovery Response
+  * DTLSv1.2 : Client Hello
+  * DTLSv1.2 : Hello Verify Request
+  * DTLSv1.2 : Server Hello, Server Key Exchange, Server Hello Done
+  * DTLSv1.2 : Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message
+  * ...
+{{</details>}}
 
 # Thread UDP packets
 * Thread UDP packets are encapsulated using 6LoWPAN which has a payload of 88 Bytes, that's why such a json UDP text message 
@@ -701,6 +698,61 @@ This is under investigation and should be available soon. The current platformio
 
 # History
 In the history are moved sections that are deprecated or no longer relevant kept for historical info only
+## Network Co-Processor (NCP)
+Note, see the RCP version above for recent border routers. Given the open source nature of OpenThread, it is quite challenging to find the right build instructions and version match to the right border router. See [Vendor support NCP](https://openthread.io/platforms#network-co-processor-ncp) for mode details. Different NCP versions are listed here.
+### Nordic - nRF 4.1.0
+* successfull match between the SDK and Rpi image, both available from the link below
+  * nRFSDK for Thread and Zigbee v4.1.0
+  * RaspPi OT Border Router Demo v4.1.0-1.alpha
+{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download" text="nRF SDK Download" icon="new" >}}
+
+
+build and flash the ncp example
+```bash
+>cd "examples\thread\ncp\ftd\usb\pca10059\mbr\armgcc\Makefile"
+>make
+>make flash_mbr
+>make flash
+```
+
+### Zephyr v2.4.99
+* This section is about the `nRF Connect SDK` using the `zephyr` directory
+* successfully built and tested with `v1.4.99-dev1` which contains Zephyr version `2.4.99`
+* recognised as USB device
+{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
+
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
+
+```bash
+cd nrf/v1.4.99-dev1/zephyr/samples/net/openthread/ncp
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-usb-nrf-br.conf"
+```
+
+### Nordic - nRF Connect
+* This section is about the `nRF Connect SDK` using the `nrf` directory
+* Not yet successfull with the nRF52 dongle, likely due to the missing usb overlay
+{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
+
+* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
+
+```bash
+cd nrf/v1.4.99-dev1/nrf/samples/openthread/ncp
+west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.conf"
+```
+
+### Open Thread
+
+* Available pre-build ncp firmware
+
+{{<icon_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..."  icon="new" >}}
+
+```cmd
+nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
+```
+
+* for build instructions see the rcp building steps in the [rcp OpenThread](#openthread) section, the build commands generates both npc and rcp elf files.
+
+
 ## Nordic - sdcard image
 
 * download a ready raspberry pi image
@@ -715,7 +767,7 @@ In the history are moved sections that are deprecated or no longer relevant kept
 * use with the OpenThread dongle firmware [detailed above](#openthread)
 * The docker command below runs deamonized (in the background) and maps port 80.
 * Note that restarting the same container does not work there fore `-rm` would help restart a new container each time
-* Two issues happen when mapping port 80 only, the `Topology` menu does not show anything and the Android comissioning App can't reach the border router so a falback on `host` networking with the second docker command solves these issues.
+* Two issues happen when mapping port 80 only, the `Topology` menu does not show anything and the Android commissioning App can't reach the border router so a falback on `host` networking with the second docker command solves these issues.
 ```bash
 docker run --rm --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
         net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
