@@ -59,6 +59,8 @@ The product page includes datasheets, schematics, firmware,...
 
 {{<icon_button href="https://docs.zephyrproject.org/latest/boards/arm/decawave_dwm1001_dev/doc/index.html" text="Zephyr support" >}}
 
+{{<button relref="/docs/networks/ultrawideband#module-firmware" >}}DWM1001 Firmware{{</button>}}
+
 # Gallery
 
 {{< gallery dir="/images/uwb/devkit" />}}
