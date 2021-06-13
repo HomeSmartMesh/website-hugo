@@ -79,4 +79,8 @@ It's actually surprisingly easy. The hardest step is to install the App which I 
 What to do if the localization in the app is terribly wrong ?
 <--->
 By default the refresh rate of stationary tags is set to 10 sec, and the algorithm has an additional filter that prevents the tag position from moving to a new absolute measure and rather only improving by a given percentage. By incrinsing the "Stationary update rate" within the range of ~ 2 sec, it's possible to get an expected user experience with a tag visibly converging to the correct location.
+<===>
+Is it possible to communicate between DWM1001C and DMW1004C ?
+<--->
+Yes, given that they both use the same DW1000 tranceiver. But they have two different Host microcontrollers so algorith,s have to be ported on both targets nRF52 and STM32 and calibration has to be done accordingly.
 {{</faq>}}
