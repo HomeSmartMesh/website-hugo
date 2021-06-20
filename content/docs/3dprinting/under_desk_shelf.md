@@ -2,7 +2,7 @@
 title: "Under desk shelf"
 description: "Hang a shelf below the desk fixed with 3d printed joints"
 date: 2021-01-01T00:00:00+00:00
-weight: 5
+weight: 11
 bookToC: false
 ---
 {{<load-model_viewer>}}

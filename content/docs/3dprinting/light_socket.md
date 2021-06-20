@@ -2,7 +2,7 @@
 title: "Switch Socket Cover"
 description: "How to cover a dumb switch and a Socket"
 date: 2021-01-01T00:00:00+00:00
-weight: 2
+weight: 3
 bookToC: false
 ---
 {{<load-model_viewer>}}

@@ -13,19 +13,22 @@ grid:
     - Electronics
     slot: 200
     items:
+    - name: "Kayak Trailer"
+      width: 200
+      tags: []
     - name: "Smart Light Switch"
       width: 200
       tags: [Smart Light]
     - name: "Switch with Socket"
       width: 200
       tags: [Smart Light]
+    - name: "Under desk shelf"
+      width: 200
+      tags: []
     - name: "ESP32 remote"
       width: 400
       tags: [Electronics]
     - name: "Handbag hanger"
-      width: 200
-      tags: []
-    - name: "Under desk shelf"
       width: 200
       tags: []
     - name: "House Model"
@@ -39,17 +42,19 @@ grid:
 # 3D Models
 
 {{< grid "my_grid" >}}
+{{< image src="/images/3dprinting/kayak_trailer/13 shape fit mounted.png" href="/docs/3dprinting/kayak_trailer/" >}}
 
+<--->
 {{< image src="/images/3dprinting/dumb_to_smart.png" href="/docs/3dprinting/light/" >}}
 <--->
 
 {{< image src="/images/3dprinting/cover_switch_socket.png" href="/docs/3dprinting/light_socket/" >}}
 <--->
+{{< image src="/images/3dprinting/shelf/02 Shelf Top View.jpg" href="/docs/3dprinting/under_desk_shelf/" >}}
+<--->
 {{< image src="/images/3dprinting/esp32_remote.png" href="/docs/3dprinting/esp32_remote/" >}}
 <--->
 {{< image src="/images/3dprinting/handbag carrier.jpg" href="/docs/3dprinting/handbag_hanger/" >}}
-<--->
-{{< image src="/images/3dprinting/shelf/02 Shelf Top View.jpg" href="/docs/3dprinting/under_desk_shelf/" >}}
 <--->
 {{< image src="/images/3dprinting/house/03 Model Side.JPG" href="/docs/3dprinting/house" >}}
 <--->
@@ -66,4 +71,9 @@ grid:
 {{< load-photoswipe >}}
 {{<gallery dir="/images/3dprinting/all models" />}}
 
+{{<button relref="/docs/3dprinting/kayak_trailer" >}}Kayak Trailer{{</button>}}
+{{<gallery dir="/images/3dprinting/kayak_trailer" />}}
+
+{{<button relref="/docs/3dprinting/house" >}}House Model{{</button>}}
+{{<gallery dir="/images/3dprinting/house" />}}
 

@@ -223,11 +223,11 @@ cd ~/ot-nrf528xx
 ./script/bootstrap
 ./bootstrap
 sudo rm -rf build/
-./script/build nrf52840 USB_trans  -DOT_THREAD_VERSION=1.2
+./script/build nrf52840 USB_trans -DOT_COMMISSIONER=ON -DOT_THREAD_VERSION=1.2
 cd build/bin/
-arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
+arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp-com-1.2.hex
 nrfjprog -f nrf52 --eraseall
-nrfjprog -f nrf52 --chiperase --program ot-rcp.hex --reset
+nrfjprog -f nrf52 --chiperase --program ot-rcp-com-1.2.hex --reset
 ```
 
 

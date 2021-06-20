@@ -2,7 +2,7 @@
 title: "Voronoi Shapes"
 description: "Randomly generated voronoi shapes"
 date: 2021-01-01T00:00:00+00:00
-weight: 10
+weight: 20
 bookToC: false
 ---
 {{<load-model_viewer>}}
