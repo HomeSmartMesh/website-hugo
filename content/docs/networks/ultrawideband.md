@@ -157,6 +157,9 @@ west init -m https://github.com/nRFMesh/sdk-uwb-zephyr --mr main
   * 3) does not include RF transaction and is simply to monitor the time it takes to compute the double precision distance computation
 
 {{<gfigure src="/images/uwb/twr_init_resp_timing.webp" width="800px" >}}
+the screenshot was made from the below commit which is a separate branch not including functional refactoring although the main line refactoring showed similar timings
+{{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr/commit/28bb91069e5c51336cb47bf0d38d4b5f21947ed9" text="branch twr_functional 28bb910" icon="github">}}
+
 
 ### Arduino
 {{<hint danger>}}Although mentioned for completeness Arduino Framework and libraries are not recommended for production development due to Arduino debug and real time limitations and the unofficial (non-tested / incomplete) character of the available libraries as discussed in the [Decawave forum](https://decaforum.decawave.com/t/how-to-read-dws1000-on-arduino-uno/9428/2){{</hint>}}
