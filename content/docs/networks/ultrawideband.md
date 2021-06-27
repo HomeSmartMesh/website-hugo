@@ -299,7 +299,9 @@ given that the response is a confirmation it will have a payload similar as the 
 {{<icon_button text="AN ACCURATE UWB RANGING FOR PRECISION ASSET LOCATION" href="http://vlsicad.eecs.umich.edu/BK/Slots/cache/www.ee.vt.edu/~ha/research/publications/uwbst03b.pdf" icon="pdf" >}}
 
 
-# FAQ
+# FAQ - Discussion
+* Support should be available from the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel
+{{<icon_button text="Discord - #ultra-wide-band " href="https://discord.gg/tyZZfTETYS" icon="discord" >}}
 
 {{<faq>}}
 What is Ultra Wide Band ?
