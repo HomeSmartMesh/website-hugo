@@ -9,6 +9,7 @@ images: ["/images/uwb/DRTLS.webp"]
 weight: 2
 toc: true
 ---
+{{<load-photoswipe>}}
 
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm1001_dev/" text="Microcontrollers / nRF52 / UWB DWM1001 dev" >}}
@@ -132,7 +133,34 @@ Community contribution of Zephyr based examples with decadriver
 {{<hint warning>}}using Zephyr 2.5 config Patches for double floats print `%lf` and `CONFIG_NEWLIB_LIBC=y`
 `CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y`, also sprintf string overflow needs size increase {{</hint>}}
 
+### Zephyr Mesh Positioning
+This framework developed as part of the `Home Smart Mesh` project is a takeover of the above mentioned [Zephyr Community](#zephyr-community) with refactoring introducing c++ and a higher level functional layer called `mp` for `mesh positioning` that wraps `dwt_` functions and adds an nRF52 custom RF mesh networking capability.
+{{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr" text="sdk-uwb-zephyr" icon="github">}}
+usage
+```bash
+west init -m https://github.com/nRFMesh/sdk-uwb-zephyr --mr main
+```
+
+* profiling `uwb\samples\twr_initiator` and `uwb\samples\twr_responder`
+* Debug PIO used `[nRF52] P0.13` => `M_PIN17` => `J7 pin 8`
+* Debug function calls `APP_SET;` and `APP_CLEAR;`
+
+{{<gfigure src="/images/uwb/twr_profiling.png" width="600px" >}}
+
+* in the screenshot below we can profile a Two Way Ranging cycle
+* The initiator has two pulses 
+  * 1) from first immediate TX until resp RX
+  * 2) from intiating the delayed final TX until it is actually transmitted
+* The responder has three pulses
+  * 1) blocked on RX listening until the first poll message is received
+  * 2) from initiating the delayed response transmittion including its actual transmission and then waiting till the reception of the final RX
+  * 3) does not include RF transaction and is simply to monitor the time it takes to compute the double precision distance computation
+
+{{<gfigure src="/images/uwb/twr_init_resp_timing.webp" width="800px" >}}
+
 ### Arduino
+{{<hint danger>}}Although mentioned for completeness Arduino Framework and libraries are not recommended for production development due to Arduino debug and real time limitations and the unofficial (non-tested / incomplete) character of the available libraries as discussed in the [Decawave forum](https://decaforum.decawave.com/t/how-to-read-dws1000-on-arduino-uno/9428/2){{</hint>}}
+
 {{<icon_button href="https://github.com/thotro/arduino-dw1000" text="arduino-dw1000" icon="github">}}
 
 * No longer maintained
