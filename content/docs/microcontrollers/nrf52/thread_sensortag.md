@@ -957,8 +957,8 @@ Memory region         Used Size  Region Size  %age Used
 
 
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
-{{<icon_button text="Discord - #thread-sensortag " href="https://discord.gg/SdKHaAfKN4" icon="discord" >}}
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discourse forum
+{{<icon_button text="Home Smart Mesh - Thread Sensor Tag category" href="https://homesmartmesh.discourse.group/c/projects/thread-sensortag" icon="discourse" >}}
 
 {{<faq>}}
 Does this Thread SensorTag support MQTT ?
@@ -972,6 +972,11 @@ Yes, sure, the use cases could be slpit as follows :
 * For long term buffering, we're no longer on the sensors network use case and rather on the logger tag use case, there you can use the Flash, 1 MB is huge.
 In my use case, I don't use buffering in order to allow live update of measures on the user's apps, but combining like a level trigger to immediately send values on big changes with buffering and sending all the values cyclically could be quite smart, you will need a QoS through to ensure your data is really sent after a while, which will also consume RF transactions, I opted for sending every single value on an RF packet which is also used as an alive signal to know when the sensor is dead or out of reach, so no problem if once a packet is lost in a while, but practically, as I use a flood mesh, most measures arrive more than once to the server.
 I think after all, such things should be configurable by the end users's app, and should not be hardcoded
+<===>
+Can this firmware be used on nRF51 ? which families are supported ?
+<--->
+No, Thread is relaying on the RF MAC layer 802.15.4 which is unfortunately only supported by nRF5340, nRF52840, nRF52833, nRF52820, nRF52811 more details on the nordic [Thread](https://www.nordicsemi.com/Products/Thread) page.
+Note that this application is developed for the nRF family but openthread is supported on other chips as well e.g. TI, NXP,... 
 {{</faq>}}
 
 

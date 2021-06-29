@@ -9,8 +9,12 @@ bookToC: false
 {{<load-photoswipe>}}
 {{<button relref="/docs/3dprinting" >}}Back to 3D Printing{{</button>}}
 
-models available for free on demand
-{{<icon_button text="Home Smart Mesh - 3D Printing" href="https://discord.gg/eqxztEdchX" icon="discord" >}}
+* Lightweight
+* small
+* can be taken along, fits in the kayak behind the seat
+
+models available for free on demand, feel free to ask on the forum
+{{<icon_button text="Home Smart Mesh - 3D Printing" href="https://homesmartmesh.discourse.group/c/3d-printing" icon="discourse" >}}
 
 {{<gallery dir="/images/3dprinting/kayak_trailer" />}}
 

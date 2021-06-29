@@ -22,8 +22,8 @@ toc: true
 UWB development environment
 {{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band RTLS" >}}
 
-Support, reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel
-{{<icon_button text="Discord - #smart-home-3d " href="https://discord.gg/4mEpx9jyF7" icon="discord" >}}
+Support, reviews, experience exchange and ideas related to this page content can be discussed in the dedicated forum category
+{{<icon_button text="Discourse - #webapps " href="https://homesmartmesh.discourse.group/c/webapps/14" icon="discourse" >}}
 
 
 ## Getting Started

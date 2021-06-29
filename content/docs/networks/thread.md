@@ -652,10 +652,10 @@ is split in two packets where each has an ACK. From one side that's a lot x4 tim
 
 {{<gfigure src="/images/thread/udp over 6LoWPAN.png">}}
 
-
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
-{{<icon_button text="Home Smart Mesh - Thread channel" href="https://discord.gg/A5X64fkM8m" icon="discord" >}}
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discourse forum
+{{<icon_button text="Home Smart Mesh - OpenThread category" href="https://homesmartmesh.discourse.group/c/networks/openthread" icon="discourse" >}}
+
 
 * see also
 {{<icon_button text="google groups openthread users" href="https://groups.google.com/g/openthread-users" icon="new" >}}
@@ -694,6 +694,11 @@ No, at least not at the moment and not within a native integration similar to th
 can I run openthread with platformio ?
 <--->
 This is under investigation and should be available soon. The current platformio integration of Zephyr-OS does not include openthread, but this is likely to change any time soon.
+<===>
+Which other families than nRF from Nordic support Thread ?
+<--->
+Many platforms are supported including but not limited to `Cascoda`, `NXP`, `Qorvo` which extends to uwb variant, `Samsung`, `Silicon Labs`, `STMicroelectronics`, `Synopsys`, `Telink Semiconductors`, `TI`  more details on openthread [platforms](https://openthread.io/platforms).
+Note that `Espressif` although listed in the platforms, does not support `802.15.4` therefore can only run the openthread stack as a host that requires an external RCP from the previous list.
 {{</faq>}}
 
 # History

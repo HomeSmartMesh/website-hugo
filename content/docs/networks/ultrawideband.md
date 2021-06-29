@@ -133,15 +133,30 @@ Community contribution of Zephyr based examples with decadriver
 {{<hint warning>}}using Zephyr 2.5 config Patches for double floats print `%lf` and `CONFIG_NEWLIB_LIBC=y`
 `CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y`, also sprintf string overflow needs size increase {{</hint>}}
 
+### Zephyr with Bluetooth
+
+{{<icon_button href="https://github.com/RT-LOC/zephyr-dwm1001/" text="RT-LOC/zephyr-dwm1001" icon="github">}}
+
 ### Zephyr Mesh Positioning
 This framework developed as part of the `Home Smart Mesh` project is a takeover of the above mentioned [Zephyr Community](#zephyr-community) with refactoring introducing c++ and a higher level functional layer called `mp` for `mesh positioning` that wraps `dwt_` functions and adds an nRF52 custom RF mesh networking capability.
 {{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr" text="sdk-uwb-zephyr" icon="github">}}
+
 usage
 ```bash
 west init -m https://github.com/nRFMesh/sdk-uwb-zephyr --mr main
 ```
+{{<hint info>}}Note that Zephyr imported dependencies have been restricted to the needed ones. It is possible to add by editing this [west.yml](https://github.com/nRFMesh/sdk-uwb-zephyr/blob/cd5dd2f1cc9851bccf66e5bdc4e4d3f7e06920e0/west.yml#L20) file e.g. all imports with `import: true`{{</hint>}}
+Features
+* Using west with a connected zephyr version dependency and a deca driver integration that can be enabled with the flag `CONFIG_DW1000=y`
+* using the already available board in Zephyr `decawave_dwm1001_dev` instead of the locally declared board `nrf52_dwm1001`
+* adding custom mesh network functionality. The issue is that testing UWB should have another independent communication and configuration channel. Normal Bluetooth cannot cover a big network so a mesh is needed. nRF52832 do not support openthread and Bluetooth Mesh is a big overhead compared to the [simplemesh](https://github.com/HomeSmartMesh/sdk-hsm-sensortag) 
+* adding a higher level API to greatly simplify TWR applications and others by eliminating redundant blocks in the code and fitting the whole ranging sequence on a single screen function, the new API MP as `meshpositioning` includes `mp_receive()` that is overloaded with the structure type intended to be received, `mp_request()` when sending a struct and expecting a response . Also for when initiating a delayed transmission either expecting a response `mp_request_at()` or not `mp_send_at()`
+* support for C++17 and standard library e.g. string, list, map. Now before the C / C++ skepticism takes over, please consider that C++ shall not be used in a real time system without knowing how C++ works. e.g. bad C++ is adding constructor without knowing when where are resources allocated. good C++ is using typed enums, any compile time typing verifications and dead simple iteration loops.
+* using [nlohmann/json](https://github.com/nlohmann/json) JSON for Modern C++ for remote procedure call e.g. an uwb listener has an MQTT interface where an app throws a json config sent over simplemesh to use with dwt_configure()
+verbose target log for status register thanks to a simple map flag to string
 
-* profiling `uwb\samples\twr_initiator` and `uwb\samples\twr_responder`
+TWR GPIO Profiling
+* samples used `uwb\samples\twr_initiator` and `uwb\samples\twr_responder`
 * Debug PIO used `[nRF52] P0.13` => `M_PIN17` => `J7 pin 8`
 * Debug function calls `APP_SET;` and `APP_CLEAR;`
 
@@ -300,8 +315,8 @@ given that the response is a confirmation it will have a payload similar as the 
 
 
 # FAQ - Discussion
-* Support should be available from the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel
-{{<icon_button text="Discord - #ultra-wide-band " href="https://discord.gg/tyZZfTETYS" icon="discord" >}}
+* Support should be available from the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the forum category
+{{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
 
 {{<faq>}}
 What is Ultra Wide Band ?

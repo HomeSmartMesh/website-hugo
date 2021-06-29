@@ -14,6 +14,9 @@ grid:
     - Network
     slot: 300
     items:
+    - name: "Discourse Forum"
+      width: 300
+      tags: []
     - name: "Ultra Wide Band"
       width: 300
       tags: [Network]
@@ -44,15 +47,16 @@ grid:
     - name: "Zigbee"
       width: 300
       tags: [Network]
-    - name: "Discord Server"
-      width: 600
-      tags: []
     - name: "Home Assistant"
       width: 150
       tags: [Frameworks]
 ---
 {{<load-svg-pan-zoom>}}
 {{< grid "my_grid" >}}
+{{< image src="/images/discourse.svg" height=60 href="https://homesmartmesh.discourse.group/" >}}
+{{< image src="/images/discourse.png" height=100 href="https://homesmartmesh.discourse.group/" >}}
+An [invitation](https://homesmartmesh.discourse.group/) to talk, chat, get support, make suggestions in any of this websites projects and topics
+<--->
 {{<image src="/images/uwb/DRTLS.webp" height="150px" href="/docs/networks/ultrawideband/" >}}
 {{<my_button href="/docs/networks/ultrawideband/" text="Ultra Wide Band Evaluation" >}}
 
@@ -141,10 +145,6 @@ References for DIY coordinators and software
 
 
 
-<--->
-{{< discord id="780126809671991328" >}}
-
-An [invitation](https://discord.gg/57cZapWHkC) to talk and chat with live suggestions and feedback
 <--->
 {{< image src="/images/hassio.png" height=100 href="/docs/frameworks/home_assistant/">}}
 {{< button href="/docs/frameworks/home_assistant/" >}}Home Assistant{{</button>}}
