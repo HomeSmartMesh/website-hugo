@@ -65,6 +65,20 @@ Steps :
 
 {{<gfigure src="/images/zephyr/ozone_zephyr.png" width="500px">}}
 
+# Serial Debug
+* Log : `CONFIG_LOG` creates a `logging` thread and enables `LOG_INF()`, `LOG_DBG()`,... functions
+	* needs a backend e.g. `CONFIG_LOG_BACKEND_RTT`, `CONFIG_LOG_BACKEND_UART`
+* Shell : `CONFIG_SHELL` creates a `shell_xxx` thread that enables an interactive command line e.g. `rtt:~$ kernel threads`
+	* needs a backend e.g. `CONFIG_SHELL_BACKEND_RTT`, `CONFIG_SHELL_BACKEND_SERIAL`
+## shell command examples
+```shell
+>help
+>kernel threads
+>kernel stacks
+>log enable dbg main
+
+```
+
 # Windows Install
 {{<icon_button href="https://docs.zephyrproject.org/2.3.0/getting_started/index.html" text="Getting Started details..."  icon="new" >}}
 

@@ -75,7 +75,7 @@ west update
 The SDK samples are presented in two folds, first the overall application including all the measures, then a list of basic applications with minimal code for each driver and measure separately
 
 ### tag_sensors_broadcast
-{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/tag_sensors_broadcast" text="tag sensors broadcast" icon="github" >}}
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/openthread_tag_sensors" text="tag sensors broadcast" icon="github" >}}
 
 {{<gfigure src="/images/thread_sensortag/application.png" >}}
 
@@ -963,7 +963,7 @@ Memory region         Used Size  Region Size  %age Used
 {{<faq>}}
 Does this Thread SensorTag support MQTT ?
 <--->
-At the moment, a firmware is in preparation that support MQTT-SN which needs an MQTT-SN gateway to connect it to an MQTT broquer. Mode details in the [MQTT Sensors Node](/docs/networks/thread/#mqtt-sensors-node)
+A first firmware was tested with MQTT-SN [MQTT Sensors Node](/docs/networks/thread/#mqtt-sensors-node), but given that it used the nRF SDK and not Zephyr, development was discontinued. As alternative a simple udp protocol with a python scripts can fulfill the broadcast function from openthread to an MQTT broker details in the [udp broadcast](/docs/microcontrollers/nrf52/thread_sensortag/#tag_sensors_broadcast) example.
 <===>
 Is it possible to save energy by collecting many sensor samples over time and sending them together?
 <--->
