@@ -42,7 +42,7 @@ toc: true
 
 ## Manufacturing
 * v 1.1 15.04.2021
-* design files
+* design files by [Mirko Informaticore](https://github.com/Informaticore)
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.1" text="tag v1.1" icon="github" >}}
 
 * gerber files
