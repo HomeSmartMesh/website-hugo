@@ -26,6 +26,9 @@ grid:
     - name: "nRF52823 UART"
       width: 200
       tags: [Board,USB,nRF52832]
+    - name: "Trick-Tracker"
+      width: 200
+      tags: [Board,USB,nRF52840]
 ---
 
 {{<grid "mygrid">}}
@@ -68,4 +71,15 @@ grid:
 ### Application
 
 {{< button relref="/docs/networks/nrf#04-uart-dongle" >}}custom mesh coordinator{{</button>}}
+
+<--->
+{{< image src="/images/trick_tracker/trick-tracker-board.png" width=200 >}}
+
+* nRF52840
+* ARM M4 64 MHz
+* 1024 KB ROM - 256 KB RAM
+* Bluetooth
+* USB-C
+* Accelerometer, Gyroscope, Magnetoscope, Pressure
+{{< button relref="/docs/microcontrollers/nrf52/trick_tracker" >}}details...{{</button>}}
 {{< /grid >}}
