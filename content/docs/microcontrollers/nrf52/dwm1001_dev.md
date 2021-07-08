@@ -69,8 +69,10 @@ The product page includes datasheets, schematics, firmware,...
 * `06 Additional Passive Tag as serial listener` : Make sure that the listener is configured with the app to join the Network intended to be listened to
 
 # FAQ - Discussion
-* Support should be available from the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the dedicated discord channel
-{{<icon_button text="Discord - #ultra-wide-band " href="https://discord.gg/tyZZfTETYS" icon="discord" >}}
+
+* Support is available on the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the forum category
+{{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
+
 
 
 {{<faq>}}
