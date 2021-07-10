@@ -15,6 +15,134 @@ toc: true
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm1001_dev/" text="Microcontrollers / nRF52 / UWB DWM1001 dev" >}}
 
 An Ultra-Wide-Band networks can form a mesh network, in addition, the main feature is the RTLS: Real-Time-Locating-System capability.
+
+# Mesh Positioning Framework
+This framework developed as part of the `Home Smart Mesh` project is a takeover of the above mentioned [Zephyr Community](#zephyr-community) with refactoring introducing c++ and a higher level functional layer called `mp` for `mesh positioning` that wraps `dwt_` functions and adds an nRF52 custom RF mesh networking capability.
+{{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr" text="sdk-uwb-zephyr" icon="github">}}
+{{<hint info>}}Note that Zephyr imported dependencies have been restricted to the needed ones. It is possible to add by editing this [west.yml](https://github.com/nRFMesh/sdk-uwb-zephyr/blob/cd5dd2f1cc9851bccf66e5bdc4e4d3f7e06920e0/west.yml#L20) file e.g. all imports with `import: true`{{</hint>}}
+
+## Nodes Preparation
+### TWR Nodes
+```bash
+west init -m https://github.com/nRFMesh/sdk-uwb-zephyr --mr main
+cd uwb/samples/06_uwb_node_sm
+west build -b decawave_dwm1001_dev -- -DCONF_FILE=prj.conf
+west flash
+west flash --snr 760130093
+west flash --snr 760130128
+```
+### Simpl Mesh CLI Node
+The back-channel commands and configuration of uwb modes is based on `simplemesh`. Both boards are supported by the cli sample `nrf52840dongle_nrf52840` and `decawave_dwm1001_dev` but the `dwm1001` has a better responsible uart console.
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag" text="sdk-uwb-zephyr" icon="github">}}
+
+```bash
+west init -m https://github.com/HomeSmartMesh/sdk-hsm-sensortag -mr main
+cd hsm/samples/simplemesh_cli
+west build -b decawave_dwm1001_dev -- -DCONF_FILE=prj-dwm.conf
+west flash
+west flash --snr 260103215
+```
+## Usage
+The cli node can take user console input commands, send them through `simplemesh` network and outputs results coming from the network.
+### DWT Config
+request to node with uid, the node responds with the full dwt config
+
+```shell
+>sm/98501ED22B42EB41{"dwt_config":{"chan":5}}
+>sm/98501ED22B42EB41{"chan":5,"dataRate":"DWT_BR_6M8","nsSFD":"NonStandard","phrMode":"DWT_PHRMODE_EXT","prf":"DWT_PRF_64M","rxCode":9,"rxPAC":"DWT_PAC8","sfdTO":129,"txCode":9,"txPreambLength":"DWT_PLEN_128"}
+```
+
+It is also possible to broadcast the config to all nodes with `sm{payload}` only at heading topic not `sm/uid{payload}`, in this case both nodes respond with the new full config
+```shell
+>sm{"dwt_config":{"chan":5}}
+>sm/E8D81FEE52C283EB{"chan":5,"dataRate":"DWT_BR_6M8","nsSFD":"NonStandard","phrMode":"DWT_PHRMODE_EXT","prf":"DWT_PRF_64M","rxCode":9,"rxPAC":"DWT_PAC8","sfdTO":129,"txCode":9,"txPreambLength":"DWT_PLEN_128"}
+sm/98501ED22B42EB41{"chan":5,"dataRate":"DWT_BR_6M8","nsSFD":"NonStandard","phrMode":"DWT_PHRMODE_EXT","prf":"DWT_PRF_64M","rxCode":9,"rxPAC":"DWT_PAC8","sfdTO":129,"txCode":9,"txPreambLength":"DWT_PLEN_128"}
+```
+
+### TWR command
+Typing the below command on the shell broadcasts the request to all nodes, and each node identified by its short id, will execute the corresponding twr transaction as `initiator` or as `responder`.
+```shell
+>sm{"twr_command":{"initiator":0,"responder":1,"at_ms":100}}
+>sm/E8D81FEE52C283EB{"at_ms":100,"initiator":0,"responder":1,"result":{"range":"0.211"}}
+```
+
+{{<details "full example of cli input and output">}}
+In this example, every simplemesh node starting reserves a short address. The first node starting checks the existance of a corrdinator by calling `node_id_get` if no responce is obtained, the node turns into a coordinator and assigns to itself the node id 0. The second node starting requests a node id and obtains the node id 1 from the coordinator. Each starting node broadcasts its dw1000 tranceiver config and its simplemesh node id.
+```shell
+>node_id_get:98501ED22B42EB41
+node_id_get:98501ED22B42EB41
+node_id_get:98501ED22B42EB41
+sm/98501ED22B42EB41{"shortid":0}
+sm/98501ED22B42EB41{"simplemesh":"started"}
+sm/98501ED22B42EB41{"chan":5,"dataRate":"DWT_BR_6M8","nsSFD":"NonStandard","phrMode":"DWT_PHRMODE_EXT","prf":"DWT_PRF_64M","rxCode":9,"rxPAC":"DWT_PAC8","sfdTO":129,"txCode":9,"txPreambLength":"DWT_PLEN_128"}
+node_id_get:E8D81FEE52C283EB
+node_id_set:E8D81FEE52C283EB:01
+sm/E8D81FEE52C283EB{"simplemesh":"started"}
+sm/E8D81FEE52C283EB{"shortid":1}
+sm/E8D81FEE52C283EB{"chan":5,"dataRate":"DWT_BR_6M8","nsSFD":"NonStandard","phrMode":"DWT_PHRMODE_EXT","prf":"DWT_PRF_64M","rxCode":9,"rxPAC":"DWT_PAC8","sfdTO":129,"txCode":9,"txPreambLength":"DWT_PLEN_128"}
+
+>sm{"twr_command":{"initiator":0,"responder":1,"at_ms":100}}
+>sm/E8D81FEE52C283EB{"at_ms":100,"initiator":0,"responder":1,"result":{"range":"0.211"}}
+sm{"twr_command":{"initiator":0,"responder":1,"at_ms":100}}
+>sm/E8D81FEE52C283EB{"at_ms":100,"initiator":0,"responder":1,"result":{"range":"0.220"}}
+```
+{{</details>}}
+
+### Diagnosis
+* `ping` command and response. The goal is to evaluate the link between the cli and one uid node :
+  * `rssi` 51 => -51 bBm
+  * time in os ticks where 1 ms = 32 ticks
+```shell
+>sm/1CF6567337562176{"rf_diag":"ping"}
+>sm/1CF6567337562176{"rf_diag":"pong","rssi":51,"time":197086}
+```
+
+* `ping_target` command and responses. The goal is to evaluate the link between two uid nodes :
+  1. the user pastes and broadcasts the command from the cli on the pinger uid `1CF6567337562176` topic
+  2. the pinger node `1CF6567337562176` recognises itself and broadcasts a `ping` command on the target uid `CBC216DC164B1DE8` topic
+  3. the pinger provides a response where `rssi` and `time` relate to the cli -> pinger rx message
+  4. The target of the `ping` request (2.) (`CBC216DC164B1DE8`) broadcasts a `pong` response where `rssi` and `time` relate to the ping rx message (`1CF6567337562176` -> `CBC216DC164B1DE8`)
+
+```shell
+1. >sm/1CF6567337562176{"rf_diag":"target_ping","target":"CBC216DC164B1DE8"}
+2. >sm/CBC216DC164B1DE8{"rf_diag":"ping"}
+3. sm/1CF6567337562176{"rf_diag":"pinger","rssi":52,"time":4200857}
+4. sm/CBC216DC164B1DE8{"rf_diag":"pong","rssi":41,"time":3898403}
+```
+
+
+
+
+## Features
+* Using west with a connected zephyr version dependency and a deca driver integration that can be enabled with the flag `CONFIG_DW1000=y`
+* using the already available board in Zephyr `decawave_dwm1001_dev` instead of the locally declared board `nrf52_dwm1001`
+* adding custom mesh network functionality. The issue is that testing UWB should have another independent communication and configuration channel. Normal Bluetooth cannot cover a big network so a mesh is needed. nRF52832 do not support openthread and Bluetooth Mesh is a big overhead compared to the [simplemesh](https://github.com/HomeSmartMesh/sdk-hsm-sensortag) 
+* adding a higher level API to greatly simplify TWR applications and others by eliminating redundant blocks in the code and fitting the whole ranging sequence on a single screen function, the new API MP as `meshpositioning` includes `mp_receive()` that is overloaded with the structure type intended to be received, `mp_request()` when sending a struct and expecting a response . Also for when initiating a delayed transmission either expecting a response `mp_request_at()` or not `mp_send_at()`
+* support for C++17 and standard library e.g. string, list, map. Now before the C / C++ skepticism takes over, please consider that C++ shall not be used in a real time system without knowing how C++ works. e.g. bad C++ is adding constructor without knowing when where are resources allocated. good C++ is using typed enums, any compile time typing verifications and dead simple iteration loops.
+* using [nlohmann/json](https://github.com/nlohmann/json) JSON for Modern C++ for remote procedure call e.g. an uwb listener has an MQTT interface where an app throws a json config sent over simplemesh to use with dwt_configure()
+verbose target log for status register thanks to a simple map flag to string
+
+## TWR GPIO Profiling
+* samples used `uwb\samples\twr_initiator` and `uwb\samples\twr_responder`
+* Debug PIO used `[nRF52] P0.13` => `M_PIN17` => `J7 pin 8`
+* Debug function calls `APP_SET;` and `APP_CLEAR;`
+
+{{<gfigure src="/images/uwb/twr_profiling.png" width="600px" >}}
+
+* in the screenshot below we can profile a Two Way Ranging cycle
+* The initiator has two pulses 
+  * 1) from first immediate TX until resp RX
+  * 2) from intiating the delayed final TX until it is actually transmitted
+* The responder has three pulses
+  * 1) blocked on RX listening until the first poll message is received
+  * 2) from initiating the delayed response transmittion including its actual transmission and then waiting till the reception of the final RX
+  * 3) does not include RF transaction and is simply to monitor the time it takes to compute the double precision distance computation
+
+{{<gfigure src="/images/uwb/twr_init_resp_timing.webp" width="800px" >}}
+the screenshot was made from the below commit which is a separate branch not including functional refactoring although the main line refactoring showed similar timings
+{{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr/commit/28bb91069e5c51336cb47bf0d38d4b5f21947ed9" text="branch twr_functional 28bb910" icon="github">}}
+
+
 # RTLS Gen 2
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
 {{<image src="/images/uwb/dwm3001-cdk.webp" width="150px">}}
@@ -137,43 +265,6 @@ Community contribution of Zephyr based examples with decadriver
 
 {{<icon_button href="https://github.com/RT-LOC/zephyr-dwm1001/" text="RT-LOC/zephyr-dwm1001" icon="github">}}
 
-### Zephyr Mesh Positioning
-This framework developed as part of the `Home Smart Mesh` project is a takeover of the above mentioned [Zephyr Community](#zephyr-community) with refactoring introducing c++ and a higher level functional layer called `mp` for `mesh positioning` that wraps `dwt_` functions and adds an nRF52 custom RF mesh networking capability.
-{{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr" text="sdk-uwb-zephyr" icon="github">}}
-
-usage
-```bash
-west init -m https://github.com/nRFMesh/sdk-uwb-zephyr --mr main
-```
-{{<hint info>}}Note that Zephyr imported dependencies have been restricted to the needed ones. It is possible to add by editing this [west.yml](https://github.com/nRFMesh/sdk-uwb-zephyr/blob/cd5dd2f1cc9851bccf66e5bdc4e4d3f7e06920e0/west.yml#L20) file e.g. all imports with `import: true`{{</hint>}}
-Features
-* Using west with a connected zephyr version dependency and a deca driver integration that can be enabled with the flag `CONFIG_DW1000=y`
-* using the already available board in Zephyr `decawave_dwm1001_dev` instead of the locally declared board `nrf52_dwm1001`
-* adding custom mesh network functionality. The issue is that testing UWB should have another independent communication and configuration channel. Normal Bluetooth cannot cover a big network so a mesh is needed. nRF52832 do not support openthread and Bluetooth Mesh is a big overhead compared to the [simplemesh](https://github.com/HomeSmartMesh/sdk-hsm-sensortag) 
-* adding a higher level API to greatly simplify TWR applications and others by eliminating redundant blocks in the code and fitting the whole ranging sequence on a single screen function, the new API MP as `meshpositioning` includes `mp_receive()` that is overloaded with the structure type intended to be received, `mp_request()` when sending a struct and expecting a response . Also for when initiating a delayed transmission either expecting a response `mp_request_at()` or not `mp_send_at()`
-* support for C++17 and standard library e.g. string, list, map. Now before the C / C++ skepticism takes over, please consider that C++ shall not be used in a real time system without knowing how C++ works. e.g. bad C++ is adding constructor without knowing when where are resources allocated. good C++ is using typed enums, any compile time typing verifications and dead simple iteration loops.
-* using [nlohmann/json](https://github.com/nlohmann/json) JSON for Modern C++ for remote procedure call e.g. an uwb listener has an MQTT interface where an app throws a json config sent over simplemesh to use with dwt_configure()
-verbose target log for status register thanks to a simple map flag to string
-
-TWR GPIO Profiling
-* samples used `uwb\samples\twr_initiator` and `uwb\samples\twr_responder`
-* Debug PIO used `[nRF52] P0.13` => `M_PIN17` => `J7 pin 8`
-* Debug function calls `APP_SET;` and `APP_CLEAR;`
-
-{{<gfigure src="/images/uwb/twr_profiling.png" width="600px" >}}
-
-* in the screenshot below we can profile a Two Way Ranging cycle
-* The initiator has two pulses 
-  * 1) from first immediate TX until resp RX
-  * 2) from intiating the delayed final TX until it is actually transmitted
-* The responder has three pulses
-  * 1) blocked on RX listening until the first poll message is received
-  * 2) from initiating the delayed response transmittion including its actual transmission and then waiting till the reception of the final RX
-  * 3) does not include RF transaction and is simply to monitor the time it takes to compute the double precision distance computation
-
-{{<gfigure src="/images/uwb/twr_init_resp_timing.webp" width="800px" >}}
-the screenshot was made from the below commit which is a separate branch not including functional refactoring although the main line refactoring showed similar timings
-{{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr/commit/28bb91069e5c51336cb47bf0d38d4b5f21947ed9" text="branch twr_functional 28bb910" icon="github">}}
 
 
 ### Arduino
