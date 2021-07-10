@@ -73,7 +73,7 @@ grid:
 {{< button relref="/docs/networks/nrf#04-uart-dongle" >}}custom mesh coordinator{{</button>}}
 
 <--->
-{{< image src="/images/trick_tracker/trick-tracker-board.png" width=200 >}}
+{{< image src="/images/trick_tracker/title_image.jpg" width=200 >}}
 
 * nRF52840
 * ARM M4 64 MHz
