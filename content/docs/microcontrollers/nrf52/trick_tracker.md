@@ -1,6 +1,6 @@
 ---
 title: "Trick Tracker"
-description: "bla bla bla"
+description: "The Trick Tracker that tracks tricks"
 date: 2021-02-07T08:48:57+00:00
 lastmod: 2021-05-14T08:00:00+00:00
 images: ["/images/trick_tracker/title_image.jpg"]
