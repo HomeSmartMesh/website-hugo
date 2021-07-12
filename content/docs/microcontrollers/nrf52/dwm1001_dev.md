@@ -54,13 +54,14 @@ The product page includes datasheets, schematics, firmware,...
 {{<icon_button text="datasheet" href="https://www.mouser.de/datasheet/2/412/DW1000_Data_Sheet-1950775.pdf" icon="pdf" >}}
 
 
-# Software
-{{<icon_button text="Decaware" href="https://github.com/Decawave" icon="github" >}}
+# Application
 
-{{<icon_button href="https://docs.zephyrproject.org/latest/boards/arm/decawave_dwm1001_dev/doc/index.html" text="Zephyr support" >}}
+{{<button relref="/docs/networks/ultrawideband#mesh-positioning-framework" text="Mesh Positioning Framework" >}}Mesh Positioning Framework{{</button>}}
 
-{{<button relref="/docs/networks/ultrawideband#module-firmware" >}}DWM1001 Firmware{{</button>}}
+# 3d printed box for 18650 battery
+{{<image src="/images/uwb/devkit/08a UWB 18650 battery.png" width="400" >}}
 
+{{< icon_button text="Fusion360 model" href="/models/DWM1001-Dev-3dprint-18650.f3d" icon="download" >}}
 # Gallery
 
 {{< gallery dir="/images/uwb/devkit" />}}
