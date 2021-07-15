@@ -94,7 +94,7 @@ Request:
 ```shell
 sm{"uwb_cmd":"twr","initiator":4,"responders":[0,1,2,3],"at_ms":100,"step_ms":10,"count":3,"count_ms":50}
 ```
-
+Responses:
 {{<details "sequence of the (4x3 = 12) TWR responses">}}
 ```shell
 sm/90A971A3D1A1B648{"initiator":4,"range":"0.305","responder":0,"seq":0,"uwb_cmd":"twr"}
@@ -111,6 +111,14 @@ sm/98501ED22B42EB41{"initiator":4,"range":"0.019","responder":2,"seq":10,"uwb_cm
 sm/E8D81FEE52C283EB{"initiator":4,"range":"0.169","responder":3,"seq":11,"uwb_cmd":"twr"}
 ```
 {{</details>}}
+
+Another request
+```shell
+sm{"uwb_cmd":"twr","initiator":0,"responders":[1,1],"at_ms":100,"step_ms":10,"count":10,"count_ms":50}
+```
+In the figure below we can see a gpio debug output from the two uwb modules. The initiator is asking the same responder twice, and then repeats the same for x10 times with a period of 50 ms.
+{{<gfigure src="/images/uwb/twr seq x2x10.png" >}}
+
 
 ### RF Mesh Diagnosis
 * `ping` command and response. The goal is to evaluate the link between the cli and one uid node :
