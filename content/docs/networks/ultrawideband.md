@@ -60,10 +60,10 @@ sm/98501ED22B42EB41{"chan":5,"dataRate":"DWT_BR_6M8","nsSFD":"NonStandard","phrM
 ```
 
 ### TWR command
-Typing the below command on the shell broadcasts the request to all nodes, and each node identified by its short id, will execute the corresponding twr transaction as `initiator` or as `responder`.
+* simple `Two Way Ranging` the below command broadcasts a request to all nodes, and each node identified by its short id, will execute the corresponding twr transaction as `initiator` or as `responder`.
 ```shell
->sm{"twr_command":{"initiator":0,"responder":1,"at_ms":100}}
->sm/E8D81FEE52C283EB{"at_ms":100,"initiator":0,"responder":1,"result":{"range":"0.211"}}
+sm{"uwb_cmd":"twr","initiator":0,"responder":1,"at_ms":100}
+sm/C24FD51212E905F0{"initiator":0,"range":"0.375","responder":1,"seq":0,"uwb_cmd":"twr"}
 ```
 
 {{<details "full example of cli input and output">}}
@@ -88,7 +88,31 @@ sm{"twr_command":{"initiator":0,"responder":1,"at_ms":100}}
 ```
 {{</details>}}
 
-### Diagnosis
+* sequence `Two Way Raning` allows to provide a list for each of the `initiators` or `responders`
+
+Request:
+```shell
+sm{"uwb_cmd":"twr","initiator":4,"responders":[0,1,2,3],"at_ms":100,"step_ms":10,"count":3,"count_ms":50}
+```
+
+{{<details "sequence of the (4x3 = 12) TWR responses">}}
+```shell
+sm/90A971A3D1A1B648{"initiator":4,"range":"0.305","responder":0,"seq":0,"uwb_cmd":"twr"}
+sm/C24FD51212E905F0{"initiator":4,"range":"0.614","responder":1,"seq":1,"uwb_cmd":"twr"}
+sm/98501ED22B42EB41{"initiator":4,"range":"0.005","responder":2,"seq":2,"uwb_cmd":"twr"}
+sm/E8D81FEE52C283EB{"initiator":4,"range":"0.178","responder":3,"seq":3,"uwb_cmd":"twr"}
+sm/90A971A3D1A1B648{"initiator":4,"range":"0.310","responder":0,"seq":4,"uwb_cmd":"twr"}
+sm/C24FD51212E905F0{"initiator":4,"range":"0.591","responder":1,"seq":5,"uwb_cmd":"twr"}
+sm/98501ED22B42EB41{"initiator":4,"range":"0.038","responder":2,"seq":6,"uwb_cmd":"twr"}
+sm/E8D81FEE52C283EB{"initiator":4,"range":"0.183","responder":3,"seq":7,"uwb_cmd":"twr"}
+sm/90A971A3D1A1B648{"initiator":4,"range":"0.319","responder":0,"seq":8,"uwb_cmd":"twr"}
+sm/C24FD51212E905F0{"initiator":4,"range":"0.577","responder":1,"seq":9,"uwb_cmd":"twr"}
+sm/98501ED22B42EB41{"initiator":4,"range":"0.019","responder":2,"seq":10,"uwb_cmd":"twr"}
+sm/E8D81FEE52C283EB{"initiator":4,"range":"0.169","responder":3,"seq":11,"uwb_cmd":"twr"}
+```
+{{</details>}}
+
+### RF Mesh Diagnosis
 * `ping` command and response. The goal is to evaluate the link between the cli and one uid node :
   * `rssi` 51 => -51 bBm
   * time in os ticks where 1 ms = 32 ticks
@@ -108,6 +132,28 @@ sm{"twr_command":{"initiator":0,"responder":1,"at_ms":100}}
 2. >sm/CBC216DC164B1DE8{"rf_diag":"ping"}
 3. sm/1CF6567337562176{"rf_diag":"pinger","rssi":52,"time":4200857}
 4. sm/CBC216DC164B1DE8{"rf_diag":"pong","rssi":41,"time":3898403}
+```
+### UWB Diagnosis
+* `ping` command and response. In this case, the ping request is a packet sent through `simplemesh` (2.4 GHz RF) to the `pinger` node, which then sends an UWB packet to the `target` node
+* the response contains collected data from the DW1000 registers and sent as a `simplemesh` response packet. For details see `DW1000_Software_API_Guide_rev2p7.pdf dwt_readdiagnostics`
+  * `fpAmp1` the leading edge signal from the LDE accumulator
+  * `fpAmp2` same for index floor firstpath+2
+  * `fpAmp3` same for index floor firstpath+3
+  * `maxGrowthCIR` Channel Impulse Response Max Growth related to the receive signal power.
+  * `maxNoise` peak maximum Noise
+  * `rxPreamCount` number of symbols accumulated for the preamble
+  * `stdNoise` standard deviation of the noise level
+```shell
+sm{"uwb_cmd":"ping", "pinger":0,"target":1,"at_ms":100}
+sm/C24FD51212E905F0{"diag":{"fpAmp1":7196,"fpAmp2":7220,"fpAmp3":6969,"maxGrowthCIR":1995,"maxNoise":1495,"rxPreamCount":118,"stdNoise":64},"uwb_cmd":"ping"}
+```
+
+This command can also be requested to be run a `count` number of times each `count_ms` taken as period
+```shell
+sm{"uwb_cmd":"ping", "pinger":0,"target":1,"at_ms":100,"count":3,"count_ms":6}
+sm/C24FD51212E905F0{"diag":{"fpAmp1":4771,"fpAmp2":7206,"fpAmp3":7313,"maxGrowthCIR":2091,"maxNoise":1516,"rxPreamCount":124,"stdNoise":68},"uwb_cmd":"ping"}
+sm/C24FD51212E905F0{"diag":{"fpAmp1":7344,"fpAmp2":7710,"fpAmp3":7008,"maxGrowthCIR":2146,"maxNoise":1712,"rxPreamCount":118,"stdNoise":68},"uwb_cmd":"ping"}
+sm/C24FD51212E905F0{"diag":{"fpAmp1":6346,"fpAmp2":6986,"fpAmp3":6808,"maxGrowthCIR":1976,"maxNoise":1339,"rxPreamCount":124,"stdNoise":60},"uwb_cmd":"ping"}
 ```
 
 
