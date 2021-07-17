@@ -17,12 +17,28 @@ toc: true
 An Ultra-Wide-Band networks can form a mesh network, in addition, the main feature is the RTLS: Real-Time-Locating-System capability.
 
 # Mesh Positioning Framework
-This framework developed as part of the `Home Smart Mesh` project is a takeover of the above mentioned [Zephyr Community](#zephyr-community) with refactoring introducing c++ and a higher level functional layer called `mp` for `mesh positioning` that wraps `dwt_` functions and adds an nRF52 custom RF mesh networking capability.
+
+{{<gfigure src="/images/uwb/mesh positioning.png" >}}
+
+Free support for any question related to this project is available on the project's forum category :
+{{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
+
+This framework is developed as part of the `Home Smart Mesh` project. It is referred to as `mp` for `mesh positioning`. It provides a python API on top of a `simplemesh` custom RF REST API. This REST API can generate a dynamic, request specific TDMA layer for performing a long sequence of basic uwb commands that wraps `dwt_` functions.
+
+The `simplemesh` communication layer is a permanent channel between all nodes and the server that can for example in one command set different nodes in different uwb channels config and roles independently of their current uwb channel.
+
+Zephyr MP Node UWB repo :
 {{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr" text="sdk-uwb-zephyr" icon="github">}}
-{{<hint info>}}Note that Zephyr imported dependencies have been restricted to the needed ones. It is possible to add by editing this [west.yml](https://github.com/nRFMesh/sdk-uwb-zephyr/blob/cd5dd2f1cc9851bccf66e5bdc4e4d3f7e06920e0/west.yml#L20) file e.g. all imports with `import: true`{{</hint>}}
+
+Zephyr CLI Node SimpleMesh repo :
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag" text="sdk-hsm-sensortag" icon="github">}}
+
+server Python API repo :
+{{<icon_button href="https://github.com/HomeSmartMesh/mesh_position" text="mesh_position" icon="github">}}
 
 ## Nodes Preparation
-### TWR Nodes
+### MP Nodes
+MP as Mesh Position nodes perform uwb commands in any role specified by the request, they also apply config and provide responses
 ```bash
 west init -m https://github.com/nRFMesh/sdk-uwb-zephyr --mr main
 cd uwb/samples/06_uwb_node_sm
@@ -31,6 +47,9 @@ west flash
 west flash --snr 760130093
 west flash --snr 760130128
 ```
+The hex file is available for download
+{{<icon_button text="simplemesh_cli dwm1001 commit 451cc6bf4da" href="/data/simplemesh_cli-451cc6bf4da.zip" icon="download" >}}
+
 ### Simpl Mesh CLI Node
 The back-channel commands and configuration of uwb modes is based on `simplemesh`. Both boards are supported by the cli sample `nrf52840dongle_nrf52840` and `decawave_dwm1001_dev` but the `dwm1001` has a better responsible uart console.
 {{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag" text="sdk-uwb-zephyr" icon="github">}}
@@ -42,7 +61,33 @@ west build -b decawave_dwm1001_dev -- -DCONF_FILE=prj-dwm.conf
 west flash
 west flash --snr 260103215
 ```
-## Usage
+The hex file is available for download
+{{<icon_button text="meshposition node dwm1001 commit f64b6e199dee" href="/data/mp_node-f64b6e199dee.zip" icon="download" >}}
+## Python Usage
+* Two Way Ranging single operation
+```python
+initiator = 0
+responder = 1
+range_measure = uwb_twr(initiator, responder)
+print(f"mp> test ({initiator})->({responder}) range = {range_measure}")
+```
+* Two Way Ranging sequence of operations
+```python
+initiator = 0
+responders = [1, 2, 3, 4]
+result_list = uwb_twr(initiator=initiator, responders=responders, step_ms=10)
+for res in result_list:
+    print(f"mp> ({res['initiator']})->({res['responder']}) range= {res['range']}")
+```
+* Ping diagnostic
+```python
+pinger = 0
+target = 1
+diag = uwb_ping_diag(pinger, target)
+print(f"test_uwb_ping> ({pinger})->({target}) stdNoise = {diag['stdNoise']}")
+```
+for more details and example measures see the [database](#database) section
+## Text Console Usage
 The cli node can take user console input commands, send them through `simplemesh` network and outputs results coming from the network.
 ### DWT Config
 request to node with uid, the node responds with the full dwt config
@@ -167,6 +212,146 @@ sm/C24FD51212E905F0{"diag":{"fpAmp1":6346,"fpAmp2":6986,"fpAmp3":6808,"maxGrowth
 
 
 
+## Database
+* Ground Truth.
+
+All nodes are in line of sight and facing the vector x direction. Below is the nodes coordinates table (all units in meter).
+
+| Node | id |x   | y   |
+| ---  | --- | --- | --- |
+| Tag  |0 |  0.75| 0.75|
+| FR   |1 |   1.5 | 1.5 |
+| FL   |2 |   0   | 1.5 |
+| RL   |3 |   0   | 0   |
+| RR   |4 |   1.5 | 0   |
+
+Tag to Anchors distance = sqrt(sqr(0.75)+sqr(0.75)) = 1.06 m
+Given the non perfect placement of the tag and anchors, a more precise measure of the distances is are as follow
+* 0-1 : 1.01 m
+* 0-2 : 1.01 m
+* 0-3 : 1.05 m
+* 0-4 : 1.04 m
+
+* Two Way Ranging
+{{<details "tag ranging four anchors TWR double sided x3 times each">}}
+```json
+[
+    {
+        "initiator": 0,
+        "range": "1.065",
+        "responder": 1,
+        "seq": 0
+    },
+    {
+        "initiator": 0,
+        "range": "1.004",
+        "responder": 2,
+        "seq": 1
+    },
+    {
+        "initiator": 0,
+        "range": "1.210",
+        "responder": 3,
+        "seq": 2
+    },
+    {
+        "initiator": 0,
+        "range": "1.187",
+        "responder": 4,
+        "seq": 3
+    },
+    {
+        "initiator": 0,
+        "range": "1.093",
+        "responder": 1,
+        "seq": 4
+    },
+    {
+        "initiator": 0,
+        "range": "0.947",
+        "responder": 2,
+        "seq": 5
+    },
+    {
+        "initiator": 0,
+        "range": "1.219",
+        "responder": 3,
+        "seq": 6
+    },
+    {
+        "initiator": 0,
+        "range": "1.177",
+        "responder": 4,
+        "seq": 7
+    },
+    {
+        "initiator": 0,
+        "range": "1.069",
+        "responder": 1,
+        "seq": 8
+    },
+    {
+        "initiator": 0,
+        "range": "1.008",
+        "responder": 2,
+        "seq": 9
+    },
+    {
+        "initiator": 0,
+        "range": "1.196",
+        "responder": 3,
+        "seq": 10
+    },
+    {
+        "initiator": 0,
+        "range": "1.154",
+        "responder": 4,
+        "seq": 11
+    }
+]
+```
+{{</details>}}
+
+
+
+* Ping Diagnostic, below an example of the result json format with two entries only. The database below available for download contains 586 ping diagnostic measures
+{{<details "tag ping diagnostic four anchors">}}
+```json
+[
+    {
+        "pinger": 0,
+        "target": 1,
+        "diag": {
+            "fpAmp1": 6699,
+            "fpAmp2": 6986,
+            "fpAmp3": 5772,
+            "maxGrowthCIR": 1953,
+            "maxNoise": 908,
+            "rxPreamCount": 120,
+            "stdNoise": 40
+        },
+        "seq": 0
+    },
+    {
+        "pinger": 0,
+        "target": 1,
+        "diag": {
+            "fpAmp1": 7886,
+            "fpAmp2": 7867,
+            "fpAmp3": 6459,
+            "maxGrowthCIR": 3164,
+            "maxNoise": 1725,
+            "rxPreamCount": 122,
+            "stdNoise": 68
+        },
+        "seq": 1
+    }
+]
+```
+{{</details>}}
+
+{{<icon_button text="ping diagnositc database 2021.07.17 17-26-01" href="/data/tag_four_ping 2021.07.17 17-26-01.json.zip" icon="download" >}}
+
 ## Features
 * Using west with a connected zephyr version dependency and a deca driver integration that can be enabled with the flag `CONFIG_DW1000=y`
 * using the already available board in Zephyr `decawave_dwm1001_dev` instead of the locally declared board `nrf52_dwm1001`
@@ -221,7 +406,8 @@ More details about the UWB DWM1001 development kit :
 {{<image src="/images/uwb/DWM1001 DevKit.png" width="150px" >}}
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm1001_dev/" text="Microcontrollers / nRF52 / UWB DWM1001 dev" >}}
 
-## Module Firmware
+## Firmware and Source Code
+Below a list of existing closed firmware delivered as binary only and open source official and community projects :
 * Production Firmware : available as precompiled binary `DWM1001_PANS_R2.0.hex` in order to recover the Module for production grade certified applications
 * PANS library : All the main functions performed by the module (TWR, RTLS, Bluetooth, 802.15.4) are provided as a library on top of which a user nRF52832 application can be built.
 * PANS library API : described in `DWM1001-Firmware-User-Guide.pdf` and `DWM1001-API-Guide.pdf` 
@@ -358,7 +544,7 @@ SDK available from Decawave uploads as zip
 * source code decadriver : `DW1000 Device Driver Version 05.01.00`
 * ported to STM32 platforms `coocox` and `stsw`
 
-## Raspberry pi software
+## Decawave Raspberry pi software
 * DWM Daemon
 * DWM Proxy
 * webapp http server
