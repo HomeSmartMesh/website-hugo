@@ -23,7 +23,10 @@ An Ultra-Wide-Band networks can form a mesh network, in addition, the main featu
 Free support for any question related to this project is available on the project's forum category :
 {{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
 
-This framework is developed as part of the `Home Smart Mesh` project. It is referred to as `mp` for `mesh positioning`. It provides a python API on top of a `simplemesh` custom RF REST API. This REST API can generate a dynamic, request specific TDMA layer for performing a long sequence of basic uwb commands that wraps `dwt_` functions.
+There is no such thing as UWB position, UWB only provide ToF and range, therefore experimenting with different positioning algorithms can now be offloaded to a server environment with high performance. Also in case the uwb ranging is not working, and your solution is based on a balck-box closed source, there's no way to figure out what the problem is, therefore being able to perform diagnostic between any two nodes with the same firmware running the ranging function is important to keep a live status of your uwb network.
+From these two ideas is born this `mesh positioning` framework.
+
+This framework is developed as part of the `Home Smart Mesh` project. It provides a python API on top of a `simplemesh` custom RF REST API. This REST API can generate a dynamic, request specific TDMA layer for performing a long sequence of basic uwb commands that wraps `dwt_` functions.
 
 The `simplemesh` communication layer is a permanent channel between all nodes and the server that can for example in one command set different nodes in different uwb channels config and roles independently of their current uwb channel.
 
@@ -49,6 +52,7 @@ west flash --snr 760130128
 ```
 The hex file is available for download
 {{<icon_button text="simplemesh_cli dwm1001 commit 451cc6bf4da" href="/data/simplemesh_cli-451cc6bf4da.zip" icon="download" >}}
+{{<icon_button text="simplemesh_cli dwm1001 commit dc772e267" href="/data/simplemesh_cli-dc772e267.zip" icon="download" >}}
 
 ### Simpl Mesh CLI Node
 The back-channel commands and configuration of uwb modes is based on `simplemesh`. Both boards are supported by the cli sample `nrf52840dongle_nrf52840` and `decawave_dwm1001_dev` but the `dwm1001` has a better responsible uart console.
@@ -63,6 +67,7 @@ west flash --snr 260103215
 ```
 The hex file is available for download
 {{<icon_button text="meshposition node dwm1001 commit f64b6e199dee" href="/data/mp_node-f64b6e199dee.zip" icon="download" >}}
+{{<icon_button text="meshposition node dwm1001 commit b794f1667" href="/data/mp_node-b794f1667.zip" icon="download" >}}
 ## Python Usage
 * Two Way Ranging single operation
 ```python
