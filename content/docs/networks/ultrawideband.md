@@ -1,11 +1,11 @@
 ---
 title: "Ultra Wide Band"
-description: "Transcievers, modules and Applications for Ultra Wide Band. Focus on Real Time Localisation System"
+description: "Ultra Wide Band open source positioning framework, link to hardware producst and survey of exisiting open source libraries"
 lead: ""
 date: 2021-05-06T08:48:57+00:00
 lastmod: 2021-05-15T08:00:00+00:00
 draft: false
-images: ["/images/uwb/DRTLS.webp"]
+images: ["/images/uwb/mesh positioning.png","/images/uwb/DRTLS.webp"]
 weight: 2
 toc: true
 ---
@@ -16,7 +16,9 @@ toc: true
 
 An Ultra-Wide-Band networks can form a mesh network, in addition, the main feature is the RTLS: Real-Time-Locating-System capability.
 
-# Mesh Positioning Framework
+This pages covers the `meshposition` Open Source UWB Framework, provide links to UWB Hardware then covers the existing software with a Survey that has focus on Fee and Open Source Framwrorks. For Closed Source and commercial Software it is possible to refer to the official Decaware/Qorvo Partners.
+
+# Mesh Position Framework
 
 {{<gfigure src="/images/uwb/mesh positioning.png" >}}
 
@@ -387,14 +389,15 @@ the screenshot was made from the below commit which is a separate branch not inc
 {{<icon_button href="https://github.com/nRFMesh/sdk-uwb-zephyr/commit/28bb91069e5c51336cb47bf0d38d4b5f21947ed9" text="branch twr_functional 28bb910" icon="github">}}
 
 
-# RTLS Gen 2
+# Hardware
+## RTLS Gen 2
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
 {{<image src="/images/uwb/dwm3001-cdk.webp" width="150px">}}
 
 * DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
 * using nRF52833 as host capable of Thread and Bluetooth Mesh and Direction finding
 
-# RTLS Gen 1
+## RTLS Gen 1
 
 {{<image src="/images/uwb/DRTLS.webp">}}
 
@@ -404,14 +407,33 @@ the screenshot was made from the below commit which is a separate branch not inc
 * [eCos](https://ecos.sourceware.org/) : Free Open source Real-Time Operating-System
 
 Decawave provides a ready to use localisation system based on a preflashed `DWM1001_PANS_R2.0.hex` firmware. The functional concept is described in `DWM1001 System Overview and Performance.pdf` including the time division protocol and the format of all the 802.15.4 Frames.
-## Hardware
+
 UWM Chips available from Decawave, now Qorvo. Qorvo is also the supplier of Apple UWB chips.
 
 More details about the UWB DWM1001 development kit :
 {{<image src="/images/uwb/DWM1001 DevKit.png" width="150px" >}}
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm1001_dev/" text="Microcontrollers / nRF52 / UWB DWM1001 dev" >}}
+## DW Tranceiver
+available in a Decawave webpage
 
-## Firmware and Source Code
+{{<icon_button href="https://www.decawave.com/dw1000/usermanual/" text="dw1000 user manual" icon="new" >}}
+
+* User Manual : latest version 2.18 as of May 2021
+* Transmission, Reception, MAC features, Calibration,...
+
+application note and datasheet from forum post (note the datasheet on the product page is version 1.8)
+{{<icon_button href="https://decaforum.decawave.com/uploads/short-url/bDBtllhpvFtLXlS6U1OW19f7Li6.pdf" text="APS017 max range in DW1000 systems v1.1" icon="pdf" >}}
+{{<icon_button href="https://www.decawave.com/sites/default/files/resources/dw1000-datasheet-v2.09.pdf" text="dw1000 datasheet v2.09" icon="pdf" >}}
+
+SDK available from Decawave uploads as zip
+
+{{<icon_button href="https://www.decawave.com/wp-content/uploads/2019/01/dw1000_api_rev2p14.zip" text="dw1000_api_rev2p14.zip" icon="download" >}}
+
+* document User Guide :  `dw1000_api_rev2p14\dw1000_api_rev2p14_stsw\DW1000_Software_API_Guide_rev2p7.pdf`
+* source code decadriver : `DW1000 Device Driver Version 05.01.00`
+* ported to STM32 platforms `coocox` and `stsw`
+
+# Software Survey
 Below a list of existing closed firmware delivered as binary only and open source official and community projects :
 * Production Firmware : available as precompiled binary `DWM1001_PANS_R2.0.hex` in order to recover the Module for production grade certified applications
 * PANS library : All the main functions performed by the module (TWR, RTLS, Bluetooth, 802.15.4) are provided as a library on top of which a user nRF52832 application can be built.
@@ -448,7 +470,7 @@ Firmware recovery
 nrfjprog -f nrf52 --program DWM1001_PANS_R2.0.hex --sectorerase --verify
 ```
 
-### Product Page
+## Product Page
 PANS binary library for nRF52832 module DWM1001
 
 {{<icon_button href="https://www.decawave.com/product/dwm1001-development-board/" text="v9_dwm_on_board_package" icon="new">}}
@@ -463,7 +485,7 @@ PANS binary library for nRF52832 module DWM1001
 
 {{<hint warning>}}Although reporting the same firmware version, two UWB commands are missing from the PANS lib `utpg, utps` (transmit power get and set){{</hint>}}
 
-### Decawave Github
+## Decawave Github
 Transciever driver DW1000 for nRF52
 
 {{<icon_button href="https://github.com/Decawave/dwm1001-examples" text="dwm1001-examples" icon="github">}}
@@ -476,8 +498,8 @@ Transciever driver DW1000 for nRF52
 
 {{<hint warning>}}with Embedded studio V5.40, it is required to enable the updated #ifdef for `__putchar` in `retarget.c` line 100{{</hint>}}
 
-### Github mynewt
-Core source code for MAC layers and ranging
+## Github mynewt
+Also from Decawave github organisation. Core source code for MAC layers and ranging
 {{<icon_button href="https://github.com/Decawave/uwb-core" text="mynewt uwb-core" icon="github">}}
 
 using the core functions and adding TDMA, Clock calib,...
@@ -485,14 +507,14 @@ using the core functions and adding TDMA, Clock calib,...
 
 * examples : sniffer, OTA, TWR, TDOA,...
 * running over Apache's [myNewt](https://mynewt.apache.org/) Operating System which comes with code for BT, network,...
-### Zephyr Official
+## Zephyr Mainline
 {{<icon_button href="https://docs.zephyrproject.org/2.4.0/boards/arm/decawave_dwm1001_dev/doc/index.html" text="Zephyr Port" icon="new">}}
 
 * module port as `decawave_dwm1001_dev` board with `.dts`
 * transciever driver `decawave,dw1000` integrated in the spi dts entry
 * no uwb specific positioning code
 
-### Zephyr Community
+## Zephyr Community
 
 Community contribution of Zephyr based examples with decadriver
 {{<icon_button href="https://github.com/foldedtoad/dwm1001" text="dwm1001" icon="github">}}
@@ -506,13 +528,23 @@ Community contribution of Zephyr based examples with decadriver
 {{<hint warning>}}using Zephyr 2.5 config Patches for double floats print `%lf` and `CONFIG_NEWLIB_LIBC=y`
 `CONFIG_NEWLIB_LIBC_FLOAT_PRINTF=y`, also sprintf string overflow needs size increase {{</hint>}}
 
-### Zephyr with Bluetooth
+## Zephyr with Bluetooth
 
 {{<icon_button href="https://github.com/RT-LOC/zephyr-dwm1001/" text="RT-LOC/zephyr-dwm1001" icon="github">}}
 
 
 
-### Arduino
+## Arm mbed
+The [search for dw1000](https://os.mbed.com/search/repository?q=dw1000) on the arm mbed registry returns 4 results, some more popular than others in terms of imports but also older with last update between 2015 - 2017.
+
+Two are worth mentioning, `AndyA DW1000` is nicely wrapped c++ driver the mbed way built on top of the `BurstSPI.lib`, but unfortunately does not come with examples, the Author though is active on the Decawave forum answering general questions and giving valuable feedback. `Grob&Stalder Decawave` with a DW1000 driver but also simple and two way ranging layer.
+
+{{<icon_button href="https://os.mbed.com/users/AndyA/code/DW1000/" text="AndyA DW1000" icon="new">}}
+
+{{<icon_button href="https://os.mbed.com/users/manumaet/code/DecaWave/" text="Grob&Stalder Decawave" icon="new">}}
+
+
+## Arduino
 {{<hint danger>}}Although mentioned for completeness Arduino Framework and libraries are not recommended for production development due to Arduino debug and real time limitations and the unofficial (non-tested / incomplete) character of the available libraries as discussed in the [Decawave forum](https://decaforum.decawave.com/t/how-to-read-dws1000-on-arduino-uno/9428/2){{</hint>}}
 
 {{<icon_button href="https://github.com/thotro/arduino-dw1000" text="arduino-dw1000" icon="github">}}
@@ -529,25 +561,6 @@ Community contribution of Zephyr based examples with decadriver
 * TWR
 
 
-## DW Tranceiver
-available in a Decawave webpage
-
-{{<icon_button href="https://www.decawave.com/dw1000/usermanual/" text="dw1000 user manual" icon="new" >}}
-
-* User Manual : latest version 2.18 as of May 2021
-* Transmission, Reception, MAC features, Calibration,...
-
-application note and datasheet from forum post (note the datasheet on the product page is version 1.8)
-{{<icon_button href="https://decaforum.decawave.com/uploads/short-url/bDBtllhpvFtLXlS6U1OW19f7Li6.pdf" text="APS017 max range in DW1000 systems v1.1" icon="pdf" >}}
-{{<icon_button href="https://www.decawave.com/sites/default/files/resources/dw1000-datasheet-v2.09.pdf" text="dw1000 datasheet v2.09" icon="pdf" >}}
-
-SDK available from Decawave uploads as zip
-
-{{<icon_button href="https://www.decawave.com/wp-content/uploads/2019/01/dw1000_api_rev2p14.zip" text="dw1000_api_rev2p14.zip" icon="download" >}}
-
-* document User Guide :  `dw1000_api_rev2p14\dw1000_api_rev2p14_stsw\DW1000_Software_API_Guide_rev2p7.pdf`
-* source code decadriver : `DW1000 Device Driver Version 05.01.00`
-* ported to STM32 platforms `coocox` and `stsw`
 
 ## Decawave Raspberry pi software
 * DWM Daemon
