@@ -391,11 +391,26 @@ the screenshot was made from the below commit which is a separate branch not inc
 
 # Hardware
 ## RTLS Gen 2
+### DWM3001 cdk
+
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
 {{<image src="/images/uwb/dwm3001-cdk.webp" width="150px">}}
 
-* DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
-* using nRF52833 as host capable of Thread and Bluetooth Mesh and Direction finding
+* form factor 65 mm x 45 mm
+* on board debugger and battery power management
+* DW3110 from the DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
+* on board host nRF52833 capable of Thread and Bluetooth Mesh and Direction finding
+
+### DWM3000 evb
+This part number has been renamed from `DWS3000` to `DWM3000 evb`
+{{<image src="/images/uwb/dwm3000-evb.webp" width="150px">}}
+
+* Arduino shield form factor (+ module antenna) 80 mm x 54 mm
+* DW3110 from the DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
+* supported hardware reference platforms `nRF52840-DK` and `nucleo-F429ZI`.
+
+for software see the [Software / DWM3000 evb](#dwm3000) section.
+
 
 ## RTLS Gen 1
 
@@ -471,7 +486,8 @@ nrfjprog -f nrf52 --program DWM1001_PANS_R2.0.hex --sectorerase --verify
 ```
 
 ## Product Page
-PANS binary library for nRF52832 module DWM1001
+### DWM1001
+PANS binary library for nRF52832 module 
 
 {{<icon_button href="https://www.decawave.com/product/dwm1001-development-board/" text="v9_dwm_on_board_package" icon="new">}}
 
@@ -484,6 +500,16 @@ PANS binary library for nRF52832 module DWM1001
 * Used `GNU Tools ARM Embedded` version `5.4 2016q3`
 
 {{<hint warning>}}Although reporting the same firmware version, two UWB commands are missing from the PANS lib `utpg, utps` (transmit power get and set){{</hint>}}
+
+### DWM3000
+Software for the [DWM3000 evb](#dwm3000-evb) hardware.
+The Decawave [product page](https://www.decawave.com/product/dwm3000evb/) provides a package of documentation and software
+{{<icon_button href="https://www.decawave.com/wp-content/uploads/2020/11/DWS3000_Software-and-API-Guide.zip" text="DWS3000_Software-and-API-Guide.zip" icon="download" >}}
+
+* supported hardware reference platforms `nRF52840-DK` and `nucleo-F429ZI`. The nucleo requires a hardware modification
+  * STM32 Cube MX project for `nucleo-F429ZI`
+  * SES emProject for `nRF52840-DK` using nRF5 SDK version 16.0.0
+
 
 ## Decawave Github
 Transciever driver DW1000 for nRF52
