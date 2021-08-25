@@ -314,8 +314,8 @@ https://dhrishi.github.io/connectedhomeip/qrcode.html?data=CH%3AI34DV%2A-00%200C
 {{<icon_button relref="https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/nrfconnect_android_commissioning.md" text="github readme" icon="github" >}}
 
 # FAQ - Discussion
-If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
-{{<icon_button text="Home Smart Mesh - connectedhomeip channel" href="https://discord.gg/f9MTAnBYM9" icon="discord" >}}
+If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
+{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
 
 {{<faq>}}
 Is CHIP yet another invention to push consumers into buing new products ?

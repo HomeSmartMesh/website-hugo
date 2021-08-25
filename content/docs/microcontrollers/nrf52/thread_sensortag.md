@@ -50,7 +50,7 @@ toc: true
 
 ## Board
 
-{{<image src="/images/thread_sensortag/board_top.webp" width="500px" >}}
+{{<image src="/images/thread_sensortag/board_top_v1.1.webp" width="500px" >}}
 
 # Development
 ## install
@@ -952,7 +952,9 @@ Memory region         Used Size  Region Size  %age Used
 * v 1.0 10.02.2021
 
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.0" text="tag v1.0" icon="github" >}}
+
 {{<gfigure src="/images/thread_sensortag/prototype_top.webp" width="200px" >}}
+
 {{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" width="200px" >}}
 
 

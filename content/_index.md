@@ -54,7 +54,7 @@ grid:
 {{<load-svg-pan-zoom>}}
 {{< grid "my_grid" >}}
 {{< image src="/images/discourse.svg" height=60 href="https://homesmartmesh.discourse.group/" >}}
-{{< image src="/images/discourse.png" height=100 href="https://homesmartmesh.discourse.group/" >}}
+{{< image src="/images/discourse/discourse_simple.png" height=100 href="https://homesmartmesh.discourse.group/" >}}
 An [invitation](https://homesmartmesh.discourse.group/) to talk, chat, get support, make suggestions in any of this websites projects and topics
 <--->
 {{<image src="/images/uwb/DRTLS.webp" height="150px" href="/docs/networks/ultrawideband/" >}}

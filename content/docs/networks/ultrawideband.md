@@ -396,7 +396,7 @@ the screenshot was made from the below commit which is a separate branch not inc
 {{<icon_button relref="/docs/microcontrollers/nrf52/dwm3001_cdk/" text="Microcontrollers / nRF52 / UWB DWM3001 cdk" >}}
 {{<image src="/images/uwb/dwm3001-cdk.webp" width="150px">}}
 
-* form factor 65 mm x 45 mm
+* form factor 65 mm x 45 mm (single board)
 * on board debugger and battery power management
 * DW3110 from the DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
 * on board host nRF52833 capable of Thread and Bluetooth Mesh and Direction finding
@@ -405,7 +405,7 @@ the screenshot was made from the below commit which is a separate branch not inc
 This part number has been renamed from `DWS3000` to `DWM3000 evb`
 {{<image src="/images/uwb/dwm3000-evb.webp" width="150px">}}
 
-* Arduino shield form factor (+ module antenna) 80 mm x 54 mm
+* Arduino shield form factor (+ module antenna) 80 mm x 54 mm (to be stacked over host board)
 * DW3110 from the DW3000 IC family `IEEE 802.15.4z`, `IEEE802.15.4-2015 UWB`,...
 * supported hardware reference platforms `nRF52840-DK` and `nucleo-F429ZI`.
 
@@ -523,6 +523,13 @@ Transciever driver DW1000 for nRF52
 * decadriver : `DW1000 Device Driver Version 04.00.06`
 
 {{<hint warning>}}with Embedded studio V5.40, it is required to enable the updated #ifdef for `__putchar` in `retarget.c` line 100{{</hint>}}
+
+### Variant on top of dwm1001-examples
+
+Academit project from the TIERS University of Turku Finland. The integration is arcaic and requires manual replacement of files, based on old SES and ARM toolchain versions. The content has value nevertheless and includes code for `Autocalibration`, `Localization` and `Measurements`. In each example, the Initiator and responders are in different firmwares. the measurement includes a python script that has among others `rospy` as dependency, therefore has a robotics application scope.
+
+{{<icon_button href="https://github.com/TIERS/dwm1001-uwb-firmware" text="dwm1001-uwb-firmware" icon="github">}}
+
 
 ## Github mynewt
 Also from Decawave github organisation. Core source code for MAC layers and ranging
@@ -694,11 +701,11 @@ given that the response is a confirmation it will have a payload similar as the 
 {{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
 
 {{<faq>}}
-What is Ultra Wide Band ?
+Can the DWM1001C firmware be modified ?
 <--->
-It's a radio technology that is not based on classical frequency or amplitude modulation rather uses a rich signal pulses that occupies a large spectrum band.
+It is possible to flash any firmware on the nRF52832 uC host of the DWM1001C and in case of need Decawave provides the orginal PANS firmware as a .hex to recover the original functionality. The PANS though is only provided as binary program and binary library. It is possible to add a custom app code on top but the content of the PANS lib cannot be modified, or at least is not intended to be modified.
 <===>
-What does Ultra Wide Band mean for home automation ?
+Where does the PANS library run ?
 <--->
-Very low energy level allows small battery operated tags to achieve functions like precise indoors positioning, which so far could only be achieved with heavier equipment like cameras that need high processing power localisation algorithms.
+The PANS library runs on the host microcontroller in the case of the DWM1001 the nRF52832. It is built on top of ecos RTOS.
 {{</faq>}}

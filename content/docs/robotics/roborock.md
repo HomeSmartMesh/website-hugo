@@ -100,8 +100,8 @@ bot.launch()
 {{</details>}}
 
 # FAQ - Discussion
-* If you want to add a question or an answer suggestion, you can join the discussion on the discord server
-{{<icon_button text="Roborock Valetudo discord channel" href="https://discord.gg/5PR47RMMsT" icon="discord" >}}
+If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
+{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
 
 * see also
 {{<icon_button text="Valetudo FAQ Page" href="https://valetudo.cloud/pages/faq.html" icon="new" >}}

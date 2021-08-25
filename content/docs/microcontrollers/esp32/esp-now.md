@@ -361,8 +361,8 @@ MQTT Explorer showing both topics received from the gateway:
 {{<icon_button text="espnow_mqtt_gateway.ino" href="https://github.com/ESP32Home/ESPNowWrapper/blob/master/examples/espnow_mqtt_gateway.ino" icon="github">}}
 
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
-{{<icon_button text="ESP-Now channel" href="https://discord.gg/caHerwBdz8" icon="discord" >}}
+If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
+{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
 
 {{<faq>}}
 Can I ran an ESP-Now wifi gateway ?

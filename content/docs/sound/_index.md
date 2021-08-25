@@ -169,8 +169,9 @@ Example integration of cubemx with pio :
 * [f411_piocube_lib_blink](https://github.com/STM32Libs/f411_piocube_lib_blink)
 
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discord server
-{{<icon_button text="Home Smart Mesh - Audio Processing" href="https://discord.gg/83pGqB67Qa" icon="discord" >}}
+If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
+{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
+
 {{<faq>}}
 What is the difference between a MediaStream and a MediaSource when used in a real time network ?
 <--->
