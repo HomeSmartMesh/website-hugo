@@ -77,3 +77,39 @@ In case the Hardware flow control is not used, which means the UART CTS and RTS 
 ```bash
 make BOARD=pca10056
 ```
+
+# Thread Sensortag
+## config
+```c++
+#define MICROPY_HW_LED1             (4) // LED1
+#define MICROPY_HW_LED2             (6) // LED2
+#define MICROPY_HW_LED3             (8) // LED3
+#define MICROPY_HW_LED4             (1) // LED4
+
+// UART config
+#define MICROPY_HW_UART1_RX         (2)
+#define MICROPY_HW_UART1_TX         (29)
+#define MICROPY_HW_UART1_CTS        (1)
+#define MICROPY_HW_UART1_RTS        (1)
+#define MICROPY_HW_UART1_HWFC       (0)
+
+// I2C busses
+#define MICROPY_HW_I2C1_NAME        "I2C1"
+#define MICROPY_HW_I2C1_SCL         (45)  // SCL
+#define MICROPY_HW_I2C1_SDA         (47)  // SDA
+
+```
+## python code
+```python
+from machine import Pin, I2C
+
+i2c = I2C(0, scl=Pin(45), sda=Pin(47))
+i2c.scan()
+```
+## output
+```
+[64, 72, 118]
+```
+## references
+https://github.com/adafruit/Adafruit_CircuitPython_MS8607
+https://github.com/eewiki/Xbee3-MicroPython/blob/master/samples/Zigbee_MS8607_i2c_rev1.py

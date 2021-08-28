@@ -110,6 +110,46 @@ Attempt to unify interfaces in one app. Result is quite a success though require
 {{< youtube LMJBS6VYZzk >}}
 
 
+## mqtt2influx
+* repo directory : https://github.com/HomeSmartMesh/raspi/tree/master/py/influx
+
+Features :
+* easily deploy as a Linux service : https://github.com/HomeSmartMesh/raspi/blob/master/py/influx/influx_mqtt.service
+* json config : https://github.com/HomeSmartMesh/raspi/blob/master/py/influx/config.json
+* `subscriptions` : topics suscriptions list
+
+```json
+        "subscriptions":[   "lzig/living heat",
+                            "+/bed weather",
+                            "lzig/bedroom heat",
+                            "+/balcony window left",
+```
+* `names` : replace long topic names with friendly names 
+```json
+        "names":{
+            "shellies/shellyplug-s-01E2B5/relay/0/power":"shelly dryer",
+```
+
+  * `types` : types enfrorcement : this is an influx design/limitation that it is not possible to change the type after creation, in case a float starts with a round number it locks the type. By using this feature the type is ensured to be correct from the first post.
+
+```json
+        "types":{
+            "energy"      :"int",
+            "power"      :"float",
+            "pressure"      :"float",
+```
+
+ * `discard` : make sure unwanted data from specific fields are excluded from the influx post although belonging to the wanted topics
+```json
+        "discard":[
+            "path",
+            "eurotronic_host_flags",
+            "occupancy"
+```
+
+* `log` : a log file with a log level
+* `last_seen` fitering : mqtt allows persistance of values needed for displaying all sensor values for newly connected clients. This might have the side effect of re-injecting the same old values to the influx database in case of restart of the client. It is possible to avoid that by using this feature that filter posts which `last_seen` field, in case it exists, is fresh and not old.
+
 ## Home heating app
 
 ### web heat control
