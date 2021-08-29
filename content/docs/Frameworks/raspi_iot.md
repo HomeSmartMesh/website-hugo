@@ -12,7 +12,28 @@ toc: true
 
 
 {{< my_button href="https://github.com/HomeSmartMesh/raspi" text="Raspi Github Repo" >}}
-## Software
+
+# Hardware
+{{< image src="/images/devices.png" width=600 >}}
+
+* Thread
+  * See [Thread SensorTag](/docs/microcontrollers/nrf52/thread_sensortag/)
+* Zigbee
+  * Hue Light with Hue gateway
+  * Eurotronics thermostats with zigbee2mqtt
+  * Aquara sensors with Zigbee2mqtt
+* WiFi
+  * ESP32 bed heater
+  * ESP32 neopixels led panel
+  * Shelly power control and monitor
+  * Roborock with valetudeo server : https://github.com/Hypfer/Valetudo
+* Custom RF
+  * nRF52 sensors with [nRF52 Mesh](https://github.com/nRFMesh/nRF52_Mesh)
+* ESP32
+  * led panel : [github esp32_iot rgb_led](https://github.com/HomeSmartMesh/esp32_iot/tree/master/rgb_led)
+  * bed heating [github esp32_iot bed_heater](https://github.com/HomeSmartMesh/esp32_iot/tree/master/bed_heater)
+
+# Software
 {{< image src="/images/software.png" width=600 >}}
 
 * Raspbian OS
@@ -23,6 +44,7 @@ toc: true
   * Grafana : https://grafana.com/
   * graphql sensors : [js/graphql](./js/graphql)
 * x to mqtt
+  * Thread UDP to mqtt : [py/thread_tags](https://github.com/HomeSmartMesh/raspi/tree/master/py/thread_tags)
   * Zigbee2mqtt : https://www.zigbee2mqtt.io/
   * nrf2mqtt : [github nRF52_Mesh nrf_mesh](https://github.com/nRFMesh/nRF52_Mesh/tree/master/raspi/nrf_mesh)
   * miflora2mqtt : https://github.com/RaymondMouthaan/miflora-mqtt-daemon
@@ -39,24 +61,40 @@ toc: true
   * Bed heating : [js/bed_heating](./js/bed_heating)
   * Roborock Chat : [js/telegraf/hover_poll.js](./js/telegraf/hover_poll.js)
 
-## Hardware
-{{< image src="/images/devices.png" width=600 >}}
+## raspberry pi setup
 
-* Zigbee
-  * Hue Light with Hue gateway
-  * Eurotronics thermostats with zigbee2mqtt
-  * Aquara sensors with Zigbee2mqtt
-* WiFi
-  * ESP32 bed heater
-  * ESP32 neopixels led panel
-  * Shelly power control and monitor
-  * Roborock with valetudeo server : https://github.com/Hypfer/Valetudo
-* Custom RF
-  * nRF52 sensors with [nRF52 Mesh](https://github.com/nRFMesh/nRF52_Mesh)
-* ESP32
-  * led panel : [github esp32_iot rgb_led](https://github.com/HomeSmartMesh/esp32_iot/tree/master/rgb_led)
-  * bed heating [github esp32_iot bed_heater](https://github.com/HomeSmartMesh/esp32_iot/tree/master/bed_heater)
-
+* download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
+* use the Raspberry pi Imager tool to write the image. The tool is available from https://www.raspberrypi.org/software/
+* eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
+* connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`
+* setup the [border router](/docs/networks/thread/#raspberry-pi-setup)
+* restart then create a network on the border router web GUI in the url of the rasp ip address
+* install docker and docker compose
+```
+  sudo apt-get update && sudo apt-get upgrade
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sudo sh get-docker.sh
+  sudo usermod -aG docker pi
+  sudo reboot now
+  sudo apt-get install libffi-dev libssl-dev
+  sudo apt install python3-dev
+  sudo apt-get install -y python3 python3-pip
+  sudo pip3 install docker-compose
+```
+* clone this repo and start services that will run docker compose `docker-compose-thread.yml` and python services
+```
+git clone https://github.com/HomeSmartMesh/raspi.git
+cd raspi
+./start_services.sh
+```
+these steps still manual can be scripted
+* in the influx container, create a database named `mqtt`
+```
+$influx
+>CREATE DATABASE mqtt
+```
+* in grafana `http://raspi_ip:3000` create an influx datasource on url `http://localhost:8086`
+* upload the dashboard `grafana\Dashboards\SensorTag Compare.json`
 
 ## Meta website
 {{< image src="/images/meta_website.png" width=100% >}}
@@ -387,33 +425,3 @@ In order to use this script, it is required to host it locally on local raspberr
   * safety power too low
 * Any heat power control custom script must necessarily have another safe switch to fully cut the power when away or device is inattended.
 
-# Raspberry pi tooling
-
-{{<new_button href="https://www.raspberrypi.org/software/" text="Raspberry pi image flash tool..." >}}
-
-## raspberry pi sd card setup
-
-* download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
-* use the Raspberry pi Imager tool above to write the image
-* eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
-* connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`
-* setup the [border router](/docs/networks/thread/#raspberry-pi-setup)
-* restart then create a network on the border router web GUI in the url of the rasp ip address
-* install docker and docker compose
-```
-  sudo apt-get update && sudo apt-get upgrade
-  curl -fsSL https://get.docker.com -o get-docker.sh
-  sudo sh get-docker.sh
-  sudo usermod -aG docker pi
-  sudo reboot now
-  sudo apt-get install libffi-dev libssl-dev
-  sudo apt install python3-dev
-  sudo apt-get install -y python3 python3-pip
-  sudo pip3 install docker-compose
-```
-* clone this repo and run docker compose for thread
-```
-git clone https://github.com/HomeSmartMesh/raspi.git
-cd raspi
-docker-compose -f docker-compose-thread.yml up
-```
