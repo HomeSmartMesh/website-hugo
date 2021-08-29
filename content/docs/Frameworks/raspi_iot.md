@@ -391,3 +391,29 @@ In order to use this script, it is required to host it locally on local raspberr
 
 {{<new_button href="https://www.raspberrypi.org/software/" text="Raspberry pi image flash tool..." >}}
 
+## raspberry pi sd card setup
+
+* download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
+* use the Raspberry pi Imager tool above to write the image
+* eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
+* connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`
+* setup the [border router](/docs/networks/thread/#raspberry-pi-setup)
+* restart then create a network on the border router web GUI in the url of the rasp ip address
+* install docker and docker compose
+```
+  sudo apt-get update && sudo apt-get upgrade
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sudo sh get-docker.sh
+  sudo usermod -aG docker pi
+  sudo reboot now
+  sudo apt-get install libffi-dev libssl-dev
+  sudo apt install python3-dev
+  sudo apt-get install -y python3 python3-pip
+  sudo pip3 install docker-compose
+```
+* clone this repo and run docker compose for thread
+```
+git clone https://github.com/HomeSmartMesh/raspi.git
+cd raspi
+docker-compose -f docker-compose-thread.yml up
+```

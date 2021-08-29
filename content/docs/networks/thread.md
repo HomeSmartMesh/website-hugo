@@ -79,6 +79,8 @@ A Thread network setup contains the following Nodes
 ## raspberry pi setup
 {{<icon_button href="https://openthread.io/guides/border-router/build#set-up-the-border-router" text="Setup - OpenThread..."  icon="new" >}}
 
+install git if not already available
+
 ```bash
 git clone https://github.com/openthread/ot-br-posix
 cd ot-br-posix
@@ -221,8 +223,8 @@ wpan0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1280
 ```bash
 cd ~/ot-nrf528xx
 ./script/bootstrap
-./bootstrap
 sudo rm -rf build/
+./script/build nrf52840 USB_trans -DOT_COMMISSIONER=ON -DOT_THREAD_VERSION=1.2 -DOT_BOOTLOADER=USB
 ./script/build nrf52840 USB_trans -DOT_COMMISSIONER=ON -DOT_THREAD_VERSION=1.2
 cd build/bin/
 arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp-com-1.2.hex
@@ -230,6 +232,11 @@ nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --chiperase --program ot-rcp-com-1.2.hex --reset
 ```
 
+It is possible to restore the original bootloader from the hex available from [this post](https://devzone.nordicsemi.com/f/nordic-q-a/40924/how-can-i-restore-the-original-bootloader-of-a-pca10059)
+
+{{<icon_button href="/data/ot-rcp-com-1.2-usb_27.08.2021.hex.zip" text="ot-rcp 27.08.2021 OT_BOOTLOADER=USB" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp-com-1.2_27.08.2021.hex.zip" text="ot-rcp 27.08.2021" icon="download" >}}
 
 {{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
 

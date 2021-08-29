@@ -24,6 +24,7 @@ toc: true
 * Reset button `P0.18` and [user button](?svg=nrf52-sensor-tag&text=S2) SW0 `P1.09`
 * [RGB LED](?svg=nrf52-sensor-tag&text=LED1) `P0. 04 06 08`
 
+# Hardware
 ## Schematics
 
 {{<svg-pan-zoom "/images/thread_sensortag/nrf52-sensor-tag.svg" "white" >}}
@@ -52,9 +53,42 @@ toc: true
 
 {{<image src="/images/thread_sensortag/board_top_v1.1.webp" width="500px" >}}
 
-# Development
-## install
-* install [zephyr and west](http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/getting_started/index.html#getting-started)
+## Produced versions
+* v 1.1 15.04.2021
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.1" text="tag v1.1" icon="github" >}}
+
+{{<gfigure src="/images/thread_sensortag/prototype_top_v1.1.webp" width="200px" >}}
+
+{{<gfigure src="/images/thread_sensortag/prototype_bottom_v1.1.webp" width="200px" >}}
+
+* v 1.0 10.02.2021
+
+{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.0" text="tag v1.0" icon="github" >}}
+
+{{<gfigure src="/images/thread_sensortag/prototype_top.webp" width="200px" >}}
+
+{{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" width="200px" >}}
+
+## Pogo pins adapter
+* SWD pogo pins adapter
+* Pogo Pin P75-E2 Dia 1.3mm Length 16.5mm
+
+{{<icon_button text="STL Model" href="/models/thread4_lower.stl" icon="download" >}}
+{{< model_viewer "/models/thread4_lower.glb" "400" >}}
+{{< gallery dir="/images/thread_sensortag/swd-pogo" />}}
+
+
+# Software
+## Border Router Setup
+ For the main Thread sensor broadcast firmware a raspberry pi is needed to act as a thread boarder router to which a usb dongle is connected as a thread radio co-processor.
+ 
+{{<button relref="/docs/networks/thread#border-router">}}border router setup{{</button>}}
+
+
+## Zephyr Tag Firmware
+
+* The development environment is based on [zephyr and west](http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/getting_started/index.html#getting-started)
 
 {{<hint warning>}}
 make sure there is no environment variable `ZEPHYR_BASE` in order to use the local zephyr version
@@ -71,8 +105,7 @@ west init -m https://github.com/HomeSmartMesh/sdk-hsm-sensortag --mr main
 west update
 ```
 
-## sdk samples
-The SDK samples are presented in two folds, first the overall application including all the measures, then a list of basic applications with minimal code for each driver and measure separately
+The first presented SDK sample is the overall application that broadcasts all sensors measures, followed by a list of basic applications with minimal code for each driver and sensor separately
 
 ### tag_sensors_broadcast
 {{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/tree/main/samples/openthread_tag_sensors" text="tag sensors broadcast" icon="github" >}}
@@ -236,10 +269,6 @@ deep sleep | 3.19 uA
 sensors acquisition | 54 uA
 wakeup cycle 1.7 sec including RF | 125 uA
 {{</table>}}
-
-
-* for info on the raspberry pi border router setup and networking see :
-{{<button relref="/docs/networks/thread#openthread---setup" >}}border router setup{{</button>}}
 
 * it's possible to listen to the ipv6 thread udp packets using `socat`
 ```bash
@@ -578,8 +607,8 @@ Memory region         Used Size  Region Size  %age Used
 {{</details>}}
 
 
-## preliminary test samples
-
+## old NRF-SDK Firmware
+this section is kept as documentation only as the old NRF-SDK is deprecated and this project continues with the previous section using the nRF-Connect SDK based on Zephyr.
 {{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/main/firmware" text="repo directory" icon="github" >}}
 
 ### 01 dongle nrfsdk mqttsn client
@@ -934,28 +963,6 @@ Memory region         Used Size  Region Size  %age Used
 ```
 {{</details>}}
 
-
-## flashing
-* SWD pogo pins adapter
-* Pogo Pin P75-E2 Dia 1.3mm Length 16.5mm
-
-{{<icon_button text="STL Model" href="/models/thread4_lower.stl" icon="download" >}}
-{{< model_viewer "/models/thread4_lower.glb" "400" >}}
-{{< gallery dir="/images/thread_sensortag/swd-pogo" />}}
-
-
-# Produced versions
-* v 1.1 15.04.2021
-
-{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.1" text="tag v1.1" icon="github" >}}
-
-* v 1.0 10.02.2021
-
-{{<icon_button href="https://github.com/HomeSmartMesh/nrf52_thread_sensortag/tree/v1.0" text="tag v1.0" icon="github" >}}
-
-{{<gfigure src="/images/thread_sensortag/prototype_top.webp" width="200px" >}}
-
-{{<gfigure src="/images/thread_sensortag/prototype_bottom.webp" width="200px" >}}
 
 
 # FAQ - Discussion
