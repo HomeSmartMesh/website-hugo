@@ -80,8 +80,14 @@ toc: true
 
 
 # Software
-## Border Router Setup
- For the main Thread sensor broadcast firmware a raspberry pi is needed to act as a thread boarder router to which a usb dongle is connected as a thread radio co-processor.
+
+## Raspberry Pi Setup
+This section includes steps to install all needed services to run the SensorTag udp-v6 broadcast to mqtt, this also inlcudes the boarder router setup as intermediate step.
+ 
+{{<button relref="/docs/frameworks/raspi_iot#raspberry-pi-setup">}}raspberry pi setup{{</button>}}
+
+### Border Router Setup
+This section includes instructions to install the boarder router services only in case another app is to be used on top of the openthread stack.
  
 {{<button relref="/docs/networks/thread#border-router">}}border router setup{{</button>}}
 

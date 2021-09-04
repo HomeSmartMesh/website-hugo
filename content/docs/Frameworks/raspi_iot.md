@@ -84,7 +84,10 @@ Source code on the [Github Repo](https://github.com/HomeSmartMesh/raspi)
 * use the Raspberry pi Imager tool to write the image. The tool is available from https://www.raspberrypi.org/software/
 * eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
 * connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`
-* setup the [border router](/docs/networks/thread/#raspberry-pi-setup)
+* setup the border router
+
+{{<button relref="/docs/networks/thread#border-router">}}border router setup{{</button>}}
+
 * restart then create a network on the border router web GUI in the url of the rasp ip address
 * install docker and docker compose
 ```
