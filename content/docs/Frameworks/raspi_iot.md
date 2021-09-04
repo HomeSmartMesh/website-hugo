@@ -1,17 +1,34 @@
 ---
 title: "Raspi IoT"
-description: "raspberry pi server for home automation. 'No limits' to what you can do with python and node.js services interfaced with javascript web apps.
-This Fremwork is a lightweight mqtt interconnect between devices (HW), services (Automation) and webapps (UI)."
+description: "raspberry pi server for home automation. For developers, startups, students and hobbyist who want to understand the basics of home automation and IoT and use it for their own projects and products. Networks devices using Thread, Zigbee, wifi are are centralized with mqtt then controlled with servies based on python and node.js scripts interacting with web apps as user Front End."
 date: 2020-10-06T08:48:57+00:00
 lastmod: 2021-02-14T08:00:00+00:00
 draft: false
 images: ["/images/software.png", "/images/devices.png" ]
 weight: 1
 toc: true
+grid:
+    slot: 300
+    items:
+    - name: "Discourse Forum"
+      width: 300
+      tags: []
+    - name: "Github Repo"
+      width: 300
+      tags: [Network]
 ---
 
+{{<grid "my_grid" >}}
+{{<image src="/images/discourse.svg" height=60 href="https://homesmartmesh.discourse.group/" >}}
+{{<image src="/images/discourse/discourse_simple.png" height=100 href="https://homesmartmesh.discourse.group/" >}}
+Support and discussions on the [Forum](https://homesmartmesh.discourse.group/)
+<--->
+{{<image src="/images/raspi_iot.png" height="170px" href="https://github.com/HomeSmartMesh/raspi" target="_blank">}}
 
-{{< my_button href="https://github.com/HomeSmartMesh/raspi" text="Raspi Github Repo" >}}
+Source code on the [Github Repo](https://github.com/HomeSmartMesh/raspi)
+
+{{</grid>}}
+
 
 # Hardware
 {{< image src="/images/devices.png" width=600 >}}
@@ -387,9 +404,22 @@ Below are the control URLs to turn led color on and off
 As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt interface, all it takes is this script [py/hover](./py/hover) to order cleaning of a room or a section with a click on an aquara zigbee button.
 
 ## zigbee/graphview
+* Github repo directory
 
-[zigbee/graph_view](./zigbee/graph_view/)
+{{<icon_button href="https://github.com/HomeSmartMesh/raspi/tree/master/zigbee/graph_view" text="zigbee/graph_view" icon="github" >}}
 
+* js library used to generate SVG from graph
+
+{{<icon_button href="https://github.com/magjac/d3-graphviz" text="d3-graphviz" icon="github" >}}
+
+* the js library is a port of the graphviz project
+
+{{<icon_button href="https://graphviz.org/" text="graphviz" icon="github" >}}
+
+* An alternative that is also configure in this project's docker-compose file is to use Zigbee2Mqtt-Assistant which in addition to providing a nice devices listing and control also offers a graph view of the network
+
+{{<icon_button href="https://github.com/yllibed/Zigbee2MqttAssistant" text="Zigbee2MqttAssistant" icon="github" >}}
+### Gif Demo
 {{< image src="/images/zig_demo.gif" width=600 >}}
 
 ### Features
@@ -397,31 +427,25 @@ As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt inte
 * multiple hosts for those using mulitple zigbee2mqtt instances.
 * svg pan zoom for simpleefficient viewing. graphs can be so huge that text gets tiny.
 * red buttons for change graph layout algorithm. Depending on the network, some algos can be more convenient than others
+* logging : `js/log.io/server.json`https://github.com/NarrativeScience/log.io
+* transport-browserconsole https://www.npmjs.com/package/winston-transport-browserconsole
 
-Note that the following viewer is hosted on github and has therefore a secure connection that shall not swap to a local home connection.
-
-### Inactive hosted page
-
-[link to inactive viewer](https://homesmartmesh.github.io/raspi/zigbee/graph_view/index.html)
-
-In order to use this script, it is required to host it locally on local raspberry py, see [deploy](zigbee/graph_view/deploy.sh) script for deployment convenience. Direct usage from the link would require to authorise cross origin on chrome symbol on right of the adress bar.
-
-### Logging
-#### Log.io
-* exposing log files to webapps :
-* `js/log.io/server.json`
-* https://github.com/NarrativeScience/log.io
-
-### transport-browserconsole
-* https://www.npmjs.com/package/winston-transport-browserconsole
-
-## Support
-* I'll provide support for any question or suggestion on https://github.com/HomeSmartMesh/raspi/issues
-## Safety warning
+# Safety warning
 * Power Sockets have deadly voltage and should not be self altered
 * Usage of certified products such as Shelly or others is recommended for any high voltage product
 * hacking custom scripts to control equipment might improve safety in case you add power cut off to a lower power for each section and device, but might also alter your food if your fridge inadvertantly goes off due to a wrong configuration
   * reboot state
   * safety power too low
 * Any heat power control custom script must necessarily have another safe switch to fully cut the power when away or device is inattended.
+
+# FAQ - Discussion
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discourse forum
+{{<icon_button text="Home Smart Mesh - Raspi IoT" href="https://homesmartmesh.discourse.group/t/about-the-raspi-iot-category/68" icon="discourse" >}}
+
+{{<faq>}}
+how does the Raspi-IoT framework compare to existing frameworks like home assistant or OpenHAB
+<--->
+Raspi-IoT is intended for developpers that prefer to stick to standard scripting like Python or Node.js and would like to use a minimalistic framework where everything can be debugged with standard tools, and also for sutdents and startups who would like to understand the underlaying techniques of home automation and IoT in order to create their own projects or products.
+{{</faq>}}
+
 
