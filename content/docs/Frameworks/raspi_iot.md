@@ -17,6 +17,7 @@ grid:
       width: 300
       tags: [Network]
 ---
+{{<load-photoswipe >}}
 
 {{<grid "my_grid" >}}
 {{<image src="/images/discourse.svg" height=60 href="https://homesmartmesh.discourse.group/" >}}
@@ -54,14 +55,13 @@ Source code on the [Github Repo](https://github.com/HomeSmartMesh/raspi)
 {{< image src="/images/software.png" width=600 >}}
 
 * Raspbian OS
-* Main services
-  * Mosquitto : https://mosquitto.org/
-  * influxDB : https://www.influxdata.com/products/influxdb-overview/
-  * mqtt2influx : [py/influx](./py/influx)
-  * Grafana : https://grafana.com/
-  * graphql sensors : [js/graphql](./js/graphql)
+* Base services
+  * Mosquitto : from [mosquitto.org](https://mosquitto.org/) installed with a docker container
+  * influxDB : from [influxdata.com](https://www.influxdata.com/products/influxdb-overview/) installed with a docker container
+  * mqtt2influx : [py/influx](#mqtt2influx) is a python script service that sends configured mqtt topics to influxdb
+  * Grafana : from [grafana.com](https://grafana.com/) installed with a docker container and provisioned with a default datasource and dashboard
 * x to mqtt
-  * Thread UDP to mqtt : [py/thread_tags](https://github.com/HomeSmartMesh/raspi/tree/master/py/thread_tags)
+  * Thread UDP to mqtt : [thread_tags](#thread_tags)
   * Zigbee2mqtt : https://www.zigbee2mqtt.io/
   * nrf2mqtt : [github nRF52_Mesh nrf_mesh](https://github.com/nRFMesh/nRF52_Mesh/tree/master/raspi/nrf_mesh)
   * miflora2mqtt : https://github.com/RaymondMouthaan/miflora-mqtt-daemon
@@ -77,44 +77,46 @@ Source code on the [Github Repo](https://github.com/HomeSmartMesh/raspi)
   * Led panel : [js/leds_panel](./js/leds_panel)
   * Bed heating : [js/bed_heating](./js/bed_heating)
   * Roborock Chat : [js/telegraf/hover_poll.js](./js/telegraf/hover_poll.js)
+* others
+  * graphql sensors : experimental service, details in [js/graphql](https://github.com/HomeSmartMesh/raspi/blob/master/js/graphql/readme.md)
+
 
 ## raspberry pi setup
 
-* download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
+* download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit tested with `2021-05-07-raspios-buster-armhf-lite.img`
 * use the Raspberry pi Imager tool to write the image. The tool is available from https://www.raspberrypi.org/software/
 * eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
 * connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`
-* setup the border router
-
-{{<button relref="/docs/networks/thread#border-router">}}border router setup{{</button>}}
-
-* restart then create a network on the border router web GUI in the url of the rasp ip address
-* install docker and docker compose
+  * in case the same raspberry pi was already known under a different host, make sure to delete it from `~/.ssh/known_hosts`
+* download and run the `get_raspi.sh` with the following commands
+```shell
+curl https://raw.githubusercontent.com/HomeSmartMesh/raspi/master/get_raspi.sh -o get_raspi.sh
+sudo sh get_raspi.sh
 ```
-  sudo apt-get update && sudo apt-get upgrade
-  curl -fsSL https://get.docker.com -o get-docker.sh
-  sudo sh get-docker.sh
-  sudo usermod -aG docker pi
-  sudo reboot now
-  sudo apt-get install libffi-dev libssl-dev
-  sudo apt install python3-dev
-  sudo apt-get install -y python3 python3-pip
-  sudo pip3 install docker-compose
-```
-* clone this repo and start services that will run docker compose `docker-compose-thread.yml` and python services
-```
-git clone https://github.com/HomeSmartMesh/raspi.git
+* the `get_raspi.sh` script will run the following
+  * `apt-get update` and `apt-get upgrade` with auto-confirmation `-y` option
+  * install git if not available
+  * close the raspi_iot repo
+  * run the `raspi/setup.sh` script
+* the setup script will need to be relaunched after reboot
+```shell
 cd raspi
-./start_services.sh
+sudo sh setup.sh
 ```
-these steps still manual can be scripted
-* in the influx container, create a database named `mqtt`
-```
-$influx
->CREATE DATABASE mqtt
-```
-* in grafana `http://raspi_ip:3000` create an influx datasource on url `http://localhost:8086`
-* upload the dashboard `grafana\Dashboards\SensorTag Compare.json`
+* the `raspi/setup.sh` script will run the following
+  * check if `docker` is available otherwise install it then reboot, in which case the script has to be run again manually
+  * check if `docker-compose` is available otherwise install it then reboot, in which case the script has to be run again manually
+  * check if `openthread` is available otherwise install it then reboot, in which case the script has to be run again manually
+  * at the end in will launch the `setup_thread_services.sh`
+* the `setup_thread_services.sh` script will perform the following
+  * start the docker compose file that includes docker images for `mosquitto`, `influx` and `grafana`
+    * the grafana container have the config and provisioning mapped from the raspi `grafana` directory
+    * the grafana has porivioned the databse `mqtt` from `http://localhost:8086`
+  * install the `influx_mqtt` which is an mqtt to influx python service, then creates an influx databse named `mqtt`
+  * install the `thread_tags` udp-v6 to mqtt python service
+* on the `http://raspi_ip` OT Border Router web GUI, Form a network e.g. on channel 18
+{{<gfigure src="/images/thread_sensortag/form_network.png" width="300px" >}}
+* open the grafana dashboard `SensorTag Compare` from `http://raspi_ip:3000`
 
 ## Meta website
 {{< image src="/images/meta_website.png" width=100% >}}
@@ -158,6 +160,15 @@ Attempt to unify interfaces in one app. Result is quite a success though require
 * Has it's own github repo : https://github.com/HomeSmartMesh/smart_home_3d_webapp
 * Hackaday project : https://hackaday.io/project/169046-smart-home-3d-webapp
 * Even a Hackaday Blog entry : https://hackaday.com/2019/12/29/the-smart-home-gains-an-extra-dimension/
+
+## thread tags
+
+{{<gfigure src="/images/thread_sensortag/application.png" >}}
+
+this python script listens to an ipv6 udp port and takes a text in the form of `mqtt_topic{json_payload}` then broadcasts the `json_payload` on the `mqtt_topic` of the configured mqtt broquer in the [config.json]() file
+
+usage with a thread sensor gag
+{{<button relref="/docs/microcontrollers/nrf52/thread_sensortag#tag_sensors_broadcast">}}tag sensors broadcast{{</button>}}
 
 ## Led Panel webapp
 {{< image src="/images/led_panel_app.jpg" width=600 >}}
