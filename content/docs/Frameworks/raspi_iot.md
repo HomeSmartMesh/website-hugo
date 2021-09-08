@@ -124,7 +124,7 @@ In case the same raspberry pi was already known under a different host, make sur
 6. the setup script will need to be relaunched after reboot
     ```shell
     cd raspi
-    sudo sh setup.sh
+    sudo bash setup.sh
     ```
     <details>
       <summary>Script Details</summary>
