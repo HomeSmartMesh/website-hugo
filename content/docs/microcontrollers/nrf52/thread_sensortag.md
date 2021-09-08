@@ -81,15 +81,16 @@ toc: true
 
 # Software
 
+
+## Openthread Dongle
+This section includes instructions how to create an openthread dongle called `Radio Co-Processor` (RCP), that needs to be flashed then attached to the raspberry pi USB port.
+ 
+{{<button relref="/docs/networks/thread#radio-co-processor-rcp">}}nRF52840-usb RCP{{</button>}}
 ## Raspberry Pi Setup
-This section includes steps to install all needed services to run the SensorTag udp-v6 broadcast to mqtt, this also inlcudes the boarder router setup as intermediate step.
+This section includes steps to install all needed services to run the SensorTag udp-v6 broadcast to mqtt, influxdb and grafana this also inlcudes the boarder router setup as intermediate step.
  
 {{<button relref="/docs/frameworks/raspi_iot#raspberry-pi-setup">}}raspberry pi setup{{</button>}}
 
-### Border Router Setup
-This section includes instructions to install the boarder router services only in case another app is to be used on top of the openthread stack.
- 
-{{<button relref="/docs/networks/thread#border-router">}}border router setup{{</button>}}
 
 
 ## Zephyr Tag Firmware

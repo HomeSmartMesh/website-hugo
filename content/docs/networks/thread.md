@@ -220,7 +220,22 @@ wpan0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1280
 {{</details>}}
 
 ## Radio Co-Processor (RCP)
+* Ready binaries : are provided below. Versions with `=USB` can be flashed with nRF-Connect `Programmer` tool and the defaul `nRF52840-usb dongle` bootloader.
+It is also possible to directly flash a non USB version with an SWD debugger or recover the original bootloader (with an SWD debugger) from the hex available from [this post](https://devzone.nordicsemi.com/f/nordic-q-a/40924/how-can-i-restore-the-original-bootloader-of-a-pca10059)
+
+{{<icon_button href="/data/ot-rcp-com-1.2-usb_27.08.2021.hex.zip" text="ot-rcp 27.08.2021 OT_BOOTLOADER=USB" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp-com-1.2_27.08.2021.hex.zip" text="ot-rcp 27.08.2021" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
+
+{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
+
+* Manual build : Link to the official documentation of build instructions
 {{<icon_button href="https://github.com/openthread/ot-nrf528xx/blob/main/src/nrf52840/README.md" text="new nRF52840 Build instructions" icon="github" >}}
+Build instructions summary
 ```bash
 cd ~/ot-nrf528xx
 ./script/bootstrap
@@ -232,18 +247,6 @@ arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp-com-1.2.hex
 nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --chiperase --program ot-rcp-com-1.2.hex --reset
 ```
-
-It is possible to restore the original bootloader from the hex available from [this post](https://devzone.nordicsemi.com/f/nordic-q-a/40924/how-can-i-restore-the-original-bootloader-of-a-pca10059)
-
-{{<icon_button href="/data/ot-rcp-com-1.2-usb_27.08.2021.hex.zip" text="ot-rcp 27.08.2021 OT_BOOTLOADER=USB" icon="download" >}}
-
-{{<icon_button href="/data/ot-rcp-com-1.2_27.08.2021.hex.zip" text="ot-rcp 27.08.2021" icon="download" >}}
-
-{{<icon_button href="/data/ot-rcp_thread-reference-20191113_nRF52840_dongle_no_bootloader.zip" text="ot-rcp thread-reference-20191113" icon="download" >}}
-
-{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-USB.zip" text="ot-rcp 20.03.2021 BOOTLOADER=USB" icon="download" >}}
-
-{{<icon_button href="/data/ot-rcp_de3ddb7169_20.03.2021_USB_BL-No.zip" text="ot-rcp 20.03.2021 No Bootloader" icon="download" >}}
 
 
 ## udp test

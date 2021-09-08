@@ -114,7 +114,8 @@ sudo sh setup.sh
     * the grafana has porivioned the databse `mqtt` from `http://localhost:8086`
   * install the `influx_mqtt` which is an mqtt to influx python service, then creates an influx databse named `mqtt`
   * install the `thread_tags` udp-v6 to mqtt python service
-* on the `http://raspi_ip` OT Border Router web GUI, Form a network e.g. on channel 18
+* discover the raspi ip address from the router (will be used to replace `<raspi_ip>`) then navigate on a browser on `http://<raspi_ip>`, the OT Border Router web GUI should appear. Use it to form a network e.g. (channel 18, panid 0x4412,...)
+  * ensure that the same parameters are used in the thread sensor tag firmware
 {{<gfigure src="/images/thread_sensortag/form_network.png" width="300px" >}}
 * open the grafana dashboard `SensorTag Compare` from `http://raspi_ip:3000`
 
