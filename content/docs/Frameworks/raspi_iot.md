@@ -142,9 +142,11 @@ Source code on the [Github Repo](https://github.com/HomeSmartMesh/raspi)
     * install the `thread_tags` udp-v6 to mqtt python service
     </details>
 
-7. on the `http://raspi_ip` OT Border Router web GUI, Form a network e.g. on channel 18
+7. Reboot the device again after the installation is done
+
+8. on the `http://raspi_ip` OT Border Router web GUI, Form a network e.g. on channel 18
     {{<gfigure src="/images/thread_sensortag/form_network.png" width="300px" >}}
-8. open the grafana dashboard `SensorTag Compare` from `http://raspi_ip:3000`
+9. open the grafana dashboard `SensorTag Compare` from `http://raspi_ip:3000`
 
 ## Meta website
 {{< image src="/images/meta_website.png" width=100% >}}
