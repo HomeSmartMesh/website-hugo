@@ -83,40 +83,68 @@ Source code on the [Github Repo](https://github.com/HomeSmartMesh/raspi)
 
 ## raspberry pi setup
 
-* download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit tested with `2021-05-07-raspios-buster-armhf-lite.img`
-* use the Raspberry pi Imager tool to write the image. The tool is available from https://www.raspberrypi.org/software/
-* eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
-* connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`
-  * in case the same raspberry pi was already known under a different host, make sure to delete it from `~/.ssh/known_hosts`
-* download and run the `get_raspi.sh` with the following commands
-```shell
-curl https://raw.githubusercontent.com/HomeSmartMesh/raspi/master/get_raspi.sh -o get_raspi.sh
-sudo sh get_raspi.sh
-```
-* the `get_raspi.sh` script will run the following
-  * `apt-get update` and `apt-get upgrade` with auto-confirmation `-y` option
-  * install git if not available
-  * close the raspi_iot repo
-  * run the `raspi/setup.sh` script
-* the setup script will need to be relaunched after reboot
-```shell
-cd raspi
-sudo sh setup.sh
-```
-* the `raspi/setup.sh` script will run the following
-  * check if `docker` is available otherwise install it then reboot, in which case the script has to be run again manually
-  * check if `docker-compose` is available otherwise install it then reboot, in which case the script has to be run again manually
-  * check if `openthread` is available otherwise install it then reboot, in which case the script has to be run again manually
-  * at the end in will launch the `setup_thread_services.sh`
-* the `setup_thread_services.sh` script will perform the following
-  * start the docker compose file that includes docker images for `mosquitto`, `influx` and `grafana`
-    * the grafana container have the config and provisioning mapped from the raspi `grafana` directory
-    * the grafana has porivioned the databse `mqtt` from `http://localhost:8086`
-  * install the `influx_mqtt` which is an mqtt to influx python service, then creates an influx databse named `mqtt`
-  * install the `thread_tags` udp-v6 to mqtt python service
-* on the `http://raspi_ip` OT Border Router web GUI, Form a network e.g. on channel 18
-{{<gfigure src="/images/thread_sensortag/form_network.png" width="300px" >}}
-* open the grafana dashboard `SensorTag Compare` from `http://raspi_ip:3000`
+1. download an os from https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit tested with `2021-05-07-raspios-buster-armhf-lite.img`
+
+2. use the Raspberry pi Imager tool to write the image. The tool is available from https://www.raspberrypi.org/software/
+
+3. eject, then reinsert the sdcard, write a file on root named `ssh` without extensions
+    <details>
+      <summary>Optional: Enable WiFi</summary>
+      
+      Create a file called *wpa_supplicant.conf* on root
+      ```
+        country=US # Your 2-digit country code
+        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+        network={
+            ssid="YOUR_NETWORK_NAME"
+            psk="YOUR_PASSWORD"
+            key_mgmt=WPA-PSK
+        }
+      
+      ```
+    </details>
+
+4. connect through ethernet, identify the ip from the router connect through ssh with `pi` and pw `raspberry`. 
+*In case the same raspberry pi was already known under a different host, make sure to delete it from `~/.ssh/known_hosts`*
+5. download and run the `get_raspi.sh` with the following commands
+    ```shell
+    curl https://raw.githubusercontent.com/HomeSmartMesh/raspi/master/get_raspi.sh -o get_raspi.sh && sudo sh get_raspi.sh
+    ```
+    <details>
+      <summary>Script Details</summary>
+      
+      The `get_raspi.sh` script will run the following
+      * `apt-get update` and `apt-get upgrade` with auto-confirmation `-y` option
+      * install git if not available
+      * close the raspi_iot repo
+      * run the `raspi/setup.sh` script
+    </details>
+
+6. the setup script will need to be relaunched after reboot
+    ```shell
+    cd raspi
+    sudo sh setup.sh
+    ```
+    <details>
+      <summary>Script Details</summary>
+      
+    ### The `raspi/setup.sh` script will run the following
+    * check if `docker` is available otherwise install it then reboot, in which case the script has to be run again manually
+    * check if `docker-compose` is available otherwise install it then reboot, in which case the script has to be run again manually
+    * check if `openthread` is available otherwise install it then reboot, in which case the script has to be run again manually
+    * at the end in will launch the `setup_thread_services.sh`
+
+    ### The `setup_thread_services.sh` script will perform the following
+    * start the docker compose file that includes docker images for `mosquitto`, `influx` and `grafana`
+      * the grafana container have the config and provisioning mapped from the raspi `grafana` directory
+      * the grafana has porivioned the databse `mqtt` from `http://localhost:8086`
+    * install the `influx_mqtt` which is an mqtt to influx python service, then creates an influx databse named `mqtt`
+    * install the `thread_tags` udp-v6 to mqtt python service
+    </details>
+
+7. on the `http://raspi_ip` OT Border Router web GUI, Form a network e.g. on channel 18
+    {{<gfigure src="/images/thread_sensortag/form_network.png" width="300px" >}}
+8. open the grafana dashboard `SensorTag Compare` from `http://raspi_ip:3000`
 
 ## Meta website
 {{< image src="/images/meta_website.png" width=100% >}}
