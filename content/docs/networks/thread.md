@@ -220,6 +220,8 @@ wpan0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1280
 {{</details>}}
 
 ## Radio Co-Processor (RCP)
+{{<hint warning>}}Using a deprecated version of RCP not matching the raspberry pi installed otbr-agent version will prevent it from running {{</hint>}}
+
 * Ready binaries : are provided below. Versions with `=USB` can be flashed with nRF-Connect `Programmer` tool and the defaul `nRF52840-usb dongle` bootloader.
 It is also possible to directly flash a non USB version with an SWD debugger or recover the original bootloader (with an SWD debugger) from the hex available from [this post](https://devzone.nordicsemi.com/f/nordic-q-a/40924/how-can-i-restore-the-original-bootloader-of-a-pca10059)
 
