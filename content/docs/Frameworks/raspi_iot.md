@@ -107,8 +107,7 @@ It is not necessary but recommended to perform the install on a new sd card imag
 
 1. download and run the `get_raspi.sh` with the following commands
     ```shell
-    curl https://raw.githubusercontent.com/HomeSmartMesh/raspi/master/get_raspi.sh -o get_raspi.sh
-    sudo bash get_raspi.sh
+    curl https://raw.githubusercontent.com/HomeSmartMesh/raspi/master/get_raspi.sh -o get_raspi.sh && sudo bash get_raspi.sh
     ```
   {{<details "Script Details" >}}
   The `get_raspi.sh` script will run the following
