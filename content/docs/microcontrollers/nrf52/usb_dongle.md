@@ -4,7 +4,7 @@ description: "Nordic's official dev kit PCA10059 in a form of a usb dongle for t
 images: ["/images/nrf_usb_dongle.png"]
 date: 2021-02-14T08:00:00+00:00
 lastmod: 2021-02-14T08:00:00+00:00
-weight: 4
+weight: 5
 toc: true
 ---
 {{<load-model_viewer>}}
