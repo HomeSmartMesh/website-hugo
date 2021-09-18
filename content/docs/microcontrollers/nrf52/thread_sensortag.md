@@ -80,7 +80,7 @@ toc: true
 
 
 # Software
-
+{{<image src="/images/thread_sensortag/software.webp" width="600px" >}}
 
 ## Openthread Dongle
 This section includes instructions how to create an openthread dongle called `Radio Co-Processor` (RCP), that needs to be flashed then attached to the raspberry pi USB port.
@@ -94,6 +94,7 @@ This section includes steps to install all needed services to run the SensorTag 
 
 
 ## Zephyr Tag Firmware
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag" text="Zephyr nRF-Connect SensorTag repo" icon="github" >}}
 
 * The development environment is based on [zephyr and west](http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/getting_started/index.html#getting-started)
 
