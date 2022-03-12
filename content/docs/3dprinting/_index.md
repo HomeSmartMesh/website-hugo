@@ -62,9 +62,9 @@ grid:
 {{< /grid >}}
 
 # Discord
-* Not all models have their own dedicated page and uploaded model, but if you like one of the below gallery models, feel free to ask on the discourse forum and I would upload it.
+* Not all models have their own dedicated page and uploaded model, but if you like one of the below gallery models, feel free to ask on the github forum and I would upload it.
 
-{{<icon_button text="Home Smart Mesh - 3D Printing" href="https://homesmartmesh.discourse.group/c/3d-printing" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - website" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
 
 # Gallery
 

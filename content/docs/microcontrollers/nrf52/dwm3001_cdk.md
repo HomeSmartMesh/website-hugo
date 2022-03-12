@@ -57,7 +57,7 @@ toc: true
 
 # FAQ - Discussion
 * Support is available on the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the forum category
-{{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - Discussions" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
 
 {{<faq>}}
 Is the DWM3001 compatible with the previous generation DWM1001 ?

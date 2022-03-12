@@ -23,7 +23,7 @@ This pages covers the `meshposition` Open Source UWB Framework, provide links to
 {{<gfigure src="/images/uwb/mesh positioning.png" >}}
 
 Free support for any question related to this project is available on the project's forum category :
-{{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
+{{<icon_button text="Discussion - sdk-uwb-zephyr " href="https://github.com/nRFMesh/sdk-uwb-zephyr/discussions" icon="github" >}}
 
 There is no such thing as UWB position, UWB only provide ToF and range, therefore experimenting with different positioning algorithms can now be offloaded to a server environment with high performance. Also in case the uwb ranging is not working, and your solution is based on a balck-box closed source, there's no way to figure out what the problem is, therefore being able to perform diagnostic between any two nodes with the same firmware running the ranging function is important to keep a live status of your uwb network.
 From these two ideas is born this `mesh positioning` framework.
@@ -698,7 +698,7 @@ given that the response is a confirmation it will have a payload similar as the 
 
 # FAQ - Discussion
 * Support should be available from the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the forum category
-{{<icon_button text="Discourse - #ultra-wide-band " href="https://homesmartmesh.discourse.group/c/networks/ultrawideband" icon="discourse" >}}
+{{<icon_button text="Discussion - sdk-uwb-zephyr " href="https://github.com/nRFMesh/sdk-uwb-zephyr/discussions" icon="github" >}}
 
 {{<faq>}}
 Can the DWM1001C firmware be modified ?

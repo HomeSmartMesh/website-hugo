@@ -16,6 +16,8 @@ A simpler, more efficient alternative to Z-x, BL-x, Thread, standard RF protocol
 
 {{<icon_button relref="/docs/microcontrollers/nrf52/simplemesh_sensortag" text="Simple Mesh SensorTag" >}}
 
+{{<icon_button href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag" text="Simple Mesh and thread on Zephyr" icon="github" >}}
+
 {{<icon_button href="https://github.com/nRFMesh/nRF52_Mesh" text="Simple Mesh Repo" icon="github" >}}
 
 ## Features
@@ -356,7 +358,7 @@ Aknowledge
 
 # FAQ - Discussion
 If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
-{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - sdk-hsm-sensortag" href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/discussions" icon="github" >}}
 
 {{<faq>}}
 What are the alternatives to Simple-Mesh ?

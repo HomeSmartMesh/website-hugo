@@ -23,7 +23,7 @@ UWB development environment
 {{<icon_button relref="/docs/networks/ultrawideband/" text="Networks / Ultra Wide Band RTLS" >}}
 
 Support, reviews, experience exchange and ideas related to this page content can be discussed in the dedicated forum category
-{{<icon_button text="Discourse - #webapps " href="https://homesmartmesh.discourse.group/c/webapps/14" icon="discourse" >}}
+{{<icon_button text="Discussions - 3d webapp " href="https://github.com/HomeSmartMesh/smart_home_3d_webapp/discussions" icon="github" >}}
 
 
 ## Getting Started

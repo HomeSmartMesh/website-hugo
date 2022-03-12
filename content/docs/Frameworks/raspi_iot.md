@@ -10,7 +10,7 @@ toc: true
 grid:
     slot: 300
     items:
-    - name: "Discourse Forum"
+    - name: "Discussion Forum"
       width: 300
       tags: []
     - name: "Github Repo"
@@ -20,9 +20,9 @@ grid:
 {{<load-photoswipe >}}
 
 {{<grid "my_grid" >}}
-{{<image src="/images/discourse.svg" height=60 href="https://homesmartmesh.discourse.group/" >}}
-{{<image src="/images/discourse/discourse_simple.png" height=100 href="https://homesmartmesh.discourse.group/" >}}
-Support and discussions on the [Forum](https://homesmartmesh.discourse.group/)
+{{<image src="/images/discourse.svg" height=60 href="https://github.com/HomeSmartMesh/raspi/discussions" >}}
+{{<image src="/images/discourse/discourse_simple.png" height=100 href="https://github.com/HomeSmartMesh/raspi/discussions" >}}
+Support and discussions on the [Github Discussions](https://github.com/HomeSmartMesh/raspi/discussions)
 <--->
 {{<image src="/images/raspi_iot.png" height="170px" href="https://github.com/HomeSmartMesh/raspi" target="_blank">}}
 
@@ -442,7 +442,8 @@ Below are the control URLs to turn led color on and off
 ## Roborock button
 As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt interface, all it takes is this script [py/hover](./py/hover) to order cleaning of a room or a section with a click on an aquara zigbee button.
 
-## zigbee/graphview
+## zigbee
+### graphview
 * Github repo directory
 
 {{<icon_button href="https://github.com/HomeSmartMesh/raspi/tree/master/zigbee/graph_view" text="zigbee/graph_view" icon="github" >}}
@@ -458,6 +459,27 @@ As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt inte
 * An alternative that is also configure in this project's docker-compose file is to use Zigbee2Mqtt-Assistant which in addition to providing a nice devices listing and control also offers a graph view of the network
 
 {{<icon_button href="https://github.com/yllibed/Zigbee2MqttAssistant" text="Zigbee2MqttAssistant" icon="github" >}}
+### zigbee2mqtt
+* bind usb device to a static name, failure to do so can result on occasional total failure where usb devices gets mixed and none of them can operate
+* hints from [stackexchange post](https://unix.stackexchange.com/questions/66901/how-to-bind-usb-device-under-a-static-name)
+
+* get info with
+```
+udevadm info -a -p  $(udevadm info -q path -n /dev/ttyUSB1)
+```
+* edit the file
+```
+sudo nano /etc/udev/rules.d/10-local.rules
+```
+* add 
+```
+ACTION=="add", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="/dev/ttyUSB1"
+```
+udevtest /dev/ttyUSB1
+references
+* [reactivated.net - guide](http://www.reactivated.net/writing_udev_rules.html)
+* [stackexchange - post](https://unix.stackexchange.com/questions/66901/how-to-bind-usb-device-under-a-static-name)
+
 ### Gif Demo
 {{< image src="/images/zig_demo.gif" width=600 >}}
 
@@ -478,8 +500,8 @@ As Roborock [valetudo](https://github.com/Hypfer/Valetudo) provides an mqtt inte
 * Any heat power control custom script must necessarily have another safe switch to fully cut the power when away or device is inattended.
 
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discourse forum
-{{<icon_button text="Home Smart Mesh - Raspi IoT" href="https://homesmartmesh.discourse.group/t/about-the-raspi-iot-category/68" icon="discourse" >}}
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the github forum
+{{<icon_button text="Home Smart Mesh - Discussions" href="https://github.com/HomeSmartMesh/raspi/discussions" icon="github" >}}
 
 {{<faq>}}
 how does the Raspi-IoT framework compare to existing frameworks like home assistant or OpenHAB

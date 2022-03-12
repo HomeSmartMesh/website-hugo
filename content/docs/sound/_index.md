@@ -170,7 +170,7 @@ Example integration of cubemx with pio :
 
 # FAQ - Discussion
 If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
-{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - Discussions" href="https://github.com/HomeSmartMesh/raspi/discussions" icon="github" >}}
 
 {{<faq>}}
 What is the difference between a MediaStream and a MediaSource when used in a real time network ?

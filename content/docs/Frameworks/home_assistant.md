@@ -10,7 +10,14 @@ toc: true
 {{< image src="/images/hassio.png" height=100 href="https://www.home-assistant.io/" >}}
 {{< icon_button href="https://www.home-assistant.io/" text="Official Website" >}}
 
+# Automations
+## Symfonisk volume rotary remote
+The gola of this Automation is to adjust the volume of the sonos system with the rotation but also use the press to play pause another system wich is a smart Samsung Tv.
+- zigbee2mqtt : https://www.zigbee2mqtt.io/
+- blueprint : https://epmatt.github.io/awesome-ha-blueprints/docs/blueprints/controllers/ikea_e1744
+- HA entity input_text : https://www.home-assistant.io/integrations/input_text/
 
+**alternative to HA Integration** : Without HA, it is necessary to pair the rotary remote with IKEA gateway, although it is enough to control the volume, it does not allow fine adjutment and combining functions with different devices.
 # Bluetooth
 ## BLE Bluetooth Low Energy
 

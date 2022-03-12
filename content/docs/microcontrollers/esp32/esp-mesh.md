@@ -216,7 +216,7 @@ RX> from(80:7d:3a:d5:2f:cc) => (Hello dowlink neighbors : 32)
 
 # FAQ - Discussion
 If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
-{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - Discussions" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
 
 {{<faq>}}
 What are the alternatives to ESP-Mesh ?

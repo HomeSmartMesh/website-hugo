@@ -14,7 +14,7 @@ bookToC: false
 * can be taken along, fits in the kayak behind the seat
 
 models available for free on demand, feel free to ask on the forum
-{{<icon_button text="Home Smart Mesh - 3D Printing" href="https://homesmartmesh.discourse.group/c/3d-printing" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - website" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
 
 {{<gallery dir="/images/3dprinting/kayak_trailer" />}}
 

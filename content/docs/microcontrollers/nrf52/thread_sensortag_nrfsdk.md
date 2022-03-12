@@ -378,5 +378,5 @@ Memory region         Used Size  Region Size  %age Used
 
 
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discourse forum
-{{<icon_button text="Home Smart Mesh - Thread Sensor Tag category" href="https://homesmartmesh.discourse.group/c/projects/thread-sensortag" icon="discourse" >}}
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the Github forum
+{{<icon_button text="Home Smart Mesh - sdk-hsm-sensortag" href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/discussions" icon="github" >}}

@@ -666,8 +666,8 @@ is split in two packets where each has an ACK. From one side that's a lot x4 tim
 {{<gfigure src="/images/thread/udp over 6LoWPAN.png">}}
 
 # FAQ - Discussion
-* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the discourse forum
-{{<icon_button text="Home Smart Mesh - OpenThread category" href="https://homesmartmesh.discourse.group/c/networks/openthread" icon="discourse" >}}
+* If you need support, want to ask a question or suggest a different answer, you can join the discussion on the github forum
+{{<icon_button text="Home Smart Mesh - OpenThread category" href="https://github.com/HomeSmartMesh/sdk-hsm-sensortag/discussions" icon="github" >}}
 
 
 * see also

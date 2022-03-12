@@ -362,7 +362,7 @@ MQTT Explorer showing both topics received from the gateway:
 
 # FAQ - Discussion
 If you need support, want to ask a question or suggest an idea, you can join the discussion on the forum
-{{<icon_button text="Home Smart Mesh - Forum" href="https://homesmartmesh.discourse.group/" icon="discourse" >}}
+{{<icon_button text="Home Smart Mesh - Discussions" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
 
 {{<faq>}}
 Can I ran an ESP-Now wifi gateway ?
