@@ -57,7 +57,8 @@ toc: true
 
 # FAQ - Discussion
 * Support is available on the [official forum](https://decaforum.decawave.com/). Reviews, experience exchange and ideas related to this page content can be discussed in the forum category
-{{<icon_button text="Home Smart Mesh - Discussions" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
+{{<icon_button text="Home Smart Mesh - UWB General" href="https://github.com/HomeSmartMesh/website/discussions" icon="github" >}}
+{{<icon_button text="Home Smart Mesh - UWB nRF52 Zephyr" href="https://github.com/nRFMesh/sdk-uwb-zephyr/discussions" icon="github" >}}
 
 {{<faq>}}
 Is the DWM3001 compatible with the previous generation DWM1001 ?
