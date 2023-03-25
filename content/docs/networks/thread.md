@@ -498,6 +498,9 @@ As the `Matter Protocol` can run over `Thread`, it is possible to connect Matter
 {{<icon_button relref="/docs/frameworks/matter/" text="More about Project Matter" >}}
 
 # Command Line Interface
+
+{{<icon_button href="https://github.com/openthread/openthread/blob/main/src/cli/README.md#openthread-cli-reference" text="Openthread CLI Reference" icon="github" >}}
+
 ## cli on border router
 in this case the dongle is flashed with ot-rcp.hex not with ot-cli.hex
 ```shell
