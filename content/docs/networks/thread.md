@@ -78,6 +78,9 @@ A Thread network setup contains the following Nodes
 # Border Router
 To create a border router, a usb dongle needs to be flashed (Radio Co-Processor) and attached to a raspberry pi where the following services are installed.
 ## raspberry pi
+
+{{<icon_button href="https://openthread.io/codelabs/openthread-border-router-nat64#0" text="Border Router with NAT64"  icon="new" >}}
+
 {{<icon_button href="https://openthread.io/guides/border-router/build#set-up-the-border-router" text="Setup - OpenThread..."  icon="new" >}}
 
 install git if not already available
@@ -85,6 +88,7 @@ install git if not already available
 ```bash
 git clone https://github.com/openthread/ot-br-posix
 cd ot-br-posix
+export NAT64=1 NAT64_SERVICE=openthread
 ./script/bootstrap
 INFRA_IF_NAME=eth0 ./script/setup
 sudo nano /etc/default/otbr-agent
@@ -275,7 +279,37 @@ on the nRF52 node Zephyr shell :
 ```
 ## Form a network
 
-Upon success you should be able to connect on the raspberry pi url `http://10.0.0.41/`
+* on the raspi command line
+
+```bash
+sudo ot-ctl dataset init new
+
+sudo ot-ctl dataset channel 24
+sudo ot-ctl dataset channel
+sudo ot-ctl dataset panid 0x1234
+sudo ot-ctl dataset panid
+sudo ot-ctl dataset networkname ThreadMatter
+sudo ot-ctl dataset networkname
+sudo ot-ctl dataset extpanid 1111111122222222
+sudo ot-ctl dataset networkkey 00112233445566778899aabbccddeeff
+sudo ot-ctl dataset
+
+sudo ot-ctl dataset commit active
+
+sudo ot-ctl ifconfig up
+sudo ot-ctl thread start
+```
+
+* check with
+```bash
+sudo ot-ctl state
+sudo ot-ctl netdata show
+sudo ot-ctl ipaddr
+```
+
+* on the web interface
+
+connect on the raspberry pi url `http://10.0.0.41/`
 
 {{<image src="/images/thread_sensortag/OTBR_server.png">}}
 
@@ -510,6 +544,9 @@ sudo ot-ctl
 ```
 
 ## cli dongle
+
+* building with openthread repo
+
 {{<icon_button href="https://github.com/openthread/ot-nrf528xx/blob/main/src/nrf52840/README.md" text="new nRF52840 Build instructions" icon="github" >}}
 ```bash
 cd ~/ot-nrf528xx
@@ -527,6 +564,25 @@ arm-none-eabi-objcopy -O ihex ot-cli-ftd ot-cli-ftd-com-join.hex
 ```bash
 nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --program ot-cli-ftd.hex --sectorerase --verify
+```
+
+* building with nRFSDK
+
+{{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/openthread/cli/README.html" text="new nRF52840 Build instructions" icon="github" >}}
+
+
+```bash
+cd nrf\v2.3.0\nrf\samples\openthread\cli
+>west build -p always -b nrf52840dongle_nrf52840 -- -DOVERLAY_CONFIG="overlay-usb.conf" -DDTC_OVERLAY_FILE="usb.overlay"
+>nrfutil pkg generate --hw-version 52 --sd-req=0x00 --application build/zephyr/zephyr.hex --application-version 1 build/zephyr/zephyr.zip
+nrfutil dfu usb-serial -pkg build/zephyr/zephyr.zip -p COM8
+```
+
+then on terminal laways preceed with `ot` for openthread commands
+```bash
+uart:~$ ot state
+disabled
+Done
 ```
 
 * connecting a node with credentials
