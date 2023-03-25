@@ -60,6 +60,51 @@ Command line helper tool :
 
 {{<icon_button href="https://github.com/project-chip/connectedhomeip/tree/master/examples/chip-tool" text="examples / chip-tool" icon="github" >}}
 
+## building the chip-tool
+
+clone, install dependencies and activate as described in this page
+
+{{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/matter/BUILDING.html" text="Building Matter" icon="new" >}}
+
+continue building the tool as described in this page
+
+{{<icon_button href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/matter/chip_tool_guide.html#building-and-running-the-chip-tool" text="Building Matter" icon="new" >}}
+
+install nodejs and zap, only one mode is enough in case of no errors
+
+```bash
+wget https://github.com/project-chip/zap/releases/download/v2023.02.27/zap-linux.zip
+unzip zap-linux.zip -d zap-linux
+export ZAP_INSTALL_PATH=/home/pi/zap-linux/
+curl -sSL https://deb.nodesource.com/setup_16.x | sudo bash -
+git clone git@github.com:project-chip/zap.git
+sudo apt-get update
+sudo apt-get install --fix-missing libpixman-1-dev libcairo-dev libsdl-pango-dev libjpeg-dev libgif-dev
+export ZAP_DEVELOPMENT_PATH=/home/pi/zap
+```
+
+used command
+
+```bash
+cd connectedhomeip
+>./scripts/examples/gn_build_example.sh examples/chip-tool examples/chip-tool/build
+```
+
+## using the chip tool
+
+* pairing
+```bash
+./chip-tool pairing ble-thread <node_id> hex:<operational_dataset> <pin_code> <discriminator>
+./chip-tool pairing ble-thread 3 hex:0e08000000000001000035060004001fffe00708fd14711ac39b204d04102fac2bd6e7c4308f3e8e0cedd893d20f0c0402a0f7f8000300001801021234030c5468726561644d617474657202081111111122222222051000112233445566778899aabbccddeeff 20202021 3840
+```
+
+* toggle light
+
+```bash
+./chip-tool onoff toggle 3 1
+```
+
+
 # Running on nRF52
 ## nRF Connect integration
 {{<image src="/images/thread_sensortag/chip_nrfconnect_overview_simplified.svg" >}}

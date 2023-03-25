@@ -31,7 +31,6 @@ GetStarted)
 ### Serial Wire Debug
 * the usb dongle is referred to as `PCA10059` which in projects usually shifts the app to offset `0x1000` as openbootloader usage is expected
 * With serial wire debug, it's possible to flash applications at same address as the `PCA10056` which is at address 0x0000
-* recovering the openbootloader mode would then require to reflash the MBR with any nRF SDK project `make flash_mbr`
 
 {{< image src="/images/thread_sensortag/serial_wire_debug.png" >}}
 
@@ -57,8 +56,36 @@ GetStarted)
 {{< load-photoswipe >}}
 {{< gallery dir="/images/nrf52_dongle" />}}
 
-# bootloader options
+# bootloader
+## options
 * nRF SDK v16.0.0 [bootloader](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.sdk5.v15.0.0%2Flib_bootloader.html)
+* Nording [nRF52840 Dongle tutorial](https://devzone.nordicsemi.com/guides/short-range-guides/b/getting-started/posts/nrf52840-dongle-programming-tutorial)
 * MCU boot - zephyr bootloader
 * UF2 bootloader
 
+## recovery
+* on nRF SDK recovering the openbootloader mode would then require to reflash the MBR with any project `make flash_mbr`
+
+* without nRF SDK, download the bootloader from the [nordic tutorial](https://devzone.nordicsemi.com/guides/short-range-guides/b/getting-started/posts/nrf52840-dongle-programming-tutorial) and rename to `pca10059_bootloader.hex`
+
+then run
+```bash
+J-Link>Power on
+cd pca10059_bootloader
+>nrfjprog -f nrf52 --eraseall
+ >nrfjprog -f nrf52 --chiperase --program pca10059_bootloader.hex --verify --reset
+```
+## build for USB DFU
+on any sample from nRF Connect that supports the nrf52840dongle_nrf52840 run
+```bash
+cd nrf\v2.3.0\nrf\samples\xxx\
+>west build -p always -b nrf52840dongle_nrf52840 -- -DOVERLAY_CONFIG="overlay-usb.conf" -DDTC_OVERLAY_FILE="usb.overlay"
+```
+
+## USB DFU command line
+It is possible to use the nRF Connect programmer, but to perform the same with command line, you need to generate a package the flash it as follows
+
+```bash
+>nrfutil pkg generate --hw-version 52 --sd-req=0x00 --application build/zephyr/zephyr.hex --application-version 1 build/zephyr/zephyr.zip
+nrfutil dfu usb-serial -pkg build/zephyr/zephyr.zip -p COM8
+```
