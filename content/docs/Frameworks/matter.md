@@ -94,6 +94,7 @@ cd connectedhomeip
 
 * pairing
 ```bash
+sudo ot-ctl dataset active -x
 ./chip-tool pairing ble-thread <node_id> hex:<operational_dataset> <pin_code> <discriminator>
 ./chip-tool pairing ble-thread 3 hex:0e08000000000001000035060004001fffe00708fd14711ac39b204d04102fac2bd6e7c4308f3e8e0cedd893d20f0c0402a0f7f8000300001801021234030c5468726561644d617474657202081111111122222222051000112233445566778899aabbccddeeff 20202021 3840
 ```
@@ -147,7 +148,14 @@ source zephyr/zephyr-env.sh
 
 {{<icon_button href="/data/nRF52840_chip-v1.5.0-rc1.zip" text="zephyr.hex v1.5.0-rc1" icon="download" >}}
 
+* commands
+```bash
+ot dataset active
+matter config
+matter device factoryreset
+```
 
+* config
 
 ```bash
 cd ncs/modules/lib/connectedhomeip/examples/lighting-app/nrfconnect/
