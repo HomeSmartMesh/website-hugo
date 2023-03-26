@@ -29,7 +29,7 @@ For a detailed list of used devices and their documentation see the [devices lis
 {{< my_button href="https://developers.meethue.com/develop/get-started-2/" text="meethue developers" >}}
 
 * [Hue Light Control](/docs/raspi/readme/#hue-light-control) from Aquara wall switches and buttons
-* The [Smart Home3D webapp](/docs/webapps/home3d/) is using the hue API, and advanced light groups dimming with 3d sliders
+* The [Smart Home3D webapp](/docs/applications/home3d/) is using the hue API, and advanced light groups dimming with 3d sliders
 
 ### Zigbee2mqtt
 ✅ The most popular framework that enables DIY fans to use even non-standard devices on standard gateways

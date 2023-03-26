@@ -14,6 +14,9 @@ grid:
     - Network
     slot: 300
     items:
+    - name: "Matter"
+      width: 300
+      tags: [Frameworks]
     - name: "Ultra Wide Band"
       width: 300
       tags: [Network]
@@ -21,9 +24,6 @@ grid:
       width: 300
       tags: [Microcontrollers]
     - name: "Raspi IoT"
-      width: 300
-      tags: [Frameworks]
-    - name: "Matter"
       width: 300
       tags: [Frameworks]
     - name: "ESP32 Boards"
@@ -38,12 +38,12 @@ grid:
     - name: "Thread"
       width: 300
       tags: [Network]
-    - name: "Smart Home 3D"
-      width: 600
-      tags: [Applications]
     - name: "Zigbee"
       width: 300
       tags: [Network]
+    - name: "Smart Home 3D"
+      width: 600
+      tags: [Applications]
     - name: "Home Assistant"
       width: 150
       tags: [Frameworks]
@@ -51,6 +51,15 @@ grid:
 {{<load-svg-pan-zoom>}}
 
 {{< grid "my_grid" >}}
+{{< image src="/images/matter/overview.png" height="150px" href="/docs/frameworks/matter/" >}}
+
+{{< my_button href="/docs/frameworks/chip/" text="ConnectedHomeIP ➡ Matter" >}}
+
+Multiple networks supported (Thread, BT, Wifi)
+
+Application "Advanced ZCL" over IP
+
+<--->
 {{<image src="/images/uwb/DRTLS.webp" height="150px" href="/docs/networks/ultrawideband/" >}}
 {{<my_button href="/docs/networks/ultrawideband/" text="Ultra Wide Band Evaluation" >}}
 
@@ -78,15 +87,6 @@ Learning examples using as few dependencies as possible
 Sensors to MQTT to influx to Grafana.
 
 Multiple Python and Node.js standalone services
-
-<--->
-{{< image src="/images/matter/overview.png" height="150px" href="/docs/frameworks/matter/" >}}
-
-{{< my_button href="/docs/frameworks/chip/" text="ConnectedHomeIP ➡ Matter" >}}
-
-Multiple networks supported (Thread, BT, Wifi)
-
-Application "Advanced ZCL" over IP
 
 <--->
 {{< image src="/images/espressif.png" href="/docs/microcontrollers/esp32/"  height=100 >}}
@@ -122,12 +122,6 @@ Tools
 
 Boarder Router
 <--->
-{{< image src="/images/floor_temperature.png" height=100 href="/docs/applications/home3d" >}}
-
-{{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
-
-Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
-<--->
 {{< image src="/images/zigbee.png" height=100 href="docs/networks/zigbee/" >}}
 {{< my_button href="docs/networks/zigbee/" text="Zigbee Doc" >}}
 
@@ -139,6 +133,12 @@ References for DIY coordinators and software
 
 
 
+<--->
+{{< image src="/images/floor_temperature.png" height=100 href="/docs/applications/home3d" >}}
+
+{{< my_button relref="/docs/applications/home3d" text="Webapps Doc" >}}
+
+Smart Home 3d : Control your home like a Video Game served from your local pi. See your 3d rooms model real time colored with your temperature sensor.
 <--->
 {{< image src="/images/hassio.png" height=100 href="/docs/frameworks/home_assistant/">}}
 {{< button href="/docs/frameworks/home_assistant/" >}}Home Assistant{{</button>}}
