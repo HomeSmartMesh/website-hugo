@@ -155,8 +155,18 @@ matter config
 matter device factoryreset
 ```
 
-* config
+* building
 
+```bash
+cd v2.3.0/nrf/samples/matter/light_bulb
+west build -p always -b nrf5340dk_nrf5340_cpuapp -- -DCONF_FILE=prj_release.conf
+west flash --erase
+
+cd modules/lib/matter/examples/lighting-app/nrfconnect
+west build -p always -b nrf52840dongle_nrf52840 -- -DCONF_FILE=prj_release.conf
+```
+
+* building with old SDK
 ```bash
 cd ncs/modules/lib/connectedhomeip/examples/lighting-app/nrfconnect/
 west build -b nrf52840dongle_nrf52840 -t menuconfig

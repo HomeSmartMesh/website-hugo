@@ -320,6 +320,7 @@ connect on the raspberry pi url `http://10.0.0.41/`
 * Folow the user guide especially section `Installing the nRF Sniffer capture plugin in Wireshark`
   * Flash the `nrf802154_sniffer_dongle.hex`
   * configure the used masterkeys in wireshark menu `Edit/Preferences` then `Protocols/IEEE 802.15.4` in Decryption Keys `Edit...`
+  * enter `Decryption key`, `Decryption key index` set to 0, and `key hash` to `Thread hash`
 
 When Forming a network, some Pakets can be sniffed including advertisment
 
