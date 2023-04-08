@@ -652,36 +652,57 @@ leaderdata
 {{</ details>}}
 
 # Commissioning
-{{<hint warning>}}note that the security concept is based on the confidentiality of the masterkey, the one used here is a dummy key used for demo purpose only. Setting a predefined masterkey is optional, the stack will generate a random one that can be retrieved with the `masterkey` command if it's needed for analysis purpose.
+{{<hint warning>}}note that the security concept is based on the confidentiality of the networkkey (previously known as masterkey), the one used here is a dummy key used for demo purpose only. Setting a predefined masterkey is optional, the stack will generate a random one that can be retrieved with the `networkkey` command if it's needed for analysis purpose.
 {{</hint>}}
 
 * make sure you use cli dongles with Commissioner and joiner compile options, see [cli dongle](#cli-dongle)
 * [openthread commissioning](https://openthread.io/guides/build/commissioning)
 * [commissioning commands](https://github.com/openthread/openthread/blob/main/src/cli/README_COMMISSIONER.md)
 * [dataset commands](https://github.com/openthread/openthread/blob/main/src/cli/README_DATASET.md)
-* make sure the used masterky is configured in the [wireshark sniffer](#wireshark-sniffing) to analyse the exchange
+* make sure the used networkkey is configured in the [wireshark sniffer](#wireshark-sniffing) to analyse the exchange
 
-on the commissioner cli run
+For clarity purpose, it is assumed that the commissioner has already joined the network (see previous section), and in this case we will run commissionning directly on the raspberry pi border router with `sudo ot-ctl` which will clearly differentiace from the joiner that only needs `ot`
+
+## summary
+on the commissionner
 ```bash
-thread stop
-ifconfig down
-
-dataset init new
-dataset
-dataset channel 24
-dataset channel
-dataset masterkey 00112233445566778899aabbccddeeff
-dataset commit active
-ifconfig up
-thread start
-commissioner start
-commissioner joiner add * ABCDE2
+sudo ot-ctl commissioner start
+sudo ot-ctl commissioner joiner add '*' ABCDE2
 ```
-on the joiner cli run
+on the joiner
 ```bash
-factoryreset
-ifconfig up
-joiner start ABCDE2
+ot ifconfig up
+ot joiner start ABCDE2
+```
+## details
+
+then on the commissioner cli who is already attached to the network, run
+```bash
+sudo ot-ctl commissioner start
+sudo ot-ctl commissioner joiner add '*' ABCDE2
+```
+or preferrably with the `eui64` of the joining device that you can get from the device, note the `eui64` is always the same and unique for every device, cannot be changed (unlexx code is modified) as it is inherited from the device serial number registers. So it is not changed through factory reset.
+```bash
+>ot eui64
+f4ce36594b6e559b
+Done
+```
+then run the followinf commands on the commissioner. Note it's important to do this before the joiner attempt
+```bash
+sudo ot-ctl commissioner start
+sudo ot-ctl commissioner joiner add f4ce36594b6e559b ABCDE2
+```
+
+on the joiner cli run these commands, note that `factoryreset` might restart the target so you might have to connect the serial console again. Note that `factoryreset` is not needed unless the device was already attached to another network.
+```bash
+ot factoryreset
+ot ifconfig up
+ot joiner start ABCDE2
+```
+this should log `Done` and `Join success` but it will only store the newly obtained credential and will not join the network, for joining the network it's possible to run any time
+```bash
+ot ifconfig up
+ot thread start
 ```
 
 {{<details "commissioner and joiner logs" >}}
@@ -722,8 +743,6 @@ Done
 thread_tags/7009D837C7BB557A{"alive":18673,"voltage":3.106,"light":184.948,"temperature":24.56,"humidity":46.49,"pressure":961.90}
 ```
 is split in two packets where each has an ACK. From one side that's a lot x4 times of what the RF power consumption could be for a simple broadcast, but at the same time it avoids taking care of manually adapting the program behaviour to accomodate the protocol. Also keeping a json text format instead of binary avoids a middle layer converting binary to text readable by apps, that would cost a bottleneck dependency between each device and the gateway.
-
-{{<gfigure src="/images/thread/udp over 6LoWPAN.png">}}
 
 # FAQ - Discussion
 * If you need support, want to ask a question or suggest a different answer, you can join the discussion on the github forum
@@ -772,153 +791,8 @@ Which other families than nRF from Nordic support Thread ?
 <--->
 Many platforms are supported including but not limited to `Cascoda`, `NXP`, `Qorvo` which extends to uwb variant, `Samsung`, `Silicon Labs`, `STMicroelectronics`, `Synopsys`, `Telink Semiconductors`, `TI`  more details on openthread [platforms](https://openthread.io/platforms).
 Note that `Espressif` although listed in the platforms, does not support `802.15.4` therefore can only run the openthread stack as a host that requires an external RCP from the previous list.
+<===>
+How does the joiner get to know on which channel is the commissioner's network running if it knows nothing about the network parameters ?
+<--->
+The joiner scans all frequencies until it gets a response from a commissioner. Given that the joiner might be low power, this operation is to be minimized and the commissionner is always ready and listening.
 {{</faq>}}
-
-# History
-In the history are moved sections that are deprecated or no longer relevant kept for historical info only
-## Network Co-Processor (NCP)
-Note, see the RCP version above for recent border routers. Given the open source nature of OpenThread, it is quite challenging to find the right build instructions and version match to the right border router. See [Vendor support NCP](https://openthread.io/platforms#network-co-processor-ncp) for mode details. Different NCP versions are listed here.
-### Nordic - nRF 4.1.0
-* successfull match between the SDK and Rpi image, both available from the link below
-  * nRFSDK for Thread and Zigbee v4.1.0
-  * RaspPi OT Border Router Demo v4.1.0-1.alpha
-{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download" text="nRF SDK Download" icon="new" >}}
-
-
-build and flash the ncp example
-```bash
->cd "examples\thread\ncp\ftd\usb\pca10059\mbr\armgcc\Makefile"
->make
->make flash_mbr
->make flash
-```
-
-### Zephyr v2.4.99
-* This section is about the `nRF Connect SDK` using the `zephyr` directory
-* successfully built and tested with `v1.4.99-dev1` which contains Zephyr version `2.4.99`
-* recognised as USB device
-{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
-
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
-```bash
-cd nrf/v1.4.99-dev1/zephyr/samples/net/openthread/ncp
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-usb-nrf-br.conf"
-```
-
-### Nordic - nRF Connect
-* This section is about the `nRF Connect SDK` using the `nrf` directory
-* Not yet successfull with the nRF52 dongle, likely due to the missing usb overlay
-{{<icon_button href="http://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_assistant.html" text="nRF Connect SDK installing..."  icon="new" >}}
-
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
-```bash
-cd nrf/v1.4.99-dev1/nrf/samples/openthread/ncp
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-logging.conf"
-```
-
-### Open Thread
-
-* Available pre-build ncp firmware
-
-{{<icon_button href="https://openthread.io/platforms/co-processor/firmware#download_nrf52840_firmware_image" text="nRF52840 ncp firmare..."  icon="new" >}}
-
-```cmd
-nrfjprog -f nrf52 --program ot-ncp-ftd-gd81d769e-nrf52840.hex --sectorerase --verify
-```
-
-* for build instructions see the rcp building steps in the [rcp OpenThread](#openthread) section, the build commands generates both npc and rcp elf files.
-
-
-## Nordic - sdcard image
-
-* download a ready raspberry pi image
-* successfully tested with the Nordif Firmware from the SDK v4.1.0
-
-{{<icon_button href="https://www.nordicsemi.com/Software-and-tools/Software/nRF5-SDK-for-Thread-and-Zigbee/Download#infotabs" text="Download the nRF5 SDK for Thread and Zigbee..."  icon="new" >}}
-
-## OpenThread - docker
-{{<icon_button href="https://openthread.io/guides/border-router/docker/run" text="Reference on 'Run OTBR Docker'..."  icon="new" >}}
-### latest
-{{<hint warning>}}This method only deploys the lates available docker container, see [version](#version) for a specific version.{{</hint>}}
-* use with the OpenThread dongle firmware [detailed above](#openthread)
-* The docker command below runs deamonized (in the background) and maps port 80.
-* Note that restarting the same container does not work there fore `-rm` would help restart a new container each time
-* Two issues happen when mapping port 80 only, the `Topology` menu does not show anything and the Android commissioning App can't reach the border router so a falback on `host` networking with the second docker command solves these issues.
-```bash
-docker run --rm --name otbr-metal -d --sysctl "net.ipv6.conf.all.disable_ipv6=0 \
-        net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
-        -p 80:80 --dns=127.0.0.1 --volume \
-        /dev/ttyACM0:/dev/ttyACM0 --privileged openthread/otbr \
-        --radio-url spinel+hdlc+uart:///dev/ttyACM0
-
-docker run --rm --name otbr-metal -d \
-  --sysctl "net.ipv6.conf.all.disable_ipv6=0 net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1" \
-  --network host --dns=127.0.0.1 \
-  --volume /dev/ttyACM0:/dev/ttyACM0 \
-  --privileged openthread/otbr \
-  --radio-url spinel+hdlc+uart:///dev/ttyACM0
-```
-Below commands to run in separate windows
-* listen to the conainer logs
-* open a shell in the container
-* open a command line to the RCP
-```bash
-docker logs --follow otbr-metal
-docker exec -it otbr-metal /bin/bash
-ot-ctl
-```
-### version
-These commands allow creating a docker image based on a specific commit, e.g. for testing with Thread version 1.1 instead of 1.2. The image is built with this [Dockerfile](https://github.com/openthread/ot-br-posix/blob/main/etc/docker/Dockerfile).
-```bash
-git clone https://github.com/openthread/ot-br-posix
-cd ot-br-posix
-git checkout 4b6d3b863f
-#git checkout 615de5  #2021-03-22
-#git checkout thread-br-certified-20180819
-git submodule update --init --recursive
-docker build --no-cache -t openthread/otbr -f etc/docker/Dockerfile .
-```
-Now running the same command above from the section [latest](#latest) with the same image `openthread/otbr` will run the newly built image.
-
-
-##  RCP - Zephyr v2.5.99
-* Zephyr version `2.5.99` has a `coprocessor` directory replacing the old `ncp`
-* For details on Zephyr install see
-{{<icon_button relref="/docs/frameworks/zephyr/" text="Zephyr RTOS" >}}
-
-* add `CONFIG_BOARD_HAS_NRF5_BOOTLOADER=n` to `prj.conf`
-
-```bash
-cd zephyrproject
-source zephyr/zephyr-env.sh
-cd zephyr/samples/net/openthread/coprocessor
-west build -b nrf52840dongle_nrf52840 -- -DCONF_FILE="prj.conf overlay-rcp.conf overlay-usb-nrf-br.conf"
-cd build/zephyr
-nrfjprog -f nrf52 --program zephyr.hex --sectorerase --verify
-```
-
-{{<details "border router error details...">}}
-tested version in zephyr 2.5.99 and border router openthread docker
-```bash
-Mar  6 13:00:06 3d926b9c2cee avahi-daemon[129]: Server startup complete. Host name is 3d926b9c2cee.local. Local service cookie is 2646371747.
-Mar  6 13:00:07 3d926b9c2cee otbr-agent[145]: [CRIT]-PLAT----: HandleRcpTimeout() at ../../third_party/openthread/repo/src/lib/spinel/radio_spinel_impl.hpp:2168: RadioSpinelNoResponse
-```
-{{</details>}}
-
-
-## Radio Co-Processor (RCP) from main repo
-{{<icon_button href="https://github.com/openthread/openthread/tree/master/examples/platforms/nrf528xx/nrf52840" text="nRF52840 Build instructions" icon="github" >}}
-
-```bash
-cd ~/opentrhead
-./script/bootstrap
-./bootstrap
-sudo rm -rf output/
-make -f examples/Makefile-nrf52840 USB=1
-cd output/nrf52840/bin/
-arm-none-eabi-objcopy -O ihex ot-rcp ot-rcp.hex
-nrfjprog -f nrf52 --eraseall
-nrfjprog -f nrf52 --program ot-rcp.hex --sectorerase --verify
-```
