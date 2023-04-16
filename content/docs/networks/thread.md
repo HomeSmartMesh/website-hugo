@@ -267,16 +267,23 @@ $sudo ot-ctl
 >udp open
 >udp bind :: 4242
 ```
-{{<hint warning>}}A current issue is that the `wpan0` adapter is lost after closing the ot-ctl command line{{</hint>}}
+{{<hint warning>}}note that the port will be freed from bind when closing the ot-ctl command line{{</hint>}}
 Listening using `socat`:
 ```shell
 $socat UDP6-LISTEN:4242,fork STDOUT
 ```
-on the nRF52 node Zephyr shell :
+
+Multicast on link local
 ```shell
 >ot udp open
 >ot udp send ff02::1 4242 hi_there_now
 ```
+Multicast on mesh local
+```shell
+>ot udp open
+>ot udp send ff03::1 4242 hi_there_now
+```
+
 ## Form a network
 
 * on the raspi command line
@@ -619,14 +626,12 @@ Done
 > 16 bytes from fe80:0:0:0:c85c:d0c4:1103:31d5: icmp_seq=2 hlim=64 time=12ms
 ```
 
-a good exercice is to commission a device through CLI
-
 {{<icon_button href="https://openthread.io/guides/border-router/external-commissioning" text="External commitioning..."  icon="new" >}}
 
 ## cli reference
 {{<icon_button href="https://github.com/openthread/openthread/blob/master/src/cli/README.md" text="thread cli reference"  icon="github" >}}
 
-{{< details "ncp cli. Click to expand..." >}}
+various commands
 ```shell
 cu -l /dev/ttyACM0 -s 115200
 panid 0xabcd
@@ -637,7 +642,7 @@ ping fd00:0064:0123:4567::0808:0808
 router list
 ```
 
-adresses
+debug adresses
 ```shell
 panid
 rloc16
@@ -649,7 +654,13 @@ ipmaddr
 leaderdata
 ```
 
-{{</ details>}}
+ntwrok debug
+```shell
+scan
+child list
+child table
+childip
+```
 
 # Commissioning
 {{<hint warning>}}note that the security concept is based on the confidentiality of the networkkey (previously known as masterkey), the one used here is a dummy key used for demo purpose only. Setting a predefined masterkey is optional, the stack will generate a random one that can be retrieved with the `networkkey` command if it's needed for analysis purpose.
